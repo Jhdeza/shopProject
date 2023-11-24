@@ -21,12 +21,8 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-   $user= User::find(1);
-   $user->email='psddfdja@kladfh.com';
-   $user->save();
-   dd($user);
-    
-    return view('dashboard');
+       
+    return view('template.template');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -36,3 +32,7 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+// Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
