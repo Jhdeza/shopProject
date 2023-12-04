@@ -41,53 +41,13 @@
     <!-- Start Header Area -->
     @include('template.partials.navbar')
     <!-- End Header Area -->
-
-    <!-- Start Hero Area -->
-   @include('template.partials.slide')
-    <!-- End Hero Area -->
-
-    <!-- Start Featured Categories Area -->
-    @include('template.partials.categories')
-    <!-- End Features Area -->
+   
+    @yield('content')
     
-    <!-- Start Trending Product Area -->
-    
-    @include('template.partials.products')
-    <!-- End Trending Product Area -->
-    
-    <!-- Start Banner Area -->
-    
-    @include('template.partials.banner')
-    <!-- End Banner Area -->
-    
-    <!-- Start Special Offer -->
-    
-    @include('template.partials.specialOffer')
-    <!-- End Special Offer -->
-    
-    <!-- Start Home Product List -->
-    @include('template.partials.productList')
-    
-    <!-- End Home Product List -->
-    
-    <!-- Start Brands Area -->
-    
-    @include('template.partials.brand')
-    <!-- End Brands Area -->
-    
-    <!-- Start Blog Section Area -->
-    
-    @include('template.partials.blogsection')
-    <!-- End Blog Section Area -->
-    
-    <!-- Start Shipping Info -->
-    
-    @include('template.partials.shippinginfo')
-    <!-- End Shipping Info -->
+  
     
     <!-- Start Footer Area -->
-    
-    @include('template.partials.footer')
+     @include('template.partials.footer')
     <!--/ End Footer Area -->
 
     <!-- ========================= scroll-top ========================= -->

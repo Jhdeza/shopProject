@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'ShopProject',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>Admin</b>ShopProject',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -153,7 +153,7 @@ return [
     'layout_fixed_sidebar' => null,
     'layout_fixed_navbar' => null,
     'layout_fixed_footer' => null,
-    'layout_dark_mode' => null,
+    'layout_dark_mode' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -312,13 +312,22 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
+            'text'        => 'Home',
+            'url'         => 'admin',
             'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
+            // 'label'       => 4,
+            // 'label_color' => 'success',
         ],
         ['header' => 'account_settings'],
+        [
+            'text' => 'Users',
+            'url' => 'my-user'
+        ],
+        [
+            'text' => 'Contact Informations',
+            'url' => 'information',
+            'icon' => 'fa fa-info'
+        ],
         [
             'text' => 'profile',
             'url'  => 'admin/settings',
@@ -367,6 +376,7 @@ return [
                 ],
             ],
         ],
+
         ['header' => 'labels'],
         [
             'text'       => 'important',

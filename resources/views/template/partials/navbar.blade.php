@@ -270,7 +270,7 @@
                                     <a href="contact.html" aria-label="Toggle navigation">Contact Us</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="about-us.html" aria-label="Toggle navigation">About Us</a>
+                                    <a href="{{route('about-us')}}"aria-label="Toggle navigation">About Us</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="login.html" aria-label="Toggle navigation">Login</a>
