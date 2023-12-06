@@ -321,12 +321,19 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'Users',
-            'url' => 'my-user'
+            'url' => 'my-user',
+            'icon'=>'fa fa-user'
         ],
         [
             'text' => 'Contact Informations',
             'url' => 'information',
             'icon' => 'fa fa-info'
+        ],
+
+        [
+            'text' => 'Categorias',
+            'url' => 'category',
+            'icon' => 'fa fa-list'
         ],
         [
             'text' => 'profile',

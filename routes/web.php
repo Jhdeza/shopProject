@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\CategorysController;
 use App\Http\Controllers\ProfileController;
-use App\Models\ContactInformationController;
-use App\Models\User;
+use App\Http\Controllers\ContactInformationController;
+use App\Http\Controllers\MyUserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -45,5 +46,6 @@ require __DIR__.'/auth.php';
 // Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('/my-user', App\Http\Controllers\MyUserController::class);
-Route::resource('/information', App\Http\Controllers\ContactInformationController::class);
+Route::resource('/my-user', MyUserController::class);
+Route::resource('/information', ContactInformationController::class);
+Route::resource('/category', CategorysController::class);

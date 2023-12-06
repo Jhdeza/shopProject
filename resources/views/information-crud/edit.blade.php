@@ -10,7 +10,7 @@
             <div class="col-6">
                 <div class="card card-dark ">
                     <div class= "card-header">
-                        <h3>Informacion de Contacto</h3>
+                        <h3>@lang('main.contact_information')</h3>
                     </div>
                     <form class="form" method="post" action="{{ route('information.update', $contacts_information->id) }}">
                         @csrf
@@ -25,7 +25,7 @@
 
                             </div>
 
-                            <label class=" col-form-label">Direccion:</label>
+                            <label class=" col-form-label">Dirección:</label>
                             <div class="form-group row">
 
 
@@ -52,18 +52,18 @@
 
                             </div>
 
-                            <label class=" col-form-label">Description:</label>
+                            <label class=" col-form-label">Descripción:</label>
                             <div class="form-group message row">
 
-                                <textarea class="form-control" name="description" placeholder="About Us">{{ $contacts_information->description }}</textarea>
+                                <textarea class="form-control" rows="5" name="description" placeholder="About Us">{{ $contacts_information->description }}</textarea>
 
                             </div>
 
-                            
+
                             <div class="form-group button row">
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary ">Edit Info</button>
-                                </div>
+
+                                <input type="button" class="btn btn-primary " value="Editar Información" />
+
                             </div>
 
                         </div>
@@ -72,8 +72,24 @@
             </div>
         </div>
     </div>
-   
-
-
-
+@endsection
+@section('js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script>
+        $(document).on('click', 'input[type=button]', function(e) {
+            e.preventDefault();
+            let title = "Estas seguro que desea cambiar la informacion"
+             let form =$('form');
+            swal({
+                title: title,
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            }).then((confirmed) => {
+                if (confirmed) {
+                    form.trigger("submit");
+                }
+            });
+        })
+    </script>
 @endsection
