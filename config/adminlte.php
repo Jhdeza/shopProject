@@ -336,6 +336,17 @@ return [
             'icon' => 'fa fa-list'
         ],
         [
+            'text' => 'Ofertas',
+            'url' => 'ofert',
+            'icon' => 'fa fa-bolt'
+        ],
+        [
+            'text' => 'Informacion cliente',
+            'url' => 'client',
+            'icon' => 'fa fa-info'
+        ],
+
+        [
             'text' => 'profile',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-user',

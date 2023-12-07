@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name',45);
             $table->string('email_address',45);
             $table->string('client_phone',45);
-            $table->string('message',45);
+            $table->text('message');
             $table->engine = 'InnoDB';
         });
     }
