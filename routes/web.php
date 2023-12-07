@@ -4,6 +4,7 @@ use App\Http\Controllers\CategorysController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactInformationController;
 use App\Http\Controllers\MyUserController;
+use App\Http\Controllers\OfertController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -49,3 +50,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('/my-user', MyUserController::class);
 Route::resource('/information', ContactInformationController::class);
 Route::resource('/category', CategorysController::class);
+Route::resource('/ofert', OfertController::class);
