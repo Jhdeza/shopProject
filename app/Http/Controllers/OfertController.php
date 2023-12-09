@@ -81,9 +81,11 @@ class OfertController extends Controller
     {
 
          $ofert = ofert::find($id);
+        
          $date_in=  Carbon::parse($ofert->date_ini)->format('m/d/Y');
          $date_end=  Carbon::parse($ofert->date_end)->format('m/d/Y');
          $ofert->range = $date_in." - ".$date_end;
+        //  $ofert = ofert::where('name', null)->where('id','<>',$ofert->id)->get();
         return view("ofertas-crud.edit", compact("ofert"));
     }
 

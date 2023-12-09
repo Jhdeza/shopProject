@@ -12,7 +12,7 @@
         @method("PUT")
         <div class="card card-primary mt-5 col-8 p-0">
             <div class="card-header ">
-                <h3 class="card-title">!!! Make an Ofert</h3>
+                <h3 class="card-title">!!! Edit the Ofert</h3>
             </div>
             <div class="card-body">
                 <div class="form-group">
@@ -58,7 +58,7 @@
 
                 </div>
                 <div class="card-footer">
-                    <Button class="btn btn-outline-success">Create Ofert</Button>
+                    <Button class="btn btn-outline-success">Edit Ofert</Button>
                 </div>
 
             </div>

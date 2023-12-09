@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Requests;
-
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Validation\Rule;
 class ofertRequest extends FormRequest
 {
     /**
@@ -23,8 +23,12 @@ class ofertRequest extends FormRequest
     {
         $ofertid = $this->route('ofert');
         return [
-            "nombre"=> "required|max:255|unique:oferts,name,' .$ofertid,",
-            "descuento"=> "required|integer|max:2,' .$ofertid,",
+            "nombre" => [
+                'required',
+                'max:255',
+                Rule::unique('oferts', 'name')->ignore($ofertid),
+            ],
+            "descuento" => "required|integer|max:99",
         ];
     }
     public function messages()
