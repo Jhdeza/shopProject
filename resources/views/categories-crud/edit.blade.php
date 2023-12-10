@@ -12,7 +12,7 @@
                     <div class= "card-header">
                         <h4>{{__('main.edit_category')}}</h4>
                     </div>
-                    <form class="form" method="post" action="{{ route('category.update', $category->id) }}">
+                    <form class="form" enctype="multipart/form-data" method="post" action="{{ route('category.update', $category->id) }}">
                         @csrf
                         @method('PUT')
                         <div class="card-body">
@@ -25,7 +25,7 @@
                                             {{ $message }}
                                         </span>
                                     @enderror
-                            </div>
+                            </div>                            
 
                             <div class="form-group row">
                                 <input @checked(old('is_sub', $category->parent_id)) type="checkbox" name="is_sub"   id="is_sub" value="1" />
@@ -47,6 +47,31 @@
                                     </span>
                                 @enderror
                             </div>
+
+                            <div class="form-group row">
+                                <div class="col-12 pb-4">
+                                    @error('file')
+                                        <span style="display: block" class="error invalid-feedback ">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                    <div id="cont-img" class="container-big crud-file d-flex align-items-center" data-simple="true" data-id="img">
+                                        <input type="file" name="file" id="img" class="upload_plugin d-none"/>
+                                        <a id="trigger" class="parent-img-img mx-auto my-auto d-flex justify-content-center" >                                      
+                                            <img data-empty="{{$category->urlImageEmtpy}}" type="button" src="{{asset($category->image_url)}}" data-holdder-rendered="true" />   
+                                        </a>
+                                        <input type="hidden" name="img_flag" id="flag" value="0">  
+                                        <button id="btn-trigger" class="btn btn-secondary crud-file_change-button  align-self-center roundex" type="button" >
+                                            <span class="fa fa-camara"></span>{{__('main.change')}}</button> 
+                                        <button  @class([
+                                            'btn btn-danger crud-file_remove-button align-self-center roundex',
+                                            'd-none' => $category->image_url == null
+                                        ])  type="button" >
+                                                <span class="fa fa-trash"></span>
+                                        </button>    
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-footer">
                             <div class="button row">
@@ -61,7 +86,7 @@
 @endsection
 
 @section('js')
-
+    <script defer src="{{asset('images/upload.js')}}" ></script>
     <script>
         $(document).on('change' , '#is_sub', function(){
             toggleCat($(this));
@@ -77,10 +102,59 @@
         $(document).ready(function(){
             toggleCat($('#is_sub'));
 
+            $('#cont-img').upload({
+                simple: true
+            });
         })
-        </script>
+    </script>
 
 @endsection
+
+@section('css')
+    <style>
+        .crud-file{
+            position: relative;
+        }
+
+        .crud-file_change-button{
+            position: absolute;
+            z-index: 200;
+            background-color: #212425;
+            color: white;
+            bottom: -45px;
+            right: 45px;
+        }
+
+        .crud-file_remove-button{
+            position: absolute;
+            z-index: 200;
+            color: white;
+            bottom: -45px;
+            right: 0px;
+        }
+
+        #cont-img{
+            border: 2px dashed #ddd !important; 
+            height: 200px;
+            width: 200px;
+
+        }
+
+        #cont-img a{
+            overflow: hidden;
+            position: relative;
+        }
+
+        #cont-img img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cubre el contenedor manteniendo la relación de aspecto */
+            object-position: center; /* Centra la imagen dentro del contenedor */
+            transform: scale(1.2);
+        }
+ </style>
+@stop
+
 
 {{-- @section('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>

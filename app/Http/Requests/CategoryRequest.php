@@ -21,25 +21,21 @@ class CategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-
-//dd(request()->all());
         $categoryId = $this->route('category');
         return [
             "category"=> 'required|string|max:255|unique:categories,description,' .$categoryId,
-            "parent_id" => 'required_with:is_sub'
-            
+            "parent_id" => 'required_with:is_sub',
+            'file' => 'image'            
         ];
     }
     public function messages()
 {
     return [
-        
         'category.required' => 'El campo Categoria es obligatorio.',
         'category.string' => 'El campo Categoria debe ser una cadena.',
         'category.max' => 'El campo Categoria no puede tener más de :max caracteres.',
         'category.unique'=>' Ya existe una categoria con ese nombre ',
-        'parent_id.required_with' => __('main.must_select_a_parent_for_subcategories')
-        
+        'parent_id.required_with' => __('main.must_select_a_parent_for_subcategories')        
     ];
 }
 }

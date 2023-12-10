@@ -16,5 +16,6 @@ return [
     "edit_category" => "Editar Categoría",
     "must_select_a_parent_for_subcategories" => "Debe seleccionar una Categoría padre",
     "sure_delete_cat" => "Está seguro que desea eliminar la categoría?",
+    "change" => "Cambiar"
 
 ];

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
-use App\Models\category;
+use App\Models\Category;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
@@ -59,14 +60,27 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-           
-
         $category = new Category();
+        $file = $request->file('file');
+        
         $category->description = $request->input("category");
         if ($request->input("parent_id")) {
             $category->parent_id = $request->input("parent_id");
         }
         $category->save();
+
+        $image = $request->file('file');
+        if($image && $request->input('img-flag')){
+            $fileName = $category->description . '_' . time() . '.' . $image->getClientOriginalExtension();  
+            $path = $image->storeAs('public/categories', $fileName); 
+            
+            $image = new Image([
+                'url' => str_replace('public/', 'storage/' ,$path)
+            ]);
+            $category->image()->save($image);
+        }
+        
+        
         return redirect()->route('category.index');
     }
 
@@ -85,7 +99,8 @@ class CategoryController extends Controller
     {
         
         $category = Category::find($id);
-        $categories = Category::where('parent_id', null)->where('id','<>',$category->id)->get();
+        $categories = Category::where('parent_id', null)->where('id','<>',$category->id)->get(); 
+        //dd($category->image->url);     
        
         return view("categories-crud.edit", compact("category","categories"));
     }
@@ -96,12 +111,39 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request,$id)
     {
         
-        $categories = Category::find($id);
+        $category = Category::find($id);
               
-        $categories->description = $request->input("category");
-        $categories->parent_id = $request->input('is_sub')?$request->input("parent_id"):null;
+        $category->description = $request->input("category");
+        $category->parent_id = $request->input('is_sub')?$request->input("parent_id"):null;
         
-        $categories->save();
+        $category->save();
+
+        $image = $request->file('file');
+        $deleteImg = false;
+       
+        if($image){
+            if($request->input('img_flag')){
+                $fileName = $category->description . '_' . time() . '.' . $image->getClientOriginalExtension();  
+                $path = $image->storeAs('public/categories', $fileName); 
+                
+                if($category->image){                    
+                    $category->image->update([
+                        'url' => str_replace('public/', 'storage/' ,$path)
+                    ]);
+                }
+                else{
+                    $category->image()->create([
+                        'url' => str_replace('public/', 'storage/' ,$path)
+                    ]);
+                }          
+            } 
+        } 
+        else if($request->input('img_flag')) $deleteImg = true;   
+
+        if($deleteImg && $category->image){
+            $category->image->delete();
+        }      
+
         return redirect()->route("category.index");
     }
 
