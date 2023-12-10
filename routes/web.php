@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CategorysController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactInformationController;
 use App\Http\Controllers\MyUserController;
@@ -49,5 +49,5 @@ require __DIR__.'/auth.php';
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/my-user', MyUserController::class);
 Route::resource('/information', ContactInformationController::class);
-Route::resource('/category', CategorysController::class);
+Route::resource('/category', CategoryController::class);
 Route::resource('/ofert', OfertController::class);

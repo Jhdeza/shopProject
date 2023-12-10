@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoriesRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,11 @@ class CategoriesRequest extends FormRequest
     public function rules(): array
     {
 
+//dd(request()->all());
         $categoryId = $this->route('category');
         return [
-            "Categoria"=> 'required|string|max:255|unique:categories,description,' .$categoryId,
+            "category"=> 'required|string|max:255|unique:categories,description,' .$categoryId,
+            "parent_id" => 'required_with:is_sub'
             
         ];
     }
@@ -32,10 +34,11 @@ class CategoriesRequest extends FormRequest
 {
     return [
         
-        'Categoria.required' => 'El campo Categoria es obligatorio.',
-        'Categoria.string' => 'El campo Categoria debe ser una cadena.',
-        'Categoria.max' => 'El campo Categoria no puede tener más de :max caracteres.',
-        'Categoria.unique'=>' Ya existe una categoria con ese nombre ',
+        'category.required' => 'El campo Categoria es obligatorio.',
+        'category.string' => 'El campo Categoria debe ser una cadena.',
+        'category.max' => 'El campo Categoria no puede tener más de :max caracteres.',
+        'category.unique'=>' Ya existe una categoria con ese nombre ',
+        'parent_id.required_with' => __('main.must_select_a_parent_for_subcategories')
         
     ];
 }

@@ -10,39 +10,27 @@
 
         <div class="card mt-5">
             <div class="card-header">
-                <h3 class="card-title">Listado de Categorias</h3>
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
+                <div class="card-title"><h4>@lang('main.categories_list')</h4></div>
+                <div class="card-tools"><a class="btn btn-success btn-sm " href="{{ route('category.create') }}">
+                    <i class="fas fa-list-alt "> </i> @lang('main.create')</a>
+                   {{-- s --}}
                     {{-- <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
                     <i class="fas fa-times"></i>
                 </button> --}}
                 </div>
             </div>
             <div class="card-body p-0" style="display: block;">
-                <table class="table table-striped projects">
+                <table class="table table-striped projects" data-del_message="{{__('main.sure_delete_cat')}}">
                     <thead>
                         <tr>
-                            <th style="width: 1%">
-
+                            <th></th>
+                            <th >
+                               {{__('main.name')}} 
                             </th>
-                            <th style="width: 20%">
-                                <h3> Categorias </h3>
-                            </th>
-
-
-                            <th class="text-right  " style="width: 5%">
-                                <a class="btn btn-success btn-sm " href="{{ route('category.create') }}">
-                                    <i class="fas fa-list-alt "> </i> Create</a>
-
+                            <th class="text-right">
                             </th>
                         </tr>
-
-
-
                     </thead>
-
                     <tbody>
                         @php
                             $count = 1;
@@ -54,26 +42,24 @@
                                 @else
                                     <td></td>
                                 @endif
+
                                 @if ($category->parent_id)
                                     <td style="padding-left: 35px"> --{{ $category->description }} </td>
                                 @else
                                     <td>{{ $category->description }} </td>
                                 @endif
 
-
                                 <td class="project-actions text-right">
                                     <a class="btn btn-info btn-sm mr-2  "
                                         href="{{ route('category.edit', $category->id) }}">
-                                        <i class="fas fa-pencil-alt mr-1"></i>Edit</a>
+                                        <i class="fas fa-pencil-alt mr-1"></i>@lang('main.edit')</a>
 
                                     <form class="mx-0 d-inline-block "
                                         action="{{ route('category.destroy', $category->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-
-
                                         <button type="button" class="btn btn-danger btn-sm delete  " >
-                                            <i class="fas fa-trash-alt mr-1"></i>Delete
+                                            <i class="fas fa-trash-alt mr-1"></i>@lang('main.delete')
                                         </button>
                                     </form>
                                 </td>
@@ -86,13 +72,21 @@
         </div>
     </section>
 @endsection
+
+@section('css')
+    <style>
+        table tr td:first-child{
+            width: 1%;        }
+    </style>
+@stop
+
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <script>
+        let title = $('table').data().del_message; 
         $(document).on('click', 'button.delete', function(e) {
-            e.preventDefault();
-            let title = "Estas seguro que desea eliminar la Categoria"
-            let form = $(this).closest('form');
+            e.preventDefault(); 
+            let form = $(this).closest('form')
             swal({
                 title: title,
                 icon: "warning",

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CategoriesRequest;
+use App\Http\Requests\CategoryRequest;
 use App\Models\category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
-class CategorysController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -57,16 +57,16 @@ class CategorysController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CategoriesRequest $request)
+    public function store(CategoryRequest $request)
     {
            
 
-        $categories = new Category();
-        $categories->description = $request->input("Categoria");
+        $category = new Category();
+        $category->description = $request->input("category");
         if ($request->input("parent_id")) {
-            $categories->parent_id = $request->input("parent_id");
+            $category->parent_id = $request->input("parent_id");
         }
-        $categories->save();
+        $category->save();
         return redirect()->route('category.index');
     }
 
@@ -93,13 +93,13 @@ class CategorysController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CategoriesRequest $request,$id)
+    public function update(CategoryRequest $request,$id)
     {
         
         $categories = Category::find($id);
               
-        $categories->description = $request->input("Categoria");
-        $categories->parent_id = $request->input("parent_id");
+        $categories->description = $request->input("category");
+        $categories->parent_id = $request->input('is_sub')?$request->input("parent_id"):null;
         
         $categories->save();
         return redirect()->route("category.index");
