@@ -21,21 +21,23 @@
             </div>
             <div class="card-body p-0" style="display: block;">
                 <table class="table table-striped projects" data-del_message="{{__('main.sure_delete_cat')}}">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th >
-                               {{__('main.name')}} 
-                            </th>
-                            <th class="text-right">
-                            </th>
-                        </tr>
-                    </thead>
+                    @if($categories->isNotEmpty())
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th >
+                                {{__('main.name')}} 
+                                </th>
+                                <th class="text-right">
+                                </th>
+                            </tr>
+                        </thead>
+                    @endif
                     <tbody>
                         @php
                             $count = 1;
                         @endphp
-                        @foreach ($categories as $category)
+                        @forelse ($categories as $category)
                             <tr>
                                 @if (!$category->parent_id)
                                     <td>{{ $count++ }} </td>
@@ -64,7 +66,13 @@
                                     </form>
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr id="empty-row">
+                                <td class="p-0" colspan="3">
+                                    <div class="p-3 m-2">@lang('main.empty_categories')</div>
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
 
                 </table>
@@ -76,7 +84,11 @@
 @section('css')
     <style>
         table tr td:first-child{
-            width: 1%;        }
+            width: 1%;        
+        }
+        table #empty-row div{
+            background-color: #b1466da7 !important;
+        }
     </style>
 @stop
 

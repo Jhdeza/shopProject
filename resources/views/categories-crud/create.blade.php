@@ -55,11 +55,9 @@
                                     @enderror
                                     <div id="cont-img" class="container-big crud-file d-flex align-items-center" data-simple="true" data-id="img">
                                         <input type="file" name="file" id="img" class="upload_plugin d-none" {{-- {!!$obj->attrToString()!!} --}} />
-                                        <a id="trigger" class="parent-img-img mx-auto my-auto d-flex justify-content-center" >
-                                        
-                                        <input type="hidden" name="img_flag" id="flag" value="0">         
-                                       
-                                            <img  type="button" data-empty="{{$category->urlImageEmtpy}}" src="{{$category->urlImageEmtpy}}" data-holdder-rendered="true" />   
+                                        <a id="trigger" class="parent-img-img mx-auto my-auto d-flex justify-content-center" >                                        
+                                            <input type="hidden" name="img_flag" id="flag" value="0">
+                                            <img  type="button" data-empty="{{App\Models\Category::urlImageEmpty}}" src="{{App\Models\Category::urlImageEmpty}}" data-holdder-rendered="true" />   
                                         </a>
                                         <button id="btn-trigger" class="btn btn-secondary crud-file_change-button  align-self-center roundex" type="button" >
                                             <span class="fa fa-camara"></span>{{__('main.change')}}</button> 

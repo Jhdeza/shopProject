@@ -12,7 +12,7 @@ class Category extends Model
     protected $guarded = [ "id"];
     public $timestamps = false;  
     protected $table = "categories";
-    public $urlImageEmtpy = 'ss';
+    const urlImageEmpty = 'path/to/empty/image.jpg';
 
     public function products(){
         return $this->hasMany(Product::class);
@@ -34,6 +34,6 @@ class Category extends Model
     public function getImageUrlAttribute(){       
         if($this->image)
             return $this->image->url;
-        return $this->urlImageEmtpy;
+        return self::urlImageEmpty;
     }
 }
