@@ -23,8 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table("categories", function (Blueprint $table) {
-            $table->unsignedBigInteger("parent_id")->nullable(false);
-            $table->foreign("parent_id")->references("id")->on('categories');
+            $table->dropForeign(["parent_id"]);
+            $table->dropColumn("parent_id");
         });
     }
 };
