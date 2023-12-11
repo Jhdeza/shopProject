@@ -17,6 +17,16 @@ return [
     "must_select_a_parent_for_subcategories" => "Debe seleccionar una Categoría padre",
     "sure_delete_cat" => "Está seguro que desea eliminar la categoría?",
     "change" => "Cambiar",
-    "empty_categories" => 'No existen categorías registradas'
-
+    "empty_categories" => 'No existen categorías registradas',
+    "discount_percent" => "Porciento de descuento",
+    "date_range" => "Rango de fechas",
+    "ofert_list" => "Listado de Ofertas",
+    "active" => "Activo",
+    "inactive" => "Inactive",
+    "state" => "Estado",
+    "date_begin" => "Fecha de Inicio",
+    "date_end" => "Fecha de Fin",
+    "create_ofert" => "Crear Oferta",
+    "edit_ofert" => "Editar Oferta",
+    "empty_oferts" => "No existen ofertas registradas",
 ];

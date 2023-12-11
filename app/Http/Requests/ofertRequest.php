@@ -4,7 +4,8 @@ namespace App\Http\Requests;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-class ofertRequest extends FormRequest
+
+class OfertRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -38,7 +39,6 @@ class ofertRequest extends FormRequest
         'nombre.required' => 'El campo Nombre es obligatorio.',
         'nombre.max' => 'El campo Nombre no puede tener más de :max caracteres.',
         'nombre.unique'=>' Ya existe una Nombre con ese nombre ',
-
         'descuento.required' => 'El campo (porciento de descuento) es obligatorio.',
         'descuento.integer' => 'El campo (porciento de descuento) debe ser un numero.',
         'descuento.max' => 'El campo (porciento de descuento) no puede tener más de :max caracteres.',

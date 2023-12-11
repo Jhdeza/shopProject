@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use App\Models\image;
 
-class ofert extends Model
+class Ofert extends Model
 {
     use HasFactory;
     public $timestamps = false;
@@ -17,8 +17,13 @@ class ofert extends Model
 
     public function image(): MorphMany
     {
-        return $this->morphMany(image::class, 'imageable');
+        return $this->morphOne(image::class, 'imageable');
     }
+
+    protected $casts = [
+        'date_ini' => 'date',
+        'date_end' => 'date',
+    ];
 
 
 

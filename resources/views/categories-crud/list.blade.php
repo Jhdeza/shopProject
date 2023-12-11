@@ -10,7 +10,7 @@
 
         <div class="card mt-5">
             <div class="card-header">
-                <div class="card-title"><h4>@lang('main.categories_list')</h4></div>
+                <div class="card-title"><h5>@lang('main.categories_list')</h5></div>
                 <div class="card-tools"><a class="btn btn-success btn-sm " href="{{ route('category.create') }}">
                     <i class="fas fa-list-alt "> </i> @lang('main.create')</a>
                    {{-- s --}}

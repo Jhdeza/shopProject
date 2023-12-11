@@ -16,7 +16,7 @@
                         @csrf
                         <div class="card-body">
                             <div class="form-group row">
-                                <label class=" col-form-label">{{__('main.name')}}:</label>
+                                <label class="col-form-label">{{__('main.name')}}:</label>
 
                                 <input class="form-control" value="{{old('category', null)}}" name="category" type="text" placeholder="{{__('main.name')}}">
                                 @error('category')
