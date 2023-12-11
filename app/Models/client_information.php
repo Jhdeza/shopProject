@@ -14,4 +14,12 @@ class client_information extends Model
     ];
    public $timestamps = false;  
     protected $table = "client_contact_informations";
+
+    protected $casts = [
+        'reading' => 'boolean',
+        
+    ];
+
+
+
 }

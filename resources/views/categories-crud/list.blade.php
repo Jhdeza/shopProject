@@ -87,7 +87,7 @@
             width: 1%;        
         }
         table #empty-row div{
-            background-color: #b1466da7 !important;
+            background-color: #840505a7 !important;
         }
     </style>
 @stop

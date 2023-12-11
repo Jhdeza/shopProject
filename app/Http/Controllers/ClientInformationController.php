@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\client_information;
+use App\Http\Requests\Client;
+use App\Models\Client_information;
 use Illuminate\Http\Request;
 
 class ClientInformationController extends Controller
@@ -12,55 +13,35 @@ class ClientInformationController extends Controller
      */
     public function index()
     {
-        $client_information = client_information::all();    
-        return view("", compact(""));
+        $clients = Client_information::all();
+        return view("cliente_crud.index", compact("clients"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function update(Client $request, $id)
     {
-        //
+
+        $client = Client_information::find($id);
+        $client->reading = !$client->reading;
+        $client->save();
+
+        return response()->json(['success' => true, 'client' => $client]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+
+
+
+    public function show($id)
     {
-        //
+
+        $client = Client_information::find($id);
+        return response()->json($client);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(client_information $client_information)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(client_information $client_information)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, client_information $client_information)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(client_information $client_information)
-    {
-        //
+        $client = Client_information::find($id);
+        $client->delete();
+        return redirect()->route("client.index");
     }
 }

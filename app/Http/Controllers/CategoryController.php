@@ -99,9 +99,7 @@ class CategoryController extends Controller
     {
         
         $category = Category::find($id);
-        $categories = Category::where('parent_id', null)->where('id','<>',$category->id)->get(); 
-        //dd($category->image->url);     
-       
+        $categories = Category::where('parent_id', null)->where('id','<>',$category->id)->get();        
         return view("categories-crud.edit", compact("category","categories"));
     }
 

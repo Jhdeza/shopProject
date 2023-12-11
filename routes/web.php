@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ClientInformationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactInformationController;
 use App\Http\Controllers\MyUserController;
 use App\Http\Controllers\OfertController;
+use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -51,3 +53,5 @@ Route::resource('/my-user', MyUserController::class);
 Route::resource('/information', ContactInformationController::class);
 Route::resource('/category', CategoryController::class);
 Route::resource('/ofert', OfertController::class);
+Route::resource('/client', ClientInformationController::class);
+Route::resource('/product', ProductsController::class);
