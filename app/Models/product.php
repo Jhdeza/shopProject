@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use App\Models\image;
 
-class product extends Model
+class Product extends Model
 {
     use HasFactory;
-
+    public $timestamps = false;
 public function category(){
     return $this->belongsTo(Category::class);
 }

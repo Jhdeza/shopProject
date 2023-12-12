@@ -26,6 +26,7 @@ return [
     "state" => "Estado",
     "date_begin" => "Fecha de Inicio",
     "date_end" => "Fecha de Fin",
+    "oferts"=> "Ofertas",
     "create_ofert" => "Crear Oferta",
     "edit_ofert" => "Editar Oferta",
     "empty_oferts" => "No existen ofertas registradas",
@@ -40,8 +41,9 @@ return [
     "product_description"=> "Descripcion Producto",
     "price"=> "Precio",
     "quantity"=> "Cantidad",
-    "quantity_alert"=> "Alerta Cantidad",
+    "quantity_alert"=> " Cantidad Alerta",
     "category_id"=> "Categoria",
     "ofert_id"=> "Oferta",
     "imagen_product"=> "Imagen",
+    "insert_Product"=> "Insertar Producto",
 ];

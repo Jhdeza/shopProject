@@ -345,6 +345,11 @@ return [
             'url' => 'client',
             'icon' => 'fa fa-info'
         ],
+        [
+            'text' => 'Productos',
+            'url' => 'product',
+            'icon' => 'fa fa-car-shopping'
+        ],
 
         [
             'text' => 'profile',

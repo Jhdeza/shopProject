@@ -138,11 +138,12 @@
         #cont-img a{
             overflow: hidden;
             position: relative;
+
         }
 
         #cont-img img{
-            width: 100%;
-            height: 100%;
+            max-width: 180px;
+            max-height: 175px;
             object-fit: cover; /* Cubre el contenedor manteniendo la relación de aspecto */
             object-position: center; /* Centra la imagen dentro del contenedor */
             transform: scale(1.2);

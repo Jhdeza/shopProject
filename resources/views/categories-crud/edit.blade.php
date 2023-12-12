@@ -58,7 +58,7 @@
                                     <div id="cont-img" class="container-big crud-file d-flex align-items-center" data-simple="true" data-id="img">
                                         <input type="file" name="file" id="img" class="upload_plugin d-none"/>
                                         <a id="trigger" class="parent-img-img mx-auto my-auto d-flex justify-content-center" >                                      
-                                            <img data-empty="{{App\Models\Category::urlImageEmpty}}" type="button" src="{{asset($category->image_url)}}" data-holdder-rendered="true" />   
+                                            <img  data-empty="{{App\Models\Category::urlImageEmpty}}" type="button" src="{{asset($category->image_url)}}" data-holdder-rendered="true" />   
                                         </a>
                                         <input type="hidden" name="img_flag" id="flag" value="0">  
                                         <button id="btn-trigger" class="btn btn-secondary crud-file_change-button  align-self-center roundex" type="button" >
@@ -143,15 +143,17 @@
         #cont-img a{
             overflow: hidden;
             position: relative;
+           
         }
 
         #cont-img img{
-            width: 100%;
-            height: 100%;
+            max-width: 180px;
+            max-height: 175px;
             object-fit: cover; /* Cubre el contenedor manteniendo la relación de aspecto */
             object-position: center; /* Centra la imagen dentro del contenedor */
             transform: scale(1.2);
         }
+        
  </style>
 @stop
 
