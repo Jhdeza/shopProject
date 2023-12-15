@@ -272,6 +272,10 @@
 
 @section('css')
 <style>
+    .but{
+        width: ;
+
+    }
     table tr td:first-child {
         width: 1%;
     }

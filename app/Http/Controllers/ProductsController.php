@@ -43,6 +43,8 @@ class ProductsController extends Controller
         
         $product->category_id = $request->input("categories");
         $product->ofert_id = $request->input("ofert");
+        $product->act_carusel = $request->input('active') == "on" ?  true : false ;
+        $product->new = $request->input('act') == "on" ?  true : false ;
         $product->save();
 
         return redirect()->route("product.index");
@@ -78,6 +80,8 @@ class ProductsController extends Controller
         
         $product->category_id = $request->input("categories");
         $product->ofert_id = $request->input("ofert");
+        $product->act_carusel = $request->input('active') == "on" ?  true : false ;
+        $product->new = $request->input('act') == "on" ?  true : false ;
         $product->save();
 
         return redirect()->route("product.index");

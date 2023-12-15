@@ -8,37 +8,25 @@
                     <!-- Start Hero Slider -->
                     <div class="hero-slider">
                         <!-- Start Single Slider -->
+                        @foreach($commonInfo["products"] as $product )
                         <div class="single-slider"
                             style="background-image: url(assets/images/hero/slider-bg1.jpg);">
                             <div class="content">
                                 <h2>
-                                    <!-- <span>No restocking fee ($35 savings)</span> -->
-                                    M75 Sport Watch
+                                    {{$product->name}}
+                                 
                                 </h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut
-                                    labore dolore magna aliqua.</p>
-                                <h3><span>Now Only</span> $320.99</h3>
+                                <p>{{$product->description}}</p>
+                            <h3><span>@lang("main.price"):</span> {{$product->price}}</h3>
                                 <!-- <div class="button">
                                     <a href="product-grids.html" class="btn">Shop Now</a>
                                 </div> -->
                             </div>
                         </div>
+                        @endforeach
                         <!-- End Single Slider -->
                         <!-- Start Single Slider -->
-                        <div class="single-slider"
-                            style="background-image: url(assets/images/hero/slider-bg2.jpg);">
-                            <div class="content">
-                                <!-- <h2><span>Big Sale Offer</span> -->
-                                    Get the Best Deal on CCTV Camera
-                                </h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur elit, sed do eiusmod tempor incididunt ut
-                                    labore dolore magna aliqua.</p>
-                                <h3><span>Combo Only:</span> $590.00</h3>
-                                <!-- <div class="button">
-                                    <a href="product-grids.html" class="btn">Shop Now</a>
-                                </div> -->
-                            </div>
-                        </div>
+                       
                         <!-- End Single Slider -->
                     </div>
                     <!-- End Hero Slider -->

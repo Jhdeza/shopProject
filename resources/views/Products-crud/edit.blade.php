@@ -10,7 +10,7 @@
         @method('PUT')
         <div class="card card-primary mt-5 col-8 p-0">
             <div class="card-header ">
-                <h3 class="card-title">@lang('main.insert_Product')</h3>
+                <h3 class="card-title">@lang('main.edit_product')</h3>
             </div>
             <div class="card-body">
                 <div class="form-group row">
@@ -86,9 +86,24 @@
                     <span style="display: block" class="error invalid-feedback ">
                         {{ $message }}
                     </span>
-                @enderror
+                    @enderror
                 </div>
+                <div class="row">
 
+                    <div class="form-group col-3 ">
+                        <label class="col-form-label">@lang('main.onsigth')</label>
+                        
+                        <input class=" form-control mt-5" type="checkbox" name="active" id="check"
+                        data-bootstrap-switch>
+                    </div>
+                    <div class="form-group col-2 ">
+                        <label class="col-form-label">@lang('main.onnew')</label>
+                        
+                        <input class=" form-control mt-5" type="checkbox" name="act" id="check"
+                        data-bootstrap-switch>
+                    </div>
+                </div>
+                
 
             </div>
             <div class="card-footer">
@@ -120,9 +135,9 @@
         $(document).ready(function() {
             $("input[data-bootstrap-switch]").each(function() {
                 $(this).bootstrapSwitch({
-                    'state': false,
-                    "onText": "Activo",
-                    "offText": "Inactivo",
+                    'state': {{$product->act_carusel}} ,
+                    "onText": "Si",
+                    "offText": "No",
                 });
             })
         })

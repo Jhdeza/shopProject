@@ -29,7 +29,7 @@ class ProductRequest extends FormRequest
                 'max:255',
                 // Rule::unique('oferts', 'name')->ignore($productid),
             ],
-            "price" => "required|integer|max:99",
+            "price" => "required|integer|max:999",
             "quantity" => "required|integer",
             "quantityAlert"=> "required|integer",
             "description"=> "required",

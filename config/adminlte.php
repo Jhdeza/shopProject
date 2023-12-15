@@ -348,7 +348,7 @@ return [
         [
             'text' => 'Productos',
             'url' => 'product',
-            'icon' => 'fa fa-car-shopping'
+            'icon' => 'fa fa-shop'
         ],
 
         [

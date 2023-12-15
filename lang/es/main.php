@@ -46,4 +46,7 @@ return [
     "ofert_id"=> "Oferta",
     "imagen_product"=> "Imagen",
     "insert_Product"=> "Insertar Producto",
+    "edit_product"=> "Editar Producto",
+    "onsigth"=> "Visible en Home",
+    "onnew"=> "Nuevo",
 ];

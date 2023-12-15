@@ -184,7 +184,18 @@
                     <div class="mega-category-menu">
                         <span class="cat-button"><i class="lni lni-menu"></i>All Categories</span>
                         <ul class="sub-category">
-                            <li><a href="product-grids.html">Electronics <i class="lni lni-chevron-right"></i></a>
+                            @foreach($commonInfo['categories'] as $category)
+                                <li><a href="product-grids.html">{{$category->description}} @if($category->subcategories->isNotEmpty()) <i class="lni lni-chevron-right"></i> @endif</a>
+                                    @if($category->subcategories->isNotEmpty())
+                                        <ul class="inner-sub-category">
+                                            @foreach($category->subcategories as $sub)
+                                                <li><a href="product-grids.html">{{$sub->description}}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                </li>
+                            @endforeach
+                           {{--  <li><a href="product-grids.html">Electronics <i class="lni lni-chevron-right"></i></a>
                                 <ul class="inner-sub-category">
                                     <li><a href="product-grids.html">Digital Cameras</a></li>
                                     <li><a href="product-grids.html">Camcorders</a></li>
@@ -197,8 +208,8 @@
                                     <li><a href="product-grids.html">Batteries</a></li>
                                     <li><a href="product-grids.html">Cables & Adapters</a></li>
                                 </ul>
-                            </li>
-                            <li><a href="product-grids.html">accessories</a></li>
+                            </li> --}}
+                            {{-- <li><a href="product-grids.html">accessories</a></li>
                             <li><a href="product-grids.html">Televisions</a></li>
                             <li><a href="product-grids.html">best selling</a></li>
                             <li><a href="product-grids.html">top 100 offer</a></li>
@@ -208,7 +219,7 @@
                             <li><a href="product-grids.html">Home Audio & Theater</a></li>
                             <li><a href="product-grids.html">Computers & Tablets </a></li>
                             <li><a href="product-grids.html">Video Games </a></li>
-                            <li><a href="product-grids.html">Home Appliances </a></li>
+                            <li><a href="product-grids.html">Home Appliances </a></li> --}}
                         </ul>
                     </div>
                     <!-- End Mega Category Menu -->
@@ -264,7 +275,7 @@
                                     </ul>
                                 </li> -->
                                 <li class="nav-item">
-                                    <a href="product-grids.html" aria-label="Toggle navigation">Products</a>
+                                    <a href="{{route('Product-grids')}}" aria-label="Toggle navigation">Products</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="contact.html" aria-label="Toggle navigation">Contact Us</a>

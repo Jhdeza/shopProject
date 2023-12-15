@@ -19,7 +19,7 @@ class Category extends Model
     }
 
     public function subcategories(){
-        return $this->hasMany(Category::class);
+        return $this->hasMany(Category::class, 'parent_id');
     }
 
     public function parent(){

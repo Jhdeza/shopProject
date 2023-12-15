@@ -15,7 +15,7 @@ class Ofert extends Model
         return $this->hasMany(Product::class);
     }
 
-    public function image(): MorphMany
+    public function image()
     {
         return $this->morphOne(image::class, 'imageable');
     }

@@ -87,7 +87,21 @@
                     </span>
                 @enderror
                 </div>
-
+                <div class="row">
+                    <div class="form-group col-3">
+                    <label class="col-form-label">@lang('main.onsigth')</label>
+                    
+                    <input class=" form-control mt-5" type="checkbox" name="active" id="check"
+                        data-bootstrap-switch>
+                </div>
+               
+                <div class="form-group col-2">
+                    <label class="col-form-label">@lang('main.onnew')</label>
+                    
+                    <input class=" form-control mt-5" type="checkbox" name="act" id="check"
+                        data-bootstrap-switch>
+                </div>
+            </div>
 
             </div>
             <div class="card-footer">
@@ -120,8 +134,8 @@
             $("input[data-bootstrap-switch]").each(function() {
                 $(this).bootstrapSwitch({
                     'state': false,
-                    "onText": "Activo",
-                    "offText": "Inactivo",
+                    "onText": "Si",
+                    "offText": "No",
                 });
             })
         })
