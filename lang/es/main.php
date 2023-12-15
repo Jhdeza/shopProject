@@ -27,6 +27,7 @@ return [
     "date_begin" => "Fecha de Inicio",
     "date_end" => "Fecha de Fin",
     "oferts"=> "Ofertas",
+    "ofert"=> "Oferta",
     "create_ofert" => "Crear Oferta",
     "edit_ofert" => "Editar Oferta",
     "empty_oferts" => "No existen ofertas registradas",
@@ -49,4 +50,6 @@ return [
     "edit_product"=> "Editar Producto",
     "onsigth"=> "Visible en Home",
     "onnew"=> "Nuevo",
+    "product_list" => "Listado de Produtos",
+    "empty_products" => "No existen productos registrados",
 ];

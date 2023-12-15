@@ -16,8 +16,7 @@ class client_information extends Model
     protected $table = "client_contact_informations";
 
     protected $casts = [
-        'reading' => 'boolean',
-        
+        'reading' => 'boolean',        
     ];
 
 

@@ -5,12 +5,11 @@
 @stop
 
 @section('content')
-
     <section class="content">
         <div class="card mt-5">
             <div class="card-header">
                 <div class="card-title">
-                    <h5>@lang('main.ofert_list')</h5>
+                    <h5>@lang('main.product_list')</h5>
                 </div>
                 <a class="btn btn-success btn-sm float-right" href="{{ route('product.create') }}">
                     <i class="fas fa-list-alt "> </i> @lang('main.create')
@@ -44,16 +43,16 @@
                         @forelse ($products as $product)
                             <tr>
                                 <td>{{ $count++ }} </td>
-                                <td>{{ $product->url_principal_picture }}</td>
+                                <td></td>
                                 <td>{{ $product->name }} </td>
                                 <td>{{ $product->description }} </td>
                                 <td>{{ $product->price }} </td>
                                 <td>{{ $product->quantity }} </td>
                                 <td>{{ $product->quantity_alert }} </td>
                                 <td>{{ $product->category->description }}</td>
-                                <td>{{ $product->ofert->name }} </td>
-                                <td>{{ $product->act_carusel == 1 ? 'Si' : 'No' }}</td>
-                                <td>{{ $product->new == 1 ? 'Si' : 'No' }}</td>
+                                <td>{{ $product->ofert?$product->ofert->name:'' }} </td>
+                                <td>{{ $product->act_carusel ? 'Si' : 'No' }}</td>
+                                <td>{{ $product->is_new ? 'Si' : 'No' }}</td>
                                 <td class="project-actions text-right button-td ">
                                     <a class="btn btn-info btn-sm mr-2  " href="{{ route('product.edit', $product->id) }}">
                                         <i class="fas fa-pencil-alt mr-1"></i><span
@@ -73,7 +72,7 @@
                         @empty
                             <tr id="empty-row">
                                 <td class="p-0" colspan="3">
-                                    <div class="p-3 m-2">@lang('main.empty_oferts')</div>
+                                    <div class="p-3 m-2">@lang('main.empty_products')</div>
                                 </td>
                             </tr>
                         @endforelse
@@ -107,7 +106,6 @@
 @endsection
 
 @section('css')
-
     <style>
         table tr td:first-child {
             width: 1%;

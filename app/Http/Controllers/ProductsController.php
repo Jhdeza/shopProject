@@ -34,19 +34,9 @@ class ProductsController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        $product = new Product();
-        $product->name = $request->input("name");
-        $product->price = $request->input("price");
-        $product->description = $request->input("description");
-        $product->quantity = $request->input("quantity");
-        $product->quantity_alert = $request->input("quantityAlert");
-        
-        $product->category_id = $request->input("categories");
-        $product->ofert_id = $request->input("ofert");
-        $product->act_carusel = $request->input('active') == "on" ?  true : false ;
-        $product->new = $request->input('act') == "on" ?  true : false ;
-        $product->save();
-
+        $product = Product::create($request->all());
+        $product->act_carusel = $request->input('act_carusel') == "on" ?  true : false ;
+        $product->is_new = $request->input('is_new') == "on" ?  true : false ;
         return redirect()->route("product.index");
     }
 
@@ -72,20 +62,11 @@ class ProductsController extends Controller
     public function update(ProductRequest $request, $id)
     {
         $product = Product::find($id);
-        $product->name= $request->input("name");
-        $product->price = $request->input("price");
-        $product->description = $request->input("description");
-        $product->quantity = $request->input("quantity");
-        $product->quantity_alert = $request->input("quantityAlert");
-        
-        $product->category_id = $request->input("categories");
-        $product->ofert_id = $request->input("ofert");
-        $product->act_carusel = $request->input('active') == "on" ?  true : false ;
-        $product->new = $request->input('act') == "on" ?  true : false ;
+        $product->fill($request->all());
+        $product->act_carusel = $request->input('act_carusel') == "on" ?  true : false ;
+        $product->is_new = $request->input('is_new') == "on" ?  true : false ;
         $product->save();
-
-        return redirect()->route("product.index");
-    
+        return redirect()->route("product.index");    
     }
 
     /**

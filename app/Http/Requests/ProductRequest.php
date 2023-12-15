@@ -31,9 +31,9 @@ class ProductRequest extends FormRequest
             ],
             "price" => "required|integer|max:999",
             "quantity" => "required|integer",
-            "quantityAlert"=> "required|integer",
+            "quantity_alert"=> "required|integer",
             "description"=> "required",
-            "categories"=> "required",
+            "category_id"=> "required",
         ];
     }
     public function messages()
@@ -48,10 +48,10 @@ class ProductRequest extends FormRequest
         'price.max' => 'El campo precio no puede tener más de :max caracteres.',
         'quantity.required'=> 'El campo cantidad es obligatorio.',
         'quantity.integer'=> 'El campo cantidad debe ser un numero.',
-        'quantityAlert.required'=> 'El campo cantidad Alerta es obligatorio.',
-        'quantityAlert.integer'=> 'El campo cantidad Alerta debe ser un numero.',
+        'quantity_alert.required'=> 'El campo cantidad Alerta es obligatorio.',
+        'quantity_alert.integer'=> 'El campo cantidad Alerta debe ser un numero.',
         'description.required'=> 'El campo descripción es obligatorio.',
-        'categories.required'=> 'Seleccionar una categoria es obligatorio.',
+        'category_id.required'=> 'Seleccionar una categoria es obligatorio.',
         
     ];
 }

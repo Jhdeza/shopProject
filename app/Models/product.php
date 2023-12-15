@@ -11,17 +11,25 @@ class Product extends Model
 {
     use HasFactory;
     public $timestamps = false;
-public function category(){
-    return $this->belongsTo(Category::class);
-}
+    protected $guarded = ['_token', 'is_new', 'act_carusel'];
 
-public function ofert(){
-   return $this->belongsTo(ofert::class);
-}
-public function image(): MorphMany
-{
-    return $this->morphMany(image::class, 'imageable');
-}
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
+
+    public function ofert(){
+        return $this->belongsTo(ofert::class);
+    }
+
+    public function image(): MorphMany
+    {
+        return $this->morphMany(image::class, 'imageable');
+    }
+
+    protected $casts = [
+        'is_new' => 'boolean',        
+        'act_carusel' => 'boolean',        
+    ];
 
 
 }
