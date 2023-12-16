@@ -1,6 +1,5 @@
 @extends('template.template')
 @section('content')
-
     <!-- Start Breadcrumbs -->
     <div class="breadcrumbs">
         <div class="container">
@@ -40,124 +39,124 @@
                         <!-- End Single Widget -->
                         <!-- Start Single Widget -->
                         <!-- <div class="single-widget">
-                            <h3>All Categories</h3>
-                            <ul class="list">
-                                <li>
-                                    <a href="product-grids.html">Computers & Accessories </a><span>(1138)</span>
-                                </li>
-                                <li>
-                                    <a href="product-grids.html">Smartphones & Tablets</a><span>(2356)</span>
-                                </li>
-                                <li>
-                                    <a href="product-grids.html">TV, Video & Audio</a><span>(420)</span>
-                                </li>
-                                <li>
-                                    <a href="product-grids.html">Cameras, Photo & Video</a><span>(874)</span>
-                                </li>
-                                <li>
-                                    <a href="product-grids.html">Headphones</a><span>(1239)</span>
-                                </li>
-                                <li>
-                                    <a href="product-grids.html">Wearable Electronics</a><span>(340)</span>
-                                </li>
-                                <li>
-                                    <a href="product-grids.html">Printers & Ink</a><span>(512)</span>
-                                </li>
-                            </ul>
-                        </div> -->
+                                <h3>All Categories</h3>
+                                <ul class="list">
+                                    <li>
+                                        <a href="product-grids.html">Computers & Accessories </a><span>(1138)</span>
+                                    </li>
+                                    <li>
+                                        <a href="product-grids.html">Smartphones & Tablets</a><span>(2356)</span>
+                                    </li>
+                                    <li>
+                                        <a href="product-grids.html">TV, Video & Audio</a><span>(420)</span>
+                                    </li>
+                                    <li>
+                                        <a href="product-grids.html">Cameras, Photo & Video</a><span>(874)</span>
+                                    </li>
+                                    <li>
+                                        <a href="product-grids.html">Headphones</a><span>(1239)</span>
+                                    </li>
+                                    <li>
+                                        <a href="product-grids.html">Wearable Electronics</a><span>(340)</span>
+                                    </li>
+                                    <li>
+                                        <a href="product-grids.html">Printers & Ink</a><span>(512)</span>
+                                    </li>
+                                </ul>
+                            </div> -->
                         <!-- End Single Widget -->
                         <!-- Start Single Widget -->
                         <!-- <div class="single-widget range">
-                            <h3>Price Range</h3>
-                            <input type="range" class="form-range" name="range" step="1" min="100" max="10000"
-                                value="10" onchange="rangePrimary.value=value">
-                            <div class="range-inner">
-                                <label>$</label>
-                                <input type="text" id="rangePrimary" placeholder="100" />
-                            </div>
-                        </div> -->
+                                <h3>Price Range</h3>
+                                <input type="range" class="form-range" name="range" step="1" min="100" max="10000"
+                                    value="10" onchange="rangePrimary.value=value">
+                                <div class="range-inner">
+                                    <label>$</label>
+                                    <input type="text" id="rangePrimary" placeholder="100" />
+                                </div>
+                            </div> -->
                         <!-- End Single Widget -->
                         <!-- Start Single Widget -->
                         <!-- <div class="single-widget condition">
-                            <h3>Filter by Price</h3>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
-                                <label class="form-check-label" for="flexCheckDefault1">
-                                    $50 - $100L (208)
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
-                                <label class="form-check-label" for="flexCheckDefault2">
-                                    $100L - $500 (311)
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3">
-                                <label class="form-check-label" for="flexCheckDefault3">
-                                    $500 - $1,000 (485)
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4">
-                                <label class="form-check-label" for="flexCheckDefault4">
-                                    $1,000 - $5,000 (213)
-                                </label>
-                            </div>
-                        </div> -->
+                                <h3>Filter by Price</h3>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
+                                    <label class="form-check-label" for="flexCheckDefault1">
+                                        $50 - $100L (208)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
+                                    <label class="form-check-label" for="flexCheckDefault2">
+                                        $100L - $500 (311)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3">
+                                    <label class="form-check-label" for="flexCheckDefault3">
+                                        $500 - $1,000 (485)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault4">
+                                    <label class="form-check-label" for="flexCheckDefault4">
+                                        $1,000 - $5,000 (213)
+                                    </label>
+                                </div>
+                            </div> -->
                         <!-- End Single Widget -->
                         <!-- Start Single Widget -->
                         <!-- <div class="single-widget condition">
-                            <h3>Filter by Brand</h3>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault11">
-                                <label class="form-check-label" for="flexCheckDefault11">
-                                    Apple (254)
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault22">
-                                <label class="form-check-label" for="flexCheckDefault22">
-                                    Bosh (39)
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault33">
-                                <label class="form-check-label" for="flexCheckDefault33">
-                                    Canon Inc. (128)
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault44">
-                                <label class="form-check-label" for="flexCheckDefault44">
-                                    Dell (310)
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault55">
-                                <label class="form-check-label" for="flexCheckDefault55">
-                                    Hewlett-Packard (42)
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault66">
-                                <label class="form-check-label" for="flexCheckDefault66">
-                                    Hitachi (217)
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault77">
-                                <label class="form-check-label" for="flexCheckDefault77">
-                                    LG Electronics (310)
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault88">
-                                <label class="form-check-label" for="flexCheckDefault88">
-                                    Panasonic (74)
-                                </label>
-                            </div>
-                        </div> -->
+                                <h3>Filter by Brand</h3>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault11">
+                                    <label class="form-check-label" for="flexCheckDefault11">
+                                        Apple (254)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault22">
+                                    <label class="form-check-label" for="flexCheckDefault22">
+                                        Bosh (39)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault33">
+                                    <label class="form-check-label" for="flexCheckDefault33">
+                                        Canon Inc. (128)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault44">
+                                    <label class="form-check-label" for="flexCheckDefault44">
+                                        Dell (310)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault55">
+                                    <label class="form-check-label" for="flexCheckDefault55">
+                                        Hewlett-Packard (42)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault66">
+                                    <label class="form-check-label" for="flexCheckDefault66">
+                                        Hitachi (217)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault77">
+                                    <label class="form-check-label" for="flexCheckDefault77">
+                                        LG Electronics (310)
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault88">
+                                    <label class="form-check-label" for="flexCheckDefault88">
+                                        Panasonic (74)
+                                    </label>
+                                </div>
+                            </div> -->
                         <!-- End Single Widget -->
                     </div>
                     <!-- End Product Sidebar -->
@@ -202,27 +201,35 @@
                                 <div class="row">
                                     <div class="col-lg-4 col-md-6 col-12">
                                         <!-- Start Single Product -->
-                                        @foreach ($products as $)
-                                            
-                                        @endforeach
-                                        <div class="single-product">
-                                            <div class="product-image">
-                                                <img src="assets/images/products/product-2.jpg" alt="#">
-                                                <span class="sale-tag">-{{$prod->percet}}%</span>
-                                                
-                                            </div>
-                                            <div class="product-info">
-                                                <span class="category">Speaker</span>
-                                                <h4 class="title">
-                                                    <a href="product-grids.html">Bluetooth Speaker</a>
-                                                </h4>
-                                                
-                                                <div class="price">
-                                                    <span>$275.00</span>
-                                                    <span class="discount-price">$300.00</span>
+                                        @foreach ($products as $product)
+                                            <div class="single-product">
+                                                <div class="product-image">
+                                                    @if ($product->ofert)
+                                                        <img src="assets/images/products/product-2.jpg" alt="#">
+                                                        <span class="sale-tag">-{{ $product->ofert->percet }}%</span>
+                                                    @endif
+                                                </div>
+                                                <div class="product-info">
+                                                    <span class="category">{{ $product->category->name }}</span>
+                                                    <h4 class="title">
+                                                        <a href="product-grids.html">{{ $product->description }}</a>
+                                                    </h4>
+                                                    <div class="price">
+                                                        @if ($product->ofert)
+                                                            <span>${{ $product->price * ($product->ofert->percet / 100) }}</span>
+                                                            <span class="discount-price">${{ $product->price }}</span>
+                                                        @else
+                                                            <span class="price">${{ $product->price }}</span>
+                                                        @endif
+                                                    </div>
+                                                    <div class="price">
+                                                        @if ($product->quantity <= $product->quantity_alert)
+                                                            <span class="price">Stock: {{ $product->quantity }}</span>
+                                                        @endif
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>                                       
+                                        @endforeach
                                         <!-- End Single Product -->
                                     </div>
                                 </div>
@@ -235,8 +242,8 @@
                                                 <li class="active"><a href="javascript:void(0)">2</a></li>
                                                 <li><a href="javascript:void(0)">3</a></li>
                                                 <li><a href="javascript:void(0)">4</a></li>
-                                                <li><a href="javascript:void(0)"><i
-                                                            class="lni lni-chevron-right"></i></a></li>
+                                                <li><a href="javascript:void(0)"><i class="lni lni-chevron-right"></i></a>
+                                                </li>
                                             </ul>
                                         </div>
                                         <!--/ End Pagination -->
@@ -445,8 +452,8 @@
                                                 <li class="active"><a href="javascript:void(0)">2</a></li>
                                                 <li><a href="javascript:void(0)">3</a></li>
                                                 <li><a href="javascript:void(0)">4</a></li>
-                                                <li><a href="javascript:void(0)"><i
-                                                            class="lni lni-chevron-right"></i></a></li>
+                                                <li><a href="javascript:void(0)"><i class="lni lni-chevron-right"></i></a>
+                                                </li>
                                             </ul>
                                         </div>
                                         <!--/ End Pagination -->
@@ -459,17 +466,17 @@
             </div>
         </div>
     </section>
-  
+
 
     <!-- ========================= scroll-top ========================= -->
     <a href="#" class="scroll-top">
         <i class="lni lni-chevron-up"></i>
     </a>
-    @endsection
-    @section("js")
+@endsection
+@section('js')
     <!-- ========================= JS here ========================= -->
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/tiny-slider.js"></script>
     <script src="assets/js/glightbox.min.js"></script>
     <script src="assets/js/main.js"></script>
-    @endsection
+@endsection

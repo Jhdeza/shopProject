@@ -44,7 +44,7 @@
                         <select class="form-control " name="ofert">
                             <option value="">@lang('main.Select')</option>
                             @foreach ($oferts as $ofert)
-                                <option @selected(old('category_id') == $category->id) value="{{ $ofert->id }}">{{ $ofert->name }}</option>
+                                <option @selected(old('ofert_id') == $ofert->id) value="{{ $ofert->id }}">{{ $ofert->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -100,7 +100,7 @@
                  
                     <div class="form-group col-2">
                         <label class="col-form-label">@lang('main.onnew')</label>                    
-                        <input class=" form-control mt-5" @checked(old('is_new') == 'on') type="checkbox" name="is_new" id="check"
+                        <input class=" form-control mt-5" @checked(old('is_new') == 'on') type="checkbox" name="is_new" id="check" 
                             data-bootstrap-switch>
                     </div>
                 </div>
