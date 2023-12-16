@@ -34,7 +34,7 @@ Route::get('/', function () {
 Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/about-us', [App\Http\Controllers\HomeController::class, 'about'])->name('about-us');
 Route::get('/productGrid', [App\Http\Controllers\HomeController::class, 'productGrid'])->name('Product-grids');
-Route::get('/about-us', [App\Http\Controllers\HomeController::class, 'about'])->name('about-us');
+Route::get('/contact-us', [App\Http\Controllers\HomeController::class, 'contactUs'])->name('contact-us');
 
 // Route::get('/dashboard', function () {
 //        return view('template.template');
