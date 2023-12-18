@@ -47,7 +47,7 @@ class ProductsController extends Controller
             if($request->hasFile('galery')){
                 $discart = explode(",", $request->input('mirror_hidden_galery'));
                 foreach($request->file('galery') as $image){
-                    if(in_array($image->gegetClientOriginalName(), $discart))
+                    if(in_array($image->getClientOriginalName(), $discart))
                         continue;
                     $fileName = 'p_' . $product->id . '_' . time().rand(1, 100) . '.' . $image->getClientOriginalExtension();
                     $path = $image->storeAs('public/products', $fileName);
