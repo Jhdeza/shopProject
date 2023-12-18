@@ -12,8 +12,8 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
-                        <li><a href="index.html"><i class="lni lni-home"></i> Home</a></li>
-                        <li><a href="index.html">Product</a></li>
+                        <li><a href="{{ route('home') }}"><i class="lni lni-home"></i> Home</a></li>
+                        <li><a href="{{ route('Product-grids') }}">Product</a></li>
                         <li>Single Product</li>
                     </ul>
                 </div>
@@ -25,6 +25,7 @@
     <!-- Start Item Details -->
     <section class="item-details section">
         <div class="container">
+            @foreach($products as $product)
             <div class="top-area">
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-md-12 col-12">
@@ -45,14 +46,14 @@
                     </div>
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="product-info">
-                            <h2 class="title">GoPro Karma Camera Drone</h2>
+                            <h2 class="title">{{$product->name}}</h2>
                             <p class="category"><i class="lni lni-tag"></i> Drones:<a href="javascript:void(0)">Action
                                     cameras</a></p>
                             <h3 class="price">$850<span>$945</span></h3>
                             <p class="info-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                                 tempor incididunt
                                 ut labore et dolore magna aliqua.</p>
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-lg-4 col-md-4 col-12">
                                     <div class="form-group color-option">
                                         <label class="title-label" for="size">Choose color</label>
@@ -96,8 +97,8 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="bottom-content">
+                            </div> --}}
+                            {{-- <div class="bottom-content">
                                 <div class="row align-items-end">
                                     <!-- <div class="col-lg-4 col-md-4 col-12">
                                         <div class="button cart-button">
@@ -115,7 +116,7 @@
                                         </div>
                                     </div> -->
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -284,6 +285,7 @@
                 </div> -->
             </div>
         </div>
+        @endforeach
     </section>
     <!-- End Item Details -->
 
@@ -352,7 +354,7 @@
     </a>
     @endsection
     <!-- ========================= JS here ========================= -->
-@section(js)
+{{-- @section(js)
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/tiny-slider.js"></script>
     <script src="assets/js/glightbox.min.js"></script>
@@ -375,4 +377,4 @@
             });
         });
     </script>
-@endsection
+@endsection --}}

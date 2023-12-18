@@ -125,7 +125,7 @@
                             <th>{{ __('main.client_phone') }}</th>
                             <th>{{ __('main.message') }}</th>
                             <th>{{ __('main.state') }}</th>
-                            <th></th>
+                            <th style="width: 400px"></th>
                         </tr>
                     </thead>
                 @endif

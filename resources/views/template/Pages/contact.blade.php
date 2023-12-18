@@ -13,7 +13,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
-                        <li><a href="index.html"><i class="lni lni-home"></i> Home</a></li>
+                        <li><a href="{{ route('home') }}"><i class="lni lni-home"></i> Home</a></li>
                         <li>Contact</li>
                     </ul>
                 </div>
@@ -75,20 +75,21 @@
                         <div class="col-lg-8 col-md-12 col-12">
                             <div class="contact-form-head">
                                 <div class="form-main">
-                                    <form class="form" method="post" action="assets/mail/mail.php">
+                                    <form class="form" method="post" action="{{route("client.store")}}">
+                                        @csrf
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6 col-12">
                                                 <div class="form-group">
                                                     <input name="name" type="text" placeholder="Your Name"
-                                                        required="required">
+                                                        required="required" value="{{old('name')}}">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6 col-md-6 col-12">
+                                            {{-- <div class="col-lg-6 col-md-6 col-12">
                                                 <div class="form-group">
                                                     <input name="subject" type="text" placeholder="Your Subject"
                                                         required="required">
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="col-lg-6 col-md-6 col-12">
                                                 <div class="form-group">
                                                     <input name="email" type="email" placeholder="Your Email"
