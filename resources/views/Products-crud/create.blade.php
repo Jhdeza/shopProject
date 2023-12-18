@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-    <form class="form" method="post" action="{{ route('product.store') }}">
+    <form class="form" enctype="multipart/form-data" method="post" action="{{ route('product.store') }}">
         @csrf
         <div class="card card-primary mt-5 col-8 p-0">
             <div class="card-header ">
@@ -92,6 +92,19 @@
                     @enderror
                 </div>
 
+                <div class="form-group row">
+                   <x-image :params="[
+                        'name' => 'galery',
+                        'usePrev' => true,
+                        'showBtns' => true,
+                        'class' => 'col-12',
+                        'itemsClass' => 'col-4',
+                        'model' => App\Models\Product::class,
+                        'method' => 'galery'
+
+                    ]"/>
+                </div>
+
                 <div class="row">
                     <div class="form-group col-3">
                         <label class="col-form-label">@lang('main.onsigth')</label>
@@ -112,38 +125,4 @@
     </form>
 @endsection
 
-@section('css')
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-switch@3.4.0/dist/css/bootstrap3/bootstrap-switch.min.css" />
-        <style>
-            .selects span.error{
-                position: absolute;
-                bottom: -20px;
-            }
 
-        </style>
-@endsection
-
-@section('js')
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/4.0.0-alpha.1/js/bootstrap-switch.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <script defer src="{{asset('images/upload.js')}}" ></script>
-    <script>
-        $(document).ready(function() {
-            $("input[data-bootstrap-switch]").each(function() {
-                let selected = $(this).is(':checked')
-                $(this).bootstrapSwitch({
-                    'state': selected,
-                    "onText": "Si",
-                    "offText": "No",
-                });
-            })
-
-            $('#cont-img').upload({
-                simple:true
-            }); 
-        })
-    </script>
-@endsection

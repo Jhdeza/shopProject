@@ -19,22 +19,7 @@ class Image extends Model
         return $this->morphTo();
     }
 
-    /*public function urlAttribute(){
-        return 'storage/'.Storage::url($this->url);
-    }*/
-
     public function getPathAttribute(){
         return str_replace('storage/', 'public/' ,$this->url);
     }
-
-    public function delete(){
-        parent::delete();
-        Storage::delete($this->path);        
-    }
-    
-  
-
-
-
-
 }

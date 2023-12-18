@@ -21,7 +21,7 @@ class Product extends Model
         return $this->belongsTo(ofert::class);
     }
 
-    public function image(): MorphMany
+    public function galery(): MorphMany
     {
         return $this->morphMany(image::class, 'imageable');
     }
