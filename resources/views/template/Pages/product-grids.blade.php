@@ -222,7 +222,7 @@
                                                 <div class="product-info">
                                                     <span class="category">{{ $product->category->description }}</span>
                                                     <h4 class="title">
-                                                        <a href="{{route("product-details",$product->id)}}">{{ $product->description }}</a>
+                                                        <a href="{{route("product-details",$product->id)}}">{{ $product->name }}</a>
                                                     </h4>
                                                     <div class="price">
 
