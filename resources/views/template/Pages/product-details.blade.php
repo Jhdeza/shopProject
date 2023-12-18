@@ -25,7 +25,7 @@
     <!-- Start Item Details -->
     <section class="item-details section">
         <div class="container">
-            @foreach($products as $product)
+            
             <div class="top-area">
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-md-12 col-12">
@@ -34,6 +34,7 @@
                                 <div class="main-img">
                                     <img src="assets/images/product-details/01.jpg" id="current" alt="#">
                                 </div>
+                                @forEach()
                                 <div class="images">
                                     <img src="assets/images/product-details/01.jpg" class="img" alt="#">
                                     <img src="assets/images/product-details/02.jpg" class="img" alt="#">
@@ -47,12 +48,15 @@
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="product-info">
                             <h2 class="title">{{$product->name}}</h2>
-                            <p class="category"><i class="lni lni-tag"></i> Drones:<a href="javascript:void(0)">Action
-                                    cameras</a></p>
-                            <h3 class="price">$850<span>$945</span></h3>
-                            <p class="info-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                tempor incididunt
-                                ut labore et dolore magna aliqua.</p>
+                            <p class="category"><i class="lni lni-tag"></i> {{$product->category->description}}:<a href="javascript:void(0)"></a></p>
+                            <div class="price">
+                                @if($product->ofert)
+                                <h3 class="price">${{ $product->price - $product->price * ($product->ofert->percet / 100) }}<span>${{ $product->price }}</span></h3>
+                                @else
+                                <h3 class="price">${{ $product->price  }}</h3>
+                                @endif
+                            </div>
+                            <p class="info-text">{{$product->description}}</p>
                             {{-- <div class="row">
                                 <div class="col-lg-4 col-md-4 col-12">
                                     <div class="form-group color-option">
@@ -285,7 +289,7 @@
                 </div> -->
             </div>
         </div>
-        @endforeach
+       
     </section>
     <!-- End Item Details -->
 

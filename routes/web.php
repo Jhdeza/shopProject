@@ -35,7 +35,7 @@ Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])-
 Route::get('/about-us', [App\Http\Controllers\HomeController::class, 'about'])->name('about-us');
 Route::get('/productGrid', [App\Http\Controllers\HomeController::class, 'productGrid'])->name('Product-grids');
 Route::get('/contact-us', [App\Http\Controllers\HomeController::class, 'contactUs'])->name('contact-us');
-Route::get('/productGrid/productDetails', [App\Http\Controllers\HomeController::class, 'productDetails'])->name('product-details');
+Route::get('/productDetails/{id}', [App\Http\Controllers\HomeController::class, 'productDetails'])->name('product-details');
 
 
 // Route::get('/dashboard', function () {

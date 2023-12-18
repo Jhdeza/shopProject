@@ -45,10 +45,11 @@ class HomeController extends Controller
         $contacts= Contact_information::get();
         return view('template.pages.contact',compact('commonInfo','contacts'));
     }
-    public function productDetails(){
+    public function productDetails($id){
+        $images=
         $commonInfo = $this->commonInfo();
-        $products = Product::get();
-        return view('template.pages.product-details',compact('commonInfo','products'));
+        $product = Product::find($id);
+        return view('template.pages.product-details',compact('commonInfo','product'));
     }
 
     private function commonInfo(){

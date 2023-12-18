@@ -1,4 +1,5 @@
-@extends('adminlte::page')
+@extends('layouts.middle')
+
 
 @section('content_header')
 

@@ -220,9 +220,9 @@
                                                     @endif
                                                 </div>
                                                 <div class="product-info">
-                                                    <span class="category">{{ $product->category->name }}</span>
+                                                    <span class="category">{{ $product->category->description }}</span>
                                                     <h4 class="title">
-                                                        <a href="{{route("product-details")}}">{{ $product->description }}</a>
+                                                        <a href="{{route("product-details",$product->id)}}">{{ $product->description }}</a>
                                                     </h4>
                                                     <div class="price">
 
