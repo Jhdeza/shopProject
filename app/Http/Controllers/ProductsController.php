@@ -43,14 +43,14 @@ class ProductsController extends Controller
             $productData['is_new'] = $request->input('is_new') == "on" ?  true : false ;
             $product = Product::create($productData);
             $files = [];
-       
+
             if($request->hasFile('galery')){
                 $discart = explode(",", $request->input('mirror_hidden_galery'));
                 foreach($request->file('galery') as $image){
                     if(in_array($image->gegetClientOriginalName(), $discart))
                         continue;
-                    $fileName = 'p_' . $product->id . '_' . time().rand(1, 100) . '.' . $image->getClientOriginalExtension();  
-                    $path = $image->storeAs('public/products', $fileName); 
+                    $fileName = 'p_' . $product->id . '_' . time().rand(1, 100) . '.' . $image->getClientOriginalExtension();
+                    $path = $image->storeAs('public/products', $fileName);
                     $files[] =[
                         'url' => str_replace('public/', 'storage/' ,$path)
                     ];
@@ -70,7 +70,7 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      */
-    
+
 
     /**
      * Show the form for editing the specified resource.
@@ -107,10 +107,10 @@ class ProductsController extends Controller
             if($request->hasFile('galery')){
                 $discart = explode(",", $request->input('mirror_hidden_galery'));
                 foreach($request->file('galery') as $image){
-                    if(in_array($image->gegetClientOriginalName(), $discart))
+                    if(in_array($image->getClientOriginalName(), $discart))
                         continue;
-                    $fileName = 'p_' . $product->id . '_' . time().rand(1, 100) . '.' . $image->getClientOriginalExtension();  
-                    $path = $image->storeAs('public/products', $fileName); 
+                    $fileName = 'p_' . $product->id . '_' . time().rand(1, 100) . '.' . $image->getClientOriginalExtension();
+                    $path = $image->storeAs('public/products', $fileName);
                     $files[] =[
                         'url' => str_replace('public/', 'storage/' ,$path)
                     ];
@@ -121,10 +121,11 @@ class ProductsController extends Controller
             DB::commit();
             $msg = __('main.product_created_successfully');
         } catch (\Exception $e) {
+            dd($e->getMessage());
             DB::rollback();
             $msg = __('main.error');
         }
-        return redirect()->route("product.index");    
+        return redirect()->route("product.index");
     }
 
     /**
@@ -145,7 +146,7 @@ class ProductsController extends Controller
             DB::rollback();
             $msg = __('main.error');
         }
-        
+
         return redirect()->route("product.index")->with($msg);
     }
 }
