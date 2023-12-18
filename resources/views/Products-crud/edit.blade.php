@@ -101,20 +101,20 @@
                          'class' => 'col-12',
                          'itemsClass' => 'col-4',
                          'model' => $product,
-                         'method' => 'galery'
- 
+                         'method' => 'getGalery'
+
                      ]"/>
                  </div>
 
                 <div class="row">
                     <div class="form-group col-3 ">
-                        <label class="col-form-label">@lang('main.onsigth')</label>                        
+                        <label class="col-form-label">@lang('main.onsigth')</label>
                         <input class=" form-control mt-5" {{ old('act_carusel', $product->act_carusel ? 'checked' : '') }} type="checkbox" name="act_carusel" id="check"
                         data-bootstrap-switch>
                     </div>
 
                     <div class="form-group col-2 ">
-                        <label class="col-form-label">@lang('main.onnew')</label>                        
+                        <label class="col-form-label">@lang('main.onnew')</label>
                         <input class=" form-control mt-5" {{ old('is_new', $product->is_new ? 'checked' : '') }} type="checkbox" name="is_new" id="check"
                         data-bootstrap-switch>
                     </div>
@@ -127,7 +127,7 @@
     </form>
 @endsection
 @section('css')
-    
+
         <style>
             .selects span.error{
                 position: absolute;
@@ -138,8 +138,8 @@
 @endsection
 
 @section('js')
-    
-    
-    
-    
+
+
+
+
 @endsection

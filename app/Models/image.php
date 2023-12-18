@@ -11,9 +11,9 @@ class Image extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['url'];
+    protected $fillable = ['url', 'is_main'];
     public $timestamps = false;
-    
+
     public function imageable(): MorphTo
     {
         return $this->morphTo();
@@ -22,4 +22,8 @@ class Image extends Model
     public function getPathAttribute(){
         return str_replace('storage/', 'public/' ,$this->url);
     }
+
+    protected $casts = [
+        'is_main' => 'boolean'
+    ];
 }

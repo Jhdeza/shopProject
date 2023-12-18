@@ -101,7 +101,7 @@
                         'class' => 'col-12',
                         'itemsClass' => 'col-4',
                         'model' => App\Models\Product::class,
-                        'method' => 'galery'
+                        'method' => 'getGalery'
 
                     ]"/>
                 </div>
@@ -111,10 +111,10 @@
                         <label class="col-form-label">@lang('main.onsigth')</label>
                         <input class="form-control mt-5" @checked(old('act_carusel') == 'on') type="checkbox" name="act_carusel" id="check" data-bootstrap-switch>
                     </div>
-                 
+
                     <div class="form-group col-2">
-                        <label class="col-form-label">@lang('main.onnew')</label>                    
-                        <input class=" form-control mt-5" @checked(old('is_new') == 'on') type="checkbox" name="is_new" id="check" 
+                        <label class="col-form-label">@lang('main.onnew')</label>
+                        <input class=" form-control mt-5" @checked(old('is_new') == 'on') type="checkbox" name="is_new" id="check"
                             data-bootstrap-switch>
                     </div>
                 </div>

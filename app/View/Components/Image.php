@@ -28,7 +28,7 @@ class Image extends Component
         foreach ($params as $key => $value) {
             $this->$key = $value;
         }
-       
+
         if(isset($params['method']))
             $this->method = $params['method'];
         if(isset($params['model']))
@@ -52,7 +52,7 @@ class Image extends Component
                 $model = $this->model;
                 $this->model = new $model();
             }
-            $files = $this->model->{$this->method};
+            $files = $this->model->{$this->method}();
             if($files !== null)
                 return $files;
         }

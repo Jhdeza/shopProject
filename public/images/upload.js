@@ -3,23 +3,23 @@
         fn: $.fn.upload = function (options) {
             var obj = $.extend({}, $.Upload.defaultOptions, options, $(this).data());
             obj.cont = $(this);
-            
+
             if (obj.simple) {
                 obj.contlist = $('.parent-img-' + obj.id);
                 obj.input_file = obj.cont.find('#' + obj.id);
-    
+
                 obj.begin = function () {
                     obj.cont.find(obj.trigger + ', ' + obj.btn_trigger).click(function () {
                         obj.input_file.click();
                     });
-    
+
                     obj.input_file.change(function (e) {
                         preview(obj, options);
                         if (typeof obj.afterpreview === 'function') {
                             obj.afterpreview(e, obj);
                         }
                     });
-    
+
                     obj.cont.find('.crud-file_remove-button').click(function (e) {
                         e.preventDefault();
                         obj.cont.find('img').attr('src', obj.cont.find('img').data().emtpy ?? '');
@@ -31,18 +31,18 @@
                 obj.contlist = $(obj.contlist);
                 obj.content = obj.cont.find('.con_list_imgs')
                 obj.empty = obj.cont.find('.empty')
-    
+
                 obj.begin = function () {
                     if (obj.showbtns) {
                         obj.contlist.find('li').each(function () {
                             $.Upload.declareEvents($(this), obj);
                         });
                     }
-    
+
                     obj.cont.find('#cancel').click(function () {
                         obj.contlist.empty();
                     });
-    
+
                     obj.cont.find('#trigger').click(function (e) {
                         e.preventDefault();
                         obj.cont.find('#' + obj.id).click();
@@ -54,19 +54,20 @@
                             b = document.getElementById('uploadClone');
                         }
                     });
-    
+
                     obj.cont.find('#' + obj.id).change(function () {
                         b = document.getElementById(obj.id);
                         beforePrev(b, obj);
                     });
                 };
             }
-    
+
             obj.begin();
         },
         setEmpty: function (obj){
             obj.content.addClass('d-none')
             obj.empty.removeClass('d-none')
+            $('#pre_hidden_'+obj.id).val("")
         },
         setNotEmpty: function (obj){
             obj.content.removeClass('d-none')
@@ -162,15 +163,15 @@
             afterpreview: undefined,
         },
     };
-    
+
 })(jQuery);
 
 function preview(obj, options){
-    
+
     var file = document.getElementById(obj.id);
     var files = file.files;
     f = files[0];
-   
+
     obj.contlist.find('div').remove();
     if (!f.type.match('image.*')){
         obj.contlist.find('img').addClass('d-none');
@@ -184,7 +185,7 @@ function preview(obj, options){
                 obj.contlist.find('img').removeClass('d-none').attr("src", e.target.result);
             };
         })(f);
-        reader.readAsDataURL(f);        
+        reader.readAsDataURL(f);
     }
     obj.cont.find('.crud-file_remove-button').removeClass('d-none')
     obj.cont.find('#flag').val(true);
@@ -225,10 +226,16 @@ function previaImg(file, obj){
 }
 
 function buildHtmlImg(title, src, obj, cont){
-    let out = `<li 
-        class="col-3 mb-4">
+    if(obj.contlist.find('li').length == 0){
+        var main_class = 'main';
+        $('#pre_hidden_'+obj.id).val(title)
+    }
+    else var main_class = '';
+
+    let out = `<li
+        class="col-3 mb-4 ${main_class}">
         <div class="card card-solid bg-transaparent-gradient">
-            <div class="card-header p-0">               
+            <div class="card-header p-0">
                 <div class="float-right card-tools bg-transparent" style="height:0px;width:auto">`;
                     if(obj.useprev)
                         out += `<button type="button" title="Portada" class="btn btn-tool set_main p-0" >
@@ -238,7 +245,7 @@ function buildHtmlImg(title, src, obj, cont){
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
-                <input type="hidden" class="${cont}"/>                
+                <input type="hidden" class="${cont}"/>
                 <div class="item">
                     <span>
                         <input type="hidden" value="${title}"/>

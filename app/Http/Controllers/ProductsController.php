@@ -28,7 +28,7 @@ class ProductsController extends Controller
     {
         $categories = Category::all();
         $oferts = Ofert::all();
-       return view('Products-crud.create',compact("categories","oferts"));
+        return view('Products-crud.create',compact("categories","oferts"));
     }
 
     /**
@@ -43,7 +43,6 @@ class ProductsController extends Controller
             $productData['is_new'] = $request->input('is_new') == "on" ?  true : false ;
             $product = Product::create($productData);
             $files = [];
-
             if($request->hasFile('galery')){
                 $discart = explode(",", $request->input('mirror_hidden_galery'));
                 foreach($request->file('galery') as $image){
@@ -52,9 +51,9 @@ class ProductsController extends Controller
                     $fileName = 'p_' . $product->id . '_' . time().rand(1, 100) . '.' . $image->getClientOriginalExtension();
                     $path = $image->storeAs('public/products', $fileName);
                     $files[] =[
-                        'url' => str_replace('public/', 'storage/' ,$path)
+                        'url' => str_replace('public/', 'storage/' ,$path),
+                        'is_main' => $request->input('pre_hidden_galery') == $image->getClientOriginalName()?true:false
                     ];
-
                 }
                 $product->galery()->createMany($files);
             }
@@ -88,8 +87,6 @@ class ProductsController extends Controller
      */
     public function update(ProductRequest $request, $id)
     {
-        //dd($request->all());
-        //dd($request->allFiles());
         try {
             DB::beginTransaction();
             $product = Product::find($id);
@@ -104,6 +101,15 @@ class ProductsController extends Controller
                     Image::find($delete)->delete();
             }
 
+            if(is_numeric($request->input('pre_hidden_galery'))){
+                $product->setMainImage($request->input('pre_hidden_galery'));
+            }
+            else if($request->input('pre_hidden_galery')){
+                $main = $product->getMainImage();
+                if($main)
+                    $main->update(['is_main' => false]);
+            }
+
             if($request->hasFile('galery')){
                 $discart = explode(",", $request->input('mirror_hidden_galery'));
                 foreach($request->file('galery') as $image){
@@ -112,9 +118,9 @@ class ProductsController extends Controller
                     $fileName = 'p_' . $product->id . '_' . time().rand(1, 100) . '.' . $image->getClientOriginalExtension();
                     $path = $image->storeAs('public/products', $fileName);
                     $files[] =[
-                        'url' => str_replace('public/', 'storage/' ,$path)
+                        'url' => str_replace('public/', 'storage/' ,$path),
+                        'is_main' => $request->input('pre_hidden_galery') == $image->getClientOriginalName()?true:false
                     ];
-
                 }
                 $product->galery()->createMany($files);
             }

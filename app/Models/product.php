@@ -26,9 +26,28 @@ class Product extends Model
         return $this->morphMany(image::class, 'imageable');
     }
 
+    public function getGalery(){
+        return $this->galery()->orderBy('is_main', 'desc')->get();
+    }
+
+    public function getMainImage(){
+        return $this->galery()->where('is_main', true)->first();
+    }
+
+    public function setMainImage($id){
+        $main = $this->getMainImage();
+        if($main && $id != $main->id){
+            $main->update(['is_main' => false]);
+            $this->galery()->where('id', $id)->update(['is_main' => true]);
+        }
+        else{
+            $this->galery()->where('id', $id)->update(['is_main' => true]);
+        }
+    }
+
     protected $casts = [
-        'is_new' => 'boolean',        
-        'act_carusel' => 'boolean',        
+        'is_new' => 'boolean',
+        'act_carusel' => 'boolean',
     ];
 
 
