@@ -12,6 +12,7 @@ class Product extends Model
     use HasFactory;
     public $timestamps = false;
     protected $guarded = ['_token', 'is_new', 'act_carusel'];
+    const urlImageEmpty = 'path/to/empty/image.jpg';
 
     public function category(){
         return $this->belongsTo(Category::class);
@@ -43,6 +44,13 @@ class Product extends Model
         else{
             $this->galery()->where('id', $id)->update(['is_main' => true]);
         }
+    }
+
+    public function getImageAttribute(){
+        $main = $this->getMainImage();
+        if($main)
+            return $main->url;
+        return self::urlImageEmpty;
     }
 
     protected $casts = [

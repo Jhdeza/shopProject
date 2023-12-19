@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.middle')
 
 @section('content_header')
 
@@ -43,7 +43,7 @@
                         @forelse ($products as $product)
                             <tr>
                                 <td>{{ $count++ }} </td>
-                                <td></td>
+                                <td><img class="list-preview" src="{{$product->image}}"></td>
                                 <td>{{ $product->name }} </td>
                                 <td>{{ $product->description }} </td>
                                 <td>{{ $product->price }} </td>

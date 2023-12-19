@@ -15,18 +15,16 @@
     <script>
         $(document).ready(function() {
 
-            $("input[data-bootstrap-switch]").each(function() {
+            /*$("input[data-bootstrap-switch]").each(function() {
                 let selected = $(this).is(':checked')
                 $(this).bootstrapSwitch({
                     'state': selected ,
                     "onText": "Si",
                     "offText": "No",
                 });
-            }) 
+            }) */
 
-            $('.cont_upload').upload({
-                
-            });
+            $('.cont_upload').upload();
 
         })
     </script>
@@ -40,6 +38,17 @@
         position: absolute;
         bottom: -20px;
     }
+
+    /* list table */
+
+    table .list-preview{
+        height: 80px;
+        max-height: 80px;
+        max-width: 80px;
+        width: 80px;
+    }
+
+    /*end list table */
 
     /*galery */
 
