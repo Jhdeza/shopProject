@@ -11,9 +11,9 @@
                 <div class="card-title">
                     <h5>@lang('main.product_list')</h5>
                 </div>
-                <a class="btn btn-success btn-sm float-right" href="{{ route('product.create') }}">
+                <button class="btn btn-success btn-sm float-right btn-modal" data-toggle="modal" data-target="#modal-generic" data-url="{{ route('product.create') }}">
                     <i class="fas fa-list-alt "> </i> @lang('main.create')
-                </a>
+                </button>
             </div>
             <div class="card-body p-0" style="display: block;">
                 <table class="table table-striped projects">
@@ -54,10 +54,10 @@
                                 <td>{{ $product->act_carusel ? 'Si' : 'No' }}</td>
                                 <td>{{ $product->is_new ? 'Si' : 'No' }}</td>
                                 <td class="project-actions text-right button-td ">
-                                    <a class="btn btn-info btn-sm mr-2  " href="{{ route('product.edit', $product->id) }}">
+                                    <button class="btn btn-info btn-sm mr-2 btn-modal" data-toggle="modal" data-target="#modal-generic" data-url="{{ route('product.edit', $product->id) }}">
                                         <i class="fas fa-pencil-alt mr-1"></i><span
                                             class="d-none d-xl-inline">@lang('main.edit')</span>
-                                    </a>
+                                    </button>
                                     <form class="mx-0 d-inline-block "
                                         action="{{ route('product.destroy', $product->id) }}" method="POST">
                                         @csrf
@@ -85,24 +85,10 @@
 @endsection
 @section('js')
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-    <script>
-        $(document).on('click', 'button.delete', function(e) {
-            e.preventDefault();
-            let title = "Estas seguro que desea eliminar el Producto"
-            let form = $(this).closest('form');
-            swal({
-                title: title,
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            }).then((confirmed) => {
-                if (confirmed) {
-                    form.trigger("submit");
-                }
-            });
-        })
-    </script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script> --}}
+   {{--  <script>
+
+    </script> --}}
 @endsection
 
 @section('css')

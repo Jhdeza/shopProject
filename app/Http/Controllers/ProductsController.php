@@ -28,7 +28,7 @@ class ProductsController extends Controller
     {
         $categories = Category::all();
         $oferts = Ofert::all();
-        return view('Products-crud.create',compact("categories","oferts"));
+        return view('Products-crud.create',compact("categories","oferts"))->render();
     }
 
     /**
@@ -79,7 +79,7 @@ class ProductsController extends Controller
         $product = Product::find($id);
         $categories = Category::all();
         $oferts = Ofert::all();
-        return view("products-crud.edit", compact("product","categories","oferts"));
+        return view("products-crud.edit", compact("product","categories","oferts"))->render();
     }
 
     /**

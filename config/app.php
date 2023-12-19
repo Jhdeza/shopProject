@@ -159,7 +159,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        JeroenNoten\LaravelAdminLte\AdminLteServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -183,6 +183,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'AdminLTE' => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
     ])->toArray(),
 
 ];

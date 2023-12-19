@@ -1,19 +1,24 @@
-@extends('layouts.middle')
+{{-- @extends('layouts.middle')
 
 
 @section('content_header')
 
 @stop
 
-@section('content')
-    <form class="form" enctype="multipart/form-data" method="post" action="{{ route('product.store') }}">
-        @csrf
-        <div class="card card-primary mt-5 col-8 p-0">
-            <div class="card-header ">
-                <h3 class="card-title">@lang('main.insert_Product')</h3>
+@section('content') --}}
+<div class="modal-dialog modal-xl">
+    <div class="modal-content">
+        <form class="form" enctype="multipart/form-data" method="post" action="{{ route('product.store') }}">
+            @csrf
+            <div class="modal-header">
+                <h4 class="modal-title">@lang('main.insert_Product')</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="card-body">
-                <div class="form-group row">
+            <div class="modal-body">
+                <div class="container">
+                <div class="form-group">
                     <label class="col-form-label">@lang('main.name')</label>
                     <input type="text" name="name" class="form-control" value="{{old('name', null)}}">
                     @error('name')
@@ -24,9 +29,9 @@
                 </div>
 
                 <div class="row selects">
-                    <div id="cat-cont" class="form-group row col-6 ">
+                    <div id="cat-cont" class="form-group col-6">
                         <label class="col-form-label">{{ __('main.category') }}:</label>
-                        <select class="form-control " name="category_id">
+                        <select class="form-control select2" name="category_id">
                             <option value="" selected>@lang('main.Select')</option>
                             @foreach ($categories as $category)
                                 <option @selected(old('category_id') == $category->id) value="{{ $category->id }}">
@@ -40,9 +45,9 @@
                         @enderror
                     </div>
 
-                    <div id="cat-cont" class="form-group row col-6 ml-2 ">
+                    <div id="cat-cont" class="form-group col-6">
                         <label class="col-form-label">{{ __('main.ofert') }}:</label>
-                        <select class="form-control " name="ofert">
+                        <select class="form-control select2" name="ofert">
                             <option value="">@lang('main.Select')</option>
                             @foreach ($oferts as $ofert)
                                 <option @selected(old('ofert_id') == $ofert->id) value="{{ $ofert->id }}">{{ $ofert->name }}</option>
@@ -52,7 +57,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="form-group col-4 pl-0">
+                    <div class="form-group col-4">
                         <label class="col-form-label">@lang('main.price')</label>
                         <input type="text" name="price" class="form-control" value="{{old("price",null)}}">
                         @error('price')
@@ -62,7 +67,7 @@
                         @enderror
                     </div>
 
-                    <div class="form-group col-4 ">
+                    <div class="form-group col-4">
                         <label class="col-form-label">@lang('main.quantity')</label>
                         <input type="text" name="quantity" class="form-control" value="{{old('quantity', null)}}">
                         @error('quantity')
@@ -72,7 +77,7 @@
                         @enderror
                     </div>
 
-                    <div class="form-group col-4 ">
+                    <div class="form-group col-4">
                         <label class="col-form-label">@lang('main.quantity_alert')</label>
                         <input type="text" name="quantity_alert" class="form-control" value="{{old('quantity_alert', 0)}}">
                         @error('quantity_alert')
@@ -83,7 +88,7 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
+                <div class="form-group">
                     <label class="col-form-label">@lang('main.product_description')</label>
                     <textarea type="text" name="description" class="form-control">{{old('description')}}</textarea>
                     @error('description')
@@ -93,8 +98,8 @@
                     @enderror
                 </div>
 
-                <div class="form-group row">
-                   <x-image :params="[
+                <div class="form-group">
+                <x-image :params="[
                         'name' => 'galery',
                         'usePrev' => true,
                         'showBtns' => true,
@@ -102,7 +107,6 @@
                         'itemsClass' => 'col-4',
                         'model' => App\Models\Product::class,
                         'method' => 'getGalery'
-
                     ]"/>
                 </div>
 
@@ -118,12 +122,16 @@
                             data-bootstrap-switch>
                     </div>
                 </div>
+                </div>
             </div>
-            <div class="card-footer">
-                <Button class="btn btn-outline-success">@lang('main.insert')</Button>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button class="btn btn-outline-success">@lang('main.insert')</button>
             </div>
-        </div>
-    </form>
-@endsection
+        </form>
+    </div>
+</div>
+
+{{-- @endsection --}}
 
 

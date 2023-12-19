@@ -12,84 +12,29 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script defer src="{{asset('images/upload.js')}}" ></script>
 
-    <script>
-        $(document).ready(function() {
-
-            /*$("input[data-bootstrap-switch]").each(function() {
-                let selected = $(this).is(':checked')
-                $(this).bootstrapSwitch({
-                    'state': selected ,
-                    "onText": "Si",
-                    "offText": "No",
-                });
-            }) */
-
-            $('.cont_upload').upload();
-
-        })
-    </script>
-    
 @endpush
 
-@push('css')
+@include('layouts.partials.js')
+@include('layouts.partials.css')
 
-<style>
-    .selects span.error{
-        position: absolute;
-        bottom: -20px;
-    }
+@section('footer')
+    @parent
 
-    /* list table */
+    <div class="modal" id="modal-generic">
 
-    table .list-preview{
-        height: 80px;
-        max-height: 80px;
-        max-width: 80px;
-        width: 80px;
-    }
+    </div>
 
-    /*end list table */
+   <x-adminlte-modal id="modalPurple" title="Theme Purple" theme="purple"
+    icon="fas fa-bolt" size='lg' disable-animations>
+    This is a purple theme modal without animations.
+    </x-adminlte-modal>
 
-    /*galery */
+    <x-adminlte-button label="Open Modal" data-toggle="modal" data-target="#modalPurple" class="bg-purple"/>
 
-    .gen-cont {
-        padding-top: 10px;
-        padding-left: 10px;
-        padding-right: 10px;
-        background-color: #ecf0f5;
-    }
+@stop
 
-    .cont_btn_upload {
-        margin-bottom: 10px;
-    }
 
-    .con_list_imgs .item {
-        display: block;
-    }
+@section('plugins.Datatables', true)
+@section('plugins.Select2', true)
+@section('plugins.Sweetalert2', true)
 
-    .con_list_imgs ul li {
-        float: left;
-        list-style: none;
-        min-height: 120px;
-    } 
-    
-    .con_list_imgs ul li img{
-        object-fit: cover; /* Cubre el contenedor manteniendo la relación de aspecto */
-        object-position: center; /* Centra la imagen dentro del contenedor */
-    } 
-
-    .con_list_imgs .card-tools{
-        position: absolute;
-        right: 10px;
-        top: -30px;
-    }   
-
-    .con_list_imgs .main .set_main{
-        display: none;
-    }
-
-    /* end galery /*
-
-</style>
-    
-@endpush
