@@ -6,12 +6,10 @@
 @endpush
 
 @push('js')
-
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/4.0.0-alpha.1/js/bootstrap-switch.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script defer src="{{asset('images/upload.js')}}" ></script>
-
 @endpush
 
 @include('layouts.partials.js')
@@ -37,4 +35,5 @@
 @section('plugins.Datatables', true)
 @section('plugins.Select2', true)
 @section('plugins.Sweetalert2', true)
+@section('plugins.JqueryValidation', true)
 

@@ -509,6 +509,16 @@ return [
                 ],
             ],
         ],
+        'JqueryValidation' => [
+            'active' => false,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => 'vendor/jquery-validation/jquery.validate.min.js',
+                ],
+            ],
+        ],
         'Pace' => [
             'active' => false,
             'files' => [

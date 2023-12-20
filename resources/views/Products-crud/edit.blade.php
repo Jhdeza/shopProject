@@ -1,10 +1,3 @@
-{{-- @extends('layouts.middle')
-
-@section('content_header')
-
-@stop
-
-@section('content') --}}
 <div class="modal-dialog modal-xl">
     <div class="modal-content">
         <form class="form" enctype="multipart/form-data" method="post" action="{{ route('product.update',$product->id) }}">
@@ -112,15 +105,15 @@
                     </div>
 
                     <div class="row">
-                        <div class="form-group col-3 ">
-                            <label class="col-form-label">@lang('main.onsigth')</label>
-                            <input class=" form-control mt-5" {{ old('act_carusel', $product->act_carusel ? 'checked' : '') }} type="checkbox" name="act_carusel" id="check"
+                        <div class="form-group col-7 pt-4">
+                            {{-- <label class="col-form-label">@lang('main.onsigth')</label> --}}
+                            <input class=" form-control" data-on="{{__('main.visible_on_home')}}" data-off="{{__('main.hidden_on_home')}}"  {{ old('act_carusel', $product->act_carusel ? 'checked' : '') }} type="checkbox" name="act_carusel" id="check"
                             data-bootstrap-switch>
                         </div>
 
-                        <div class="form-group col-2 ">
-                            <label class="col-form-label">@lang('main.onnew')</label>
-                            <input class=" form-control mt-5" {{ old('is_new', $product->is_new ? 'checked' : '') }} type="checkbox" name="is_new" id="check"
+                        <div class="form-group col-5 pt-4">
+                            {{-- <label class="col-form-label">@lang('main.onnew')</label> --}}
+                            <input class=" form-control" data-on="{{__('main.is_new')}}" data-off="{{__('main.is_not_new')}}" {{ old('is_new', $product->is_new ? 'checked' : '') }} type="checkbox" name="is_new" id="check"
                             data-bootstrap-switch>
                         </div>
                     </div>
@@ -133,21 +126,4 @@
         </form>
     </div>
 </div>
-{{-- @endsection
-@section('css')
 
-        <style>
-            .selects span.error{
-                position: absolute;
-                bottom: -20px;
-            }
-
-        </style>
-@endsection
-
-@section('js')
-
-
-
-
-@endsection --}}

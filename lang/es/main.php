@@ -52,4 +52,8 @@ return [
     "onnew"=> "Nuevo",
     "product_list" => "Listado de Produtos",
     "empty_products" => "No existen productos registrados",
+    "visible_on_home" => "Visible en el Home",
+    "hidden_on_home" => "Oculto en el Home",
+    "is_new" => "Es Nuevo",
+    "is_not_new" => "No es Nuevo",
 ];
