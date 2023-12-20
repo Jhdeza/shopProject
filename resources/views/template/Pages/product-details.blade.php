@@ -24,7 +24,6 @@
     <!-- Start Item Details -->
     <section class="item-details section">
         <div class="container">
-
             <div class="top-area">
                 <div class="row align-items-center">
                     <div class="col-lg-6 col-md-12 col-12">
@@ -47,6 +46,7 @@
                                         @endif
                                     @endforeach
                                 </div>
+                               
                             </main>
                         </div>
                     </div>
@@ -63,7 +63,8 @@
                                 @else
                                     <h3 class="price">${{ $product->price }}</h3>
                                 @endif
-                            </div>
+                                  </div>
+                                  
                             <p class="info-text">{{ $product->description }}</p>
                             {{-- <div class="row">
                                 <div class="col-lg-4 col-md-4 col-12">
@@ -129,6 +130,11 @@
                                     </div> -->
                                 </div>
                             </div> --}}
+                        </div>
+                        <div class="price">
+                            @if ($product->quantity <= $product->quantity_alert)
+                                <span class="price">En Stock: {{ $product->quantity }}</span>
+                            @endif
                         </div>
                     </div>
                 </div>

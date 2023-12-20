@@ -29,7 +29,7 @@ class OfertRequest extends FormRequest
                 'max:255',
                 Rule::unique('oferts', 'name')->ignore($ofertid),
             ],
-            "descuento" => "required|integer|max:99",
+            "descuento" => "required|numeric|max:99",
         ];
     }
     public function messages()
@@ -40,7 +40,7 @@ class OfertRequest extends FormRequest
         'nombre.max' => 'El campo Nombre no puede tener más de :max caracteres.',
         'nombre.unique'=>' Ya existe una Nombre con ese nombre ',
         'descuento.required' => 'El campo (porciento de descuento) es obligatorio.',
-        'descuento.integer' => 'El campo (porciento de descuento) debe ser un numero.',
+        'descuento.numeric' => 'El campo (porciento de descuento) debe ser un numero.',
         'descuento.max' => 'El campo (porciento de descuento) no puede tener más de :max caracteres.',
         
     ];
