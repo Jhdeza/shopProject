@@ -49,77 +49,7 @@
             })
         })
 
-        $('form.form-generic')
-        .submit(function(e) {
-            e.preventDefault();
-        })
-        .validate({
-            rules: {
-                contact_id: {
-                    remote: {
-                        url: '/contacts/check-contacts-id',
-                        type: 'post',
-                        data: {
-                            contact_id: function() {
-                                return $('#contact_id').val();
-                            },
-                            hidden_id: function() {
-                                if ($('#hidden_id').length) {
-                                    return $('#hidden_id').val();
-                                } else {
-                                    return '';
-                                }
-                            },
-                        },
-                    },
-                },
-            },
-            messages: {
-                contact_id: {
-                    remote: LANG.contact_id_already_exists,
-                },
-            },
-            submitHandler: function(form) {
-                let url = $(this).attr('href')
-                let data = $(this).serialize()
-                $.ajax({
-                    method: 'POST',
-                    url: url,
-                    dataType: 'json',
-                    data: {
-                        contact_id: function() {
-                            return $('#hidden_id').val();
-                        },
-                        mobile_number: function() {
-                            return $('#mobile').val();
-                        },
-                    },
-                    beforeSend: function(xhr) {
-                        __disable_submit_button($(form).find('button[type="submit"]'));
-                    },
-                    success: function(result) {
-                        if (result.is_mobile_exists == true) {
-                            swal({
-                                title: LANG.sure,
-                                text: result.msg,
-                                icon: 'warning',
-                                buttons: true,
-                                dangerMode: true,
-                            }).then(willContinue => {
-                                if (willContinue) {
-                                    submitQuickAddPurchaseContactForm(form);
-                                } else {
-                                    $('#mobile').select();
-                                }
-                            });
-                            
-                        } else {
-                            submitQuickAddPurchaseContactForm(form);
-                        }
-                    },
-                });
-            },
-        });
+
 
         activatePlugins = (cont) => {
             if(cont == undefined)
@@ -141,6 +71,77 @@
             })
 
             cont.find('.cont_upload').upload();
+
+            cont.find('form')
+                .submit(function(e) {
+                    e.preventDefault();
+                })
+            .validate({
+                errorClass: "error invalid-feedback",
+                errorPlacement: function(error, element) {
+                        // Solo asignar la clase al elemento label
+                    if (element.hasClass('select2')) {
+                        error.appendTo(element.parent());
+                    } else {
+                        error.insertAfter(element);
+                    }
+
+            },
+            /* rules: {
+                contact_id: {
+                    remote: {
+                        url: '/contacts/check-contacts-id',
+                        type: 'post',
+                        data: {
+                            contact_id: function() {
+                                return $('#contact_id').val();
+                            },
+                            hidden_id: function() {
+                                if ($('#hidden_id').length) {
+                                    return $('#hidden_id').val();
+                                } else {
+                                    return '';
+                                }
+                            },
+                        },
+                    },
+                },
+            }, */
+           /*  messages: {
+                contact_id: {
+                    remote: LANG.contact_id_already_exists,
+                },
+            }, */
+            submitHandler: function(form) {
+                let url = $(form).attr('href')
+                let data = $(form).serialize()
+                $.ajax({
+                    method: $(form).attr('method'),
+                    url: url,
+                    dataType: 'json',
+                    data: $(form).serialize(),
+                    beforeSend: function(xhr) {
+                        $(form).find('button.btn-outline-success').prop('disabled', true);
+                    },
+                    success: function(result) {
+                        if(result.success){
+
+                        }
+                        else{
+
+                        }
+                        $(form).find('button.btn-outline-success').prop('disabled', false);
+                    },
+                    error: function(response){
+                        console.log(response)
+                        console.log(response.responseJSON.errors)
+                        response.responseJSON.errors.forEach(element => {
+                            console.log(element)
+                        });
+                    },
+                });
+            },
+        });
 
         }
 

@@ -27,6 +27,14 @@
 
     /* select2 correction end */
 
+    /* form validation */
+
+    input.invalid-feedback, select.invalid-feedback, textarea.invalid-feedback{
+        display: inline;
+    }
+
+    /* form validation end */
+
     .main-footer{
         color: #fff !important;
     }

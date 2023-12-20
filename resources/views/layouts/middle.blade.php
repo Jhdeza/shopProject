@@ -36,4 +36,5 @@
 @section('plugins.Select2', true)
 @section('plugins.Sweetalert2', true)
 @section('plugins.JqueryValidation', true)
+@section('plugins.toastr', true)
 

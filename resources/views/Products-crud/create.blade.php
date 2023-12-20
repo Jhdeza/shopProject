@@ -12,7 +12,7 @@
                 <div class="container">
                 <div class="form-group">
                     <label class="col-form-label">@lang('main.name')</label>
-                    <input type="text" name="name" class="form-control" value="{{old('name', null)}}">
+                    <input type="text" required name="name" class="form-control" value="{{old('name', null)}}">
                     @error('name')
                         <span style="display: block" class="error invalid-feedback ">
                             {{ $message }}
@@ -23,7 +23,7 @@
                 <div class="row selects">
                     <div id="cat-cont" class="form-group col-6">
                         <label class="col-form-label">{{ __('main.category') }}:</label>
-                        <select class="form-control select2" name="category_id">
+                        <select class="form-control select2" required name="category_id">
                             <option value="" selected>@lang('main.Select')</option>
                             @foreach ($categories as $category)
                                 <option @selected(old('category_id') == $category->id) value="{{ $category->id }}">
