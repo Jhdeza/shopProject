@@ -185,14 +185,15 @@
                         <span class="cat-button"><i class="lni lni-menu"></i>All Categories</span>
                         <ul class="sub-category">
                             @foreach ($commonInfo['categories'] as $category)
-                                <li><a href="product-grids.html">{{ $category->description }} @if ($category->subcategories->isNotEmpty())
+                                <li><a href="{{ route('Product-grids' ,['category' => $category->id]) }}">{{ $category->name }} 
+                                        @if ($category->subcategories->isNotEmpty())
                                             <i class="lni lni-chevron-right"></i>
                                         @endif
                                     </a>
                                     @if ($category->subcategories->isNotEmpty())
                                         <ul class="inner-sub-category">
                                             @foreach ($category->subcategories as $sub)
-                                                <li><a href="product-grids.html">{{ $sub->description }}</a></li>
+                                                <li><a href="{{ route('Product-grids' , ['category' => $sub->parent_id, 'subcategory' => $sub->id]) }}">{{ $sub->name }}</a></li>
                                             @endforeach
                                         </ul>
                                     @endif
@@ -225,9 +226,7 @@
                                 <li class="nav-item">
                                     <a href="{{ route('about-us') }}"aria-label="Toggle navigation">About Us</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="login.html" aria-label="Toggle navigation">Login</a>
-                                </li>
+                                
                             </ul>
                         </div> <!-- navbar collapse -->
                     </nav>
@@ -239,18 +238,20 @@
                 <div class="nav-social">
                     <h5 class="title">Follow Us:</h5>
                     <ul>
+                        
                         <li>
-                            <a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a>
+                            <a href={{ $commonInfo['contacts']->social_facebook }}><i class="lni lni-facebook-filled"></i></a>
+                        </li>
+                       
+                        <li>
+                            <a href={{ $commonInfo['contacts']->social_twitter }}><i class="lni lni-twitter-original"></i></a>
                         </li>
                         <li>
-                            <a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a>
+                            <a href={{ $commonInfo['contacts']->social_instagram }}><i class="lni lni-instagram"></i></a>
                         </li>
-                        <li>
-                            <a href="javascript:void(0)"><i class="lni lni-instagram"></i></a>
-                        </li>
-                        <li>
+                        {{-- <li>
                             <a href="javascript:void(0)"><i class="lni lni-skype"></i></a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </div>
                 <!-- End Nav Social -->

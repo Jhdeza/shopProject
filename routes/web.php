@@ -38,6 +38,8 @@ Route::get('/contact-us', [App\Http\Controllers\HomeController::class, 'contactU
 Route::get('/productDetails/{id}', [App\Http\Controllers\HomeController::class, 'productDetails'])->name('product-details');
 
 
+
+
 // Route::get('/dashboard', function () {
 //        return view('template.template');
 // })->middleware(['auth', 'verified'])->name('dashboard');

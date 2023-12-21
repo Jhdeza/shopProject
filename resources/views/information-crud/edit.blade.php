@@ -52,7 +52,24 @@
 
                             </div>
 
-                            <label class=" col-form-label">Descripción:</label>
+                            <label class="c col-form-label">Redes Sociales:</label>
+                            <div>
+
+                                <div class="form-group row">
+                                     <input class="form-control" name="social_facebook" type="text" placeholder="Facebook Link"
+                                    value="{{ $contacts_information->social_facebook }}">
+                               </div>
+                                <div class="form-group row">    
+                                    <input class="form-control" name="social_instagram" type="text" placeholder="Instagram Link"
+                                    value="{{ $contacts_information->social_instagram }}" >    
+                                </div>
+                                <div class="form-group row">                                    
+                                    <input class="form-control" name="social_twitter" type="text" placeholder="Twitter Link"
+                                    value="{{ $contacts_information->social_twitter }}">                                    
+                                </div>
+                            </div>
+                                
+                                <label class=" col-form-label">Descripción:</label>
                             <div class="form-group message row">
 
                                 <textarea class="form-control" rows="5" name="description" placeholder="About Us">{{ $contacts_information->description }}</textarea>

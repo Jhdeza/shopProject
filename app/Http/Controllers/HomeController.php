@@ -25,39 +25,48 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {      
+    {
         $commonInfo = $this->commonInfo();
-       return view('template.pages.home', compact('commonInfo'));
+        return view('template.pages.home', compact('commonInfo'));
     }
     public function about()
     {
         $commonInfo = $this->commonInfo();
-       return view('template.pages.about-us',compact('commonInfo'));
+        return view('template.pages.about-us', compact('commonInfo'));
     }
-    public function productGrid()
+    public function productGrid(Request $request)
     {
         $commonInfo = $this->commonInfo();
-        $products = Product::with("Ofert")->get();
-       return view('template.pages.product-grids',compact('commonInfo','products'));
+        $query = Product::with("Ofert");
+        if ($request->input('category'))
+            $query->where('category_id', $request->input('category'));
+        if ($request->input('subcategory'))
+            $query->where('subcategory_id', $request->input('subcategory'));
+        $products = $query->get();
+
+        return view('template.pages.product-grids', compact('commonInfo', 'products'));
     }
-    public function contactUs(){
+    public function contactUs()
+    {
         $commonInfo = $this->commonInfo();
-        $contacts= Contact_information::get();
-        return view('template.pages.contact',compact('commonInfo','contacts'));
+        $contacts = Contact_information::get();
+        return view('template.pages.contact', compact('commonInfo', 'contacts'));
     }
-    public function productDetails($id){
-        $images=
+    public function productDetails($id)
+    {
+
         $commonInfo = $this->commonInfo();
         $product = Product::find($id);
-        return view('template.pages.product-details',compact('commonInfo','product'));
+        return view('template.pages.product-details', compact('commonInfo', 'product'));
     }
 
-    private function commonInfo(){
-        return [ 
-            
-            'products'=> Product::where('act_carusel',true)->get(),
-            'categories' =>  Category::with('subcategories')->where('parent_id', null)->get() 
+    private function commonInfo()
+    {
+        return [
+
+            'contacts' => Contact_information::First(),
+            'products' => Product::where('act_carusel', true)->get(),
+            'categories' =>  Category::with('subcategories')->where('parent_id', null)->get()
         ];
     }
-
 }
