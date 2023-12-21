@@ -75,7 +75,7 @@
                                     <div class="p-3 m-2">@lang('main.empty_products')</div>
                                 </td>
                             </tr>
-                        @endforelse 
+                        @endforelse
                     </tbody>--}}
 
                 </table>
@@ -92,8 +92,8 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         }); */
-        
-        product_tb = $('#products-tb').DataTable({
+
+        $.list_tb = $('#products-tb').DataTable({
             processing: true,
             serverSide: true,
             scrollY: "75vh",
@@ -114,7 +114,7 @@
                 { data: 'ofert', name: 'ofert' },
                 { data: 'act_carusel', name: 'act_carusel' },
                 { data: 'is_new', name: 'is_new' },
-                
+
             ]/* ,
             fnDrawCallback: function(oSettings) {
                 //__currency_convert_recursively($('#stock_report_table'));

@@ -2,7 +2,7 @@
     <div class="modal-content">
         <form class="form" enctype="multipart/form-data" method="post" action="{{ route('product.update',$product->id) }}">
             @csrf
-            @method('PUT')
+             @method('PATCH')
             <div class="modal-header">
                 <h4 class="modal-title">@lang('main.edit_product')</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -28,7 +28,7 @@
                                 <option value="">@lang('main.Select')</option>
                                 @foreach ($categories as $category)
                                     <option @selected(old('category_id',$product->category_id) == $category->id) value="{{ $category->id }}">
-                                        {{ $category->description }}</option>
+                                        {{ $category->name }}</option>
                                 @endforeach
                             </select>
                             @error('category_id')

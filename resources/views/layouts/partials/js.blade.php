@@ -5,6 +5,12 @@
         $(document).ready(function() {
             $.modalGeneric = $('#modal-generic')
 
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
             $(document).on('click', '.btn-modal', function(e){
                 e.stopPropagation();
                 e.preventDefault();
@@ -66,50 +72,26 @@
                 .submit(function(e) {
                     e.preventDefault();
                 })
-            .validate({
-                errorClass: "error invalid-feedback",
-                errorPlacement: function(error, element) {
-                        // Solo asignar la clase al elemento label
-                    if (element.hasClass('select2')) {
-                        error.appendTo(element.parent());
-                    } else {
-                        error.insertAfter(element);
-                    }
+                .validate({
+                    errorClass: "error invalid-feedback",
+                    errorPlacement: function(error, element) {
+                            // Solo asignar la clase al elemento label
+                        if (element.hasClass('select2')) {
+                            error.appendTo(element.parent());
+                        } else {
+                            error.insertAfter(element);
+                        }
 
-            },
-            /* rules: {
-                contact_id: {
-                    remote: {
-                        url: '/contacts/check-contacts-id',
-                        type: 'post',
-                        data: {
-                            contact_id: function() {
-                                return $('#contact_id').val();
-                            },
-                            hidden_id: function() {
-                                if ($('#hidden_id').length) {
-                                    return $('#hidden_id').val();
-                                } else {
-                                    return '';
-                                }
-                            },
-                        },
-                    },
                 },
-            }, */
-           /*  messages: {
-                contact_id: {
-                    remote: LANG.contact_id_already_exists,
-                },
-            }, */
             submitHandler: function(form) {
-                let url = $(form).attr('href')
-                
+                let url = $(form).attr('action')
+
+                let method = $(form).find('input[name=_method]')?$(form).find('input[name=_method]').val():$(form).attr('method');
+                console.log(url, method)
                 let params = {
-                    method: $(form).attr('method'),
+                    method: method??'POST',
                     url: url,
                     dataType: 'json',
-                    data: $(form).serialize(),
                     beforeSend: function(xhr) {
                         $(form).find('button.btn-outline-success').prop('disabled', true);
                     },
@@ -121,11 +103,11 @@
                         }
                         else{
                             if(result.message)
-                                toastr.error(result.message);  
+                                toastr.error(result.message);
                         }
+                        $.modalGeneric.modal('hide');
                     },
-                    error: function(response){    
-                                            
+                    error: function(response){
                         if(response.status = 422){
                             if(response.responseJSON)
                                 Object.entries(response.responseJSON.errors).forEach(function([key, value]) {
@@ -140,9 +122,12 @@
                     },
                     complete: function(response){
                         $(form).find('button.btn-outline-success').prop('disabled', false);
+                        let table = response.table??'list_tb';
+                        $[table].ajax.reload()
                     },
                 }
                 if ($(form).attr('enctype') == 'multipart/form-data'){
+                    alert('s');
                     params.data = new FormData(form)
                     params.processData = false
                     params.contentType = false
@@ -150,7 +135,7 @@
                 else{
                     params.data = $(form).serialize()
                 }
-
+                console.log(params)
                 $.ajax(params);
             },
         });

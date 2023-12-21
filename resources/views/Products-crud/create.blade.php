@@ -27,7 +27,7 @@
                             <option value="" selected>@lang('main.Select')</option>
                             @foreach ($categories as $category)
                                 <option @selected(old('category_id') == $category->id) value="{{ $category->id }}">
-                                    {{ $category->description }}</option>
+                                    {{ $category->name }}</option>
                             @endforeach
                         </select>
                         @error('category_id')

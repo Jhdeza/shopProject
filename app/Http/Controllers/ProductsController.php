@@ -32,7 +32,7 @@ class ProductsController extends Controller
                             'c.name as category',
                             'o.name as ofert',
                         )->get();
-        if($request->ajax()){    
+        if($request->ajax()){
             return Datatables::of($products)
             ->addColumn('image', function($row){
                 return '<img class="list-preview" src="'. $row->image .'">';
@@ -45,7 +45,7 @@ class ProductsController extends Controller
                       Action
                     </button>
                     <div class="dropdown-menu">
-                        <button class="dropdown-item" data-toggle="modal" data-target="#modal-generic" data-url="'. route('product.edit', $row->id) .'">
+                        <button class="dropdown-item btn-modal" data-toggle="modal" data-target="#modal-generic" data-url="'. route('product.edit', $row->id) .'">
                         <i class="fas fa-pencil-alt mr-1"></i><span class="">'. __('main.edit') .'</span></button>
                         <a type="button" class="dropdown-item delete" data-url="'. route('product.destroy', $row->id) .'">
                         <i class="fas fa-trash-alt mr-1"></i><span class="">'. __('main.delete') .'</span></a>
@@ -95,7 +95,7 @@ class ProductsController extends Controller
                 }
                 $product->galery()->createMany($files);
             }
-            
+
             $response = [
                 'success' => true,
                 'message' =>  __('main.product_created_successfully')
@@ -109,7 +109,7 @@ class ProductsController extends Controller
                 'message' =>  __('main.error')
             ];
             DB::rollback();
-            
+
         }
         return response()->json($response);
     }
@@ -133,8 +133,9 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ProductRequest $request, $id)
+    public function update(Request $request, $id)
     {
+        dd($request->all());
         try {
             DB::beginTransaction();
             $product = Product::find($id);
