@@ -46,7 +46,7 @@ class HomeController extends Controller
         return view('template.pages.contact',compact('commonInfo','contacts'));
     }
     public function productDetails($id){
-        $images=
+        
         $commonInfo = $this->commonInfo();
         $product = Product::find($id);
         return view('template.pages.product-details',compact('commonInfo','product'));
@@ -54,7 +54,7 @@ class HomeController extends Controller
 
     private function commonInfo(){
         return [ 
-            
+            'contacts'=>Contact_information::First(),
             'products'=> Product::where('act_carusel',true)->get(),
             'categories' =>  Category::with('subcategories')->where('parent_id', null)->get() 
         ];
