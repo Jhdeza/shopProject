@@ -9,15 +9,53 @@ use App\Models\Category;
 use App\Models\Ofert;
 use App\Models\Image;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class ProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $products = Product::with(["category","ofert"])->get();
+        $products = Product::join('categories as c', 'c.id' , '=' , 'products.category_id')
+                        ->leftJoin('oferts as o', 'o.id', "=", 'products.ofert_id')
+                        ->select(
+                            'products.id',
+                            'products.name',
+                            'products.price',
+                            'products.quantity',
+                            'products.quantity_alert',
+                            'products.is_new',
+                            'products.act_carusel',
+                            'c.name as category',
+                            'o.name as ofert',
+                        )->get();
+        if($request->ajax()){    
+            return Datatables::of($products)
+            ->addColumn('image', function($row){
+                return '<img class="list-preview" src="'. $row->image .'">';
+            })
+            ->addColumn('buttons', function($row){
+               return '
+               <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      Action
+                    </button>
+                    <div class="dropdown-menu">
+                        <button class="dropdown-item" data-toggle="modal" data-target="#modal-generic" data-url="'. route('product.edit', $row->id) .'">
+                        <i class="fas fa-pencil-alt mr-1"></i><span class="">'. __('main.edit') .'</span></button>
+                        <a type="button" class="dropdown-item delete" data-url="'. route('product.destroy', $row->id) .'">
+                        <i class="fas fa-trash-alt mr-1"></i><span class="">'. __('main.delete') .'</span></a>
+                    </div>
+                  </div>
+                </div>';
+            })
+            ->rawColumns(['image', 'buttons'])
+            ->make(true);
+        }
         return view("Products-crud.index", compact('products'));
     }
 
@@ -57,13 +95,23 @@ class ProductsController extends Controller
                 }
                 $product->galery()->createMany($files);
             }
+            
+            $response = [
+                'success' => true,
+                'message' =>  __('main.product_created_successfully')
+            ];
             DB::commit();
-            $msg = __('main.product_created_successfully');
+
         } catch (\Exception $e) {
+            dd($e->getMessage());
+            $response = [
+                'success' => false,
+                'message' =>  __('main.error')
+            ];
             DB::rollback();
-            $msg = __('main.error');
+            
         }
-        return redirect()->route("product.index");
+        return response()->json($response);
     }
 
     /**

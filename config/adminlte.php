@@ -489,6 +489,21 @@ return [
                 ],
             ],
         ],
+        'BootstrapSwitch' => [
+            'active' => false,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => 'vendor/bootstrap-switch/js/bootstrap-switch.min.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => 'vendor/bootstrap-switch/css/bootstrap3/bootstrap-switch.min.css',
+                ],
+            ],
+        ],
         'Chartjs' => [
             'active' => false,
             'files' => [
@@ -516,6 +531,21 @@ return [
                     'type' => 'js',
                     'asset' => false,
                     'location' => 'vendor/jquery-validation/jquery.validate.min.js',
+                ],
+            ],
+        ],
+        'Toastr' => [
+            'active' => false,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => false,
+                    'location' => 'vendor/toastr/toastr.min.css'
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => 'vendor/toastr/toastr.min.js'
                 ],
             ],
         ],

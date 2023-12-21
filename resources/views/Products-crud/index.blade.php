@@ -15,15 +15,15 @@
                     <i class="fas fa-list-alt "> </i> @lang('main.create')
                 </button>
             </div>
-            <div class="card-body p-0" style="display: block;">
-                <table class="table table-striped projects">
+            <div class="card-body">
+                <table id="products-tb" class="table table-striped table-list">
                     @if ($products->isNotEmpty())
                         <thead>
                             <tr>
                                 <th></th>
                                 <th>@lang('main.imagen_product')</th>
                                 <th>@lang('main.name_product') </th>
-                                <th>@lang('main.product_description')</th>
+                                {{-- <th>@lang('main.product_description')</th> --}}
                                 <th>@lang('main.price')</th>
                                 <th>@lang('main.quantity')</th>
                                 <th>@lang('main.quantity_alert')</th>
@@ -32,12 +32,12 @@
                                 <th>@lang('main.onsigth')</th>
                                 <th>@lang('main.onnew')</th>
 
-                                <th></th>
+                                {{-- <th></th> --}}
                             </tr>
                         </thead>
                     @endif
-                    <tbody>
-                        @php
+                    {{--<tbody>
+                         @php
                             $count = 1;
                         @endphp
                         @forelse ($products as $product)
@@ -75,35 +75,54 @@
                                     <div class="p-3 m-2">@lang('main.empty_products')</div>
                                 </td>
                             </tr>
-                        @endforelse
-                    </tbody>
+                        @endforelse 
+                    </tbody>--}}
 
                 </table>
             </div>
         </div>
     </section>
 @endsection
-@section('js')
+@push('js')
 
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script> --}}
-   {{--  <script>
+<script>
+    $(document).ready(function(){
+       /*  $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        }); */
+        
+        product_tb = $('#products-tb').DataTable({
+            processing: true,
+            serverSide: true,
+            scrollY: "75vh",
+            scrollX: true,
+            scrollCollapse: true,
+            aaSorting: [[2, 'asc']],
+            ajax: {
+                url: 'product',
+            },
+            columns: [
+                { data: 'buttons', name: 'buttons', orderable: false, searchable: false },
+                { data: 'image', name: 'image', orderable: false, searchable: false },
+                { data: 'name', name: 'name' },
+                { data: 'price', name: 'price' },
+                { data: 'quantity', name: 'quantity' },
+                { data: 'quantity_alert', name: 'quantity_alert' },
+                { data: 'category', name: 'category' },
+                { data: 'ofert', name: 'ofert' },
+                { data: 'act_carusel', name: 'act_carusel' },
+                { data: 'is_new', name: 'is_new' },
+                
+            ]/* ,
+            fnDrawCallback: function(oSettings) {
+                //__currency_convert_recursively($('#stock_report_table'));
+            }, */
+        })
+    })
 
-    </script> --}}
-@endsection
+</script>
+@endpush
 
-@section('css')
-    <style>
-        table tr td:first-child {
-            width: 1%;
-        }
 
-        table #empty-row div {
-            background-color: #b1466da7 !important;
-        }
-
-        .button-td {
-            width: 200px;
-            padding-left: 0 !important;
-        }
-    </style>
-@stop

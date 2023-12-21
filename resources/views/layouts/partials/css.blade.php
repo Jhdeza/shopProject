@@ -41,11 +41,24 @@
 
     /* list table */
 
-    table .list-preview{
+    table.table-list .list-preview{
         height: 80px;
         max-height: 80px;
         max-width: 80px;
         width: 80px;
+    }
+
+    table.table-list tr td:first-child {
+        width: 1%;
+    }
+
+    table.table-list #empty-row div {
+        background-color: #b1466da7 !important;
+    }
+
+    .button-td {
+        width: 200px;
+        padding-left: 0 !important;
     }
 
     /*end list table */

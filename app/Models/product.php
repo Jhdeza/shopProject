@@ -11,7 +11,7 @@ class Product extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $guarded = ['_token', 'is_new', 'act_carusel'];
+    protected $guarded = ['_token'];
     const urlImageEmpty = 'path/to/empty/image.jpg';
 
     public function category(){

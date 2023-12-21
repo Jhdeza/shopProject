@@ -2,16 +2,17 @@
 
 @push('css')
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap-switch@3.4.0/dist/css/bootstrap3/bootstrap-switch.min.css" />
+    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap-switch@3.4.0/dist/css/bootstrap3/bootstrap-switch.min.css" /> --}}
 @endpush
 
 @push('js')
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/4.0.0-alpha.1/js/bootstrap-switch.js"></script>
+    {{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-switch/4.0.0-alpha.1/js/bootstrap-switch.js"></script> --}}
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script defer src="{{asset('images/upload.js')}}" ></script>
 @endpush
 
+@include('layouts.partials.config')
 @include('layouts.partials.js')
 @include('layouts.partials.css')
 
@@ -36,5 +37,6 @@
 @section('plugins.Select2', true)
 @section('plugins.Sweetalert2', true)
 @section('plugins.JqueryValidation', true)
-@section('plugins.toastr', true)
+@section('plugins.Toastr', true)
+@section('plugins.BootstrapSwitch', true)
 

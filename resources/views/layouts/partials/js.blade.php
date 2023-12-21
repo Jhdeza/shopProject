@@ -1,6 +1,7 @@
 @push('js')
 
     <script>
+
         $(document).ready(function() {
             $.modalGeneric = $('#modal-generic')
 
@@ -17,7 +18,7 @@
                         activatePlugins($.modalGeneric)
                     },
                     error: function(error){
-
+                        toastr.error(Config.locales[actLocale].error)
                     }
                 })
             })
@@ -39,17 +40,6 @@
                 }
             });
         })
-
-        $(document).on('submit', '.form-generic', function(e){
-            e.preventDefault();
-            let url = $(this).attr('href')
-            let data = $(this).serialize()
-            $.ajax({
-
-            })
-        })
-
-
 
         activatePlugins = (cont) => {
             if(cont == undefined)
@@ -114,8 +104,8 @@
             }, */
             submitHandler: function(form) {
                 let url = $(form).attr('href')
-                let data = $(form).serialize()
-                $.ajax({
+                
+                let params = {
                     method: $(form).attr('method'),
                     url: url,
                     dataType: 'json',
@@ -125,21 +115,43 @@
                     },
                     success: function(result) {
                         if(result.success){
+                            if(result.message)
+                                toastr.success(result.message);
 
                         }
                         else{
-
+                            if(result.message)
+                                toastr.error(result.message);  
                         }
+                    },
+                    error: function(response){    
+                                            
+                        if(response.status = 422){
+                            if(response.responseJSON)
+                                Object.entries(response.responseJSON.errors).forEach(function([key, value]) {
+                                    var errors = {};
+                                    errors[key] = value;
+                                    $(form).validate().showErrors(errors);
+                                });
+                            toastr.error(Config.locales[actLocale].error)
+                            return ;
+                        }
+                        toastr.error(Config.locales[actLocale].error)
+                    },
+                    complete: function(response){
                         $(form).find('button.btn-outline-success').prop('disabled', false);
                     },
-                    error: function(response){
-                        console.log(response)
-                        console.log(response.responseJSON.errors)
-                        response.responseJSON.errors.forEach(element => {
-                            console.log(element)
-                        });
-                    },
-                });
+                }
+                if ($(form).attr('enctype') == 'multipart/form-data'){
+                    params.data = new FormData(form)
+                    params.processData = false
+                    params.contentType = false
+                }
+                else{
+                    params.data = $(form).serialize()
+                }
+
+                $.ajax(params);
             },
         });
 
