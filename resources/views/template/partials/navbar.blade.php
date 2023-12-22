@@ -1,3 +1,5 @@
+
+
 <header class="header navbar-area">
     <!-- Start Topbar -->
     <!-- <div class="topbar">
@@ -83,16 +85,19 @@
                                 <div class="select-position">
                                     <select id="select1">
                                         <option selected>All</option>
-                                        <option value="1">option 01</option>
-                                        <option value="2">option 02</option>
-                                        <option value="3">option 03</option>
-                                        <option value="4">option 04</option>
-                                        <option value="5">option 05</option>
+                                        @foreach ($commonInfo['categories'] as $category)
+                                       <option value="{{ $category->name }} ">{{ $category->name }} 
+                                            @if ($category->subcategories->isNotEmpty())
+                                                <i class="lni lni-chevron-right"></i>
+                                            @endif
+                                        </option>
+                                        @endforeach
+                                        
                                     </select>
                                 </div>
                             </div>
                             <div class="search-input">
-                                <input type="text" placeholder="Search">
+                                <input type="text" id='search' placeholder="Search">
                             </div>
                             <div class="search-btn">
                                 <button><i class="lni lni-search-alt"></i></button>
@@ -213,18 +218,17 @@
                         </button>
                         <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                             <ul id="nav" class="navbar-nav ms-auto">
-                                <li class="nav-item">
-                                    <a href="{{ route('home') }}" class="active"
-                                        aria-label="Toggle navigation">Home</a>
+                                <li class="nav-item  ">
+                                    <a href="{{ route('home') }}" class="{{ request()->is('home') ? 'active' : '' }}" aria-label="Toggle navigation">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('Product-grids') }}" aria-label="Toggle navigation">Products</a>
+                                    <a href="{{ route('Product-grids') }}"  class="{{ request()->is('productGrid') ? 'active' : '' }}" aria-label="Toggle navigation">Products</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('contact-us') }}" aria-label="Toggle navigation">Contact Us</a>
+                                    <a href="{{ route('contact-us') }}" class="{{ request()->is('contact-us') ? 'active' : '' }}"  aria-label="Toggle navigation">Contact Us</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('about-us') }}"aria-label="Toggle navigation">About Us</a>
+                                    <a href="{{ route('about-us') }}" class="{{ request()->is('about-us') ? 'active' : '' }}"  aria-label="Toggle navigation">About Us</a>
                                 </li>
                                 
                             </ul>
@@ -260,3 +264,31 @@
     </div>
     <!-- End Header Bottom -->
 </header>
+
+@push("css")
+<link rel="stylesheet" href="{{asset('vendor/jquery-ui-1.13.2/jquery-ui.min.css')}}">
+@endpush
+
+@push("js")
+<script src="{{asset('vendor/jquery-ui-1.13.2/jquery-ui.min.js')}}"></script>
+
+<script>
+
+    $("#search").autocomplete({
+        source: function(request,response){ 
+            $.ajax({
+            url:"{{route('search.category')}}",
+            dataType: 'json',
+            data:{
+                catg: request.term,
+            },
+            success: function(data){
+                response(data)
+            }
+        })
+        
+    }
+    })
+    </script>
+    
+@endpush
