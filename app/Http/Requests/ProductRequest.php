@@ -40,7 +40,7 @@ class ProductRequest extends FormRequest
 {
     return [
         
-        'name.required' => 'El campo Nombre es obligatorio.',
+        /*'name.required' => 'El campo Nombre es obligatorio.',
         'name.max' => 'El campo Nombre no puede tener más de :max caracteres.',
         'name.unique'=>' Ya existe una Nombre con ese nombre ',
         'price.required' => 'El campo precio es obligatorio.',
@@ -51,7 +51,7 @@ class ProductRequest extends FormRequest
         'quantity_alert.required'=> 'El campo cantidad Alerta es obligatorio.',
         'quantity_alert.integer'=> 'El campo cantidad Alerta debe ser un numero.',
         'description.required'=> 'El campo descripción es obligatorio.',
-        'category_id.required'=> 'Seleccionar una categoria es obligatorio.',
+        'category_id.required'=> 'Seleccionar una categoria es obligatorio.',*/
         
     ];
 }

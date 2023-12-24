@@ -39,4 +39,5 @@
 @section('plugins.JqueryValidation', true)
 @section('plugins.Toastr', true)
 @section('plugins.BootstrapSwitch', true)
+@section('plugins.Summernote', true)
 

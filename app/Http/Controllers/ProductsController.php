@@ -13,6 +13,11 @@ use Yajra\DataTables\Facades\DataTables;
 
 class ProductsController extends Controller
 {
+
+    public function __construct()
+{
+    $this->middleware('web');
+}
     /**
      * Display a listing of the resource.
      */
@@ -47,11 +52,17 @@ class ProductsController extends Controller
                     <div class="dropdown-menu">
                         <button class="dropdown-item btn-modal" data-toggle="modal" data-target="#modal-generic" data-url="'. route('product.edit', $row->id) .'">
                         <i class="fas fa-pencil-alt mr-1"></i><span class="">'. __('main.edit') .'</span></button>
-                        <a type="button" class="dropdown-item delete" data-url="'. route('product.destroy', $row->id) .'">
-                        <i class="fas fa-trash-alt mr-1"></i><span class="">'. __('main.delete') .'</span></a>
+                        <button type="button" class="dropdown-item delete" data-url="'. route('product.destroy', $row->id) .'">
+                        <i class="fas fa-trash-alt mr-1"></i><span class="">'. __('main.delete') .'</span></button>
                     </div>
                   </div>
                 </div>';
+            })
+            ->editColumn('is_new', function($row){
+                return $row->is_new?__('main.yes'):__('main.no');
+            })
+            ->editColumn('act_carusel', function($row){
+                return $row->act_carusel?__('main.yes'):__('main.no');
             })
             ->rawColumns(['image', 'buttons'])
             ->make(true);
@@ -103,7 +114,6 @@ class ProductsController extends Controller
             DB::commit();
 
         } catch (\Exception $e) {
-            dd($e->getMessage());
             $response = [
                 'success' => false,
                 'message' =>  __('main.error')
@@ -133,9 +143,8 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
-        dd($request->all());
         try {
             DB::beginTransaction();
             $product = Product::find($id);
@@ -173,14 +182,20 @@ class ProductsController extends Controller
                 }
                 $product->galery()->createMany($files);
             }
+            $response = [
+                'success' => true,
+                'message' =>  __('main.product_updated_successfully')
+            ];
             DB::commit();
-            $msg = __('main.product_created_successfully');
         } catch (\Exception $e) {
             dd($e->getMessage());
+            $response = [
+                'success' => false,
+                'message' =>  __('main.error')
+            ];
             DB::rollback();
-            $msg = __('main.error');
         }
-        return redirect()->route("product.index");
+        return response()->json($response);
     }
 
     /**
@@ -195,13 +210,18 @@ class ProductsController extends Controller
             foreach($product->galery as $img)
                 $img->delete();
             DB::commit();
-            $msg = __('main.product_deleted_successfully');
+            $response = [
+                'success' => true,
+                'message' =>  __('main.product_deleted_successfully')
+            ];
         } catch (\Exception $e) {
-            dd($e->getMessage());
             DB::rollback();
-            $msg = __('main.error');
+            $response = [
+                'success' => false,
+                'message' =>  __('main.error')
+            ];
         }
 
-        return redirect()->route("product.index")->with($msg);
+        return response()->json($response);
     }
 }

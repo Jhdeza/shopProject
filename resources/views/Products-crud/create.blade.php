@@ -1,6 +1,6 @@
 <div class="modal-dialog modal-xl">
     <div class="modal-content">
-        <form class="form form-generic" enctype="multipart/form-data" method="post" action="{{ route('product.store') }}">
+        <form class="form form-generic" enctype="multipart/form-data" method="POST" action="{{ route('product.store') }}">
             @csrf
             <div class="modal-header">
                 <h4 class="modal-title">@lang('main.insert_Product')</h4>
@@ -10,114 +10,88 @@
             </div>
             <div class="modal-body">
                 <div class="container">
-                <div class="form-group">
-                    <label class="col-form-label">@lang('main.name')</label>
-                    <input type="text" required name="name" class="form-control" value="{{old('name', null)}}">
-                    @error('name')
-                        <span style="display: block" class="error invalid-feedback ">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-
-                <div class="row selects">
-                    <div id="cat-cont" class="form-group col-6">
-                        <label class="col-form-label">{{ __('main.category') }}:</label>
-                        <select class="form-control select2" required name="category_id">
-                            <option value="" selected>@lang('main.Select')</option>
-                            @foreach ($categories as $category)
-                                <option @selected(old('category_id') == $category->id) value="{{ $category->id }}">
-                                    {{ $category->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('category_id')
-                            <span style="display: block" class="error invalid-feedback ">
-                                {{ $message }}
-                            </span>
-                        @enderror
+                    <div class="form-group">
+                        <label class="col-form-label">@lang('main.name')</label>
+                        <input type="text" required name="name" class="form-control" value="{{old('name', null)}}">
                     </div>
 
-                    <div id="cat-cont" class="form-group col-6">
-                        <label class="col-form-label">{{ __('main.ofert') }}:</label>
-                        <select class="form-control select2" name="ofert">
-                            <option value="">@lang('main.Select')</option>
-                            @foreach ($oferts as $ofert)
-                                <option @selected(old('ofert_id') == $ofert->id) value="{{ $ofert->id }}">{{ $ofert->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
+                    <div class="row selects">
+                        <div id="cat-cont" class="form-group col-6">
+                            <label class="col-form-label">{{ __('main.category') }}:</label>
+                            <select class="form-control select2"  name="category_id">
+                                <option value="">@lang('main.Select')</option>required
+                                @foreach ($categories as $category)
+                                    <option @selected(old('category_id') == $category->id) value="{{ $category->id }}">
+                                        {{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
-                <div class="row">
-                    <div class="form-group col-4">
-                        <label class="col-form-label">@lang('main.price')</label>
-                        <input type="text" name="price" class="form-control" value="{{old("price",null)}}">
-                        @error('price')
-                            <span style="display: block" class="error invalid-feedback ">
-                                {{ $message }}
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group col-4">
-                        <label class="col-form-label">@lang('main.quantity')</label>
-                        <input type="text" name="quantity" class="form-control" value="{{old('quantity', null)}}">
-                        @error('quantity')
-                            <span style="display: block" class="error invalid-feedback ">
-                                {{ $message }}
-                            </span>
-                        @enderror
+                        <div id="cat-cont" class="form-group col-6">
+                            <label class="col-form-label">{{ __('main.ofert') }}:</label>
+                            <select class="form-control select2" name="ofert">
+                                <option value="">@lang('main.Select')</option>
+                                @foreach ($oferts as $ofert)
+                                    <option @selected(old('ofert_id') == $ofert->id) value="{{ $ofert->id }}">{{ $ofert->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="form-group col-4">
-                        <label class="col-form-label">@lang('main.quantity_alert')</label>
-                        <input type="text" name="quantity_alert" class="form-control" value="{{old('quantity_alert', 0)}}">
-                        @error('quantity_alert')
-                            <span style="display: block" class="error invalid-feedback ">
-                                {{ $message }}
-                            </span>
-                        @enderror
-                    </div>
-                </div>
+                    <div class="row">
+                        <div class="form-group col-4">
+                            <label class="col-form-label">@lang('main.price')</label>
+                            <input type="text" name="price" required class="form-control validate-types" data-val-type="amount" value="{{old("price",null)}}">
+                        </div>
 
-                <div class="form-group">
-                    <label class="col-form-label">@lang('main.product_description')</label>
-                    <textarea type="text" name="description" class="form-control">{{old('description')}}</textarea>
-                    @error('description')
-                        <span style="display: block" class="error invalid-feedback ">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
+                        <div class="form-group col-4">
+                            <label class="col-form-label">@lang('main.quantity')</label>
+                            <input type="text" name="quantity" required class="form-control validate-types" data-val-type="quantity" value="{{old('quantity', null)}}">
+                        </div>
 
-                <div class="form-group">
-                <x-image :params="[
-                        'name' => 'galery',
-                        'usePrev' => true,
-                        'showBtns' => true,
-                        'class' => 'col-12',
-                        'itemsClass' => 'col-4',
-                        'model' => App\Models\Product::class,
-                        'method' => 'getGalery'
-                    ]"/>
-                </div>
-
-                <div class="row">
-                    <div class="form-group col-7 pt-4">
-                       {{--  <label class="col-form-label">@lang('main.onsigth')</label> --}}
-                        <input class="form-control" data-on="{{__('main.visible_on_home')}}" data-off="{{__('main.hidden_on_home')}}" @checked(old('act_carusel') == 'on') type="checkbox" name="act_carusel" id="check" data-bootstrap-switch>
+                        <div class="form-group col-4">
+                            <label class="col-form-label">@lang('main.quantity_alert')</label>
+                            <input type="text" name="quantity_alert" class="form-control validate-types" data-val-type="quantity_alert" value="{{old('quantity_alert', 0)}}">
+                        </div>
                     </div>
 
-                    <div class="form-group col-5 pt-4">
-                        {{-- <label class="col-form-label">@lang('main.onnew')</label> --}}
-                        <input class=" form-control" data-on="{{__('main.is_new')}}" data-off="{{__('main.is_not_new')}}" @checked(old('is_new') == 'on') type="checkbox" name="is_new" id="check"
-                            data-bootstrap-switch>
+                    <div class="form-group">
+                        <label class="col-form-label">@lang('main.product_description')</label>
+                        <textarea type="text" rows="5" required name="description" class="form-control">{{old('description')}}</textarea>
                     </div>
-                </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label">@lang('main.product_details')</label>
+                        <textarea name="details" class="summernote">                          
+                        </textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <x-image :params="[
+                                'name' => 'galery',
+                                'usePrev' => true,
+                                'showBtns' => true,
+                                'class' => 'col-12',
+                                'itemsClass' => 'col-4',
+                                'model' => App\Models\Product::class,
+                                'method' => 'getGalery'
+                            ]"/>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-7 pt-4">
+                            <input class="form-control" data-on="{{__('main.visible_on_home')}}" data-off="{{__('main.hidden_on_home')}}" @checked(old('act_carusel') == 'on') type="checkbox" name="act_carusel" id="check" data-bootstrap-switch>
+                        </div>
+
+                        <div class="form-group col-5 pt-4">
+                            <input class=" form-control" data-on="{{__('main.is_new')}}" data-off="{{__('main.is_not_new')}}" @checked(old('is_new') == 'on') type="checkbox" name="is_new" id="check"
+                                data-bootstrap-switch>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">@lang('main.close')</button>
                 <button class="btn btn-outline-success">@lang('main.insert')</button>
             </div>
         </form>

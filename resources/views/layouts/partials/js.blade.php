@@ -5,11 +5,15 @@
         $(document).ready(function() {
             $.modalGeneric = $('#modal-generic')
 
+            $(document).on('hidden.bs.modal', '#modal-generic',  function(){
+               $(this).empty()
+            })
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
-            });
+            }); 
 
             $(document).on('click', '.btn-modal', function(e){
                 e.stopPropagation();
@@ -34,17 +38,35 @@
             e.preventDefault();
             e.stopPropagation()
             let title = "Estas seguro que desea eliminar el Producto"
-            let form = $(this).closest('form');
-            new swal({
-                title: title,
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            }).then((confirmed) => {
-                if (confirmed) {
-                    form.trigger("submit");
+            let url = $(this).data().url;
+
+            Swal.fire({
+            title: title,
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+           /*  confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33', */
+            confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        method: 'DELETE',
+                        success: function(response){
+                            let table = response.table??'list_tb';
+                            $[table].ajax.reload()
+                            if(response.success){
+                                if(response.message)
+                                    toastr.success(response.message);
+                            }
+                        },
+                        error: function(error){
+                            toastr.error(Config.locales[actLocale].error)
+                        }
+                    })
                 }
-            });
+            })
         })
 
         activatePlugins = (cont) => {
@@ -66,6 +88,10 @@
                 dropdownParent: cont
             })
 
+            cont.find('.summernote').summernote({
+                height : 200
+            });
+
             cont.find('.cont_upload').upload();
 
             cont.find('form')
@@ -75,71 +101,83 @@
                 .validate({
                     errorClass: "error invalid-feedback",
                     errorPlacement: function(error, element) {
-                            // Solo asignar la clase al elemento label
                         if (element.hasClass('select2')) {
                             error.appendTo(element.parent());
                         } else {
                             error.insertAfter(element);
                         }
-
                 },
-            submitHandler: function(form) {
-                let url = $(form).attr('action')
+                submitHandler: function(form) {
+                    let url = $(form).attr('action')
+                    //let method = $(form).find('input[name=_method]').length>0?$(form).find('input[name=_method]').val():$(form).attr('method')
+                    let params = {
+                        method: 'POST',
+                        url: url,
+                        dataType: 'json',
+                        beforeSend: function(xhr) {
+                            $(form).find('button.btn-outline-success').prop('disabled', true);
+                        },
+                        success: function(result) {
+                            if(result.success){
+                                if(result.message)
+                                    toastr.success(result.message);
 
-                let method = $(form).find('input[name=_method]')?$(form).find('input[name=_method]').val():$(form).attr('method');
-                console.log(url, method)
-                let params = {
-                    method: method??'POST',
-                    url: url,
-                    dataType: 'json',
-                    beforeSend: function(xhr) {
-                        $(form).find('button.btn-outline-success').prop('disabled', true);
-                    },
-                    success: function(result) {
-                        if(result.success){
-                            if(result.message)
-                                toastr.success(result.message);
-
-                        }
-                        else{
-                            if(result.message)
-                                toastr.error(result.message);
-                        }
-                        $.modalGeneric.modal('hide');
-                    },
-                    error: function(response){
-                        if(response.status = 422){
-                            if(response.responseJSON)
-                                Object.entries(response.responseJSON.errors).forEach(function([key, value]) {
-                                    var errors = {};
-                                    errors[key] = value;
-                                    $(form).validate().showErrors(errors);
-                                });
+                            }
+                            else{
+                                if(result.message)
+                                    toastr.error(result.message);
+                            }
+                            $.modalGeneric.modal('hide');
+                        },
+                        error: function(response){
+                            if(response.status = 422){
+                                if(response.responseJSON)
+                                    Object.entries(response.responseJSON.errors).forEach(function([key, value]) {
+                                        var errors = {};
+                                        errors[key] = value;
+                                        $(form).validate().showErrors(errors);
+                                    });
+                                toastr.error(Config.locales[actLocale].error)
+                                return ;
+                            }
                             toastr.error(Config.locales[actLocale].error)
-                            return ;
-                        }
-                        toastr.error(Config.locales[actLocale].error)
-                    },
-                    complete: function(response){
-                        $(form).find('button.btn-outline-success').prop('disabled', false);
-                        let table = response.table??'list_tb';
-                        $[table].ajax.reload()
-                    },
-                }
-                if ($(form).attr('enctype') == 'multipart/form-data'){
-                    alert('s');
-                    params.data = new FormData(form)
-                    params.processData = false
-                    params.contentType = false
-                }
-                else{
-                    params.data = $(form).serialize()
-                }
-                console.log(params)
-                $.ajax(params);
-            },
+                        },
+                        complete: function(response){
+                            $(form).find('button.btn-outline-success').prop('disabled', false);
+                            let table = response.table??'list_tb';
+                            $[table].ajax.reload()
+                        },
+                    }
+                    if ($(form).find('input[type=file]').length > 0){
+                        params.data = new FormData(form);
+                        params.processData = false
+                        params.contentType = false
+                    }
+                    else{
+                        params.data = $(form).serialize()
+                    }
+                    console.log('FormData:', params.data)
+                    $.ajax(params);
+                },
+            });
+
+        }
+
+        $(document).on('input', '.validate-types',  function (e) {  
+            validate($(this)[0], $(this).data().valType)
         });
 
+        $(document).on('blur', '.check-amount',  function (e) {     
+            if ($(this)[0].value.slice(-1) === '.') {
+                $(this)[0].value = $(this)[0].value.slice(0, -1);
+            }
+        });
+
+        function validate(input, type) { 
+            let regex = Config.regexs[type];
+            if (!regex.test(input.value)) {
+                input.value = input.value.slice(0, -1);
+            }            
         }
 
     </script>
