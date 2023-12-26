@@ -8145,3 +8145,9 @@ blockquote span {
     display: none;
   }
 }
+
+.select2-tree{
+  width: 180px !important;
+  margin-left: 5px;
+  padding-left: 0;
+}

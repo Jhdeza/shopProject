@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="{{asset('template/assets/css/tiny-slider.css')}}" />
     <link rel="stylesheet" href="{{asset('template/assets/css/glightbox.min.css')}}" />
     <link rel="stylesheet" href="{{asset('template/assets/css/main.css')}}" />
+    
+    <link rel="stylesheet" href="{{asset('vendor/jquery-ui-1.13.2/jquery-ui.min.css')}}">
 
 </head>
 
@@ -132,6 +134,68 @@
         timer();
         setInterval(timer, 1000);
     </script>
+
+<script src="{{asset('vendor/jquery/jquery.min.js')}}"></script> 
+<script src="{{asset('vendor/jquery-ui-1.13.2/jquery-ui.min.js')}}"></script>
+
+{{-- <script>
+     $('#select1').autocomplete({
+        source: function(request,response){ 
+            $.ajax({
+            url:"{{route('search.category')}}",
+            dataType: 'json',
+            data:{
+                catg: request.term,
+            },
+            success: function(data){
+                response(data)
+            }
+        })
+     }
+    })
+    </script>  --}}
+
+    <script>
+        $(document).ready(function(){
+            $.input = $('#search')
+            $.select =  $('#category_id')
+
+            $('#searchbtn').on('click',function(){
+                filterProduct();
+            })
+
+            $('#search').on('input',function(){
+               
+            })
+
+           // $('#select1').change(function() {
+               
+
+            function filterProduct(){
+                let selectedValue = $.select.val();
+                let inputValue = $.input.val()
+
+                // Realizar la consulta AJAX con jQuery
+                $.ajax({
+                    url: '{{ route('search.category') }}',
+                    method: 'GET',
+                    data: { category: selectedValue, filter : inputValue },
+                    dataType: 'json',
+                    success: function(response) {
+                        // Manejar la respuesta JSON
+                    
+                        
+                        $('#productGrid').html(response.html);
+                    },
+                });
+            }
+        //})
+    });
+    
+    </script>
+
+
+
 </body>
 
 </html>
