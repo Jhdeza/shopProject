@@ -25,6 +25,7 @@ class ProductsController extends Controller
     {
         $products = Product::with(["category","ofert"])->get();
         $products = Product::join('categories as c', 'c.id' , '=' , 'products.category_id')
+                        ->leftJoin('categories as sub', 'sub.id', "=", 'products.sub_category_id')
                         ->leftJoin('oferts as o', 'o.id', "=", 'products.ofert_id')
                         ->select(
                             'products.id',
@@ -35,6 +36,7 @@ class ProductsController extends Controller
                             'products.is_new',
                             'products.act_carusel',
                             'c.name as category',
+                            'sub.name as sub_category',
                             'o.name as ofert',
                         )->get();
         if($request->ajax()){
@@ -64,10 +66,16 @@ class ProductsController extends Controller
             ->editColumn('act_carusel', function($row){
                 return $row->act_carusel?__('main.yes'):__('main.no');
             })
-            ->rawColumns(['image', 'buttons'])
+            ->editColumn('category', function($row){
+                if($row->sub_category){
+                    return $row->category. '<br>' .$row->sub_category;
+                }
+                return $row->category;
+            })
+            ->rawColumns(['image', 'buttons', 'category'])
             ->make(true);
         }
-        return view("Products-crud.index", compact('products'));
+        return view("products.index", compact('products'));
     }
 
     /**
@@ -77,7 +85,7 @@ class ProductsController extends Controller
     {
         $categories = Category::all();
         $oferts = Ofert::all();
-        return view('Products-crud.create',compact("categories","oferts"))->render();
+        return view('products.create',compact("categories","oferts"))->render();
     }
 
     /**
@@ -89,7 +97,12 @@ class ProductsController extends Controller
             DB::beginTransaction();
             $productData = $request->all();
             $productData['act_carusel'] = $request->input('act_carusel') == "on" ?  true : false ;
-            $productData['is_new'] = $request->input('is_new') == "on" ?  true : false ;
+            $productData['is_new'] = $request->input('is_new') == "on" ?  true : false ;        
+            $cats = explode('-', $productData['category_id']);
+            if(count($cats) == 2){
+                $productData['category_id'] = $cats[0];
+                $productData['sub_category_id'] = $cats[1];
+            }
             $product = Product::create($productData);
             $files = [];
             if($request->hasFile('galery')){
@@ -135,9 +148,9 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        $categories = Category::all();
+        //$categories = Category::all();
         $oferts = Ofert::all();
-        return view("products-crud.edit", compact("product","categories","oferts"))->render();
+        return view("products.edit", compact("product"/*,"categories"*/,"oferts"))->render();
     }
 
     /**
@@ -148,6 +161,18 @@ class ProductsController extends Controller
         try {
             DB::beginTransaction();
             $product = Product::find($id);
+            $cats = explode('-', $request->category_id);
+            if(count($cats) == 2){
+                $request->merge([
+                    'category_id' => $cats[0],
+                    'sub_category_id' => $cats[1]
+                ]);
+            }
+            else{
+                $request->merge([
+                    'sub_category_id' => null
+                ]);
+            }
             $product->fill($request->all());
             $product->act_carusel = $request->input('act_carusel') == "on" ?  true : false ;
             $product->is_new = $request->input('is_new') == "on" ?  true : false ;

@@ -1,9 +1,10 @@
 @push('css')
 
 <style>
-    .selects span.error{
+    .selects .error{
         position: absolute;
-        bottom: -20px;
+        bottom: -30px;
+        left:10px;
     }
 
     .select2{
@@ -23,6 +24,13 @@
 
     .select2-selection__rendered{
         color: #fff !important;
+    }
+
+    .select2-results__option.sub {
+        padding-left: 20px !important; 
+    }
+    .select2-results__option.sub::before {
+        content: "--";
     }
 
     /* select2 correction end */
@@ -102,6 +110,55 @@
     }
 
     /* end galery */
+
+    /* simple-file */
+
+        .simple-file{
+            position: relative;
+            border: 2px dashed #ddd !important;  
+            height: 200px;
+            width: 200px;
+        }       
+
+        .simple-file{
+            /* border: 2px dashed #ddd !important;  
+            height: 200px;
+            width: 200px; */
+
+        }
+
+        .simple-file a{
+            overflow: hidden;
+            position: relative;
+
+        }
+
+        .simple-file img{
+            max-width: 180px;
+            max-height: 175px;
+            object-fit: cover; /* Cubre el contenedor manteniendo la relación de aspecto */
+            object-position: center; /* Centra la imagen dentro del contenedor */
+            transform: scale(1.2);
+        }
+
+        .simple-file .change-btn{
+            position: absolute;
+            z-index: 200;
+            background-color: #212425;
+            color: white;
+            bottom: -45px;
+            right: 45px;
+        }
+
+        .simple-file .remove-btn{
+            position: absolute;
+            z-index: 200;
+            color: white;
+            bottom: -45px;
+            right: 0px;
+        }
+
+        /* end simple-file */
 
 </style>
 

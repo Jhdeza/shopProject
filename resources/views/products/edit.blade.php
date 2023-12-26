@@ -2,7 +2,7 @@
     <div class="modal-content">
         <form class="form" action="{{ route('product.update', $product) }}">
             @csrf
-             @method('PATCH')  
+            @method('PATCH')  
             <div class="modal-header">
                 <h4 class="modal-title">@lang('main.edit_product')</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -19,13 +19,14 @@
                     <div class="row selects">
                         <div id="cat-cont" class="form-group col-6">
                             <label class="col-form-label">{{ __('main.category') }}:</label>
-                            <select class="form-control select2" name="category_id">
+                            {!! \App\models\Category::selectHtmlTreeMode($product) !!}
+                            {{-- <select class="form-control select2" name="category_id">
                                 <option value="">@lang('main.Select')</option>
                                 @foreach ($categories as $category)
                                     <option @selected(old('category_id',$product->category_id) == $category->id) value="{{ $category->id }}">
                                         {{ $category->name }}</option>
                                 @endforeach
-                            </select>
+                            </select> --}}
                         </div>
 
                         <div id="cat-cont" class="form-group col-6">
@@ -71,13 +72,10 @@
                     <div class="form-group">
                         <x-image :params="[
                             'name' => 'galery',
-                            'usePrev' => true,
-                            'showBtns' => true,
-                            'class' => 'col-12',
-                            'itemsClass' => 'col-4',
+                            'type' => 'multiple',
                             'model' => $product,
+                            'method' => 'getGalery',
                             'method' => 'getGalery'
-
                         ]"/>
                     </div>
 

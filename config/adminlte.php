@@ -564,19 +564,29 @@ return [
                 ],
             ],
         ],
-        'Pace' => [
+        'Moment' => [
             'active' => false,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => false,
+                    'location' => 'vendor/moment/moment.min.js',
+                ],
+            ],
+        ],
+        'Daterangepicker' => [
+            'active' => false,           
             'files' => [
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-center-radar.min.css',
+                    'location' => 'vendor/daterangepicker/daterangepicker.css',
                 ],
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
-                ],
+                    'location' => 'vendor/daterangepicker/daterangepicker.js',
+                ]
             ],
         ],
     ],

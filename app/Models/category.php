@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Image;
+use Illuminate\Support\Collection;
 
 class Category extends Model
 {
@@ -31,9 +32,58 @@ class Category extends Model
         return $this->morphOne(Image::class, 'imageable');
     }
 
+    public function imageUrl(){
+        return $this->image_url;
+    }
+
     public function getImageUrlAttribute(){       
         if($this->image)
             return $this->image->url;
         return self::urlImageEmpty;
     }
+
+    public static function selectHtmlTreeMode($obj = null){
+        $cats = Category::leftJoin('categories as c',  'c.parent_id', '=', 'categories.id')->select('categories.id', 'categories.name', 'categories.parent_id')->get();          
+        $cats = Self::orderCategories($cats);
+        return self::htmlTreeMode($cats, $obj);   
+    }
+
+    public static function htmlTreeMode($cats, $obj = null){
+        if($obj)
+            $obj = $obj->category_id.($obj->sub_category_id?'-'.$obj->sub_category_id:'');
+        
+        $html =' <select id="category_id" name="category_id" class="form-control select2-tree" required="" aria-required="true">
+        <option value="">' .__('main.Select'). '</option>';     
+        foreach($cats as $key => $row){
+            $id = $row->id;
+            if($row->parent_id)
+                $id .= '-'.$row->parent_id;
+            $html .= '<option '. ($obj == $id?'selected="selected" ':' ') . ($row->parent_id?'class="sub"':"" ) .' value="' .$id. '">' .$row->name. '</option>';
+        }      
+        $html .= '</select>';
+        return $html;
+    }
+
+    public static function orderCategories($categories) {     
+        $parents = new Collection();
+        $sons = $categories->filter(function($el){
+            return $el->parent_id != null;
+        });
+
+        $categories->map(function($cat) use ($sons, $parents){
+            if($cat->parent_id== null)
+            {   
+                $parents->push($cat);
+                $sons->map(function ($elemento, $index) use ($cat, $parents, $sons) {                
+                    if($elemento->parent_id == $cat->id){
+                        $parents->push($elemento);     
+                        $sons->forget($index);
+                    }
+                
+                 });
+            }
+       });
+       return $parents;
+    }
+    
 }

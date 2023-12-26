@@ -40,4 +40,6 @@
 @section('plugins.Toastr', true)
 @section('plugins.BootstrapSwitch', true)
 @section('plugins.Summernote', true)
+@section('plugins.Moment', true)
+@section('plugins.Daterangepicker', true)
 

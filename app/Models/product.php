@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use App\Models\image;
+use App\Models\Image;
 
 class Product extends Model
 {
@@ -19,12 +19,12 @@ class Product extends Model
     }
 
     public function ofert(){
-        return $this->belongsTo(ofert::class);
+        return $this->belongsTo(Ofert::class);
     }
 
     public function galery(): MorphMany
     {
-        return $this->morphMany(image::class, 'imageable');
+        return $this->morphMany(Image::class, 'imageable');
     }
 
     public function getGalery(){

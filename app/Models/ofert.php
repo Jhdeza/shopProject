@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use App\Models\image;
+use App\Models\Product;
 
 class Ofert extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $guarded = ['_token'];
     public function products(){
         return $this->hasMany(Product::class);
     }
@@ -24,9 +25,5 @@ class Ofert extends Model
         'date_ini' => 'date',
         'date_end' => 'date',
     ];
-
-
-
-
 
 }

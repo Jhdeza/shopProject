@@ -18,13 +18,14 @@
                     <div class="row selects">
                         <div id="cat-cont" class="form-group col-6">
                             <label class="col-form-label">{{ __('main.category') }}:</label>
-                            <select class="form-control select2"  name="category_id">
+                            {!! \App\models\Category::selectHtmlTreeMode() !!}
+                           {{--  <select class="form-control select2"  name="category_id">
                                 <option value="">@lang('main.Select')</option>required
                                 @foreach ($categories as $category)
                                     <option @selected(old('category_id') == $category->id) value="{{ $category->id }}">
                                         {{ $category->name }}</option>
                                 @endforeach
-                            </select>
+                            </select> --}}
                         </div>
 
                         <div id="cat-cont" class="form-group col-6">
@@ -69,10 +70,7 @@
                     <div class="form-group">
                         <x-image :params="[
                                 'name' => 'galery',
-                                'usePrev' => true,
-                                'showBtns' => true,
-                                'class' => 'col-12',
-                                'itemsClass' => 'col-4',
+                                'type' => 'multiple',
                                 'model' => App\Models\Product::class,
                                 'method' => 'getGalery'
                             ]"/>

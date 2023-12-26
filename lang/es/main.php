@@ -56,4 +56,6 @@ return [
     "hidden_on_home" => "Oculto en el Home",
     "is_new" => "Es Nuevo",
     "is_not_new" => "No es Nuevo",
+    "remove" => 'Eliminar',
+    "category_used_by_products" => 'No se puede eliminar la categoría porque está siendo utilizada por uno o más productos',
 ];

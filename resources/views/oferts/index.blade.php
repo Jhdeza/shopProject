@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.middle')
 
 @section('content_header')
 
@@ -10,13 +10,13 @@
     <div class="card mt-5">
         <div class="card-header">
             <div class="card-title"><h5>@lang('main.ofert_list')</h5></div>
-            <a class="btn btn-success btn-sm float-right" href="{{ route('ofert.create') }}">
+            <button class="btn btn-success btn-sm float-right btn-modal" data-toggle="modal" data-target="#modal-generic" data-url="{{ route('ofert.create') }}">
                 <i class="fas fa-list-alt "> </i> @lang('main.create')
-            </a>
+            </button>
         </div>
-        <div class="card-body p-0" style="display: block;">
-            <table class="table table-striped projects">
-                @if($oferts->isNotEmpty())
+        <div class="card-body">
+            <table id="oferts-tb" class="table table-striped table-list" style="width: 100%" data-del_title="{{__('main.sure_delete_ofert')}}">
+                {{-- @if($oferts->isNotEmpty()) --}}
                     <thead>
                         <tr>
                             <th></th>
@@ -24,12 +24,11 @@
                             <th>@lang('main.discount_percent')</th>
                             <th>@lang('main.date_begin')</th>
                             <th>@lang('main.date_end')</th>  
-                            <th>@lang('main.state')</th>              
-                            <th></th>
+                            <th>@lang('main.state')</th> 
                         </tr>
                     </thead>
-                @endif
-                <tbody>
+                {{-- @endif --}}
+                {{-- <tbody>
                     @php
                         $count = 1;
                     @endphp
@@ -69,41 +68,55 @@
                             </td>
                         </tr>
                     @endforelse
-                </tbody>
+                </tbody> --}}
 
             </table>
         </div>
     </div>
 </section>
 @endsection
-@section('js')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-<script>
-    $(document).on('click', 'button.delete', function(e) {
-        e.preventDefault();
-        let title = "Estas seguro que desea eliminar la Oferta"
-        let form = $(this).closest('form');
-        swal({
-            title: title,
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        }).then((confirmed) => {
-            if (confirmed) {
-                form.trigger("submit");
-            }
-        });
-    })
-</script>
-@endsection
+@push('js')
+    <script>
+        $(document).ready(function(){
+            $.list_tb = $('#oferts-tb').DataTable({
+                processing: true,
+                serverSide: true,
+                scrollY: "75vh",
+                scrollX: true,
+                scrollCollapse: true,
+                aaSorting: [],
+                ajax: {
+                    url: 'ofert',
+                },
+                columns: [
+                    { data: 'buttons', name: 'buttons', orderable: false, searchable: false },
+                    { data: 'name', name: 'name' },
+                    { data: 'percent', name: 'percent' },
+                    { data: 'date_ini', name: 'date_ini' },
+                    { data: 'date_end', name: 'date_end' },
+                    { data: 'active', name: 'active' },
+                ],
+                initComplete: function () {
+                    var table = this.api(); 
+                    if (table.rows().data().length === 0) {
+                        $(this[0]).closest('.dataTables_scroll').find('.dataTables_scrollHead').addClass('d-none')
+                    }
+                    else{
+                        $(this[0]).closest('.dataTables_scroll').find('.dataTables_scrollHead').removeClass('d-none')
+                    }
 
-@section('css')
-    <style>
-        table tr td:first-child{
-            width: 1%;        
-        }
-        table #empty-row div{
-            background-color: #b1466da7 !important;
-        }
-    </style>
-@stop
+                    table.on('draw.dt', function () {
+                        if (table.rows().data().length === 0) {
+                            $(this[0]).closest('.dataTables_scroll').find('.dataTables_scrollHead').addClass('d-none')
+                        }
+                        else{
+                            $(this[0]).closest('.dataTables_scroll').find('.dataTables_scrollHead').removeClass('d-none')
+                        }
+                    });      
+                } ,
+                fnDrawCallback: function(oSettings) {
+                }, 
+            })
+        })
+    </script>
+@endpush

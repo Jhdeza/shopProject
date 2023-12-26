@@ -20,7 +20,7 @@
                         }
                     });
 
-                    obj.cont.find('.crud-file_remove-button').click(function (e) {
+                    obj.cont.find('.remove-btn').click(function (e) {
                         e.preventDefault();
                         obj.cont.find('img').attr('src', obj.cont.find('img').data().emtpy ?? '');
                         $(this).addClass('d-none');
@@ -140,7 +140,7 @@
             else
                 var mirror_hidden = $('#mirror_hidden_'+obj.id);
             li.remove();
-            console.log(mirror_hidden)
+           
             if(mirror_hidden.val() == '')
                 mirror_hidden.val(li.find('.item input').val());
             else
@@ -187,7 +187,7 @@ function preview(obj, options){
         })(f);
         reader.readAsDataURL(f);
     }
-    obj.cont.find('.crud-file_remove-button').removeClass('d-none')
+    obj.cont.find('.remove-btn').removeClass('d-none')
     obj.cont.find('#flag').val(true);
 }
 

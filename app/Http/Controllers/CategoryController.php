@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Models\Image;
+use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
@@ -13,18 +15,50 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-
         $categories = Category::select([
-            'description', 'categories.id', 'parent_id'
+            'name', 'categories.id', 'parent_id'
         ])
-            ->groupBy('categories.id');
+        ->groupBy('categories.id');
         $categories = $categories->get();
         $categories = $this->orderCategories($categories);
 
-        return view("categories-crud.list", compact("categories"));
+        if($request->ajax()){
+            return Datatables::of($categories)
+            ->editColumn('name', function ($row) {
+                if ($row->parent_id != null) {
+                    return '<span class="pl-5">--' . $row->name.'</span>';
+                } else {
+                    return $row->name;
+                }
+            })
+            ->addColumn('image', function($row){
+                    return '<img class="list-preview" src="'. $row->image_url .'">';
+            })
+            ->addColumn('buttons', function($row){
+               return '
+               <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      Action
+                    </button>
+                    <div class="dropdown-menu">
+                        <button class="dropdown-item btn-modal" data-toggle="modal" data-target="#modal-generic" data-url="'. route('category.edit', $row->id) .'">
+                        <i class="fas fa-pencil-alt mr-1"></i><span class="">'. __('main.edit') .'</span></button>
+                        <button type="button" class="dropdown-item delete" data-url="'. route('category.destroy', $row->id) .'">
+                        <i class="fas fa-trash-alt mr-1"></i><span class="">'. __('main.delete') .'</span></button>
+                    </div>
+                  </div>
+                </div>';
+            })
+            ->rawColumns(['image', 'buttons', 'name'])
+            ->make(true);
+        }
+
+        return view("categories.index"/* , compact("categories") */);
     }
+    
     private function orderCategories($categories)
     {
         $parents = new Collection();
@@ -52,7 +86,7 @@ class CategoryController extends Controller
     public function create()
     {
         $categories = Category::where('parent_id', null)->get();
-        return view("categories-crud.create", compact("categories"));
+        return view("categories.create", compact("categories"));
     }
 
     /**
@@ -60,28 +94,43 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $category = new Category();
-        $file = $request->file('file');
-        
-        $category->description = $request->input("category");
-        if ($request->input("parent_id")) {
-            $category->parent_id = $request->input("parent_id");
-        }
-        $category->save();
-
-        $image = $request->file('file');
-        if($image && $request->input('img-flag')){
-            $fileName = $category->description . '_' . time() . '.' . $image->getClientOriginalExtension();  
-            $path = $image->storeAs('public/categories', $fileName); 
+        try{
+            DB::beginTransaction();
+            $category = new Category();
+            $file = $request->file('file');
             
-            $image = new Image([
-                'url' => str_replace('public/', 'storage/' ,$path)
-            ]);
-            $category->image()->save($image);
+            $category->name = $request->input("name");
+            if ($request->input("parent_id")) {
+                $category->parent_id = $request->input("parent_id");
+            }
+            $category->save();
+
+            $image = $request->file('file');
+            if($image && $request->input('flag-file')){
+                $fileName = $category->name . '_' . time() . '.' . $image->getClientOriginalExtension();  
+                $path = $image->storeAs('public/categories', $fileName); 
+                
+                $image = new Image([
+                    'url' => str_replace('public/', 'storage/' ,$path)
+                ]);
+                $category->image()->save($image);
+            }
+        
+            $response = [
+                'success' => true,
+                'message' =>  __('main.category_created_successfully')
+            ];
+            DB::commit();
+
+        } catch (\Exception $e) {
+            $response = [
+                'success' => false,
+                'message' =>  __('main.error')
+            ];
+            DB::rollback();
+
         }
-        
-        
-        return redirect()->route('category.index');
+        return response()->json($response);
     }
 
     /**
@@ -100,7 +149,7 @@ class CategoryController extends Controller
         
         $category = Category::find($id);
         $categories = Category::where('parent_id', null)->where('id','<>',$category->id)->get();        
-        return view("categories-crud.edit", compact("category","categories"));
+        return view("categories.edit", compact("category","categories"));
     }
 
     /**
@@ -108,41 +157,51 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request,$id)
     {
-        
-        $category = Category::find($id);
-              
-        $category->description = $request->input("category");
-        $category->parent_id = $request->input('is_sub')?$request->input("parent_id"):null;
-        
-        $category->save();
-
-        $image = $request->file('file');
-        $deleteImg = false;
+        try {
+            $category = Category::find($id);                
+            $category->name = $request->input("name");
+            $category->parent_id = $request->input('is_sub')?$request->input("parent_id"):null;            
+            $category->save();
+            $image = $request->file('file');
+            $deleteImg = false;
        
-        if($image){
-            if($request->input('img_flag')){
-                $fileName = $category->description . '_' . time() . '.' . $image->getClientOriginalExtension();  
-                $path = $image->storeAs('public/categories', $fileName); 
-                
-                if($category->image){                    
-                    $category->image->update([
-                        'url' => str_replace('public/', 'storage/' ,$path)
-                    ]);
-                }
-                else{
-                    $category->image()->create([
-                        'url' => str_replace('public/', 'storage/' ,$path)
-                    ]);
-                }          
+            if($image){
+                if($request->input('flag-file')){
+                    $fileName = $category->description . '_' . time() . '.' . $image->getClientOriginalExtension();  
+                    $path = $image->storeAs('public/categories', $fileName); 
+                    
+                    if($category->image){                    
+                        $category->image->update([
+                            'url' => str_replace('public/', 'storage/' ,$path)
+                        ]);
+                    }
+                    else{
+                        $category->image()->create([
+                            'url' => str_replace('public/', 'storage/' ,$path)
+                        ]);
+                    }          
+                } 
             } 
-        } 
-        else if($request->input('img_flag')) $deleteImg = true;   
+            else if($request->input('flag-file')) $deleteImg = true;   
 
-        if($deleteImg && $category->image){
-            $category->image->delete();
-        }      
-
-        return redirect()->route("category.index");
+            if($deleteImg && $category->image){
+                $category->image->delete();
+            }  
+            
+            $response = [
+                'success' => true,
+                'message' =>  __('main.category_updated_successfully')
+            ];
+            DB::commit();
+        
+        } catch (\Exception $e) {
+            $response = [
+                'success' => false,
+                'message' =>  __('main.error')
+            ];
+            DB::rollback();
+        }
+        return response()->json($response);
     }
 
     /**
@@ -150,9 +209,25 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-       
-        $categories = Category::find($id);
-        $categories->delete();
-        return redirect()->route("category.index");
+        try {
+            DB::beginTransaction();
+            $category = Category::find($id);
+            $category->delete();
+            if($category->image)
+                $category->image->delete();
+            DB::commit();
+            $response = [
+                'success' => true,
+                'message' =>  __('main.category_deleted_successfully')
+            ];
+        }
+        catch (\Exception $e) {
+            DB::rollback();
+            $response = [
+                'success' => false,
+                'message' =>  $e->errorInfo[1] == 1451?__('main.category_used_by_products'):__('main.error')
+            ];
+        }
+        return response()->json($response);    
     }
 }

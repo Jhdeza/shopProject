@@ -40,11 +40,6 @@
 
 <script>
     $(document).ready(function(){
-        /* $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        }); */
 
         $.list_tb = $('#products-tb').DataTable({
             processing: true,
@@ -70,27 +65,24 @@
 
             ],
             initComplete: function () {
-                var table = this.api();             
-
+                var table = this.api(); 
                 if (table.rows().data().length === 0) {
-                    $('#products-tb').closest('.dataTables_scroll').find('.dataTables_scrollHead').addClass('d-none')
+                    $(this[0]).closest('.dataTables_scroll').find('.dataTables_scrollHead').addClass('d-none')
                 }
                 else{
-                    $('#products-tb').closest('.dataTables_scroll').find('.dataTables_scrollHead').removeClass('d-none')
+                    $(this[0]).closest('.dataTables_scroll').find('.dataTables_scrollHead').removeClass('d-none')
                 }
 
                 table.on('draw.dt', function () {
                     if (table.rows().data().length === 0) {
-                        $('#products-tb').closest('.dataTables_scroll').find('.dataTables_scrollHead').addClass('d-none')
+                        $(this[0]).closest('.dataTables_scroll').find('.dataTables_scrollHead').addClass('d-none')
                     }
                     else{
-                        $('#products-tb').closest('.dataTables_scroll').find('.dataTables_scrollHead').removeClass('d-none')
+                        $(this[0]).closest('.dataTables_scroll').find('.dataTables_scrollHead').removeClass('d-none')
                     }
                 });      
             } ,
             fnDrawCallback: function(oSettings) {
-                //$('#products-tb').closest('.dataTables_scroll').find('dataTables_scrollHead').addClass('d-none')
-                //__currency_convert_recursively($('#stock_report_table'));
             }, 
         })
     })

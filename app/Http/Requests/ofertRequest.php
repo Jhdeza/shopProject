@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Requests;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -24,24 +23,24 @@ class OfertRequest extends FormRequest
     {
         $ofertid = $this->route('ofert');
         return [
-            "nombre" => [
+            "name" => [
                 'required',
                 'max:255',
                 Rule::unique('oferts', 'name')->ignore($ofertid),
             ],
-            "descuento" => "required|numeric|max:99",
+            "percent" => "required|numeric|max:99",
         ];
     }
     public function messages()
 {
     return [
         
-        'nombre.required' => 'El campo Nombre es obligatorio.',
+        /* 'nombre.required' => 'El campo Nombre es obligatorio.',
         'nombre.max' => 'El campo Nombre no puede tener más de :max caracteres.',
         'nombre.unique'=>' Ya existe una Nombre con ese nombre ',
         'descuento.required' => 'El campo (porciento de descuento) es obligatorio.',
         'descuento.numeric' => 'El campo (porciento de descuento) debe ser un numero.',
-        'descuento.max' => 'El campo (porciento de descuento) no puede tener más de :max caracteres.',
+        'descuento.max' => 'El campo (porciento de descuento) no puede tener más de :max caracteres.', */
         
     ];
 }

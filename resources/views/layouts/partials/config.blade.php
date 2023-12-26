@@ -5,10 +5,14 @@
     const Config = {
         locales : {
             'en' : {
-                error : "Something was Wrong!"
+                error : "Something was Wrong!",
+                tableDelMessage : "Are you sure?",
+                tableDelWarningMessage : "You won't be able to revert this!"
             },
             'es' : {
-                error : "Algo ha salido mal!"
+                error : "Algo ha salido mal!",
+                tableDelMessage : "Estás seguro que desea eliminar la fila?",
+                tableDelWarningMessage : "No podrá deshacer esta acción"
             }
         },
         regexs : {

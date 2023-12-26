@@ -5,10 +5,13 @@ namespace App\View\Components;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use App\View\Components\Utils\Image\ImageInterface;
+use App\View\Components\Utils\Image\ImageMultiple;
+use App\View\Components\Utils\Image\ImageSimple;
 
-class Image extends Component
+class Image extends Component implements ImageInterface
 {
-    public $id;
+   /*  public $id;
     private $method = false;
     private $model = false;
     public $params;
@@ -18,47 +21,42 @@ class Image extends Component
     public $panelClass = 'box box-primary';
     public $dataAttr= '';
     public $usePrev= '';
-    private $mimes = '';
+    private $mimes = '';*/
+    public $object = null; 
     /**
      * Create a new component instance.
      */
     public function __construct($params)
     {
-        $this->params = $params;
+        switch ($params['type']) {
+            case 'simple':
+                $this->object = new ImageSimple($params);
+                break;
+            case 'multiple':
+                $this->object = new ImageMultiple($params);
+                break;
+            
+            default:
+                throw new \InvalidArgumentException("Invalid image upload variant: {$params['type']}");
+                break;
+        }
         foreach ($params as $key => $value) {
-            $this->$key = $value;
-        }
-
-        if(isset($params['method']))
-            $this->method = $params['method'];
-        if(isset($params['model']))
-            $this->model = $params['model'];
-        $this->files = $this->getFiles();
-        $this->dataAttr = $this->defineParams();
+            if(property_exists($this->object, $key))
+                $this->object->$key = $value;
+        }       
+        $this->object->getFiles();
     }
 
-    private function defineParams(){
-        $result = ' data-id="'.$this->name.'" data-contlist="#list_files'.$this->name.
-        '" data-usePrev="'.$this->params['usePrev'].'" data-showBtns="'.$this->params['showBtns'].
-        '" data-itemsClass="'.$this->params['itemsClass'].
-        '" data-related="'.($this->method===false?false:true).
-        '" data-mimes="'.htmlspecialchars(json_encode($this->mimes)).'"';
-        return $result;
+    public function defineParams(){
+        return $this->object->defineParams();
     }
 
-    private function getFiles(){
-        if($this->method){
-            if(!is_object($this->model)){
-                $model = $this->model;
-                $this->model = new $model();
-            }
-            $files = $this->model->{$this->method}();
-            if($files !== null)
-                return $files;
-        }
-        else if($this->path !== null && Storage::disk('localpublic')->exists($this->path))
-            return Storage::disk('localpublic')->allFiles($this->path);
-        return [];
+    public function getFiles(){
+        return $this->object->getFiles();
+    }
+
+    public function getView():String{
+        return $this->object->getView();
     }
 
     /**
@@ -66,6 +64,6 @@ class Image extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.image.image');
+        return view($this->object->getView());
     }
 }
