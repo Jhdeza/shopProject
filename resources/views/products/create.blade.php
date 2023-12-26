@@ -19,13 +19,6 @@
                         <div id="cat-cont" class="form-group col-6">
                             <label class="col-form-label">{{ __('main.category') }}:</label>
                             {!! \App\models\Category::selectHtmlTreeMode() !!}
-                           {{--  <select class="form-control select2"  name="category_id">
-                                <option value="">@lang('main.Select')</option>required
-                                @foreach ($categories as $category)
-                                    <option @selected(old('category_id') == $category->id) value="{{ $category->id }}">
-                                        {{ $category->name }}</option>
-                                @endforeach
-                            </select> --}}
                         </div>
 
                         <div id="cat-cont" class="form-group col-6">
