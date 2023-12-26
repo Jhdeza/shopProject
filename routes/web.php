@@ -38,7 +38,7 @@ Route::get('/about-us', [App\Http\Controllers\HomeController::class, 'about'])->
 Route::get('/productGrid', [App\Http\Controllers\HomeController::class, 'productGrid'])->name('Product-grids');
 Route::get('/contact-us', [App\Http\Controllers\HomeController::class, 'contactUs'])->name('contact-us');
 Route::get('/productDetails/{id}', [App\Http\Controllers\HomeController::class, 'productDetails'])->name('product-details');
-Route::get('search/category',[SearchController::class,  'category'])->name('search.category');
+Route::get('/search/category',[SearchController::class,  'category'])->name('search.category');
 
 
 

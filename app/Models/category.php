@@ -65,6 +65,7 @@ class Category extends Model
         return $html;
     }
 
+
     public static function orderCategories($categories) {
         $parents = new Collection();
         $sons = $categories->filter(function($el){

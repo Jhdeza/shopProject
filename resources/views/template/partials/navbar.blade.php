@@ -83,24 +83,23 @@
                         <div class="navbar-search search-style-5">
                             <div class="search-select">
                                 <div class="select-position">
-                                    <select id="select1">
+                                    {!! \App\models\Category::selectHtmlTreeMode() !!}
+                                    {{-- <select id="select1">
                                         <option selected>All</option>
+
                                         @foreach ($commonInfo['categories'] as $category)
-                                       <option value="{{ $category->name }} ">{{ $category->name }} 
-                                            @if ($category->subcategories->isNotEmpty())
-                                                <i class="lni lni-chevron-right"></i>
-                                            @endif
-                                        </option>
+                                       <option value="{{ $category->id }} ">{{ $category->name }}</option>
+
                                         @endforeach
                                         
-                                    </select>
+                                    </select> --}}
                                 </div>
                             </div>
                             <div class="search-input">
-                                <input type="text" id='search' placeholder="Search">
+                                <input type="text" id='search' placeholder="">
                             </div>
                             <div class="search-btn">
-                                <button><i class="lni lni-search-alt"></i></button>
+                                <button id="searchbtn"><i class="lni lni-search-alt"></i></button>
                             </div>
                         </div>
                         <!-- navbar search Ends -->
@@ -265,30 +264,8 @@
     <!-- End Header Bottom -->
 </header>
 
-@push("css")
-<link rel="stylesheet" href="{{asset('vendor/jquery-ui-1.13.2/jquery-ui.min.css')}}">
-@endpush
 
-@push("js")
-<script src="{{asset('vendor/jquery-ui-1.13.2/jquery-ui.min.js')}}"></script>
-
-<script>
-
-    $("#search").autocomplete({
-        source: function(request,response){ 
-            $.ajax({
-            url:"{{route('search.category')}}",
-            dataType: 'json',
-            data:{
-                catg: request.term,
-            },
-            success: function(data){
-                response(data)
-            }
-        })
-        
-    }
-    })
-    </script>
     
-@endpush
+
+
+

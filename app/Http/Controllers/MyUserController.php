@@ -39,17 +39,8 @@ class MyUserController extends Controller
         return redirect()->route('my-user.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
+ 
+  
     public function edit($id)
     {
         
@@ -57,9 +48,7 @@ class MyUserController extends Controller
         return view("user-crud.edit", compact("user"));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+  
     public function update(Request $request, $id)
     {
         
@@ -70,9 +59,6 @@ class MyUserController extends Controller
         return redirect()->route('my-user.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id)
     {
         $user = User::find($id);

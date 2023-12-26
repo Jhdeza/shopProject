@@ -133,18 +133,7 @@ class CategoryController extends Controller
         return response()->json($response);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(category $categorys)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
+       public function edit($id)
     {
         
         $category = Category::find($id);
@@ -152,9 +141,7 @@ class CategoryController extends Controller
         return view("categories.edit", compact("category","categories"));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(CategoryRequest $request,$id)
     {
         try {

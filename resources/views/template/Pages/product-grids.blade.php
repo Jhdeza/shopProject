@@ -199,7 +199,7 @@
                             <div class="tab-pane fade show active" id="nav-grid" role="tabpanel"
                                 aria-labelledby="nav-grid-tab">
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-6 col-12">
+                                    <div id="productGrid" class="col-lg-4 col-md-6 col-12">
                                         <!-- Start Single Product -->
                                         @foreach ($products as $product)
                                             <div class="single-product">
