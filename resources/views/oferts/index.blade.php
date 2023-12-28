@@ -15,7 +15,8 @@
             </button>
         </div>
         <div class="card-body">
-            <table id="oferts-tb" class="table table-striped table-list" style="width: 100%" data-del_title="{{__('main.sure_delete_ofert')}}">
+            <table id="oferts-tb" class="table table-striped table-list" style="width: 100%" 
+            data-del_title="{{__('main.sure_delete_ofert')}}">
                     <thead>
                         <tr>
                             <th></th>
@@ -55,18 +56,18 @@
                 initComplete: function () {
                     var table = this.api(); 
                     if (table.rows().data().length === 0) {
-                        $(this[0]).closest('.dataTables_scroll').find('.dataTables_scrollHead').addClass('d-none')
+                        $(this).closest('.dataTables_scroll').find('.dataTables_scrollHead').addClass('d-none')
                     }
                     else{
-                        $(this[0]).closest('.dataTables_scroll').find('.dataTables_scrollHead').removeClass('d-none')
+                        $(this).closest('.dataTables_scroll').find('.dataTables_scrollHead').removeClass('d-none')
                     }
 
                     table.on('draw.dt', function () {
                         if (table.rows().data().length === 0) {
-                            $(this[0]).closest('.dataTables_scroll').find('.dataTables_scrollHead').addClass('d-none')
+                            $(this).closest('.dataTables_scroll').find('.dataTables_scrollHead').addClass('d-none')
                         }
                         else{
-                            $(this[0]).closest('.dataTables_scroll').find('.dataTables_scrollHead').removeClass('d-none')
+                            $(this).closest('.dataTables_scroll').find('.dataTables_scrollHead').removeClass('d-none')
                         }
                     });      
                 } ,

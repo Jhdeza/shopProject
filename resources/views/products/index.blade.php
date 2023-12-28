@@ -67,18 +67,18 @@
             initComplete: function () {
                 var table = this.api(); 
                 if (table.rows().data().length === 0) {
-                    $(this[0]).closest('.dataTables_scroll').find('.dataTables_scrollHead').addClass('d-none')
+                    $(this).closest('.dataTables_scroll').find('.dataTables_scrollHead').addClass('d-none')
                 }
                 else{
-                    $(this[0]).closest('.dataTables_scroll').find('.dataTables_scrollHead').removeClass('d-none')
+                    $(this).closest('.dataTables_scroll').find('.dataTables_scrollHead').removeClass('d-none')
                 }
 
                 table.on('draw.dt', function () {
                     if (table.rows().data().length === 0) {
-                        $(this[0]).closest('.dataTables_scroll').find('.dataTables_scrollHead').addClass('d-none')
+                        $(this).closest('.dataTables_scroll').find('.dataTables_scrollHead').addClass('d-none')
                     }
                     else{
-                        $(this[0]).closest('.dataTables_scroll').find('.dataTables_scrollHead').removeClass('d-none')
+                        $(this).closest('.dataTables_scroll').find('.dataTables_scrollHead').removeClass('d-none')
                     }
                 });      
             } ,

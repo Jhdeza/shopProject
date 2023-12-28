@@ -37,6 +37,8 @@ return [
     "empty_clients"=> "No se registran nuevos contactos de clientes",
     "change_state"=> "Marcar Leido",
     "change_state2"=> "Marcar No Leido",
+    'stade1'=>'Leido',
+    'stade2'=>'No Leido',
     "client_list"=> "Contactos de Clientes",
     "name_product"=> "Nombre Producto",
     "product_description"=> "Descripcion Producto",

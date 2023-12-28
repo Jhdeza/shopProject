@@ -42,6 +42,7 @@
             let title = data_table.del_title??Config.locales[actLocale].tableDelMessage
             let url = $(this).data().url;
 
+
             Swal.fire({
                 title: title,
                 text: Config.locales[actLocale].tableDelWarningMessage,
