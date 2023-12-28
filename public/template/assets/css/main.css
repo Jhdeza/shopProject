@@ -2010,7 +2010,7 @@ ol {
   position: relative;
 }
 
-.header .main-menu-search .select-position:after {
+/* .header .main-menu-search .select-position:after {
   border-bottom: 1.5px solid #081828;
   border-right: 1.5px solid #081828;
   content: '';
@@ -2028,7 +2028,7 @@ ol {
   -webkit-transition: all 0.15s ease-in-out;
   transition: all 0.15s ease-in-out;
   width: 8px;
-}
+} */
 
 .header .main-menu-search .select-position select {
   height: 45px;
@@ -7830,7 +7830,7 @@ blockquote span {
 .footer .footer-middle {
   padding-top: 40px;
   padding-bottom: 80px;
- 
+
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -8148,6 +8148,45 @@ blockquote span {
 
 .select2-tree{
   width: 180px !important;
-  margin-left: 5px;
-  padding-left: 0;
+ /*  margin-left: 5px; */
+  /* padding-left: 0; */
 }
+
+.select2-results__option.sub {
+  padding-left: 20px !important;
+}
+.select2-results__option.sub::before {
+  content: "--";
+}
+
+.select-position .select2{
+  height: 45px;
+    border: 1px solid #e2e2e2;
+    border-right: 0px;
+    padding: 0 20px;
+    background: transparent;
+    border-radius: 4px 0 0 4px;
+    position: relative;
+    padding-right: 30px;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-appearance: none;
+    font-size: 14px;
+}
+
+.select-position .select2 .select2-selection{
+  border: 0px;
+
+}
+.select2 .select2-selection{
+  height: 40px;
+  padding-top: 8px;
+}
+ .select2-selection__arrow {
+height: 40px !important;
+padding-top: 8px;
+}
+.select2-container--open .select2-dropdown--below{
+  width: 375px !important;
+}
+

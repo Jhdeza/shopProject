@@ -14,8 +14,9 @@
     <link rel="stylesheet" href="{{asset('template/assets/css/LineIcons.3.0.css')}} "/>
     <link rel="stylesheet" href="{{asset('template/assets/css/tiny-slider.css')}}" />
     <link rel="stylesheet" href="{{asset('template/assets/css/glightbox.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('vendor/select2/css/select2.min.css')}}" />
     <link rel="stylesheet" href="{{asset('template/assets/css/main.css')}}" />
-    
+
     <link rel="stylesheet" href="{{asset('vendor/jquery-ui-1.13.2/jquery-ui.min.css')}}">
 
 </head>
@@ -43,11 +44,11 @@
     <!-- Start Header Area -->
     @include('template.partials.navbar')
     <!-- End Header Area -->
-   
+
     @yield('content')
-    
-  
-    
+
+
+
     <!-- Start Footer Area -->
      @include('template.partials.footer')
     <!--/ End Footer Area -->
@@ -58,12 +59,15 @@
     </a>
 
     <!-- ========================= JS here ========================= -->
+    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('vendor/jquery-ui-1.13.2/jquery-ui.min.js')}}"></script>
     <script src="{{asset('template/assets/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('template/assets/js/tiny-slider.js')}}"></script>
     <script src="{{asset('template/assets/js/glightbox.min.js')}}"></script>
+    <script src="{{asset('vendor/select2/js/select2.min.js')}}"></script>
     <script src="{{asset('template/assets/js/main.js')}}"></script>
     <script type="text/javascript">
-        //========= Hero Slider 
+        //========= Hero Slider
         tns({
             container: '.hero-slider',
             slideBy: 'page',
@@ -135,12 +139,10 @@
         setInterval(timer, 1000);
     </script>
 
-<script src="{{asset('vendor/jquery/jquery.min.js')}}"></script> 
-<script src="{{asset('vendor/jquery-ui-1.13.2/jquery-ui.min.js')}}"></script>
 
 {{-- <script>
      $('#select1').autocomplete({
-        source: function(request,response){ 
+        source: function(request,response){
             $.ajax({
             url:"{{route('search.category')}}",
             dataType: 'json',
@@ -165,11 +167,11 @@
             })
 
             $('#search').on('input',function(){
-               
+
             })
 
            // $('#select1').change(function() {
-               
+
 
             function filterProduct(){
                 let selectedValue = $.select.val();
@@ -183,19 +185,20 @@
                     dataType: 'json',
                     success: function(response) {
                         // Manejar la respuesta JSON
-                    
-                        
+
+
                         $('#productGrid').html(response.html);
                     },
                 });
             }
         //})
     });
-    
+
     </script>
 
 
 
 </body>
+
 
 </html>

@@ -38,6 +38,25 @@ Author: GrayGrids
         navbarToggler.classList.toggle("active");
     });
 
+    
+    $('.navbar-search .select2-tree').select2({
+        templateResult: formatResult,
+        escapeMarkup: function (markup) {
+            return markup;
+        },
+        //dropdownParent: cont
+    })
+
+    function formatResult(result, container){
+        if ($(result.element).hasClass('sub')) {
+            $(container).addClass('sub');
+        }
+        else{
+            $(container).addClass('parent');
+        }
+        return result.text;
+    }
+
      
   
 
