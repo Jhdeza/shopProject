@@ -9,6 +9,8 @@ use App\Http\Controllers\MyUserController;
 use App\Http\Controllers\OfertController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -56,6 +58,8 @@ require __DIR__.'/auth.php';
 
 // Auth::routes();
 
+Route::prefix('admin')->group(function () {
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/my-user', MyUserController::class);
 Route::resource('/information', ContactInformationController::class);
@@ -63,3 +67,7 @@ Route::resource('/category', CategoryController::class);
 Route::resource('/ofert', OfertController::class);
 Route::resource('/client', ClientInformationController::class);
 Route::resource('/product', ProductsController::class);
+Route::resource('/about-us', AboutUsController::class);
+Route::resource('/staff', StaffController::class);
+
+});

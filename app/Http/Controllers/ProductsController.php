@@ -42,7 +42,7 @@ class ProductsController extends Controller
         if($request->ajax()){
             return Datatables::of($products)
             ->addColumn('image', function($row){
-                return '<img class="list-preview" src="'. $row->image .'">';
+                return '<img class="list-preview" src="/'. $row->image .'">';
             })
             ->addColumn('buttons', function($row){
                return '
@@ -213,7 +213,7 @@ class ProductsController extends Controller
             ];
             DB::commit();
         } catch (\Exception $e) {
-            dd($e->getMessage());
+           
             $response = [
                 'success' => false,
                 'message' =>  __('main.error')

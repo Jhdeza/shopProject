@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\aboutUs;
 use App\Models\Category;
 use App\Models\Contact_information;
 use App\Models\Product;
+use App\Models\Staff;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -32,7 +34,9 @@ class HomeController extends Controller
     public function about()
     {
         $commonInfo = $this->commonInfo();
-        return view('template.pages.about-us', compact('commonInfo'));
+        $abouts = aboutUs::get();
+        $staffs = Staff::get();
+        return view('template.pages.about-us', compact('commonInfo','abouts',"staffs"));
     }
     public function productGrid(Request $request)
     {
@@ -60,11 +64,11 @@ class HomeController extends Controller
         $product->increment('views');
         return view('template.pages.product-details', compact('commonInfo', 'product'));
     }
-
+    
     private function commonInfo()
     {
         return [
-
+           
             'contacts' => Contact_information::First(),
             'products' => Product::where('act_carusel', true)->get(),
             'categories' =>  Category::with('subcategories')->where('parent_id', null)->get()

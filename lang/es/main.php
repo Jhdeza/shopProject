@@ -60,4 +60,40 @@ return [
     "is_not_new" => "No es Nuevo",
     "remove" => 'Eliminar',
     "category_used_by_products" => 'No se puede eliminar la categoría porque está siendo utilizada por uno o más productos',
+    "close"=>"Cerrar",
+    "save"=>"Salvar",
+
+    "category_created_successfully"=>"Categoria Creada",
+    "category_updated_successfully"=>"Categoria Actualizada",
+    "category_deleted_successfully"=>"Categoria Eliminada",
+    
+    "message_deleted_successfully"=>"Información Eliminada",
+    "sure_delete_ofert"=>"Esta seguro que desea eliminar ",
+    "sure_delete_clientinfo"=>"Esta seguro que desea eliminar este contacto",
+
+    "ofert_deleted_successfully"=>"Oferta Eliminada ",
+    "ofert_updated_successfully"=>"Oferta Actualizada ",
+    "ofert_created_successfully"=>"Oferta Creada ",
+    "error_ofert"=>"No se puede eliminar la oferta porque está siendo utilizada por uno o más productos",
+
+    "product_created_successfully"=>"Producto Creado ",
+    "product_updated_successfully"=>"Producto Actualizado ",
+    "product_deleted_successfully"=>"Producto Eliminado ",
+    "yes"=>"Si",
+    "no"=>"No",
+
+    "list_team"=>"Equipo Central",
+    "about_us"=>"Acerca de Nosotros",
+    "imagen_staff"=>"Foto",
+    "name_staff"=>"Nombre",
+    "position"=>"Cargo",
+    "facebook"=>"Facebook",
+    "twitter"=>"Twitter",
+    "instagram"=>"Instagram",
+    'create_membrer'=>'Insertar Integrante ',
+    "staff_deleted_successfully"=>"Integrante Eliminado ",
+    "staff_updated_successfully"=>"Integrante Actualizado",
+  
+    
+
 ];

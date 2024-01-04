@@ -321,46 +321,47 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'Users',
-            'url' => 'my-user',
+            'url' => 'admin/my-user',
             'icon'=>'fa fa-user'
         ],
         [
-            'text' => 'Contact Informations',
-            'url' => 'information',
+            'text' => 'Informacion de Contacto',
+            'url' => 'admin/information',
             'icon' => 'fa fa-info'
         ],
 
         [
             'text' => 'Categorias',
-            'url' => 'category',
+            'url' => 'admin/category',
             'icon' => 'fa fa-list'
         ],
         [
             'text' => 'Ofertas',
-            'url' => 'ofert',
+            'url' => 'admin/ofert',
             'icon' => 'fa fa-bolt'
         ],
         [
             'text' => 'Informacion cliente',
-            'url' => 'client',
+            'url' => 'admin/client',
             'icon' => 'fa fa-info'
         ],
         [
             'text' => 'Productos',
-            'url' => 'product',
+            'url' => 'admin/product',
             'icon' => 'fa fa-shop'
         ],
 
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
+            'text' => 'About-Us',
+            'url'  => 'admin/about-us',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'Staff',
+            'url'  => 'admin/staff',
+            'icon' => 'fas fa-fw fa-user',
         ],
+       
         [
             'text'    => 'multilevel',
             'icon'    => 'fas fa-fw fa-share',
@@ -460,17 +461,17 @@ return [
                     'type' => 'js',
                     'asset' => false,
                     //'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
-                    'location' => 'vendor/datatables/js/jquery.dataTables.min.js',
+                    'location' => '/vendor/datatables/js/jquery.dataTables.min.js',
                 ],
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => 'vendor/datatables//js/dataTables.bootstrap4.min.js',
+                    'location' => '/vendor/datatables//js/dataTables.bootstrap4.min.js',
                 ],
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => 'vendor/datatables/css/dataTables.bootstrap4.min.css',
+                    'location' => '/vendor/datatables/css/dataTables.bootstrap4.min.css',
                 ],
             ],
         ],
@@ -480,12 +481,12 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => 'vendor/select2/js/select2.min.js',
+                    'location' => '/vendor/select2/js/select2.min.js',
                 ],
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => 'vendor/select2/css/select2.css',
+                    'location' => '/vendor/select2/css/select2.css',
                 ],
             ],
         ],
@@ -495,12 +496,12 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => 'vendor/bootstrap-switch/js/bootstrap-switch.min.js',
+                    'location' => '/vendor/bootstrap-switch/js/bootstrap-switch.min.js',
                 ],
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => 'vendor/bootstrap-switch/css/bootstrap3/bootstrap-switch.min.css',
+                    'location' => '/vendor/bootstrap-switch/css/bootstrap3/bootstrap-switch.min.css',
                 ],
             ],
         ],
@@ -520,7 +521,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => 'vendor/sweetalert2/sweetalert2.all.min.js',
+                    'location' => '/vendor/sweetalert2/sweetalert2.all.min.js',
                 ],
             ],
         ],
@@ -530,7 +531,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => 'vendor/jquery-validation/jquery.validate.min.js',
+                    'location' => '/vendor/jquery-validation/jquery.validate.min.js',
                 ],
             ],
         ],
@@ -540,12 +541,12 @@ return [
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => 'vendor/toastr/toastr.min.css'
+                    'location' => '/vendor/toastr/toastr.min.css'
                 ],
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => 'vendor/toastr/toastr.min.js'
+                    'location' => '/vendor/toastr/toastr.min.js'
                 ],
             ],
         ],
@@ -555,12 +556,12 @@ return [
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => 'vendor/summernote/summernote-bs4.min.css'
+                    'location' => '/vendor/summernote/summernote-bs4.min.css'
                 ],
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => 'vendor/summernote/summernote-bs4.min.js'
+                    'location' => '/vendor/summernote/summernote-bs4.min.js'
                 ],
             ],
         ],
@@ -570,7 +571,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => 'vendor/moment/moment.min.js',
+                    'location' => '/vendor/moment/moment.min.js',
                 ],
             ],
         ],
@@ -580,12 +581,12 @@ return [
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => 'vendor/daterangepicker/daterangepicker.css',
+                    'location' => '/vendor/daterangepicker/daterangepicker.css',
                 ],
                 [
                     'type' => 'js',
+                    'location' => '/vendor/daterangepicker/daterangepicker.js',
                     'asset' => false,
-                    'location' => 'vendor/daterangepicker/daterangepicker.js',
                 ]
             ],
         ],

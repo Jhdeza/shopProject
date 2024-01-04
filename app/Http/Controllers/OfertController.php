@@ -79,7 +79,7 @@ class OfertController extends Controller
 
             $response = [
                 'success' => true,
-                'message' =>  __('main.category_created_successfully')
+                'message' =>  __('main.ofert_created_successfully')
             ];
             DB::commit();
 
@@ -133,7 +133,7 @@ class OfertController extends Controller
             $ofert->fill($request->all())->save();
             $response = [
                 'success' => true,
-                'message' =>  __('main.category_updated_successfully')
+                'message' =>  __('main.ofert_updated_successfully')
             ];
             DB::commit();
 
@@ -169,7 +169,7 @@ class OfertController extends Controller
             DB::rollback();
             $response = [
                 'success' => false,
-                'message' => __('main.error')
+                'message' => __('main.error_ofert')
             ];
         }
         return response()->json($response);   

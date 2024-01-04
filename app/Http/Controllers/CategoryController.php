@@ -34,6 +34,7 @@ class CategoryController extends Controller
                 }
             })
             ->addColumn('image', function($row){
+             
                     return '<img class="list-preview" src="'. $row->image_url .'">';
             })
             ->addColumn('buttons', function($row){

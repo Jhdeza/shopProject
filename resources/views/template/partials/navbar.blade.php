@@ -250,7 +250,7 @@
                             <a href={{ $commonInfo['contacts']->social_twitter }}><i class="lni lni-twitter-original"></i></a>
                         </li>
                         <li>
-                            <a href={{ $commonInfo['contacts']->social_instagram }}><i class="lni lni-instagram"></i></a>
+                            <a href={{ $commonInfo['contacts']->social_instagram }}><i class="lni lni-instagram-original"></i></a>
                         </li>
                         {{-- <li>
                             <a href="javascript:void(0)"><i class="lni lni-skype"></i></a>
