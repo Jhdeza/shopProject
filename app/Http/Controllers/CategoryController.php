@@ -18,7 +18,7 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $categories = Category::select([
-            'name', 'categories.id', 'parent_id'
+            'name','slug', 'categories.id', 'parent_id'
         ])
         ->groupBy('categories.id');
         $categories = $categories->get();
@@ -99,11 +99,12 @@ class CategoryController extends Controller
             DB::beginTransaction();
             $category = new Category();
             $file = $request->file('file');
-            
+          
             $category->name = $request->input("name");
             if ($request->input("parent_id")) {
                 $category->parent_id = $request->input("parent_id");
             }
+            $category->slug = $request->input("slug");
             $category->save();
 
             $image = $request->file('file');
@@ -146,8 +147,9 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request,$id)
     {
         try {
-            $category = Category::find($id);                
+            $category = Category::find($id);   
             $category->name = $request->input("name");
+            $category->slug=$request->input("slug");   
             $category->parent_id = $request->input('is_sub')?$request->input("parent_id"):null;            
             $category->save();
             $image = $request->file('file');

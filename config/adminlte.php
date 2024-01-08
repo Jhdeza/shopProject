@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>ShopProject',
+    'logo' => '<b>ShopProject</b>',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -586,6 +586,16 @@ return [
                 [
                     'type' => 'js',
                     'location' => '/vendor/daterangepicker/daterangepicker.js',
+                    'asset' => false,
+                ]
+            ],
+        ],
+        'jFriendly' => [
+            'active' => false,           
+            'files' => [
+                  [
+                    'type' => 'js',
+                    'location' => '/vendor/jFriendly/jFriendly.js',
                     'asset' => false,
                 ]
             ],

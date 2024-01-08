@@ -64,7 +64,7 @@
                     <!-- Start Single Team -->
                     <div class="single-team">
                         <div class="image">
-                            <img src="{{$staff->image}}" alt="#">
+                            <img src="{{$staff->image->url}}" alt="#">
                         </div>
                         <div class="content">
                             <div class="info">

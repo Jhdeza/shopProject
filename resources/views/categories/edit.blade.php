@@ -27,8 +27,12 @@
                 <div class="container">
                 <div class="form-group">
                     <label class=" col-form-label">{{__('main.name')}}:</label>
-                    <input class="form-control " name="name" type="text" placeholder="{{__('main.name')}}" value="{{ $category->name }}">
-                </div>                            
+                    <input id="name" class="form-control " name="name" type="text" placeholder="{{__('main.name')}}" value="{{ $category->name }}">
+                </div> 
+                <div class="form-group">
+                    <label class="col-form-label">{{__('main.slug')}}:</label>
+                    <input id="slug" class="form-control" name="slug" readonly type="text" value="{{ $category->slug }}" placeholder="{{__('main.name')}}">
+                </div>                             
 
                 <div class="form-group">
                     <input @checked(old('is_sub', $category->parent_id)) type="checkbox" name="is_sub"   id="is_sub" value="1" />

@@ -38,14 +38,14 @@ class HomeController extends Controller
         $staffs = Staff::get();
         return view('template.pages.about-us', compact('commonInfo','abouts',"staffs"));
     }
-    public function productGrid(Request $request)
+    public function productGrid(Request $request,)
     {
         $commonInfo = $this->commonInfo();
-        $query = Product::with("Ofert");
+        $query = Product::with("Ofert") ;
         if ($request->input('category'))
             $query->where('category_id', $request->input('category'));
         if ($request->input('subcategory'))
-            $query->where('subcategory_id', $request->input('subcategory'));
+            $query->where('sub_category_id', $request->input('subcategory'));
         $products = $query->get();
 
         return view('template.pages.product-grids', compact('commonInfo', 'products'));
@@ -56,14 +56,17 @@ class HomeController extends Controller
         $contacts = Contact_information::get();
         return view('template.pages.contact', compact('commonInfo', 'contacts'));
     }
-    public function productDetails($id)
+    public function productDetails($id,)
     {
 
         $commonInfo = $this->commonInfo();
         $product = Product::find($id);
+     
         $product->increment('views');
         return view('template.pages.product-details', compact('commonInfo', 'product'));
     }
+
+   
     
     private function commonInfo()
     {

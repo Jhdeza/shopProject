@@ -42,4 +42,5 @@
 @section('plugins.Summernote', true)
 @section('plugins.Moment', true)
 @section('plugins.Daterangepicker', true)
+@section('plugins.jFriendly', true)
 

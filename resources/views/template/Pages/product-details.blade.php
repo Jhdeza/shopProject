@@ -6,14 +6,14 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="breadcrumbs-content">
-                        <h1 class="page-title">Single Product</h1>
+                        <h1 class="page-title">{{$product->name}}</h1>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
                         <li><a href="{{ route('home') }}"><i class="lni lni-home"></i> Home</a></li>
-                        <li><a href="{{ route('Product-grids') }}">Product</a></li>
-                        <li>Single Product</li>
+                        <li><a href="{{ route('Product-grids') }}">Products</a></li>
+                        <li>{{$product->name}}</li>
                     </ul>
                 </div>
             </div>
@@ -53,12 +53,14 @@
                     <div class="col-lg-6 col-md-12 col-12">
                         <div class="product-info">
                             <h2 class="title">{{ $product->name }}</h2>
-                            <p class="category"><i class="lni lni-tag"></i>{{ $product->category->description }}:<a
+                           
+                            <p class="category"><i class="lni lni-tag"></i>{{$product->category->name }}:<a
                                     href="javascript:void(0)"></a></p>
+                                   
                             <div class="price">
                                 @if ($product->ofert)
                                     <h3 class="price">
-                                        ${{ $product->price - $product->price * ($product->ofert->percet / 100) }}<span>${{ $product->price }}</span>
+                                        ${{ $product->price - $product->price * ($product->ofert->percent / 100) }}<span>${{ $product->price }}</span>
                                     </h3>
                                 @else
                                     <h3 class="price">${{ $product->price }}</h3>

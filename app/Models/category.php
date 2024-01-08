@@ -14,6 +14,10 @@ class Category extends Model
     public $timestamps = false;
     protected $table = "categories";
     const urlImageEmpty = 'path/to/empty/image.jpg';
+    public function getRouteKeyName(): string
+{
+    return 'slug';
+}
 
     public function products(){
         return $this->hasMany(Product::class);

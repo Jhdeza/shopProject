@@ -266,19 +266,3 @@
     </script>
 @endpush
 
-{{-- @section('css')
-<style>
-    .but {
-        width: ;
-
-    }
-
-    table tr td:first-child {
-        width: 1%;
-    }
-
-    table #empty-row div {
-        background-color: #240202a7 !important;
-    }
-</style>
-@stop --}}

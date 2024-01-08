@@ -11,31 +11,37 @@
             <div class="modal-body">
                 <div class="container">
                     <div class="form-group">
-                        <label class="col-form-label">{{__('main.name')}}:</label>
-                        <input class="form-control" name="name" type="text" placeholder="{{__('main.name')}}">
-                    </div>                            
+                        <label class="col-form-label">{{ __('main.name') }}:</label>
+                        <input id="name" class="form-control" name="name" type="text"
+                            placeholder="{{ __('main.name') }}">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">{{ __('main.slug') }}:</label>
+                        <input id="slug" class="form-control" name="slug" readonly type="text"
+                            placeholder="{{ __('main.name') }}">
+                    </div>
 
                     <div class="form-group">
-                        <input type="checkbox" name="is_sub"   id="is_sub" value="1" />
-                        <label class="col-form-label ml-2">@lang('main.is_subcategory')</label>                                
+                        <input type="checkbox" name="is_sub" id="is_sub" value="1" />
+                        <label class="col-form-label ml-2">@lang('main.is_subcategory')</label>
                     </div>
 
                     <div id="cat-cont" class="form-group d-none">
-                        <label class="col-form-label">{{__('main.category')}}:</label>
-                        <select class="form-control d-nonde" name="parent_id" >
+                        <label class="col-form-label">{{ __('main.category') }}:</label>
+                        <select class="form-control d-nonde" name="parent_id">
                             <option value="" selected>@lang('main.Select')</option>
-                            @foreach($categories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endforeach
                         </select>
                     </div>
 
                     <div class="form-group">
                         <x-image :params="[
-                                'type' => 'simple',
-                                'model' => App\Models\Category::class,
-                                'method' => 'image'
-                            ]"/>
+                            'type' => 'simple',
+                            'model' => App\Models\Category::class,
+                            'method' => 'image',
+                        ]" />
                     </div>
                 </div>
             </div>
@@ -46,3 +52,4 @@
         </form>
     </div>
 </div>
+

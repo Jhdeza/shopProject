@@ -10,14 +10,14 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
 
     <!-- ========================= CSS here ========================= -->
-    <link rel="stylesheet" href="{{asset('template/assets/css/bootstrap.min.css')}} "/>
-    <link rel="stylesheet" href="{{asset('template/assets/css/LineIcons.3.0.css')}} "/>
-    <link rel="stylesheet" href="{{asset('template/assets/css/tiny-slider.css')}}" />
-    <link rel="stylesheet" href="{{asset('template/assets/css/glightbox.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('vendor/select2/css/select2.min.css')}}" />
-    <link rel="stylesheet" href="{{asset('template/assets/css/main.css')}}" />
+    <link rel="stylesheet" href="{{ asset('template/assets/css/bootstrap.min.css') }} " />
+    <link rel="stylesheet" href="{{ asset('template/assets/css/LineIcons.3.0.css') }} " />
+    <link rel="stylesheet" href="{{ asset('template/assets/css/tiny-slider.css') }}" />
+    <link rel="stylesheet" href="{{ asset('template/assets/css/glightbox.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('template/assets/css/main.css') }}" />
 
-    <link rel="stylesheet" href="{{asset('vendor/jquery-ui-1.13.2/jquery-ui.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('vendor/jquery-ui-1.13.2/jquery-ui.min.css') }}">
 
 </head>
 
@@ -50,7 +50,7 @@
 
 
     <!-- Start Footer Area -->
-     @include('template.partials.footer')
+    @include('template.partials.footer')
     <!--/ End Footer Area -->
 
     <!-- ========================= scroll-top ========================= -->
@@ -59,13 +59,13 @@
     </a>
 
     <!-- ========================= JS here ========================= -->
-    <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{asset('vendor/jquery-ui-1.13.2/jquery-ui.min.js')}}"></script>
-    <script src="{{asset('template/assets/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('template/assets/js/tiny-slider.js')}}"></script>
-    <script src="{{asset('template/assets/js/glightbox.min.js')}}"></script>
-    <script src="{{asset('vendor/select2/js/select2.min.js')}}"></script>
-    <script src="{{asset('template/assets/js/main.js')}}"></script>
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/jquery-ui-1.13.2/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('template/assets/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('template/assets/js/tiny-slider.js') }}"></script>
+    <script src="{{ asset('template/assets/js/glightbox.min.js') }}"></script>
+    <script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
+    <script src="{{ asset('template/assets/js/main.js') }}"></script>
     <script type="text/javascript">
         //========= Hero Slider
         tns({
@@ -105,7 +105,6 @@
                 }
             }
         });
-
     </script>
     <script>
         const finaleDate = new Date("February 15, 2023 00:00:00").getTime();
@@ -140,7 +139,7 @@
     </script>
 
 
-{{-- <script>
+    {{-- <script>
      $('#select1').autocomplete({
         source: function(request,response){
             $.ajax({
@@ -158,22 +157,22 @@
     </script>  --}}
 
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             $.input = $('#search')
-            $.select =  $('#category_id')
+            $.select = $('#category_id')
 
-            $('#searchbtn').on('click',function(){
+            $('#searchbtn').on('click', function() {
                 filterProduct();
             })
 
-            $('#search').on('input',function(){
+            $('#search').on('input', function() {
 
             })
 
-           // $('#select1').change(function() {
+            // $('#select1').change(function() {
 
 
-            function filterProduct(){
+            function filterProduct() {
                 let selectedValue = $.select.val();
                 let inputValue = $.input.val()
 
@@ -181,19 +180,27 @@
                 $.ajax({
                     url: '{{ route('search.category') }}',
                     method: 'GET',
-                    data: { category: selectedValue, filter : inputValue },
+                    data: {
+                        category: selectedValue,
+                        filter: inputValue
+                    },
                     dataType: 'json',
                     success: function(response) {
                         // Manejar la respuesta JSON
 
 
-                        $('#productGrid').html(response.html);
+                        $('#nav-grid').html(response.grid);
+                        $('#nav-list').html(response.list);
+
                     },
                 });
             }
-        //})
-    });
+           
+        });
+    
+     
 
+        
     </script>
 
 

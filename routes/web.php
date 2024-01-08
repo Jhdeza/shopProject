@@ -35,7 +35,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/about-us', [App\Http\Controllers\HomeController::class, 'about'])->name('about-us');
 Route::get('/productGrid', [App\Http\Controllers\HomeController::class, 'productGrid'])->name('Product-grids');
 Route::get('/contact-us', [App\Http\Controllers\HomeController::class, 'contactUs'])->name('contact-us');
@@ -60,7 +60,7 @@ require __DIR__.'/auth.php';
 
 Route::prefix('admin')->group(function () {
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/my-user', MyUserController::class);
 Route::resource('/information', ContactInformationController::class);
 Route::resource('/category', CategoryController::class);
