@@ -24,7 +24,7 @@
                             <th></th>
                             <th>{{ __('main.name') }}</th>
                             <th>{{ __('main.slug') }}</th>
-                            <th></th>
+                            <th>{{ __('main.image') }}</th>
                         </tr>
                     </thead>
                 </table>
@@ -51,63 +51,59 @@
         })
 
         $(document).ready(function() {
-                $.list_tb = $('#categories-tb').DataTable({
-                    processing: true,
-                    serverSide: true,
-                    scrollY: "75vh",
-                    scrollX: true,
-                    scrollCollapse: true,
-                    aaSorting: [],
-                    ajax: {
-                        url: 'category',
+            $.list_tb = $('#categories-tb').DataTable({
+                processing: true,
+                serverSide: true,
+                scrollY: "75vh",
+                scrollX: true,
+                scrollCollapse: true,
+                aaSorting: [],
+                ajax: {
+                    url: 'category',
+                },
+                columns: [{
+                        data: 'buttons',
+                        name: 'buttons',
+                        orderable: false,
+                        searchable: false
                     },
-                    columns: [{
-                            data: 'buttons',
-                            name: 'buttons',
-                            orderable: false,
-                            searchable: false
-                        },
-                        {
-                            data: 'name',
-                            name: 'name'
-                        },
-                        {
-                            data: 'slug',
-                            name: 'slug'
-                        },
-                        {
-                            data: 'image',
-                            name: 'image',
-                            orderable: false,
-                            searchable: false
-                        },
-                    ],
-                    initComplete: function() {
-                        var table = this.api();
+                    {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'slug',
+                        name: 'slug'
+                    },
+                    {
+                        data: 'image',
+                        name: 'image',
+                        orderable: false,
+                        searchable: false
+                    },
+                ],
+                initComplete: function() {
+                    var table = this.api();
+                    if (table.rows().data().length === 0) {
+                        $(this[0]).closest('.dataTables_scroll').find('.dataTables_scrollHead')
+                            .addClass('d-none')
+                    } else {
+                        $(this[0]).closest('.dataTables_scroll').find('.dataTables_scrollHead')
+                            .removeClass('d-none')
+                    }
+
+                    table.on('draw.dt', function() {
                         if (table.rows().data().length === 0) {
-                            $(this[0]).closest('.dataTables_scroll').find('.dataTables_scrollHead')
-                                .addClass('d-none')
+                            $(this[0]).closest('.dataTables_scroll').find(
+                                '.dataTables_scrollHead').addClass('d-none')
                         } else {
-                            $(this[0]).closest('.dataTables_scroll').find('.dataTables_scrollHead')
-                                .removeClass('d-none')
+                            $(this[0]).closest('.dataTables_scroll').find(
+                                '.dataTables_scrollHead').removeClass('d-none')
                         }
-
-                        table.on('draw.dt', function() {
-                            if (table.rows().data().length === 0) {
-                                $(this[0]).closest('.dataTables_scroll').find(
-                                    '.dataTables_scrollHead').addClass('d-none')
-                            } else {
-                                $(this[0]).closest('.dataTables_scroll').find(
-                                    '.dataTables_scrollHead').removeClass('d-none')
-                            }
-                        });
-                    },
-                    fnDrawCallback: function(oSettings) {},
-                })
+                    });
+                },
+                fnDrawCallback: function(oSettings) {},
             })
-        
-
-
-       
+        })
     </script>
 @endpush

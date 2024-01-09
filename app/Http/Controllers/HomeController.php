@@ -38,18 +38,44 @@ class HomeController extends Controller
         $staffs = Staff::get();
         return view('template.pages.about-us', compact('commonInfo','abouts',"staffs"));
     }
-    public function productGrid(Request $request,)
-    {
-        $commonInfo = $this->commonInfo();
-        $query = Product::with("Ofert") ;
-        if ($request->input('category'))
-            $query->where('category_id', $request->input('category'));
-        if ($request->input('subcategory'))
-            $query->where('sub_category_id', $request->input('subcategory'));
-        $products = $query->get();
+    public function productGrid($slug = null, $sub_slug = null)
+{
+    $commonInfo = $this->commonInfo();
+    $query = Product::with("Ofert");
 
-        return view('template.pages.product-grids', compact('commonInfo', 'products'));
+    if ($sub_slug != null) {
+        $category = Category::where('slug', $sub_slug)->first();
+        $query->where('sub_category_id', $category->id);
+    } elseif ($slug != null) {
+        $category = Category::where('slug', $slug)->first();
+        $query->where('category_id', $category->id);
     }
+
+    $products = $query->paginate();
+
+    return view('template.pages.product-grids', compact('commonInfo', 'products'));
+}
+
+    // public function productGrid($slug = null,$sub_slug = null)
+    // {
+    //     $commonInfo = $this->commonInfo();
+    //     $query = Product::with("Ofert");
+    //     if($sub_slug != null){
+    //         $category = Category::where('slug', $sub_slug)->first();
+    //         $query->where('subcategory_id', $category->id);
+    //     }
+    //     else if($slug != null){
+    //         $category = Category::where('slug', $slug)->first();
+    //         $query->where('category_id', $category->id);
+    //     }
+    //    /* if ($request->input('category'))
+    //         $query->where('category_id', $request->input('category'));
+    //     if ($request->input('subcategory'))
+    //         $query->where('subcategory_id', $request->input('subcategory'));*/
+    //     $products = $query->get();
+
+    //     return view('template.pages.product-grids', compact('commonInfo','products'));
+    // }
     public function contactUs()
     {
         $commonInfo = $this->commonInfo();
@@ -74,6 +100,7 @@ class HomeController extends Controller
            
             'contacts' => Contact_information::First(),
             'products' => Product::where('act_carusel', true)->get(),
+            'productosMasVistos' => Product::orderByDesc('views')->take(8)->get(),
             'categories' =>  Category::with('subcategories')->where('parent_id', null)->get()
         ];
     }

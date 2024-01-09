@@ -62,6 +62,7 @@ return [
     "category_used_by_products" => 'No se puede eliminar la categoría porque está siendo utilizada por uno o más productos',
     "close"=>"Cerrar",
     "save"=>"Salvar",
+    "image"=>"Imagen",
 
     "category_created_successfully"=>"Categoria Creada",
     "category_updated_successfully"=>"Categoria Actualizada",
@@ -93,6 +94,8 @@ return [
     'create_membrer'=>'Insertar Integrante ',
     "staff_deleted_successfully"=>"Integrante Eliminado ",
     "staff_updated_successfully"=>"Integrante Actualizado",
+
+    "slug"=>"Slug",
   
     
 

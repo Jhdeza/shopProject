@@ -18,7 +18,7 @@ class SearchController extends Controller
             $query->where('category_id', $category)->orWhere('sub_category_id', $category);
         if ($filter)
             $query->where("name", 'like', '%' . $filter . '%');
-        $products = $query->get();
+        $products = $query->paginate();
         
         $arr=[
             'grid' => view('template.partials.ajax.product-grid', compact('products'))->render(),

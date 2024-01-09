@@ -18,7 +18,7 @@
                     <div class="form-group">
                         <label class="col-form-label">{{ __('main.slug') }}:</label>
                         <input id="slug" class="form-control" name="slug" readonly type="text"
-                            placeholder="{{ __('main.name') }}">
+                          >
                     </div>
 
                     <div class="form-group">

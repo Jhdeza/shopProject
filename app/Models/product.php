@@ -13,6 +13,10 @@ class Product extends Model
     public $timestamps = false;
     protected $guarded = ['_token'];
     const urlImageEmpty = 'path/to/empty/image.jpg';
+    public function getRouteKeyName(): string
+{
+    return 'slug';
+}
 
     public function category(){
         return $this->belongsTo(Category::class);

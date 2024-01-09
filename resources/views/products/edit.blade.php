@@ -1,6 +1,6 @@
 <div class="modal-dialog modal-xl">
     <div class="modal-content">
-        <form class="form" action="{{ route('product.update', $product) }}">
+        <form class="form" action="{{ route('product.update', $product->id) }}">
             @csrf
             @method('PATCH')  
             <div class="modal-header">

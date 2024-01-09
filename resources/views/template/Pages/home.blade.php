@@ -81,12 +81,12 @@
                     <!-- Start Single Category -->
                     @foreach ($commonInfo['categories'] as $category)
                         <div class="single-category">
-                            <h3 class="heading"><a href="{{ route('Product-grids' ,['category' => $category->slug]) }}">{{ $category->name }} 
+                            <h3 class="heading"><a href="{{ route('Product-grids' ,['category' => $category->id]) }}">{{ $category->name }} 
                               </a></h3>
                             <ul>
                                 @if ($category->subcategories->isNotEmpty())
                                 @foreach ($category->subcategories as $sub)
-                                    <li><a href="{{ route('Product-grids', ['category' => $sub->parent_id, 'subcategory' => $sub->slug]) }}">{{ $sub->name }}</a>
+                                    <li><a href="{{ route('Product-grids', ['category' => $sub->parent_id, 'subcategory' => $sub->id]) }}">{{ $sub->name }}</a>
                                     </li>
                                 @endforeach
                                 @endif
@@ -118,28 +118,43 @@
                 </div>
             </div>
             <div class="row">
+                @foreach($commonInfo['productosMasVistos'] as $prod)
                 <div class="col-lg-3 col-md-6 col-12">
                     <!-- Start Single Product -->
                     <div class="single-product">
+                        @if ($prod->is_new || ($prod->ofert && $prod->ofert->percent))
                         <div class="product-image">
-                            <img src="assets/images/products/product-1.jpg" alt="#">
-                            <div class="button">
-                                <!-- <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to Cart</a> -->
-                            </div>
-                        </div>
+                            <img src="{{$prod->image}}" alt="#">
+                            <span class="new-tag">{{ $prod->is_new == 1 ? 'New' : '' }}</span>
+
+                            @if ($prod->ofert && $prod->ofert->percent)
+                            <span 
+                            @if($prod->is_new) 
+                             class="sale-tag " style="margin-left:45px"
+                            @endif
+                            >-{{ $prod->ofert->percent }}%</span>
+                            @endif
+                          </div>
+                          @endif
                         <div class="product-info">
-                            <span class="category">Watches</span>
+                            <span class="category">{{$prod->category->name}}</span>
                             <h4 class="title">
-                                <a href="product-grids.html">Xiaomi Mi Band 5</a>
+                                <a href="product-grids.html">{{$prod->name}}</a>
                             </h4>
                            
                             <div class="price">
-                                <span>$199.00</span>
+                                @if ($prod->ofert)
+                                <span>${{ $prod->price - $prod->price * ($prod->ofert->percent / 100) }}</span>
+                                <span class="discount-price">${{ $prod->price }}</span>
+                            @else
+                                <span>${{ $prod->price }}</span>
+                            @endif
                             </div>
                         </div>
                     </div>
                     <!-- End Single Product -->
                 </div>
+                @endforeach
 
                
             </div>

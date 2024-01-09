@@ -37,7 +37,7 @@
         <div class="container">
             <div class="bottom-inner">
                 <div class="row justify-content-center">
-                    <div class="col-lg-3 col-md-6 col-12">
+                    <div class="col-lg-5 col-md-6 col-12">
                         <!-- Single Widget -->
                         <div class="single-footer f-contact">
                             <h3>Get In Touch With Us</h3>
@@ -75,13 +75,13 @@
                         </div> -->
                         <!-- End Single Widget -->
                     <!-- </div> -->
-                    <div class="col-lg-3 col-md-6 col-12">
+                    <div class="col-lg-5 col-md-6 col-12">
                         <!-- Single Widget -->
                         <div class="single-footer f-link">
                             <h3>Information</h3>
                             <ul>
-                                <li><a href="javascript:void(0)">About Us</a></li>
-                                <li><a href="javascript:void(0)">Contact Us</a></li>
+                                <li><a href="{{ route('about-us') }}">About Us</a></li>
+                                <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
                                 <!-- <li><a href="javascript:void(0)">Downloads</a></li>
                                 <li><a href="javascript:void(0)">Sitemap</a></li>
                                 <li><a href="javascript:void(0)">FAQs Page</a></li> -->
@@ -89,7 +89,7 @@
                         </div>
                         <!-- End Single Widget -->
                     </div>
-                    <div class="col-lg-2 col-md-6 col-12">
+                    {{-- <div class="col-lg-2 col-md-6 col-12">
                         <!-- Single Widget -->
                         <div class="single-footer f-link">
                             <h3>Shop Departments</h3>
@@ -102,7 +102,7 @@
                             </ul>
                         </div>
                         <!-- End Single Widget -->
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

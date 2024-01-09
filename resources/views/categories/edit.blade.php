@@ -31,7 +31,7 @@
                 </div> 
                 <div class="form-group">
                     <label class="col-form-label">{{__('main.slug')}}:</label>
-                    <input id="slug" class="form-control" name="slug" readonly type="text" value="{{ $category->slug }}" placeholder="{{__('main.name')}}">
+                    <input id="slug" class="form-control" name="slug" readonly type="text" value="{{ $category->slug }}" >
                 </div>                             
 
                 <div class="form-group">
