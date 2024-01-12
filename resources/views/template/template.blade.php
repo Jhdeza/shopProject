@@ -161,7 +161,8 @@
             $.input = $('#search')
             $.select = $('#category_id')
 
-            $('#searchbtn').on('click', function() {
+            $('#searchbtn').on('click', function(e) {
+                e.preventDefault();
                 filterProduct();
             })
 
@@ -176,7 +177,7 @@
                 let selectedValue = $.select.val();
                 let inputValue = $.input.val()
 
-                // Realizar la consulta AJAX con jQuery
+               
                 $.ajax({
                     url: '{{ route('search.category') }}',
                     method: 'GET',
@@ -186,9 +187,7 @@
                     },
                     dataType: 'json',
                     success: function(response) {
-                        // Manejar la respuesta JSON
-
-
+                       
                         $('#nav-grid').html(response.grid);
                         $('#nav-list').html(response.list);
 
@@ -197,10 +196,36 @@
             }
            
         });
-    
-     
+          
+        $(document).ready(function() {
+   
+    $(document).on('click','.pagination a', function(e) {
+        e.preventDefault(); 
 
         
+        var url = $(this).attr('href');
+
+       
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: "json",
+            success: function(response) {
+                
+                $('#nav-grid').html(response.grid);
+                $('#nav-list').html(response.list);
+         
+                $('#pagination').html(response.links);
+               
+            },
+          
+        });
+    });
+});
+
+
+
+
     </script>
 
 

@@ -192,7 +192,9 @@
                         <ul class="sub-category">
                             @foreach ($commonInfo['categories'] as $category)
                                 <li><a
-                                        href="{{ route('Product-grids', ['slug' => $category->slug, 'sub_slug' => null]) }}">{{ $category->name }}
+                                        href="{{ route('Product-grids', ['slug' => $category->slug, 'sub_slug' => null]) }}">
+                                        {{ $category->name }}
+
                                         @if ($category->subcategories->isNotEmpty())
                                             <i class="lni lni-chevron-right"></i>
                                         @endif
@@ -200,8 +202,8 @@
                                     @if ($category->subcategories->isNotEmpty())
                                         <ul class="inner-sub-category">
                                             @foreach ($category->subcategories as $sub)
-                                                <li><a
-                                                        href="{{ route('Product-grids', ['slug' => $category->slug, 'sub_slug' => $sub->slug]) }}">{{ $sub->name }}</a>
+                                                <li><a href="{{ route('Product-grids', ['slug' => $category->slug, 'sub_slug' => $sub->slug]) }}">
+                                                        {{ $sub->name }}</a>
                                                 </li>
                                             @endforeach
                                         </ul>

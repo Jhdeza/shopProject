@@ -52,6 +52,7 @@ return [
     "edit_product"=> "Editar Producto",
     "onsigth"=> "Visible en Home",
     "onnew"=> "Nuevo",
+    "product_details" => "Detalles del Produto",
     "product_list" => "Listado de Produtos",
     "empty_products" => "No existen productos registrados",
     "visible_on_home" => "Visible en el Home",

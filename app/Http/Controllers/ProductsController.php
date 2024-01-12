@@ -99,10 +99,12 @@ class ProductsController extends Controller
             $productData['act_carusel'] = $request->input('act_carusel') == "on" ?  true : false ;
             $productData['is_new'] = $request->input('is_new') == "on" ?  true : false ;        
             $cats = explode('-', $productData['category_id']);
+            
             if(count($cats) == 2){
-                $productData['category_id'] = $cats[0];
-                $productData['sub_category_id'] = $cats[1];
+                $productData['sub_category_id'] = $cats[0];
+                $productData['category_id'] = $cats[1];
             }
+            
             $product = Product::create($productData);
             $files = [];
             if($request->hasFile('galery')){
@@ -119,7 +121,7 @@ class ProductsController extends Controller
                 }
                 $product->galery()->createMany($files);
             }
-
+            
             $response = [
                 'success' => true,
                 'message' =>  __('main.product_created_successfully')
@@ -134,6 +136,8 @@ class ProductsController extends Controller
             DB::rollback();
 
         }
+
+            
         return response()->json($response);
     }
 
@@ -164,8 +168,8 @@ class ProductsController extends Controller
             $cats = explode('-', $request->category_id);
             if(count($cats) == 2){
                 $request->merge([
-                    'category_id' => $cats[0],
-                    'sub_category_id' => $cats[1]
+                    'sub_category_id' => $cats[0],
+                    'category_id' => $cats[1]
                 ]);
             }
             else{

@@ -9,6 +9,8 @@ use App\Models\Product;
 use App\Models\Staff;
 use Illuminate\Http\Request;
 
+
+
 class HomeController extends Controller
 {
     /**
@@ -40,18 +42,20 @@ class HomeController extends Controller
     }
     public function productGrid($slug = null, $sub_slug = null)
 {
+   
     $commonInfo = $this->commonInfo();
     $query = Product::with("Ofert");
-
-    if ($sub_slug != null) {
+  
+   if ($sub_slug!= null) {
         $category = Category::where('slug', $sub_slug)->first();
         $query->where('sub_category_id', $category->id);
-    } elseif ($slug != null) {
+
+    } elseif ($slug!= null) {
         $category = Category::where('slug', $slug)->first();
         $query->where('category_id', $category->id);
     }
-
-    $products = $query->paginate();
+   $products = $query->paginate(6);
+   
 
     return view('template.pages.product-grids', compact('commonInfo', 'products'));
 }

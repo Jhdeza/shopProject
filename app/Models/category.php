@@ -47,8 +47,9 @@ class Category extends Model
     }
 
     public static function selectHtmlTreeMode($obj = null){
-        $cats = Category::leftJoin('categories as c',  'c.parent_id', '=', 'categories.id')->select('categories.id', 'categories.name', 'categories.parent_id')
-        ->distinct('id')->get();
+        $cats = Category::leftJoin('categories as c',  'c.parent_id', '=', 'categories.id')
+                         ->select('categories.id', 'categories.name', 'categories.parent_id')
+                         ->distinct('id')->get();
         $cats = Self::orderCategories($cats);
         return self::htmlTreeMode($cats, $obj);
     }

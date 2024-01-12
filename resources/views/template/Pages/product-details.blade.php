@@ -33,7 +33,7 @@
                                 @foreach ($product->galery as $image)
                                     <div class="main-img">
                                         @if ($image->is_main)
-                                            <img style="max-height: 350px" src="{{ asset($image->url) }}" id="current"
+                                            <img src="{{ asset($image->url) }}" id="current"
                                                 alt="imagen producto principal">
                                         @endif
                                     </div>
@@ -308,7 +308,6 @@
 
     </section>
     <!-- End Item Details -->
-
     <!-- Review Modal -->
     <!-- <div class="modal fade review-modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">

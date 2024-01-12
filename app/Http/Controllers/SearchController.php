@@ -18,13 +18,14 @@ class SearchController extends Controller
             $query->where('category_id', $category)->orWhere('sub_category_id', $category);
         if ($filter)
             $query->where("name", 'like', '%' . $filter . '%');
-        $products = $query->paginate();
+        $products = $query->paginate(6)->withQueryString();
+  
         
-        $arr=[
+        $arr=[ 
             'grid' => view('template.partials.ajax.product-grid', compact('products'))->render(),
             'list' => view('template.partials.ajax.product-list', compact('products'))->render(),
-        ];
-     
+            // 'links' => $products->links(),
+        ]; 
         return response()->json($arr);
 
         // $catg = $request->get("catg");
