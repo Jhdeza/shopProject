@@ -41,9 +41,15 @@
     </div>
     <!-- /End Preloader -->
 
-    <!-- Start Header Area -->
-    @include('template.partials.navbar')
-    <!-- End Header Area -->
+    @if (request()->routeIs('Product-grids'))
+        {
+        @include('template.partials.navbargrid')
+
+    }@else{
+        @include('template.partials.navbar')
+
+        }
+    @endif
 
     @yield('content')
 
@@ -139,45 +145,29 @@
     </script>
 
 
-    {{-- <script>
-     $('#select1').autocomplete({
-        source: function(request,response){
-            $.ajax({
-            url:"{{route('search.category')}}",
-            dataType: 'json',
-            data:{
-                catg: request.term,
-            },
-            success: function(data){
-                response(data)
-            }
-        })
-     }
-    })
-    </script>  --}}
+
 
     <script>
         $(document).ready(function() {
-            $.input = $('#search')
-            $.select = $('#category_id')
-
+            $.input = $('#search');
+            $.select = $('#category_id');
             $('#searchbtn').on('click', function(e) {
                 e.preventDefault();
                 filterProduct();
-            })
-
-            $('#search').on('input', function() {
-
-            })
-
-            // $('#select1').change(function() {
+            });
+            $('#search').on('input', function() {});
+            $('#searchbtn').trigger('click')
+        });
 
 
-            function filterProduct() {
-                let selectedValue = $.select.val();
-                let inputValue = $.input.val()
+        
 
-               
+        function filterProduct() {
+            let selectedValue = $.select.val();
+            let inputValue = $.input.val();
+
+            if (selectedValue !== "" || inputValue !== "") {
+
                 $.ajax({
                     url: '{{ route('search.category') }}',
                     method: 'GET',
@@ -187,45 +177,64 @@
                     },
                     dataType: 'json',
                     success: function(response) {
-                       
                         $('#nav-grid').html(response.grid);
                         $('#nav-list').html(response.list);
+
+                        //    window.location.href = '{{ route('Product-grids') }}';
+                    },
+                });
+            }
+        }
+
+        $(document).ready(function() {
+
+            $(document).on('click', '.pagination a', function(e) {
+                e.preventDefault();
+                var url = $(this).attr('href');
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    dataType: "json",
+                    success: function(response) {
+
+                        $('#nav-grid').html(response.grid);
+                        $('#nav-list').html(response.list);
+                        $('#pagination').html(response.links);
+
+                    },
+
+                });
+            });
+        });
+
+
+
+        $(document).ready(function() {
+
+            $('#sorting').on('change', function() {
+                var selectedValue = $(this).val();
+
+                OrderProduct(selectedValue);
+            });
+
+            function OrderProduct(selectedValue) {
+
+                $.ajax({
+                    url: '{{ route('search.sorting') }}',
+                    method: 'GET',
+                    data: {
+                        sort: selectedValue,
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        $('#nav-grid').html(response.grid);
+                        $('#nav-list').html(response.list);
+
 
                     },
                 });
             }
-           
         });
-          
-        $(document).ready(function() {
-   
-    $(document).on('click','.pagination a', function(e) {
-        e.preventDefault(); 
-
-        
-        var url = $(this).attr('href');
-
-       
-        $.ajax({
-            url: url,
-            type: 'GET',
-            dataType: "json",
-            success: function(response) {
-                
-                $('#nav-grid').html(response.grid);
-                $('#nav-list').html(response.list);
-         
-                $('#pagination').html(response.links);
-               
-            },
-          
-        });
-    });
-});
-
-
-
-
     </script>
 
 

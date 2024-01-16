@@ -53,6 +53,7 @@
         <div class="pagination left" id="pagination" >
             <ul  class="pagination-list">
                 {{ $products->links() }}
+                
             </ul>
         </div>
         <!--/ End Pagination -->

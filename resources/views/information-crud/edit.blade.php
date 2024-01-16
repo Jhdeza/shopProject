@@ -12,7 +12,7 @@
                     <div class= "card-header">
                         <h3>@lang('main.contact_information')</h3>
                     </div>
-                    <form class="form" method="post" action="{{ route('information.update', $contacts_information->id) }}">
+                    <form  enctype="multipart/form-data" class="form" method="post" action="{{ route('information.update', $contacts_information->id) }}">
                         @csrf
                         @method('PUT')
 
@@ -78,6 +78,16 @@
                                 <textarea class="form-control" rows="5" name="description" placeholder="About Us">{{ $contacts_information->description }}</textarea>
 
                             </div>
+                            <div class="form-group row">
+                                <div class="form-group">
+                                    <x-image :params="[
+                                            'type' => 'simple',
+                                            'model' => $contacts_information,
+                                            'method' => 'imageUrl'
+                                        ]"/>
+                                </div>
+                                
+                            </div>
 
 
                             <div class="form-group button row">
@@ -93,7 +103,7 @@
         </div>
     </div>
 @endsection
-@section('js')
+@push('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <script>
         $(document).on('click', 'input[type=button]', function(e) {
@@ -111,5 +121,13 @@
                 }
             });
         })
+        
     </script>
-@endsection
+    <script>
+
+$(document).ready(function() {
+                
+    $('.file-upload').upload();
+            });
+    </script>
+@endpush

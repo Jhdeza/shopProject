@@ -58,28 +58,7 @@
                                 'method' => 'imageUrl'
                             ]"/>
                     </div>
-                    {{-- <div class="col-12 pb-4">
-                        {{-- @error('file')
-                            <span style="display: block" class="error invalid-feedback ">
-                                {{ $message }}
-                            </span>
-                        @enderror --}
-                        <div id="cont-img" class="container-big crud-file d-flex align-items-center" data-simple="true" data-id="img">
-                            <input type="file" name="file" id="img" class="upload_plugin d-none"/>
-                            <a id="trigger" class="parent-img-img mx-auto my-auto d-flex justify-content-center" >                                      
-                                <img  data-empty="{{App\Models\Category::urlImageEmpty}}" type="button" src="{{asset($category->image_url)}}" data-holdder-rendered="true" />   
-                            </a>
-                            <input type="hidden" name="img_flag" id="flag" value="0">  
-                            <button id="btn-trigger" class="btn btn-secondary crud-file_change-button  align-self-center roundex" type="button" >
-                                <span class="fa fa-camara"></span>{{__('main.change')}}</button> 
-                            <button  @class([
-                                'btn btn-danger crud-file_remove-button align-self-center roundex',
-                                'd-none' => $category->image_url == null
-                            ])  type="button" >
-                                    <span class="fa fa-trash"></span>
-                            </button>    
-                        </div>
-                    </div> --}}
+                    
                 </div>
             </div>
             <div class="modal-footer justify-content-between">

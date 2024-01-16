@@ -40,7 +40,7 @@ class HomeController extends Controller
         $staffs = Staff::get();
         return view('template.pages.about-us', compact('commonInfo','abouts',"staffs"));
     }
-    public function productGrid($slug = null, $sub_slug = null)
+    public function productGrid(Request $request, $slug = null, $sub_slug = null)
 {
    
     $commonInfo = $this->commonInfo();
@@ -54,38 +54,39 @@ class HomeController extends Controller
         $category = Category::where('slug', $slug)->first();
         $query->where('category_id', $category->id);
     }
-   $products = $query->paginate(6);
+   $products = $query->paginate(9)->withQueryString();
    
+   if($request->ajax()){
+        $arr=[ 
+            'grid' => view('template.partials.ajax.product-grid', compact('products'))->render(),
+            'list' => view('template.partials.ajax.product-list', compact('products'))->render(),
+            // 'pagination' => $products->links()->toHtml(),
+        ]; 
+    
+        return response()->json($arr);
+   }
 
-    return view('template.pages.product-grids', compact('commonInfo', 'products'));
+   if($request->category_id){
+        $arr = explode("-", $request->category_id);
+        if(count($arr)> 1)
+            $id = $arr[0];
+        else $id = $arr[0];
+        $category = Category::find($id);
+   }
+   else
+        $category = null;
+    $search = $request->search;
+    
+
+    return view('template.pages.product-grids', compact('commonInfo', 'products','category', 'search'));
 }
-
-    // public function productGrid($slug = null,$sub_slug = null)
-    // {
-    //     $commonInfo = $this->commonInfo();
-    //     $query = Product::with("Ofert");
-    //     if($sub_slug != null){
-    //         $category = Category::where('slug', $sub_slug)->first();
-    //         $query->where('subcategory_id', $category->id);
-    //     }
-    //     else if($slug != null){
-    //         $category = Category::where('slug', $slug)->first();
-    //         $query->where('category_id', $category->id);
-    //     }
-    //    /* if ($request->input('category'))
-    //         $query->where('category_id', $request->input('category'));
-    //     if ($request->input('subcategory'))
-    //         $query->where('subcategory_id', $request->input('subcategory'));*/
-    //     $products = $query->get();
-
-    //     return view('template.pages.product-grids', compact('commonInfo','products'));
-    // }
-    public function contactUs()
+       public function contactUs()
     {
         $commonInfo = $this->commonInfo();
         $contacts = Contact_information::get();
         return view('template.pages.contact', compact('commonInfo', 'contacts'));
     }
+
     public function productDetails($id,)
     {
 
@@ -96,7 +97,6 @@ class HomeController extends Controller
         return view('template.pages.product-details', compact('commonInfo', 'product'));
     }
 
-   
     
     private function commonInfo()
     {

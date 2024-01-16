@@ -48,10 +48,9 @@
                                     <div class="product-sorting">
                                         <label for="sorting">Sort by:</label>
                                         <select class="form-control" id="sorting">
-                                            <option>Popularity</option>
+                                            <option>Selecione</option>
                                             <option>Low - High Price</option>
                                             <option>High - Low Price</option>
-                                            <option>Average Rating</option>
                                             <option>A - Z Order</option>
                                             <option>Z - A Order</option>
                                         </select>
@@ -83,6 +82,7 @@
                                 @include('template.partials.ajax.product-list')                              
                                 
                             </div>
+                           
                             
                             
                         </div>
@@ -91,7 +91,7 @@
             </div>
         </div>
     </section>
-
+   
 
     <!-- ========================= scroll-top ========================= -->
     <a href="#" class="scroll-top">

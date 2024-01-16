@@ -8,33 +8,26 @@
                         <img src={{ $commonInfo['contacts']->image->url }} alt="Logo">
 
                     </a>
-
+                    <!-- End Header Logo -->
                 </div>
                 <div class="col-lg-5 col-md-7 col-xs-3">
-
+                    <!-- Start Main Menu Search -->
                     <div class="main-menu-search">
-
-                        <form action="{{ route('Product-grids') }}" novalidate  method="POST">
-                            @csrf
-                            <div class="navbar-search search-style-5">
-
-                                <div class="search-select">
-                                    <div class="select-position">
-                                        {!! \App\models\Category::selectHtmlTreeMode() !!}
-                                    </div>
+                        <!-- navbar search start -->
+                        <div class="navbar-search search-style-5">
+                            <div class="search-select">
+                                <div class="select-position">
+                                    {!! \App\models\Category::selectHtmlTreeMode($category) !!}
                                 </div>
-                              
-                                <div class="search-input">
-                                    <input type="text" name="search" id='search' placeholder="">
-                                </div>
-
-                                <div class="search-btn">
-                                    <button id="searchbtngrid"><i class="lni lni-search-alt"></i></button>
-                                </div>
-
                             </div>
-                        </form>
-
+                           
+                            <div class="search-input">
+                                <input type="text"  @isset($search) value="{{ $search }}" @endisset id='search' placeholder="">
+                            </div>
+                            <div class="search-btn">
+                                <button id="searchbtn"><i class="lni lni-search-alt"></i></button>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -149,4 +142,5 @@
             </div>
         </div>
     </div>
+
 </header>

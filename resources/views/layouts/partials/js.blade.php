@@ -128,6 +128,7 @@
             $(document).ready(function() {
                 $("#name").jFriendly("#slug");
             });
+            
             cont.find('.file-upload').upload();
 
             cont.find('form')
