@@ -44,6 +44,7 @@ class HomeController extends Controller
 {
    
     $commonInfo = $this->commonInfo();
+    $sort = $request->input('sort');
     $query = Product::with("Ofert");
   
    if ($sub_slug!= null) {
@@ -54,14 +55,32 @@ class HomeController extends Controller
         $category = Category::where('slug', $slug)->first();
         $query->where('category_id', $category->id);
     }
-   $products = $query->paginate(9)->withQueryString();
+
+    switch ($sort) {
+        case 'Low - High Price':
+            $query->orderBy('price');
+            break;
+        case 'High - Low Price':
+            $query->orderByDesc('price');
+            break;
+        case 'A - Z Order':
+            $query->orderBy('name');
+            break;
+        case 'Z - A Order':
+            $query->orderByDesc('name');
+            break;
+        default:
+            $query->orderBy('id', 'asc');
+    }
+
+    //dd($query->toSql());
+   $products = $query->paginate(12)->withQueryString();
    
    if($request->ajax()){
         $arr=[ 
             'grid' => view('template.partials.ajax.product-grid', compact('products'))->render(),
             'list' => view('template.partials.ajax.product-list', compact('products'))->render(),
-            // 'pagination' => $products->links()->toHtml(),
-        ]; 
+            ]; 
     
         return response()->json($arr);
    }
@@ -75,7 +94,7 @@ class HomeController extends Controller
    }
    else
         $category = null;
-    $search = $request->search;
+        $search = $request->search;
     
 
     return view('template.pages.product-grids', compact('commonInfo', 'products','category', 'search'));

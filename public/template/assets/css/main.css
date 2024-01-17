@@ -1672,6 +1672,7 @@ ol {
 }
 
 .header .nav-hotline i {
+
   color: #081828;
   font-size: 18px;
   position: absolute;
@@ -1692,6 +1693,7 @@ ol {
   font-size: 15px;
   font-weight: 600;
   color: #081828;
+ margin-bottom: 15px;
 }
 
 .header .nav-hotline h3 span {

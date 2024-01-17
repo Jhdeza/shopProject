@@ -6,10 +6,8 @@
                     <!-- Start Header Logo -->
                     <a class="navbar-brand" href="index.html">
                         <img src={{ $commonInfo['contacts']->image->url }} alt="Logo">
-
                     </a>
-                    <!-- End Header Logo -->
-                </div>
+                 </div>
                 <div class="col-lg-5 col-md-7 col-xs-3">
                     <!-- Start Main Menu Search -->
                     <div class="main-menu-search">
@@ -20,28 +18,29 @@
                                     {!! \App\models\Category::selectHtmlTreeMode($category) !!}
                                 </div>
                             </div>
-                           
                             <div class="search-input">
-                                <input type="text"  @isset($search) value="{{ $search }}" @endisset id='search' placeholder="">
+                                <input type="text"
+                                    @isset($search) value="{{ $search }}" @endisset
+                                    id='search' placeholder="">
                             </div>
                             <div class="search-btn">
                                 <button id="searchbtn"><i class="lni lni-search-alt"></i></button>
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <div class="col-lg-4 col-md-2 col-5">
                     <div class="middle-right-area">
                         <div class="nav-hotline">
+                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $commonInfo['contacts']->phone_contacts) }}"
+                                target="_blank"
+                                rel="noopener noreferrer">
                             <i class="lni lni-phone"></i>
-
+                            </a>
                             <h3>LLame Ahora:
                                 <span>{{ $commonInfo['contacts']->phone_contacts }}</span>
                             </h3>
-
                         </div>
-
                     </div>
                 </div>
             </div>

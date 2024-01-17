@@ -39,7 +39,7 @@
             </div>
         </div>
     </div>
-    <!-- /End Preloader -->
+
 
     @if (request()->routeIs('Product-grids'))
         {
@@ -52,7 +52,6 @@
     @endif
 
     @yield('content')
-
 
 
     <!-- Start Footer Area -->
@@ -151,40 +150,93 @@
         $(document).ready(function() {
             $.input = $('#search');
             $.select = $('#category_id');
+
             $('#searchbtn').on('click', function(e) {
                 e.preventDefault();
                 filterProduct();
             });
-            $('#search').on('input', function() {});
-            $('#searchbtn').trigger('click')
+
+            $('#search').on('input', function() {
+                filterProduct();
+            });
+
+            $('#searchbtn').trigger('click');
+
+            $('#sorting').on('change', function() {
+                filterProduct();
+            });
         });
-
-
-        
 
         function filterProduct() {
             let selectedValue = $.select.val();
             let inputValue = $.input.val();
+            let sortValue = $('#sorting').val();
 
             if (selectedValue !== "" || inputValue !== "") {
-
                 $.ajax({
                     url: '{{ route('search.category') }}',
                     method: 'GET',
                     data: {
                         category: selectedValue,
-                        filter: inputValue
+                        filter: inputValue,
+                        sort: sortValue,
                     },
                     dataType: 'json',
                     success: function(response) {
                         $('#nav-grid').html(response.grid);
                         $('#nav-list').html(response.list);
-
-                        //    window.location.href = '{{ route('Product-grids') }}';
                     },
                 });
             }
         }
+
+
+        $(document).ready(function() {
+
+            $('#sorting').on('change', function() {
+                orderProduct();
+            });
+        });
+
+        function orderProduct() {
+
+            let sortValue = $('#sorting').val();
+
+            @php
+            $params = array();
+            if(isset(Route::current()->parameters['slug']))
+            $params['slug'] = Route::current()->parameters['slug'];
+          
+            if(isset(Route::current()->parameters['sub_slug']))
+            $params['sub_slug'] = Route::current()->parameters['sub_slug'];
+            
+            @endphp
+            
+            $.ajax({
+                method: 'GET',
+                //url: '{{ Route::current()->uri }}',
+                url: '{{ route('Product-grids', $params) }}',
+                data: {
+                   
+                   /*  @isset(Route::current()->parameters['slug'])
+                    slug: '{{Route::current()->parameters['slug']}}',
+                    @endisset
+                    @isset(Route::current()->parameters['sub_slug'])
+                    sub_slug: '{{Route::current()->parameters['sub_slug']}}',
+                    @endisset */
+                    sort: sortValue,
+
+                },
+                dataType: 'json',
+                success: function(response) {
+                    $('#nav-grid').html(response.grid);
+                    $('#nav-list').html(response.list);
+                },
+            });
+        }
+
+
+
 
         $(document).ready(function() {
 
@@ -205,35 +257,6 @@
 
                 });
             });
-        });
-
-
-
-        $(document).ready(function() {
-
-            $('#sorting').on('change', function() {
-                var selectedValue = $(this).val();
-
-                OrderProduct(selectedValue);
-            });
-
-            function OrderProduct(selectedValue) {
-
-                $.ajax({
-                    url: '{{ route('search.sorting') }}',
-                    method: 'GET',
-                    data: {
-                        sort: selectedValue,
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        $('#nav-grid').html(response.grid);
-                        $('#nav-list').html(response.list);
-
-
-                    },
-                });
-            }
         });
     </script>
 

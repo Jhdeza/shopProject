@@ -25,22 +25,7 @@
     <section class="product-grids section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-12">
-                    <!-- Start Product Sidebar -->
-                    <div class="product-sidebar">
-                        <!-- Start Single Widget -->
-                        <div class="single-widget search">
-                            <h3>Search Product</h3>
-                            <form action="#">
-                                <input type="text" placeholder="Search Here...">
-                                <button type="submit"><i class="lni lni-search-alt"></i></button>
-                            </form>
-                        </div>
-                        
-                    </div>
-                    <!-- End Product Sidebar -->
-                </div>
-                <div class="col-lg-9 col-12">
+                <div class="col-lg-12 col-12">
                     <div class="product-grids-head">
                         <div class="product-grid-topbar">
                             <div class="row align-items-center">

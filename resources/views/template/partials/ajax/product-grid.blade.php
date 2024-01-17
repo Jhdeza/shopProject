@@ -1,6 +1,6 @@
 <div class="row">
     @foreach ($products as $product)
-    <div id="productGrid" class="col-lg-4 col-md-6 col-12">
+    <div id="productGrid" class="col-lg-3 col-md-6 col-12">
             <!-- Start Single Product -->
 
             <div class="single-product">

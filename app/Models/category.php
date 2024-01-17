@@ -85,7 +85,7 @@ class Category extends Model
             return $obj->parent_id?$obj->id .'-'.$obj->parent_id:$obj->id;
         }
         else {
-            return $obj->category_id . ($obj->sub_category_id ? '-' . $obj->sub_category_id : '');# code...
+            return $obj->category_id . ($obj->sub_category_id ? '-' . $obj->sub_category_id : '');
         }
     }
 
