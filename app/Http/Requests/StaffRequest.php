@@ -22,7 +22,11 @@ class StaffRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            
+            "name" => 'required|string|max:255',
+            "position" => "required|string|max:255",
+            
         ];
+        
     }
 }

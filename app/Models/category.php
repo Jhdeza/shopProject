@@ -65,7 +65,7 @@ class Category extends Model
         if ($obj)
             $obj = self::buildObj($obj);
 
-        $html = ' <select id="category_id" name="category_id" class="form-control select2-tree" required="" aria-required="true">
+        $html = ' <select id="category_id" name="category_id" class="form-control select2-tree"  aria-required="true">
         <option value="">' . __('main.Select') . '</option>';
         foreach ($cats as $key => $row) {
             $id = $row->id;

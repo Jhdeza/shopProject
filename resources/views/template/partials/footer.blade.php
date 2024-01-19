@@ -40,21 +40,23 @@
                     <div class="col-lg-5 col-md-6 col-12">
                         <!-- Single Widget -->
                         <div class="single-footer f-contact">
-                            <h3>Get In Touch With Us</h3>
-                            <p class="phone">Phone: +1 (900) 33 169 7720</p>
+                            <h3>{{ __('main.touch_with_us') }}:</h3>
+                            <p class="phone">{{ __('main.phone') }}:
+                            <p> {{ $commonInfo['contacts']->phone_contacts }}</p>
+                            </p>
                             <ul>
                                 <li><span>Monday-Friday: </span> 9.00 am - 8.00 pm</li>
                                 <li><span>Saturday: </span> 10.00 am - 6.00 pm</li>
                             </ul>
                             <p class="mail">
-                                <a href="mailto:support@.com">support@.com</a>
+                                <a href="mailto:support@.com">{{ $commonInfo['contacts']->email }}</a>
                             </p>
                         </div>
                         <!-- End Single Widget -->
                     </div>
                     <!-- <div class="col-lg-3 col-md-6 col-12"> -->
-                        <!-- Single Widget -->
-                        <!-- <div class="single-footer our-app">
+                    <!-- Single Widget -->
+                    <!-- <div class="single-footer our-app">
                             <h3>Our Mobile App</h3>
                             <ul class="app-btn">
                                 <li>
@@ -73,12 +75,12 @@
                                 </li>
                             </ul>
                         </div> -->
-                        <!-- End Single Widget -->
+                    <!-- End Single Widget -->
                     <!-- </div> -->
                     <div class="col-lg-5 col-md-6 col-12">
                         <!-- Single Widget -->
                         <div class="single-footer f-link">
-                            <h3>Information</h3>
+                            <h3>{{ __('main.information') }}:</h3>
                             <ul>
                                 <li><a href="{{ route('about-us') }}">About Us</a></li>
                                 <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
@@ -89,20 +91,7 @@
                         </div>
                         <!-- End Single Widget -->
                     </div>
-                    {{-- <div class="col-lg-2 col-md-6 col-12">
-                        <!-- Single Widget -->
-                        <div class="single-footer f-link">
-                            <h3>Shop Departments</h3>
-                            <ul>
-                                <li><a href="javascript:void(0)">Computers & Accessories</a></li>
-                                <li><a href="javascript:void(0)">Smartphones & Tablets</a></li>
-                                <li><a href="javascript:void(0)">TV, Video & Audio</a></li>
-                                <li><a href="javascript:void(0)">Cameras, Photo & Video</a></li>
-                                <li><a href="javascript:void(0)">Headphones</a></li>
-                            </ul>
-                        </div>
-                        <!-- End Single Widget -->
-                    </div> --}}
+
                 </div>
             </div>
         </div>
@@ -119,22 +108,30 @@
                             <img src="assets/images/footer/credit-cards-footer.png" alt="#">
                         </div>
                     </div> -->
-                    <div class="col-lg-4 col-12">
+                    {{-- <div class="col-lg-4 col-12">
                         <div class="copyright">
                             <p>Designed and Developed by<a href="https://graygrids.com/" rel="nofollow"
                                     target="_blank"></a></p>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="col-lg-4 col-12">
-                        <ul class="socila">
-                            <li>
-                                <span>Follow Us On:</span>
-                            </li>
-                            <li><a href="javascript:void(0)"><i class="lni lni-facebook-filled"></i></a></li>
-                            <li><a href="javascript:void(0)"><i class="lni lni-twitter-original"></i></a></li>
-                            <li><a href="javascript:void(0)"><i class="lni lni-instagram"></i></a></li>
-                            <li><a href="javascript:void(0)"><i class="lni lni-google"></i></a></li>
-                        </ul>
+                        @if (
+                            $commonInfo['contacts']->social_facebook ||
+                                $commonInfo['contacts']->social_twitter ||
+                                $commonInfo['contacts']->social_instagram)
+                            <ul class="socila">
+                                <li>
+                                    <span>{{ __('main.follow_us_on') }}:</span>
+                                </li>
+                                <li><a href="{{ $commonInfo['contacts']->social_facebook }}"><i
+                                            class="lni lni-facebook-filled"></i></a></li>
+                                <li><a href="{{ $commonInfo['contacts']->social_twitter }}"><i
+                                            class="lni lni-twitter-original"></i></a></li>
+                                <li><a href="{{ $commonInfo['contacts']->social_instagram }}"><i
+                                            class="lni lni-instagram"></i></a></li>
+
+                            </ul>
+                        @endif
                     </div>
                 </div>
             </div>

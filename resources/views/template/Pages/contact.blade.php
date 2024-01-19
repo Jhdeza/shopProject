@@ -8,13 +8,13 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="breadcrumbs-content">
-                        <h1 class="page-title">Contact Us</h1>
+                        <h1 class="page-title">{{__('main.contactus')}}</h1>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
                         <li><a href="{{ route('home') }}"><i class="lni lni-home"></i> Home</a></li>
-                        <li>Contact</li>
+                        <li>{{__('main.contactus')}}</li>
                     </ul>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="section-title">
-                            <h2>Contact Us</h2>
+                            <h2>{{__('main.contactus')}}</h2>
                             @foreach($contacts as $contact)
                             <p>{{$contact->description}}</p>
                         </div>
@@ -42,7 +42,7 @@
                                 <!-- Start Single Info -->
                                 <div class="single-info">
                                     <i class="lni lni-map"></i>
-                                    <h3>Address</h3>
+                                    <h3>{{__('main.address')}}</h3>
                                     <ul>
                                         <li>{{$contact->address_contacts}}</li>
                                     </ul>
@@ -51,7 +51,7 @@
                                 <!-- Start Single Info -->
                                 <div class="single-info">
                                     <i class="lni lni-phone"></i>
-                                    <h3>Call us on</h3>
+                                    <h3>{{__('main.callus')}}</h3>
                                     <ul>
                                         <li><a href="#">{{$contact->phone_contacts}}</a></li>
                                         
@@ -61,7 +61,7 @@
                                 <!-- Start Single Info -->
                                 <div class="single-info">
                                     <i class="lni lni-envelope"></i>
-                                    <h3>Mail at</h3>
+                                    <h3>{{__('main.mailat')}}</h3>
                                     <ul>
                                         <li><a href="{{$contact->email}}">{{$contact->email}}</a>
                                         </li>
@@ -80,7 +80,7 @@
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6 col-12">
                                                 <div class="form-group">
-                                                    <input name="name" type="text" placeholder="Your Name"
+                                                    <input name="name" type="text" placeholder="Nombre"
                                                         required="required" value="{{old('name')}}">
                                                 </div>
                                             </div>
@@ -92,24 +92,24 @@
                                             </div> --}}
                                             <div class="col-lg-6 col-md-6 col-12">
                                                 <div class="form-group">
-                                                    <input name="email" type="email" placeholder="Your Email"
+                                                    <input name="email" type="email" placeholder="Email"
                                                         required="required">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-12">
                                                 <div class="form-group">
-                                                    <input name="phone" type="text" placeholder="Your Phone"
+                                                    <input name="phone" type="text" placeholder="Telefono"
                                                         required="required">
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="form-group message">
-                                                    <textarea name="message" placeholder="Your Message"></textarea>
+                                                    <textarea name="message" placeholder="Mensaje"></textarea>
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="form-group button">
-                                                    <button type="submit" class="btn ">Submit Message</button>
+                                                    <button type="submit" class="btn ">{{__('main.submitmessage')}}</button>
                                                 </div>
                                             </div>
                                         </div>

@@ -22,6 +22,11 @@
 
                                 <input class="form-control " name="name_contact" type="text" placeholder="Name"
                                     value="{{ $contacts_information->name_contact }}">
+                                    @error('name_contact')
+                                    <span style="display: block" class="error invalid-feedback ">
+                                        {{$message}}
+                                    </span>
+                                    @enderror
 
                             </div>
 
@@ -30,34 +35,42 @@
 
 
                                 <input class="form-control" name="address_contacts" type="text"
-                                    placeholder="Your Address" value="{{ $contacts_information->address_contacts }}"
-                                    required="required">
+                                    placeholder="Your Address" value="{{ $contacts_information->address_contacts }}">
+                                    @error('address_contacts')
+                                    <span style="display: block" class="error invalid-feedback ">
+                                        {{$message}}
+                                    </span>
+                                    @enderror
 
                             </div>
-
-
-                            
+                           
 
                             <label class=" col-form-label">Email:</label>
                             <div class="form-group row">
 
 
                                 <input class="form-control" name="email" type="email" placeholder="Your Email"
-                                    value="{{ $contacts_information->email }}" required="required">
-
+                                    value="{{ $contacts_information->email }}" >
+                                    @error('email')
+                                    <span style="display: block" class="error invalid-feedback ">
+                                        {{$message}}
+                                    </span>
+                                    @enderror
                             </div>
 
                             <label class="c col-form-label">Telefono:</label>
                             <div class="form-group row">
 
                                 <input class="form-control" name="phone_contacts" type="text" placeholder="Your Phone"
-                                    value="{{ $contacts_information->phone_contacts }}" required="required">
-
+                                    value="{{ $contacts_information->phone_contacts }}">
+                                    @error('phone_contacts')
+                                    <span style="display: block" class="error invalid-feedback ">
+                                        {{$message}}
+                                    </span>
+                                    @enderror
                             </div>
-
                             <label class="c col-form-label">Redes Sociales:</label>
                             <div>
-
                                 <div class="form-group row">
                                      <input class="form-control" name="social_facebook" type="text" placeholder="Facebook Link"
                                     value="{{ $contacts_information->social_facebook }}">
@@ -76,7 +89,11 @@
                             <div class="form-group message row">
 
                                 <textarea class="form-control" rows="5" name="description" placeholder="About Us">{{ $contacts_information->description }}</textarea>
-
+                                @error('description')
+                                <span style="display: block" class="error invalid-feedback ">
+                                    {{$message}}
+                                </span>
+                                @enderror
                             </div>
                             <div class="form-group row">
                                 <div class="form-group">

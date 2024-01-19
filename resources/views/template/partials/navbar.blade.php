@@ -3,13 +3,14 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-3 col-md-3 col-7">
-                    <a class="navbar-brand" href="index.html">
-                        <img src={{ $commonInfo['contacts']->image->url }} alt="Logo">
+                    <a class="navbar-brand" href="{{ route('home') }}">
+                        <img src={{ request()->is('productGrid/*') ? '/' . $commonInfo['contacts']->image->url : $commonInfo['contacts']->image->url }}
+                            alt="Logo">
                     </a>
                 </div>
                 <div class="col-lg-5 col-md-7 col-xs-3">
                     <div class="main-menu-search">
-                        <form action="{{ route('Product-grids') }}" novalidate  method="POST">
+                        <form action="{{ route('Product-grids') }}" novalidate method="POST">
                             @csrf
                             <div class="navbar-search search-style-5">
                                 <div class="search-select">
@@ -17,7 +18,7 @@
                                         {!! \App\models\Category::selectHtmlTreeMode() !!}
                                     </div>
                                 </div>
-                               <div class="search-input">
+                                <div class="search-input">
                                     <input type="text" name="search" id='search' placeholder="">
                                 </div>
 
@@ -32,10 +33,9 @@
                     <div class="middle-right-area">
                         <div class="nav-hotline">
                             <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $commonInfo['contacts']->phone_contacts) }}"
-                                target="_blank"
-                                rel="noopener noreferrer">
-                            <i class="lni lni-phone"></i>
-                        </a>
+                                target="_blank" rel="noopener noreferrer">
+                                <i class="lni lni-phone"></i>
+                            </a>
                             <h3>LLame Ahora:
                                 <span>{{ $commonInfo['contacts']->phone_contacts }}</span>
                             </h3>
@@ -94,17 +94,17 @@
                                 <li class="nav-item">
                                     <a href="{{ route('Product-grids') }}"
                                         class="{{ request()->is('productGrid') ? 'active' : '' }}"
-                                        aria-label="Toggle navigation">Products</a>
+                                        aria-label="Toggle navigation">{{ __('main.productgrid') }}</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('contact-us') }}"
                                         class="{{ request()->is('contact-us') ? 'active' : '' }}"
-                                        aria-label="Toggle navigation">Contact Us</a>
+                                        aria-label="Toggle navigation">{{ __('main.contactus') }}</a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="{{ route('about-us') }}"
                                         class="{{ request()->is('about-us') ? 'active' : '' }}"
-                                        aria-label="Toggle navigation">About Us</a>
+                                        aria-label="Toggle navigation">{{ __('main.aboutus') }}</a>
                                 </li>
 
                             </ul>
@@ -114,28 +114,31 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 col-12">
+                @if (
+                    $commonInfo['contacts']->social_facebook ||
+                        $commonInfo['contacts']->social_twitter ||
+                        $commonInfo['contacts']->social_instagram)
+                    <div class="nav-social">
+                        <h5 class="title">{{ __('main.follow_us_on') }}:</h5>
+                        <ul>
 
-                <div class="nav-social">
-                    <h5 class="title">Follow Us:</h5>
-                    <ul>
+                            <li>
+                                <a href={{ $commonInfo['contacts']->social_facebook }}><i
+                                        class="lni lni-facebook-filled"></i></a>
+                            </li>
 
-                        <li>
-                            <a href={{ $commonInfo['contacts']->social_facebook }}><i
-                                    class="lni lni-facebook-filled"></i></a>
-                        </li>
+                            <li>
+                                <a href={{ $commonInfo['contacts']->social_twitter }}><i
+                                        class="lni lni-twitter-original"></i></a>
+                            </li>
+                            <li>
+                                <a href={{ $commonInfo['contacts']->social_instagram }}><i
+                                        class="lni lni-instagram-original"></i></a>
+                            </li>
 
-                        <li>
-                            <a href={{ $commonInfo['contacts']->social_twitter }}><i
-                                    class="lni lni-twitter-original"></i></a>
-                        </li>
-                        <li>
-                            <a href={{ $commonInfo['contacts']->social_instagram }}><i
-                                    class="lni lni-instagram-original"></i></a>
-                        </li>
-
-                    </ul>
-                </div>
-
+                        </ul>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

@@ -39,9 +39,10 @@
             </div>
         </div>
     </div>
-
-
-    @if (request()->routeIs('Product-grids'))
+    {{-- @dd(Route::current()->getName(), Route::current()->hasParameter('slug')) --}}
+    {{-- @dd(Route::current()->hasParameter('slug')) 
+@dd(get_class_methods(Route::current())) --}}
+    @if (Route::current()->getName() == 'Product-grids' && !Route::current()->hasParameter('slug'))
         {
         @include('template.partials.navbargrid')
 
@@ -153,79 +154,44 @@
 
             $('#searchbtn').on('click', function(e) {
                 e.preventDefault();
-                filterProduct();
+                orderProduct();
             });
-
             $('#search').on('input', function() {
-                filterProduct();
+               
             });
 
-            $('#searchbtn').trigger('click');
-
-            $('#sorting').on('change', function() {
-                filterProduct();
-            });
-        });
-
-        function filterProduct() {
-            let selectedValue = $.select.val();
-            let inputValue = $.input.val();
-            let sortValue = $('#sorting').val();
-
-            if (selectedValue !== "" || inputValue !== "") {
-                $.ajax({
-                    url: '{{ route('search.category') }}',
-                    method: 'GET',
-                    data: {
-                        category: selectedValue,
-                        filter: inputValue,
-                        sort: sortValue,
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        $('#nav-grid').html(response.grid);
-                        $('#nav-list').html(response.list);
-                    },
-                });
-            }
-        }
-
-
-        $(document).ready(function() {
+            @if (request()->isMethod('post'))
+                $('#searchbtn').trigger('click');
+            @endif
 
             $('#sorting').on('change', function() {
                 orderProduct();
             });
+
         });
 
         function orderProduct() {
-
+            let selectedValue = $.select.val();
+            let inputValue = $.input.val();
             let sortValue = $('#sorting').val();
 
             @php
-            $params = array();
-            if(isset(Route::current()->parameters['slug']))
-            $params['slug'] = Route::current()->parameters['slug'];
-          
-            if(isset(Route::current()->parameters['sub_slug']))
-            $params['sub_slug'] = Route::current()->parameters['sub_slug'];
-            
+                $params = [];
+                if (isset(Route::current()->parameters['slug'])) {
+                    $params['slug'] = Route::current()->parameters['slug'];
+                }
+                if (isset(Route::current()->parameters['sub_slug'])) {
+                    $params['sub_slug'] = Route::current()->parameters['sub_slug'];
+                }
             @endphp
-            
+
             $.ajax({
                 method: 'GET',
-                //url: '{{ Route::current()->uri }}',
                 url: '{{ route('Product-grids', $params) }}',
                 data: {
-                   
-                   /*  @isset(Route::current()->parameters['slug'])
-                    slug: '{{Route::current()->parameters['slug']}}',
-                    @endisset
-                    @isset(Route::current()->parameters['sub_slug'])
-                    sub_slug: '{{Route::current()->parameters['sub_slug']}}',
-                    @endisset */
+                    category: selectedValue,
+                    filter: inputValue,
                     sort: sortValue,
-
                 },
                 dataType: 'json',
                 success: function(response) {
@@ -238,24 +204,25 @@
 
 
 
-        $(document).ready(function() {
 
-            $(document).on('click', '.pagination a', function(e) {
-                e.preventDefault();
-                var url = $(this).attr('href');
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    dataType: "json",
-                    success: function(response) {
 
-                        $('#nav-grid').html(response.grid);
-                        $('#nav-list').html(response.list);
-                        $('#pagination').html(response.links);
+        $(document).on('click', '.pagination a', function(e) {
 
-                    },
+            e.preventDefault();
+            var url = $(this).attr('href');
 
-                });
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: "json",
+                success: function(response) {
+
+                    $('#nav-grid').html(response.grid);
+                    $('#nav-list').html(response.list);
+                    $('#pagination').html(response.links);
+
+                },
+
             });
         });
     </script>

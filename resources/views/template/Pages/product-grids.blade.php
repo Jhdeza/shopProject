@@ -6,13 +6,13 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="breadcrumbs-content">
-                        <h1 class="page-title">Product Grid</h1>
+                        <h1 class="page-title">{{ __('main.productgrid') }}</h1>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
                         <li><a href="{{ route('home') }}"><i class="lni lni-home"></i> Home</a></li>
-                        <li>Products</li>
+                        <li>{{ __('main.productgrid') }}</li>
 
                     </ul>
                 </div>
@@ -31,7 +31,7 @@
                             <div class="row align-items-center">
                                 <div class="col-lg-7 col-md-8 col-12">
                                     <div class="product-sorting">
-                                        <label for="sorting">Sort by:</label>
+                                        <label for="sorting">{{ __('main.sortby') }}:</label>
                                         <select class="form-control" id="sorting">
                                             <option>Selecione</option>
                                             <option>Low - High Price</option>
@@ -39,7 +39,8 @@
                                             <option>A - Z Order</option>
                                             <option>Z - A Order</option>
                                         </select>
-                                        <h3 class="total-show-product">Showing: <span>1 - 12 items</span></h3>
+                                        <h3 class="total-show-product">{{ __('main.showing') }}: <span>1 - 12 items</span>
+                                        </h3>
                                     </div>
                                 </div>
                                 <div class="col-lg-5 col-md-4 col-12">
@@ -59,24 +60,25 @@
                             </div>
                         </div>
                         <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
+                            <div class="tab-pane fade show active" id="nav-grid" role="tabpanel"
+                                aria-labelledby="nav-grid-tab">
                                 @include('template.partials.ajax.product-grid')
-                                
+
                             </div>
                             <div class="tab-pane fade" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
-                                @include('template.partials.ajax.product-list')                              
-                                
+                                @include('template.partials.ajax.product-list')
+
                             </div>
-                           
-                            
-                            
+
+
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-   
+
 
     <!-- ========================= scroll-top ========================= -->
     <a href="#" class="scroll-top">

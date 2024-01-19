@@ -8,7 +8,7 @@
                         <div class="d-flex ">
 
                             <div class="product-image">
-                                <img src="{{ $product->image }}" alt="Imagen Producto">
+                                <img src= "{{ request()->is('productGrid/*') ? '/' . $product->image  : $product->image }}" alt="Imagen Producto">
                                 @if ($product->is_new || ($product->ofert && $product->ofert->percent))
                                     <span class="new-tag">{{ $product->is_new == 1 ? 'New' : '' }}</span>
                                 @endif

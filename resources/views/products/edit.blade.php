@@ -36,12 +36,12 @@
                     <div class="row">
                         <div class="form-group col-4">
                             <label class="col-form-label">@lang('main.price')</label>
-                            <input type="text" name="price" required class="form-control validate-types" data-val-type="amount" value="{{$product->price}}">
+                            <input type="text" name="price"  class="form-control validate-types" data-val-type="amount" value="{{$product->price}}">
                         </div>
 
                         <div class="form-group col-4">
                             <label class="col-form-label">@lang('main.quantity')</label>
-                            <input type="text" name="quantity" required class="form-control validate-types" data-val-type="quantity" value="{{$product->quantity}}">
+                            <input type="text" name="quantity"  class="form-control validate-types" data-val-type="quantity" value="{{$product->quantity}}">
                         </div>
 
                         <div class="form-group col-4">
@@ -52,7 +52,7 @@
 
                     <div class="form-group">
                         <label class="col-form-label">@lang('main.product_description')</label>
-                        <textarea type="text" name="description" required class="form-control" >{{old('description',$product->description)}}</textarea>
+                        <textarea type="text" name="description"  class="form-control" >{{old('description',$product->description)}}</textarea>
                     </div>
 
                     <div class="form-group">

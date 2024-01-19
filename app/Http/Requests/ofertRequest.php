@@ -31,17 +31,5 @@ class OfertRequest extends FormRequest
             "percent" => "required|numeric|max:99",
         ];
     }
-    public function messages()
-{
-    return [
-        
-        /* 'nombre.required' => 'El campo Nombre es obligatorio.',
-        'nombre.max' => 'El campo Nombre no puede tener más de :max caracteres.',
-        'nombre.unique'=>' Ya existe una Nombre con ese nombre ',
-        'descuento.required' => 'El campo (porciento de descuento) es obligatorio.',
-        'descuento.numeric' => 'El campo (porciento de descuento) debe ser un numero.',
-        'descuento.max' => 'El campo (porciento de descuento) no puede tener más de :max caracteres.', */
-        
-    ];
-}
+   
 }

@@ -38,68 +38,130 @@ class HomeController extends Controller
         $commonInfo = $this->commonInfo();
         $abouts = aboutUs::get();
         $staffs = Staff::get();
-        return view('template.pages.about-us', compact('commonInfo','abouts',"staffs"));
+        return view('template.pages.about-us', compact('commonInfo', 'abouts', "staffs"));
     }
+
+
+
+
     public function productGrid(Request $request, $slug = null, $sub_slug = null)
-{
-   
-    $commonInfo = $this->commonInfo();
-    $sort = $request->input('sort');
-    $query = Product::with("Ofert");
-  
-   if ($sub_slug!= null) {
-        $category = Category::where('slug', $sub_slug)->first();
-        $query->where('sub_category_id', $category->id);
+    {
 
-    } elseif ($slug!= null) {
-        $category = Category::where('slug', $slug)->first();
-        $query->where('category_id', $category->id);
-    }
+        $commonInfo = $this->commonInfo();
+        $sort = $request->input('sort');
 
-    switch ($sort) {
-        case 'Low - High Price':
-            $query->orderBy('price');
-            break;
-        case 'High - Low Price':
-            $query->orderByDesc('price');
-            break;
-        case 'A - Z Order':
-            $query->orderBy('name');
-            break;
-        case 'Z - A Order':
-            $query->orderByDesc('name');
-            break;
-        default:
-            $query->orderBy('id', 'asc');
-    }
+        $filter = $request->input('filter');
+        $category = $request->input('category');
 
-    //dd($query->toSql());
-   $products = $query->paginate(12)->withQueryString();
-   
-   if($request->ajax()){
-        $arr=[ 
+
+        
+       
+       if ($filter!=null || $category!=null ||( $filter!=null &&  $category!=null) ) {
+
+        
+        $query = Product::query();
+        if ($category && $filter) {
+            $query->where(function ($query) use ($category, $filter) {
+                $query->where(function ($query) use ($category) {
+                    $query->where('category_id', $category)
+                          ->orWhere('sub_category_id', $category);
+                })
+                ->where("name", 'like', '%' . $filter . '%');
+            });
+        } else {
+            // Si solo una de las condiciones está presente
+            if ($category) {
+                $query->where(function ($query) use ($category) {
+                    $query->where('category_id', $category)
+                          ->orWhere('sub_category_id', $category);
+                });
+            }
+            if ($filter) {
+                $query->where("name", 'like', '%' . $filter . '%');
+            }
+        }
+
+        
+        switch ($sort) {
+            case 'Low - High Price':
+                $query->orderBy('price');
+                break;
+            case 'High - Low Price':
+                $query->orderByDesc('price');
+                break;
+            case 'A - Z Order':
+                $query->orderBy('name');
+                break;
+            case 'Z - A Order':
+                $query->orderByDesc('name');
+                break;
+            default:
+
+                $query->orderBy('id', 'asc');
+        }
+        $products = $query->paginate(12)->withQueryString();
+
+        $arr = [
             'grid' => view('template.partials.ajax.product-grid', compact('products'))->render(),
             'list' => view('template.partials.ajax.product-list', compact('products'))->render(),
-            ]; 
-    
+        ];
+
         return response()->json($arr);
-   }
 
-   if($request->category_id){
-        $arr = explode("-", $request->category_id);
-        if(count($arr)> 1)
-            $id = $arr[0];
-        else $id = $arr[0];
-        $category = Category::find($id);
-   }
-   else
-        $category = null;
-        $search = $request->search;
-    
+        } else {
 
-    return view('template.pages.product-grids', compact('commonInfo', 'products','category', 'search'));
-}
-       public function contactUs()
+
+
+            $query = Product::with("Ofert");
+
+            if ($sub_slug != null) {
+                $category = Category::where('slug', $sub_slug)->first();
+                $query->where('sub_category_id', $category->id);
+            } elseif ($slug != null) {
+                $category = Category::where('slug', $slug)->first();
+                $query->where('category_id', $category->id);
+            }
+
+            switch ($sort) {
+                case 'Low - High Price':
+                    $query->orderBy('price');
+                    break;
+                case 'High - Low Price':
+                    $query->orderByDesc('price');
+                    break;
+                case 'A - Z Order':
+                    $query->orderBy('name');
+                    break;
+                case 'Z - A Order':
+                    $query->orderByDesc('name');
+                    break;
+                default:
+                    $query->orderBy('id', 'asc');
+            }
+            $products = $query->paginate(12)->withQueryString();
+            if ($request->ajax()) {
+                $arr = [
+                    'grid' => view('template.partials.ajax.product-grid', compact('products'))->render(),
+                    'list' => view('template.partials.ajax.product-list', compact('products'))->render(),
+                ];
+                return response()->json($arr);
+            }
+            if ($request->category_id) {
+                $arr = explode("-", $request->category_id);
+                if (count($arr) > 1)
+                    $id = $arr[0];
+                else $id = $arr[0];
+                $category = Category::find($id);
+            } else
+                $category = null;
+
+            $search = $request->search;
+            return view('template.pages.product-grids', compact('commonInfo', 'products', 'category', 'search'));
+           
+        }
+    }
+
+    public function contactUs()
     {
         $commonInfo = $this->commonInfo();
         $contacts = Contact_information::get();
@@ -111,16 +173,16 @@ class HomeController extends Controller
 
         $commonInfo = $this->commonInfo();
         $product = Product::find($id);
-     
+
         $product->increment('views');
         return view('template.pages.product-details', compact('commonInfo', 'product'));
     }
 
-    
+
     private function commonInfo()
     {
         return [
-           
+
             'contacts' => Contact_information::First(),
             'products' => Product::where('act_carusel', true)->get(),
             'productosMasVistos' => Product::orderByDesc('views')->take(8)->get(),

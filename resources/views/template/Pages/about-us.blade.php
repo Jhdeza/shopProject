@@ -6,13 +6,13 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6 col-12">
                     <div class="breadcrumbs-content">
-                        <h1 class="page-title">About Us</h1>
+                        <h1 class="page-title">{{__('main.aboutus')}}</h1>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-12">
                     <ul class="breadcrumb-nav">
                         <li><a href="{{ route('home') }}"><i class="lni lni-home"></i> Home</a></li>
-                        <li>About Us</li>
+                        <li>{{__('main.aboutus')}}</li>
                     </ul>
                 </div>
             </div>
@@ -51,7 +51,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2 class="wow fadeInUp" data-wow-delay=".4s">Our Core Team</h2>
+                        <h2 class="wow fadeInUp" data-wow-delay=".4s">{{__('main.ourcoreteam')}}</h2>
                         @foreach($abouts as $about)
                         <p class="wow fadeInUp" data-wow-delay=".6s">{{$about->extracto_team}}</p>
                         @endforeach

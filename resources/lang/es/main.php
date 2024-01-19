@@ -98,6 +98,23 @@ return [
 
     "slug"=>"Slug",
   
+    //   *************** Traducciones front ******************
+    'follow_us_on'=>'Nuestras Redes Sociales',
+    'information'=>'Información',
+    'touch_with_us'=>'Contacto',
+    'phone'=>'Telefono',
+    'productgrid'=>'Productos',
+    'contactus'=>'Contactenos',
+    'aboutus'=>'Acerca de',
+    'address'=>'Dirección',
+    'callus'=>'LLamenos',
+    'mailat'=>'Email',
+    'submitmessage'=>'Enviar Mensaje',
+    'ourcoreteam'=>'Nuestro Equipo',
+    'sortby'=>'Ordenar Por',
+    'showing'=>'Mostrando',
+    'featuredcategories'=>'Categorias Destacadas',
+    'trendingproduct'=>'Productos en Tendencia',
     
-
+    
 ];

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class ContactRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,12 +21,17 @@ class CategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        $categoryId = $this->route('category');
+        
         return [
-            "name"=> 'required|string|max:255|unique:categories,name,' .$categoryId,
-            "parent_id" => 'required_with:is_sub',
-            'file' => 'image'            
+            "name_contact" =>'required|string|max:255',
+            'address_contacts'=>'required|max:255',
+            'email'=>'required|email',
+            'phone_contacts'=>['required','regex:/^(\+[0-9]{0,3}|\+[0-9]{1,3}\s)?([0-9]{8,9})$/'],
+            'description'=>' required|string',
+
         ];
     }
-   
+    
+
+
 }

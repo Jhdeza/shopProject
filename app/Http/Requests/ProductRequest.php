@@ -22,11 +22,9 @@ class ProductRequest extends FormRequest
      */
     public function rules(): array
     {
-        // $productid = $this->route('product');
+       
         return [
-            "name" => [
-                'required',
-                'max:255',
+            "name" => ['required','max:255',
                 // Rule::unique('oferts', 'name')->ignore($productid),
             ],
             "price" => "required|numeric|max:9999",
@@ -40,18 +38,7 @@ class ProductRequest extends FormRequest
 {
     return [
         
-        /*'name.required' => 'El campo Nombre es obligatorio.',
-        'name.max' => 'El campo Nombre no puede tener más de :max caracteres.',
-        'name.unique'=>' Ya existe una Nombre con ese nombre ',
-        'price.required' => 'El campo precio es obligatorio.',
-        'price.numeric' => 'El campo precio debe ser un numero.',
-        'price.max' => 'El campo precio no puede tener más de :max caracteres.',
-        'quantity.required'=> 'El campo cantidad es obligatorio.',
-        'quantity.integer'=> 'El campo cantidad debe ser un numero.',
-        'quantity_alert.required'=> 'El campo cantidad Alerta es obligatorio.',
-        'quantity_alert.integer'=> 'El campo cantidad Alerta debe ser un numero.',
-        'description.required'=> 'El campo descripción es obligatorio.',
-        'category_id.required'=> 'Seleccionar una categoria es obligatorio.',*/
+       
         
     ];
 }
