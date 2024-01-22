@@ -3434,7 +3434,7 @@ ol {
 }
 
 .single-product .product-info .price {
-  margin-top: 15px;
+  margin-top: 5px;
 }
 
 .single-product .product-info .price span {
@@ -3445,12 +3445,12 @@ ol {
 }
 
 .single-product .product-info .price .discount-price {
-  margin: 0;
+  margin-top: 5px;
   color: #aaaaaa;
   text-decoration: line-through;
   font-weight: normal;
   margin-left: 10px;
-  font-size: 14px;
+  font-size: 17px;
   display: inline-block;
 }
 

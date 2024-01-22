@@ -173,9 +173,13 @@ class HomeController extends Controller
 
         $commonInfo = $this->commonInfo();
         $product = Product::find($id);
-
+        
         $product->increment('views');
-        return view('template.pages.product-details', compact('commonInfo', 'product'));
+
+        $category = Category::with('subcategories')->where('parent_id', null)->get();
+
+
+        return view('template.pages.product-details', compact('commonInfo', 'product', "category"));
     }
 
 

@@ -50,19 +50,18 @@
                     <!-- Start Single Category -->
                     @foreach ($commonInfo['categories'] as $category)
                         <div class="single-category">
-                            <h3 class="heading"><a href="{{ route('Product-grids' ,['category' => $category->id]) }}">
+                            <h3 class="heading"><a   href="{{ route('Product-grids',['slug' => $category->slug]) }}" >
                                 {{ $category->name }} 
                               </a></h3>
                             <ul>
                                 @if ($category->subcategories->isNotEmpty())
                                 @foreach ($category->subcategories as $sub)
-                                    <li><a href="{{ route('Product-grids', ['category' => $sub->parent_id, 'subcategories' => $sub->id]) }}">
+                                    <li><a  href="{{ route('Product-grids',['slug' => $sub->parent->slug, 'sub_slug' => $sub->slug]) }}" >
                                         {{ $sub->name }}</a>
                                     </li>
                                     @endforeach
                                     @endif
-                                
-                            </ul>
+                                   </ul>
                             
                         </div>
                     @endforeach
@@ -104,7 +103,7 @@
                         <div class="product-info">
                             <span class="category">{{$prod->category->name}}</span>
                             <h4 class="title">
-                                <a href="product-grids.html">{{$prod->name}}</a>
+                                <a href="{{ route('product-details', $prod->id) }}">{{$prod->name}}</a>
                             </h4>
                            
                             <div class="price">

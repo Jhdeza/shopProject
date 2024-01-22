@@ -22,13 +22,7 @@
 </head>
 
 <body>
-    <!--[if lte IE 9]>
-      <p class="browserupgrade">
-        You are using an <strong>outdated</strong> browser. Please
-        <a href="https://browsehappy.com/">upgrade your browser</a> to improve
-        your experience and security.
-      </p>
-    <![endif]-->
+    
 
     <!-- Preloader -->
     <div class="preloader">
@@ -39,9 +33,7 @@
             </div>
         </div>
     </div>
-    {{-- @dd(Route::current()->getName(), Route::current()->hasParameter('slug')) --}}
-    {{-- @dd(Route::current()->hasParameter('slug')) 
-@dd(get_class_methods(Route::current())) --}}
+    
     @if (Route::current()->getName() == 'Product-grids' && !Route::current()->hasParameter('slug'))
         {
         @include('template.partials.navbargrid')
@@ -151,15 +143,15 @@
         $(document).ready(function() {
             $.input = $('#search');
             $.select = $('#category_id');
+            
 
             $('#searchbtn').on('click', function(e) {
                 e.preventDefault();
                 orderProduct();
             });
-            $('#search').on('input', function() {
-               
-            });
+            $('#search').on('input', function() {});
 
+           
             @if (request()->isMethod('post'))
                 $('#searchbtn').trigger('click');
             @endif
@@ -167,6 +159,8 @@
             $('#sorting').on('change', function() {
                 orderProduct();
             });
+
+
 
         });
 
@@ -223,6 +217,16 @@
 
                 },
 
+            });
+        });
+
+        $(document).ready(function() {
+
+            $('.thumbnail').click(function() {
+                var thumbnailUrl = $(this).data('image');
+                var mainImage = $('#gallery .main-img img');
+                $(this).attr('src', mainImage.attr('src')).data('image', mainImage.attr('src'));
+                mainImage.attr('src', thumbnailUrl);
             });
         });
     </script>

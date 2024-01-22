@@ -93,6 +93,7 @@ class ProductsController extends Controller
      */
     public function store(ProductRequest $request)
     {
+        
         try {
             DB::beginTransaction();
             $productData = $request->all();
@@ -121,12 +122,13 @@ class ProductsController extends Controller
                 }
                 $product->galery()->createMany($files);
             }
-            
+           
             $response = [
                 'success' => true,
                 'message' =>  __('main.product_created_successfully')
             ];
             DB::commit();
+            
 
         } catch (\Exception $e) {
             $response = [
@@ -137,7 +139,7 @@ class ProductsController extends Controller
 
         }
 
-            
+        
         return response()->json($response);
     }
 

@@ -23,7 +23,7 @@
 
                         <div id="cat-cont" class="form-group col-6">
                             <label class="col-form-label">{{ __('main.ofert') }}:</label>
-                            <select class="form-control select2" name="ofert">
+                            <select class="form-control select2" name="ofert_id">
                                 <option value="">@lang('main.Select')</option>
                                 @foreach ($oferts as $ofert)
                                     <option @selected(old('ofert_id') == $ofert->id) value="{{ $ofert->id }}">{{ $ofert->name }}</option>

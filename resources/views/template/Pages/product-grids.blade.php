@@ -39,7 +39,8 @@
                                             <option>A - Z Order</option>
                                             <option>Z - A Order</option>
                                         </select>
-                                        <h3 class="total-show-product">{{ __('main.showing') }}: <span>1 - 12 items</span>
+                                        <h3 class="total-show-product">{{ __('main.showing') }}: 
+                                        <span>{{$products->firstItem()}} - {{$products->lastItem()}} de {{$products->total()}} Productos</span>
                                         </h3>
                                     </div>
                                 </div>
@@ -78,6 +79,8 @@
             </div>
         </div>
     </section>
+
+    
 
 
     <!-- ========================= scroll-top ========================= -->
