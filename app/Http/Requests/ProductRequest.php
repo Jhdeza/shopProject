@@ -36,6 +36,7 @@ class ProductRequest extends FormRequest
             "quantity_alert"=> "required|integer",
             "description"=> "required",
             "category_id"=> "required",
+            'file' => 'getGalery'   
         ];
     }
     public function messages()

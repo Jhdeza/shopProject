@@ -40,7 +40,7 @@
                                             <option>Z - A Order</option>
                                         </select>
                                         <h3 class="total-show-product">{{ __('main.showing') }}: 
-                                        <span>{{$products->firstItem()}} - {{$products->lastItem()}} de {{$products->total()}} Productos</span>
+                                        <span id="pagination-info" >{{$products->firstItem()}} - {{$products->lastItem()}} de {{$products->total()}} Productos</span>
                                         </h3>
                                     </div>
                                 </div>

@@ -36,7 +36,7 @@
                                 target="_blank" rel="noopener noreferrer">
                                 <i class="lni lni-phone"></i>
                             </a>
-                            <h3>LLame Ahora:
+                            <h3>llame Ahora:
                                 <span>{{ $commonInfo['contacts']->phone_contacts }}</span>
                             </h3>
                         </div>
@@ -121,20 +121,22 @@
                     <div class="nav-social">
                         <h5 class="title">{{ __('main.follow_us_on') }}:</h5>
                         <ul>
-
-                            <li>
-                                <a href={{ $commonInfo['contacts']->social_facebook }}><i
-                                        class="lni lni-facebook-filled"></i></a>
-                            </li>
-
+                            @if ($commonInfo['contacts']->social_facebook)
+                                <li>
+                                    <a href={{ $commonInfo['contacts']->social_facebook }}><i
+                                            class="lni lni-facebook-filled"></i></a>
+                                </li>
+                            @endif
+                                @if ($commonInfo['contacts']->social_twitter)
                             <li>
                                 <a href={{ $commonInfo['contacts']->social_twitter }}><i
                                         class="lni lni-twitter-original"></i></a>
-                            </li>
+                            </li>@endif
+                            @if ($commonInfo['contacts']->social_instagram)
                             <li>
                                 <a href={{ $commonInfo['contacts']->social_instagram }}><i
                                         class="lni lni-instagram-original"></i></a>
-                            </li>
+                            </li>@endif
 
                         </ul>
                     </div>

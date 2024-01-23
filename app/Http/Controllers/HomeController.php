@@ -31,7 +31,8 @@ class HomeController extends Controller
     public function index()
     {
         $commonInfo = $this->commonInfo();
-        return view('template.pages.home', compact('commonInfo'));
+        $cat = Category::get();
+        return view('template.pages.home', compact('commonInfo','cat'));
     }
     public function about()
     {
@@ -104,6 +105,7 @@ class HomeController extends Controller
         $arr = [
             'grid' => view('template.partials.ajax.product-grid', compact('products'))->render(),
             'list' => view('template.partials.ajax.product-list', compact('products'))->render(),
+            'pagination_info' => $products->firstItem() . ' - ' . $products->lastItem() . ' de ' . $products->total() . ' Productos',
         ];
 
         return response()->json($arr);
@@ -143,6 +145,7 @@ class HomeController extends Controller
                 $arr = [
                     'grid' => view('template.partials.ajax.product-grid', compact('products'))->render(),
                     'list' => view('template.partials.ajax.product-list', compact('products'))->render(),
+                    'pagination_info' =>$products->firstItem() . ' - ' . $products->lastItem() . ' de ' . $products->total() . ' Productos',
                 ];
                 return response()->json($arr);
             }
@@ -156,7 +159,10 @@ class HomeController extends Controller
                 $category = null;
 
             $search = $request->search;
+           
+
             return view('template.pages.product-grids', compact('commonInfo', 'products', 'category', 'search'));
+           
            
         }
     }

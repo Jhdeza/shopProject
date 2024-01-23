@@ -191,6 +191,8 @@
                 success: function(response) {
                     $('#nav-grid').html(response.grid);
                     $('#nav-list').html(response.list);
+                    $('#pagination-info').html(response.pagination_info);
+                   
                 },
             });
         }
@@ -214,6 +216,7 @@
                     $('#nav-grid').html(response.grid);
                     $('#nav-list').html(response.list);
                     $('#pagination').html(response.links);
+                    $('#pagination-info').html(response.pagination_info);
 
                 },
 

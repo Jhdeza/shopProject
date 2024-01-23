@@ -28,10 +28,10 @@
                     <div class="price">
 
                         @if ($product->ofert)
-                            <span>${{ $product->price - $product->price * ($product->ofert->percent / 100) }}</span>
-                            <span class="discount-price">${{ $product->price }}</span>
+                            <span>${{ number_format($product->price - ($product->price * ($product->ofert->percent / 100)), 2, '.', '') }}</span>
+                            <span class="discount-price">${{ number_format($product->price, 2, '.', '') }}</span>
                         @else
-                            <span class="price">${{ $product->price }}</span>
+                            <span class="price">${{ number_format($product->price, 2, '.', '') }}</span>
                         @endif
                     </div>
                     <div class="price">
@@ -59,7 +59,6 @@
         <!--/ End Pagination -->
     </div>
 </div>
-
 
 
 

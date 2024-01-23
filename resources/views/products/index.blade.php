@@ -55,7 +55,11 @@
                 { data: 'buttons', name: 'buttons', orderable: false, searchable: false },
                 { data: 'image', name: 'image', orderable: false, searchable: false },
                 { data: 'name', name: 'name' },
-                { data: 'price', name: 'price' },
+                { data: 'price', 
+                  name: 'price',
+                  render: function(data, type, row) {
+                    return parseFloat(data).toFixed(2);
+                }},
                 { data: 'quantity', name: 'quantity' },
                 { data: 'quantity_alert', name: 'quantity_alert' },
                 { data: 'category', name: 'category' },

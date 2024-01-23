@@ -32,11 +32,12 @@
                 <div class="col-lg-4 col-md-2 col-5">
                     <div class="middle-right-area">
                         <div class="nav-hotline">
-                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $commonInfo['contacts']->phone_contacts) }}"
+                            <a href="tel:{{ $commonInfo['contacts']->phone_contacts }}"
                                 target="_blank" rel="noopener noreferrer">
                                 <i class="lni lni-phone"></i>
                             </a>
-                            <h3>LLame Ahora:
+                            
+                            <h3>llame Ahora:
                                 <span>{{ $commonInfo['contacts']->phone_contacts }}</span>
                             </h3>
                         </div>

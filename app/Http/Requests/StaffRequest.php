@@ -25,7 +25,7 @@ class StaffRequest extends FormRequest
             
             "name" => 'required|string|max:255',
             "position" => "required|string|max:255",
-            
+            'file' => 'image'  
         ];
         
     }

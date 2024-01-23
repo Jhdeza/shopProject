@@ -69,28 +69,20 @@
                         <div class="content">
                             <div class="info">
                                 <h3>{{$staff->name}}</h3>
-                                <h5>{{$staff->position}}</h5>
+                                <h5>{{$staff->position}}</h5>                               
                                 <ul class="social">
-                                    <li><a href={{ $staff->facebook }}><i class="lni lni-facebook-filled"></i></a>
-                                    </li>
-                                    <li><a href={{ $staff->Twitter }}><i class="lni lni-twitter-original"></i></a>
-                                    </li>
-                                    <li><a href={{ $staff->Instagram }}><i class="lni lni-instagram-original"></i></a>
-                                    </li>
-                                </ul>
+                                    <li><a href={{ $staff->facebook }}><i class="lni lni-facebook-filled"></i></a></li>                                    
+                                    <li><a href={{ $staff->Twitter }}><i class="lni lni-twitter-original"></i></a></li>
+                                    <li><a href={{ $staff->Instagram }}><i class="lni lni-instagram-original"></i></a></li>
+                                </ul>                              
                             </div>
                         </div>
-                    </div>
-                    
+                    </div>                
                 </div>
-                @endforeach
-                
-                    
+                @endforeach               
                 </div>
             </div>
-        
     </section>
-    <!-- End Team Area -->
 
    
 

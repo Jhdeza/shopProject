@@ -50,12 +50,20 @@
                                 <!-- End Single Info -->
                                 <!-- Start Single Info -->
                                 <div class="single-info">
-                                    <i class="lni lni-phone"></i>
-                                    <h3>{{__('main.callus')}}</h3>
-                                    <ul>
-                                        <li><a href="#">{{$contact->phone_contacts}}</a></li>
-                                        
-                                    </ul>
+                                    <div class="d-flex mb-3">
+                                        <a href="tel:{{$commonInfo['contacts']->phone_contacts }}"> <i class="lni lni-phone"></i></a>
+                                            <ul style="margin-left: 10px; margin-top: 5px" >
+                                            <li >
+                                                {{$contact->phone_contacts}}
+                                            </li>                                           
+                                        </ul>
+                                    </div>
+                                    <div class="d-flex ">
+                                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $commonInfo['contacts']->phone_contacts) }}"> <i class="lni lni-whatsapp"></i> </a>
+                                            <ul style="margin-left: 10px; margin-top: 5px">
+                                            <li     >{{$contact->phone_contacts}}</li>                                           
+                                        </ul>
+                                    </div>
                                 </div>
                                 <!-- End Single Info -->
                                 <!-- Start Single Info -->
@@ -63,7 +71,7 @@
                                     <i class="lni lni-envelope"></i>
                                     <h3>{{__('main.mailat')}}</h3>
                                     <ul>
-                                        <li><a href="{{$contact->email}}">{{$contact->email}}</a>
+                                        <li><a href="mailto:{{$contact->email}}">{{$contact->email}}</a>
                                         </li>
                                         
                                     </ul>
