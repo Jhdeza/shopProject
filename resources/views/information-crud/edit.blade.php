@@ -7,7 +7,7 @@
 @section('content')
     <div class="container">
         <div class="row mt-5 ">
-            <div class="col-6">
+            <div class="col-lg-6 col-12">
                 <div class="card card-dark ">
                     <div class= "card-header">
                         <h3>@lang('main.contact_information')</h3>

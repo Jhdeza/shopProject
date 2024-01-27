@@ -4,7 +4,7 @@
             @csrf
             @method("PUT")
             <div class="modal-header">
-                <h4 class="modal-title">@lang('main.edit_product')</h4>
+                <h4 class="modal-title">@lang('main.edit_ofert')</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -34,13 +34,13 @@
                         </div>
                     </div>
                     <div class="form-group mt-5">
-                        <input  class="mt-5" type="checkbox" name="active" id="check" checked
+                        <input  class="mt-5" type="checkbox" name="active" id="check" {{$ofert->active ? 'checked': ""}}
                             data-bootstrap-switch>
                     </div>
                 </div>
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">@lang('main.close')</button>
                 <button class="btn btn-outline-success">@lang('main.save')</button>
             </div>
         </form>

@@ -74,14 +74,14 @@ class ClientInformationController extends Controller
 
         $client = new Client_information();
         $client->name = $request->input('name');
-        $client->email_address = $request->input('email');
-        $client->client_phone = $request->input('phone');
+        $client->email_address = $request->input('email_address');
+        $client->client_phone = $request->input('client_phone');
         $client->message = $request->input('message');
         $client->save();
         return redirect()->route('contact-us');
     }
 
-    public function update(ClientRequest $request, $id)
+    public function update($id)
     {
 
         $client = Client_information::find($id);

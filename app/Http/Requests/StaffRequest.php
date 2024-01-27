@@ -29,4 +29,12 @@ class StaffRequest extends FormRequest
         ];
         
     }
+    public function attributes(): array
+    {
+        return [
+            'name'=>'nombre',
+            'position'=>'posicion',
+            
+        ];
+    }
 }

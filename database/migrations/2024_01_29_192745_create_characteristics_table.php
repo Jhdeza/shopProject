@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('client_contact_informations', function (Blueprint $table) {
-            $table->boolean('reading');
-
-            
+        Schema::create('characteristics', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique();
+            $table->engine = 'InnoDB';
         });
     }
 
@@ -23,10 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('client_contact_informations', function (Blueprint $table) {
-            $table->dropColumn('reading');
-
-            
-        });
+        Schema::dropIfExists('characteristics');
     }
 };

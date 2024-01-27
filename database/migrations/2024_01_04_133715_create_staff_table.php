@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('staff', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->string("cargo");
-            $table->string("facebook");
-            $table->string("Twitter");
-            $table->string("Instagram");
+            $table->string("position");
+            $table->string("facebook")->nullable();
+            $table->string("Twitter")->nullable();
+            $table->string("Instagram")->nullable();
 
         });
     }

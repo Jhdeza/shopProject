@@ -25,7 +25,7 @@ class ProductRequest extends FormRequest
        
         return [
             "name" => ['required','max:255',
-                // Rule::unique('oferts', 'name')->ignore($productid),
+                
             ],
             "price" => [
                 'required',
@@ -39,12 +39,15 @@ class ProductRequest extends FormRequest
             'file' => 'getGalery'   
         ];
     }
-    public function messages()
-{
-    return [
-        
-       
-        
-    ];
-}
+    public function attributes(): array
+    {
+        return [
+            'name'=>'nombre',
+            'price'=>'precio',
+            'quantity' => 'cantidad',
+            'quantity_alert' => 'alerta de cantidad ',
+            'description' => 'descripción',
+            'category_id' => 'categoria',
+        ];
+    }
 }

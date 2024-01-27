@@ -27,4 +27,12 @@ class UserRequest extends FormRequest
             "password"=> "required",
         ];
     }
+    public function attributes(): array
+    {
+        return [
+            'name'=>'nombre',
+            'password'=>'contraseña',
+            
+        ];
+    }
 }

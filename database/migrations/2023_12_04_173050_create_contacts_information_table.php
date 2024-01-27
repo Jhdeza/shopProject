@@ -17,8 +17,10 @@ return new class extends Migration
             $table->string('phone_contacts',45);
             $table->string('email',45);
             $table->string('address_contacts',45);
-            $table->string('logo')->nullable();
             $table->string('description');
+            $table->string('social_facebook')->nullable();
+            $table->string('social_instagram')->nullable();
+            $table->string('social_twitter')->nullable();
             $table->engine = 'InnoDB';
         });
     }

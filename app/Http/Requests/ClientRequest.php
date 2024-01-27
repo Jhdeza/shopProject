@@ -22,7 +22,20 @@ class ClientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "name" => ['required','max:255',],
+            'email_address'=>"required|email",
+            'client_phone'=>['required','regex:/^(\+[0-9]{0,3}|\+[0-9]{1,3}\s)?([0-9]{8,9})$/'],
+            'message'=>'required|string',
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'name'=>'nombre',
+            'email_address' => 'email',
+            'client_phone' => 'telefono',
+            'message' => 'mensaje',
         ];
     }
 }

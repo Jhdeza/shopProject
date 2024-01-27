@@ -45,8 +45,10 @@
                     </div>
                 </div>
             </div>
+           
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">@lang('main.close')</button>
+               
                 <button class="btn btn-outline-success">@lang('main.insert')</button>
             </div>
         </form>

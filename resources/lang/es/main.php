@@ -22,7 +22,7 @@ return [
     "date_range" => "Rango de fechas",
     "ofert_list" => "Listado de Ofertas",
     "active" => "Activo",
-    "inactive" => "Inactive",
+    "inactive" => "Inactivo",
     "state" => "Estado",
     "date_begin" => "Fecha de Inicio",
     "date_end" => "Fecha de Fin",
@@ -97,6 +97,7 @@ return [
     "staff_updated_successfully"=>"Integrante Actualizado",
 
     "slug"=>"Slug",
+    "Allcategories"=>"Categorias",
   
     //   *************** Traducciones front ******************
     'follow_us_on'=>'Nuestras Redes Sociales',
@@ -107,14 +108,36 @@ return [
     'contactus'=>'Contactenos',
     'aboutus'=>'Sobre Nosotros',
     'address'=>'Dirección',
-    'callus'=>'WhatsApp',
+    'callus'=>'Contactanos',
     'mailat'=>'Envíenos un Mensaje',
     'submitmessage'=>'Enviar Mensaje',
     'ourcoreteam'=>'Nuestro Equipo',
     'sortby'=>'Ordenar Por',
     'showing'=>'Mostrando',
     'featuredcategories'=>'Categorias Destacadas',
-    'trendingproduct'=>'Productos en Tendencia',
+    'trendingproduct'=>'Productos mas Populares',
+
+
+    'pagenotfound'=>'Oops! Pagina no Encontrada',
+    'pageextract'=>'La página que buscas no existe. Es posible que se haya movido o eliminado.',
+    '404buttom'=>'Volver a Home',
+    '404page'=>'404 Pagina no Encontrada',
+
+
+    'details'=>'Detalles',
+    'MondayFriday'=>'Lunes-Viernes:',
+    'Saturday'=>'Sabado:',
+    'horaLV'=>'9.00 am - 8.00 pm',
+    'horaS'=>'10.00 am - 6.00 pm',
     
     
+    'no_products'=>'No hay productos que coincidan con los filtros proporcionados.',
+    
+    'no_products_available'=>'No se encontraron Productos',
+    'email'=>'Email',
+
+
+
+
+
 ];

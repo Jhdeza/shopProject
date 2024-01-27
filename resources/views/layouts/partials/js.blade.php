@@ -79,8 +79,8 @@
                 let data = $(this).data()
                 $(this).bootstrapSwitch({
                     'state': selected,
-                    "onText": data.on ?? 'Active',
-                    "offText": data.off ?? 'Inactive',
+                    "onText": data.on ?? 'Activo',
+                    "offText": data.off ?? 'Inactivo',
                 });
             })
 

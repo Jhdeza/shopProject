@@ -1,6 +1,6 @@
 @extends('template.template')
 @section('content')
-    <!-- Start Breadcrumbs -->
+    
     <div class="breadcrumbs">
         <div class="container">
             <div class="row align-items-center">
@@ -18,21 +18,15 @@
             </div>
         </div>
     </div>
-    <!-- End Breadcrumbs -->
-
-    <!-- Start About Area -->
     <section class="about-us section">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-12 col-12">
                     <div class="content-left">
-                        <img src="assets/images/about/about-img.jpg" alt="#">
-                        {{-- <a href="https://www.youtube.com/watch?v=r44RKWyfcFw&fbclid=IwAR21beSJORalzmzokxDRcGfkZA1AtRTE__l5N4r09HcGS5Y6vOluyouM9EM"
-                            class="glightbox video"><i class="lni lni-play"></i></a> --}}
+                        <img src="{{asset('template/assets/images/img/proyecto.jpg')}}" alt="foto_front_chapintec">
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-12">
-                    <!-- content-1 start -->
                     <div class="content-right">
                         @foreach($abouts as $about)
                         <h2>{{$about->titulo}}</h2>
@@ -43,9 +37,6 @@
             </div>
         </div>
     </section>
-    <!-- End About Area -->
-
-    <!-- Start Team Area -->
     <section class="team section">
         <div class="container">
             <div class="row">
@@ -64,7 +55,11 @@
                     <!-- Start Single Team -->
                     <div class="single-team">
                         <div class="image">
+                            @if($staff->image)
                             <img src="{{$staff->image->url}}" alt="#">
+                            @else
+                            <img src="template/assets/images/img/usuario_general.jpg" alt="#">
+                            @endif
                         </div>
                         <div class="content">
                             <div class="info">
@@ -83,9 +78,6 @@
                 </div>
             </div>
     </section>
-
-   
-
     <!-- ========================= scroll-top ========================= -->
     <a href="#" class="scroll-top">
         <i class="lni lni-chevron-up"></i>

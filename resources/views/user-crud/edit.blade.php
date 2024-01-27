@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.middle')
 
 @section('content_header')
 
@@ -25,13 +25,23 @@
                                     <input class="form-control " type="text" value="{{ $user->email }}" name="email"
                                         placeholder="Email...">
                                 </div>
+                                @error('email')
+                                    <span style="display: block" class="error invalid-feedback ">
+                                        {{$message}}
+                                    </span>
+                                    @enderror
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Name</label>
                                 <div class="col-sm-9">
                                     <input class="form-control" type="text" value="{{ $user->name }}" name="name"
-                                        placeholder="Name...">
+                                        placeholder="Nombre...">
                                 </div>
+                                @error('name')
+                                    <span style="display: block" class="error invalid-feedback ">
+                                        {{$message}}
+                                    </span>
+                                    @enderror
                             </div>
                         </div>
                         <div class="card-footer">

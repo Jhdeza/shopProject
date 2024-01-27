@@ -31,5 +31,14 @@ class OfertRequest extends FormRequest
             "percent" => "required|numeric|max:99",
         ];
     }
-   
+    public function attributes(): array
+    {
+        return [
+            'name'=>'nombre',
+            'percent'=>'porciento',
+            
+        ];
+    }
+
+    
 }

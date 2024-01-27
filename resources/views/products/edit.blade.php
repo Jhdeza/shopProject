@@ -17,12 +17,12 @@
                     </div>
 
                     <div class="row selects">
-                        <div id="cat-cont" class="form-group col-6">
+                        <div id="cat-cont" class="form-group col-lg-6 col-md-12 col-12">
                             <label class="col-form-label">{{ __('main.category') }}:</label>
                             {!! \App\models\Category::selectHtmlTreeMode($product) !!}
                         </div>
 
-                        <div id="cat-cont" class="form-group col-6">
+                        <div id="cat-cont" class="form-group col-lg-6 col-md-12 col-12">
                             <label class="col-form-label">{{ __('main.oferts') }}:</label>
                             <select class="form-control select2" name="ofert_id">
                                 <option value="">@lang('main.Select') </option>
@@ -34,17 +34,17 @@
                     </div>
 
                     <div class="row">
-                        <div class="form-group col-4">
+                        <div class="form-group col-lg-4 col-md-12 col-12">
                             <label class="col-form-label">@lang('main.price')</label>
                             <input type="text" name="price"  class="form-control validate-types" data-val-type="amount" value="{{$product->price}}">
                         </div>
 
-                        <div class="form-group col-4">
+                        <div class="form-group col-lg-4 col-md-12 col-12">
                             <label class="col-form-label">@lang('main.quantity')</label>
                             <input type="text" name="quantity"  class="form-control validate-types" data-val-type="quantity" value="{{$product->quantity}}">
                         </div>
 
-                        <div class="form-group col-4">
+                        <div class="form-group col-lg-4 col-md-12 col-12">
                             <label class="col-form-label">@lang('main.quantity_alert')</label>
                             <input type="text" name="quantity_alert" class="form-control validate-types" data-val-type="quantity_alert" value="{{$product->quantity_alert}}">
                         </div>

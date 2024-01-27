@@ -7,7 +7,7 @@
 @section('content')
     <div class="container">
         <div class="row mt-5 ">
-            <div class="col-6">
+            <div class="col-lg-6 col-12">
                 <div class="card card-dark ">
                     <div class= "card-header">
                         <h3>@lang('main.about_us')</h3>
@@ -17,10 +17,10 @@
                         @method('PUT')
 
                         <div class="card-body">
-                            <label class=" col-form-label">Titulo:</label>
+                            <label class=" col-form-label ">Titulo:</label>
                             <div class="form-group row">
 
-                                <input class="form-control " name="titulo" type="text" placeholder="Titulo"
+                                <input class="form-control col-xs-12 " name="titulo" type="text" placeholder="Titulo"
                                     value="{{ $about->titulo }}">
 
                             </div>
@@ -28,13 +28,13 @@
                             <label class=" col-form-label">Extrato:</label>
                             <div class="form-group message row">
 
-                                <textarea class="form-control" rows="5" name="extracto" placeholder="Descripcion empresa">{{ $about->extracto }}</textarea>
+                                <textarea class="form-control col-xs-12" rows="5" name="extracto" placeholder="Descripcion empresa">{{ $about->extracto }}</textarea>
 
                             </div>
                             <label class=" col-form-label">Extrato Equipo:</label>
                             <div class="form-group message row">
 
-                                <textarea class="form-control" rows="5" name="extracto_team" placeholder="Descripcion Equipo">{{ $about->extracto_team }}</textarea>
+                                <textarea class="form-control col-xs-12" rows="5" name="extracto_team" placeholder="Descripcion Equipo">{{ $about->extracto_team }}</textarea>
 
                             </div>
 

@@ -28,5 +28,12 @@ class CategoryRequest extends FormRequest
             'file' => 'image'            
         ];
     }
-   
+    public function attributes(): array
+    {
+        return [
+            'name'=>'nombre',
+            'parent_id' => 'categoria',
+            
+        ];
+    }
 }

@@ -111,6 +111,7 @@ class OfertController extends Controller
         $date_in=  Carbon::parse($ofert->date_ini)->format('d/m/Y');
         $date_end=  Carbon::parse($ofert->date_end)->format('d/m/Y');
         $ofert->range = $date_in." - ".$date_end;
+        
             
         return view("oferts.edit", compact("ofert"));
     }

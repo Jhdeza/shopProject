@@ -32,12 +32,12 @@
                 <div class="col-lg-4 col-md-2 col-5">
                     <div class="middle-right-area">
                         <div class="nav-hotline">
-                            <a href="tel:{{ $commonInfo['contacts']->phone_contacts }}"
-                                target="_blank" rel="noopener noreferrer">
+                            <a href="tel:{{ $commonInfo['contacts']->phone_contacts }}" target="_blank"
+                                rel="noopener noreferrer">
                                 <i class="lni lni-phone"></i>
                             </a>
-                            
-                            <h3>llame Ahora:
+
+                            <h3>LLame Ahora:
                                 <span>{{ $commonInfo['contacts']->phone_contacts }}</span>
                             </h3>
                         </div>
@@ -49,11 +49,11 @@
 
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-8 col-md-6 col-12">
+            <div class="col-lg-7 col-md-6 col-12">
                 <div class="nav-inner">
 
                     <div class="mega-category-menu">
-                        <span class="cat-button"><i class="lni lni-menu"></i>All Categories</span>
+                        <span class="cat-button"><i class="lni lni-menu"></i>{{ __('main.Allcategories') }}</span>
                         <ul class="sub-category">
                             @foreach ($commonInfo['categories'] as $category)
                                 <li><a
@@ -115,7 +115,7 @@
 
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 col-12">
+            <div class="col-lg-5 col-md-6 col-12">
                 @if (
                     $commonInfo['contacts']->social_facebook ||
                         $commonInfo['contacts']->social_twitter ||

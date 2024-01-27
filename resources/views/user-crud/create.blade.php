@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.middle')
 
 @section('content_header')
 
@@ -31,7 +31,7 @@
                             <div class="form-group row mb-0">
                                 <label class="col-sm-3 col-form-label pr-0">Name:</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="name" placeholder="Name...">
+                                    <input type="text" class="form-control" name="name" placeholder="Nombre...">
                                     @error('name')
                                     <span style="display: block" class="error invalid-feedback ">
                                         {{$message}}

@@ -8,6 +8,10 @@ use App\Models\Contact_information;
 use App\Models\Product;
 use App\Models\Staff;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Route;
+
+
 
 
 
@@ -18,10 +22,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+   
 
     /**
      * Show the application dashboard.
@@ -32,7 +33,7 @@ class HomeController extends Controller
     {
         $commonInfo = $this->commonInfo();
         $cat = Category::get();
-        return view('template.pages.home', compact('commonInfo','cat'));
+        return view('template.pages.home', compact('commonInfo', 'cat'));
     }
     public function about()
     {
@@ -53,66 +54,80 @@ class HomeController extends Controller
 
         $filter = $request->input('filter');
         $category = $request->input('category');
-
-
         
-       
-       if ($filter!=null || $category!=null ||( $filter!=null &&  $category!=null) ) {
 
-        
-        $query = Product::query();
-        if ($category && $filter) {
-            $query->where(function ($query) use ($category, $filter) {
-                $query->where(function ($query) use ($category) {
-                    $query->where('category_id', $category)
-                          ->orWhere('sub_category_id', $category);
-                })
-                ->where("name", 'like', '%' . $filter . '%');
-            });
-        } else {
-            // Si solo una de las condiciones está presente
-            if ($category) {
-                $query->where(function ($query) use ($category) {
-                    $query->where('category_id', $category)
-                          ->orWhere('sub_category_id', $category);
+
+
+        if ($filter != null || $category != null || ($filter != null &&  $category != null)) {
+
+
+            $query = Product::query();
+            if ($category && $filter) {
+                $query->where(function ($query) use ($category, $filter) {
+                    $query->where(function ($query) use ($category) {
+                        $query->where('category_id', $category)
+                            ->orWhere('sub_category_id', $category);
+                    })
+                        ->where("name", 'like', '%' . $filter . '%');
                 });
+            } else {
+                
+                if ($category) {
+                    $query->where(function ($query) use ($category) {
+                        $query->where('category_id', $category)
+                            ->orWhere('sub_category_id', $category);
+                    });
+                }
+                if ($filter) {
+                    $query->where("name", 'like', '%' . $filter . '%');
+                }
             }
-            if ($filter) {
-                $query->where("name", 'like', '%' . $filter . '%');
+
+
+            switch ($sort) {
+                case 'Low - High Price':
+                    $query->orderBy('price');
+                    break;
+                case 'High - Low Price':
+                    $query->orderByDesc('price');
+                    break;
+                case 'A - Z Order':
+                    $query->orderBy('name');
+                    break;
+                case 'Z - A Order':
+                    $query->orderByDesc('name');
+                    break;
+                default:
+
+                    $query->orderBy('id', 'asc');
             }
-        }
+            $products = $query->paginate(12)->withQueryString();
+           
+            // $quantity = $products->items();
+            // if(count($products->items()) == 0){
+            //     $arr=[
 
-        
-        switch ($sort) {
-            case 'Low - High Price':
-                $query->orderBy('price');
-                break;
-            case 'High - Low Price':
-                $query->orderByDesc('price');
-                break;
-            case 'A - Z Order':
-                $query->orderBy('name');
-                break;
-            case 'Z - A Order':
-                $query->orderByDesc('name');
-                break;
-            default:
+            //         'grid' => view('template.partials.notfound')->render(),
+            //         'list' => view('template.partials.notfound')->render(),
+            //         'pagination_info' => $products->firstItem() . ' - ' . $products->lastItem() . ' de ' . $products->total() . ' Productos',
+            //     ];
+                // return view('template.partials.notfound');
+                
+            // }
+            // else{ 
+               
+                $arr = [
+                    'grid' => view('template.partials.ajax.product-grid', compact('products'))->render(),
+                    'list' => view('template.partials.ajax.product-list', compact('products'))->render(),
+                    'pagination_info' => $products->firstItem() . ' - ' . $products->lastItem() . ' de ' . $products->total() . ' Productos',
+                ];
+                
+            // }
+                
+                return response()->json($arr);
 
-                $query->orderBy('id', 'asc');
-        }
-        $products = $query->paginate(12)->withQueryString();
-
-        $arr = [
-            'grid' => view('template.partials.ajax.product-grid', compact('products'))->render(),
-            'list' => view('template.partials.ajax.product-list', compact('products'))->render(),
-            'pagination_info' => $products->firstItem() . ' - ' . $products->lastItem() . ' de ' . $products->total() . ' Productos',
-        ];
-
-        return response()->json($arr);
 
         } else {
-
-
 
             $query = Product::with("Ofert");
 
@@ -141,14 +156,9 @@ class HomeController extends Controller
                     $query->orderBy('id', 'asc');
             }
             $products = $query->paginate(12)->withQueryString();
-            if ($request->ajax()) {
-                $arr = [
-                    'grid' => view('template.partials.ajax.product-grid', compact('products'))->render(),
-                    'list' => view('template.partials.ajax.product-list', compact('products'))->render(),
-                    'pagination_info' =>$products->firstItem() . ' - ' . $products->lastItem() . ' de ' . $products->total() . ' Productos',
-                ];
-                return response()->json($arr);
-            }
+            
+            $quantity = $products->count();
+            
             if ($request->category_id) {
                 $arr = explode("-", $request->category_id);
                 if (count($arr) > 1)
@@ -160,10 +170,25 @@ class HomeController extends Controller
 
             $search = $request->search;
            
+            if ($request->ajax()) {
+                $arr = [
+                    'grid' => view('template.partials.ajax.product-grid', compact('products'))->render(),
+                    'list' => view('template.partials.ajax.product-list', compact('products'))->render(),
+                    'pagination_info' => $products->firstItem() . ' - ' . $products->lastItem() . ' de ' . $products->total() . ' Productos',
+                ];
+                
+                return response()->json($arr);
+            }else{
+                
+                return view('template.pages.product-grids', compact('commonInfo',
+                                                                    'products', 
+                                                                    'category', 
+                                                                    'search',
+                                                                    'quantity'));
+            }
 
-            return view('template.pages.product-grids', compact('commonInfo', 'products', 'category', 'search'));
-           
-           
+
+
         }
     }
 
@@ -179,7 +204,7 @@ class HomeController extends Controller
 
         $commonInfo = $this->commonInfo();
         $product = Product::find($id);
-        
+
         $product->increment('views');
 
         $category = Category::with('subcategories')->where('parent_id', null)->get();
@@ -187,6 +212,19 @@ class HomeController extends Controller
 
         return view('template.pages.product-details', compact('commonInfo', 'product', "category"));
     }
+
+    public function Error()
+    {
+        $commonInfo = $this->commonInfo();
+        $cat = Category::get();
+        $parameters = Route::current()->parameters();
+        if (isset($parameters["fallbackPlaceholder"]) && Str::is('admin/*', $parameters["fallbackPlaceholder"])) {
+            return view('admin.404');
+        } else {
+            return view('template.pages.404', compact('commonInfo', 'cat'));
+        }
+    }
+
 
 
     private function commonInfo()

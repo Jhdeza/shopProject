@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('oferts', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->integer('percet');
+            $table->integer('percent');
             $table->timestamp('date_ini');
             $table->timestamp('date_end');
             $table->boolean('active');

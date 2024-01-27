@@ -10,7 +10,7 @@ class Staff extends Model
     use HasFactory;
 
     public $timestamps = false;
-    const urlImageEmpty = 'path/to/empty/image.jpg';
+    const urlImageEmpty = 'template/assets/images/img/usuario_general.jpg';
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
