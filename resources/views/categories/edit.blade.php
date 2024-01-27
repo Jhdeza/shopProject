@@ -1,10 +1,4 @@
-{{-- @extends('adminlte::page')
 
-@section('content_header')
-
-@stop
-
-@section('content')
     <div class="container">
         <div class="row mt-5 ">
             <div class="col-6">

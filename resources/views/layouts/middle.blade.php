@@ -2,6 +2,7 @@
 
 @push('css')
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('icon.png') }}">
     {{-- <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap-switch@3.4.0/dist/css/bootstrap3/bootstrap-switch.min.css" /> --}}
 @endpush
 
@@ -28,7 +29,7 @@
     This is a purple theme modal without animations.
     </x-adminlte-modal>
 
-    <x-adminlte-button label="Open Modal" data-toggle="modal" data-target="#modalPurple" class="bg-purple"/>
+    {{-- <x-adminlte-button label="Open Modal" data-toggle="modal" data-target="#modalPurple" class="bg-purple"/> --}}
 
 @stop
 

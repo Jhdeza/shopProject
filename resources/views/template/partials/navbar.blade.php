@@ -4,7 +4,8 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 col-md-3 col-7">
                     <a class="navbar-brand" href="{{ route('home') }}">
-                        <img src={{ request()->is('productGrid/*') || request()->is('productDetails/*')  ? '/' . $commonInfo['contacts']->image->url : $commonInfo['contacts']->image->url }}
+                        <img src={{ request()->is('productGrid/*') || request()->is('productDetails/*') 
+                         ? '/' . $commonInfo['contacts']->image->url : $commonInfo['contacts']->image->url }}
                             alt="Logo">
                     </a>
                 </div>
@@ -32,11 +33,11 @@
                 <div class="col-lg-4 col-md-2 col-5">
                     <div class="middle-right-area">
                         <div class="nav-hotline">
-                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $commonInfo['contacts']->phone_contacts) }}"
+                            <a href="tel:{{$commonInfo['contacts']->phone_contacts}}"
                                 target="_blank" rel="noopener noreferrer">
                                 <i class="lni lni-phone"></i>
                             </a>
-                            <h3>llame Ahora:
+                            <h3>LLame Ahora:
                                 <span>{{ $commonInfo['contacts']->phone_contacts }}</span>
                             </h3>
                         </div>
@@ -88,7 +89,7 @@
                         <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                             <ul id="nav" class="navbar-nav ms-auto">
                                 <li class="nav-item  ">
-                                    <a href="{{ route('home') }}" class="{{ request()->is('home') ? 'active' : '' }}"
+                                    <a href="{{ route('home') }}" class="{{ request()->is('/') ? 'active' : '' }}"
                                         aria-label="Toggle navigation">Home</a>
                                 </li>
                                 <li class="nav-item">

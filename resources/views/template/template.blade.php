@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Shop Parts</title>
+    <title>Chapintec | Tu Auto Nuestro Compromiso</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
-
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('template/assets/images/icon.png')}}" />
+    
     <!-- ========================= CSS here ========================= -->
     <link rel="stylesheet" href="{{ asset('template/assets/css/bootstrap.min.css') }} " />
     <link rel="stylesheet" href="{{ asset('template/assets/css/LineIcons.3.0.css') }} " />
@@ -34,7 +34,7 @@
         </div>
     </div>
     
-    @if (Route::current()->getName() == 'Product-grids' && !Route::current()->hasParameter('slug'))
+    @if (Route::current() && Route::current()->getName() == 'Product-grids' && !Route::current()->hasParameter('slug'))
         {
         @include('template.partials.navbargrid')
 

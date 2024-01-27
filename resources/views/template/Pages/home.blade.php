@@ -5,30 +5,36 @@
             <div class="row">
                 <div class="col-lg- col-12 custom-padding-right">
                     <div class="slider-head">
-                        <!-- Start Hero Slider -->
-                        <div class="hero-slider">
-                            <!-- Start Single Slider -->
-                            @foreach ($commonInfo['products'] as $product)
-                                <div class="single-slider" style="background-image: url({{ asset($product->image) }});">
-                                    <div class="content">
-                                        <h2>
-                                            {{ $product->name }}
 
+                        <div class="hero-slider">
+
+                            @foreach ($commonInfo['products'] as $product)
+                                <div class="single-slider " style="background-image: url({{ asset($product->image) }});">
+                                    <div class="content">
+                                        <h2><a href="{{ route('product-details', $product->id) }}">{{ $product->name }}</a>
                                         </h2>
                                         <p>{{ $product->description }}</p>
-                                        <h3><span>@lang('main.price'):</span> {{ $product->price }}</h3>
-                                        <!-- <div class="button">
-                                            <a href="product-grids.html" class="btn">Shop Now</a>
-                                        </div> -->
+                                        <h3>
+                                            <span>@lang('main.price'):</span>
+                                            <div class="price d-flex  align-items-baseline">
+                                                @if ($product->ofert)
+                                                    <h3>${{ number_format($product->price - $product->price * ($product->ofert->percent / 100), 2, '.', '') }}
+                                                    </h3>
+                                                    <h4 class="text-decoration-line-through "
+                                                        style="color: grey; margin-left: 15px">
+                                                        ${{ number_format($product->price, 2, '.', '') }}</h4>
+                                                @else
+                                                    <h3 class="price">${{ number_format($product->price, 2, '.', '') }}
+                                                    </h3>
+                                                @endif
+                                            </div>
+                                        </h3>
                                     </div>
                                 </div>
                             @endforeach
-                            <!-- End Single Slider -->
-                            <!-- Start Single Slider -->
 
-                            <!-- End Single Slider -->
                         </div>
-                        <!-- End Hero Slider -->
+
                     </div>
                 </div>
             </div>
@@ -47,7 +53,7 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-4 col-md-6 col-12">
-                    <!-- Start Single Category -->
+
                     @foreach ($commonInfo['categories'] as $category)
                         <div class="single-category">
                             <h3 class="heading"><a href="{{ route('Product-grids', ['slug' => $category->slug]) }}">
@@ -65,12 +71,12 @@
                             </ul>
 
                             <div class="images">
-                                
-                                <img src="{{ asset($category->image->url) }}" alt="{{$category->name}}">
+
+                                <img src="{{ asset($category->image->url) }}" alt="{{ $category->name }}">
                             </div>
                         </div>
                     @endforeach
-                    <!-- End Single Category -->
+
                 </div>
 
             </div>
@@ -90,7 +96,7 @@
             <div class="row">
                 @foreach ($commonInfo['productosMasVistos'] as $prod)
                     <div class="col-lg-3 col-md-6 col-12">
-                        <!-- Start Single Product -->
+
                         <div class="single-product">
                             <div class="product-image">
                                 <img src="{{ $prod->image }}" alt="#">
@@ -113,15 +119,15 @@
 
                                 <div class="price">
                                     @if ($prod->ofert)
-                                        <span>${{ $prod->price - $prod->price * ($prod->ofert->percent / 100) }}</span>
-                                        <span class="discount-price">${{ $prod->price }}</span>
+                                        <span>${{ number_format($prod->price - $prod->price * ($prod->ofert->percent / 100), 2, '.', '') }}</span>
+                                        <span class="discount-price">${{ number_format($prod->price, 2, '.', '') }}</span>
                                     @else
-                                        <span>${{ $prod->price }}</span>
+                                        <span>${{ number_format($prod->price, 2, '.', '') }}</span>
                                     @endif
                                 </div>
                             </div>
                         </div>
-                        <!-- End Single Product -->
+
                     </div>
                 @endforeach
 

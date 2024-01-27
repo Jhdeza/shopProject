@@ -1,5 +1,5 @@
 @extends('adminlte::page')
-@section('title', 'Admin')
+@section('title', 'Chapintec')
 
 @section('content_header')
     <h1>Welcome to Admin Console</h1>
@@ -11,8 +11,9 @@
 
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('icon.png') }}">
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+   
 @stop

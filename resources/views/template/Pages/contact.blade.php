@@ -2,7 +2,7 @@
 
 @extends('template.template')
 @section('content')
-    <!-- Start Breadcrumbs -->
+  
     <div class="breadcrumbs">
         <div class="container">
             <div class="row align-items-center">
@@ -20,9 +20,6 @@
             </div>
         </div>
     </div>
-    <!-- End Breadcrumbs -->
-
-    <!-- Start Contact Area -->
     <section id="contact-us" class="contact-us section">
         <div class="container">
             <div class="contact-head">
@@ -39,18 +36,9 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-12 col-12">
                             <div class="single-info-head">
-                                <!-- Start Single Info -->
                                 <div class="single-info">
-                                    <i class="lni lni-map"></i>
-                                    <h3>{{__('main.address')}}</h3>
-                                    <ul>
-                                        <li>{{$contact->address_contacts}}</li>
-                                    </ul>
-                                </div>
-                                <!-- End Single Info -->
-                                <!-- Start Single Info -->
-                                <div class="single-info">
-                                    <div class="d-flex mb-3">
+                                    <h3>{{__('main.callus')}}:</h3>
+                                    <div class="d-flex mb-2">
                                         <a href="tel:{{$commonInfo['contacts']->phone_contacts }}"> <i class="lni lni-phone"></i></a>
                                             <ul style="margin-left: 10px; margin-top: 5px" >
                                             <li >
@@ -65,19 +53,23 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <!-- End Single Info -->
-                                <!-- Start Single Info -->
                                 <div class="single-info">
                                     <i class="lni lni-envelope"></i>
-                                    <h3>{{__('main.mailat')}}</h3>
+                                    <h3>{{__('main.mailat')}}:</h3>
                                     <ul>
                                         <li><a href="mailto:{{$contact->email}}">{{$contact->email}}</a>
                                         </li>
                                         
                                     </ul>
                                 </div>
+                                <div class="single-info">
+                                    <i class="lni lni-map"></i>
+                                    <h3>{{__('main.address')}}:</h3>
+                                    <ul>
+                                        <li>{{$contact->address_contacts}}</li>
+                                    </ul>
+                                </div>
                                 @endforeach
-                                <!-- End Single Info -->
                             </div>
                         </div>
                         <div class="col-lg-8 col-md-12 col-12">
@@ -92,12 +84,6 @@
                                                         required="required" value="{{old('name')}}">
                                                 </div>
                                             </div>
-                                            {{-- <div class="col-lg-6 col-md-6 col-12">
-                                                <div class="form-group">
-                                                    <input name="subject" type="text" placeholder="Your Subject"
-                                                        required="required">
-                                                </div>
-                                            </div> --}}
                                             <div class="col-lg-6 col-md-6 col-12">
                                                 <div class="form-group">
                                                     <input name="email" type="email" placeholder="Email"
@@ -130,8 +116,6 @@
             </div>
         </div>
     </section>
-    <!--/ End Contact Area -->
-
     @endsection
 
     

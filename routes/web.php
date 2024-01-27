@@ -27,19 +27,20 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', function () {
+Route::get('/admin', function () {
    
     return view('admin.index');
-});
+})->name('admin');
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/about-us', [App\Http\Controllers\HomeController::class, 'about'])->name('about-us');
 Route::get('/productGrid/{slug?}/{sub_slug?}', [App\Http\Controllers\HomeController::class, 'productGrid'])->name('Product-grids');
 Route::get('/contact-us', [App\Http\Controllers\HomeController::class, 'contactUs'])->name('contact-us');
 Route::get('/productDetails/{id}', [App\Http\Controllers\HomeController::class, 'productDetails'])->name('product-details');
 Route::post('/productGrid/{slug?}/{sub_slug?}', [App\Http\Controllers\HomeController::class, 'productGrid'])->name('Product-grids');
 
+Route::fallback(function () {return app(HomeController::class)->Error();})->middleware(['web']);
 
 
 
@@ -59,7 +60,7 @@ require __DIR__.'/auth.php';
 
 Route::prefix('admin')->group(function () {
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::resource('/my-user', MyUserController::class);
 Route::resource('/information', ContactInformationController::class);
 Route::resource('/category', CategoryController::class);
@@ -68,5 +69,7 @@ Route::resource('/client', ClientInformationController::class);
 Route::resource('/product', ProductsController::class);
 Route::resource('/about-us', AboutUsController::class);
 Route::resource('/staff', StaffController::class);
-
+Route::fallback(function () {
+    return app(HomeController::class)->Error();
+});
 });

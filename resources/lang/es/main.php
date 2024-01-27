@@ -107,14 +107,23 @@ return [
     'contactus'=>'Contactenos',
     'aboutus'=>'Sobre Nosotros',
     'address'=>'Dirección',
-    'callus'=>'WhatsApp',
+    'callus'=>'Contactanos',
     'mailat'=>'Envíenos un Mensaje',
     'submitmessage'=>'Enviar Mensaje',
     'ourcoreteam'=>'Nuestro Equipo',
     'sortby'=>'Ordenar Por',
     'showing'=>'Mostrando',
     'featuredcategories'=>'Categorias Destacadas',
-    'trendingproduct'=>'Productos en Tendencia',
+    'trendingproduct'=>'Productos mas Populares',
+
+
+    'pagenotfound'=>'Oops! Pagina no Encontrada',
+    'pageextract'=>'La página que buscas no existe. Es posible que se haya movido o eliminado.',
+    '404buttom'=>'Volver a Home',
+    '404page'=>'404 Pagina no Encontrada',
+
+
+    'details'=>'Detalles',
     
     
 ];

@@ -1,7 +1,6 @@
 @extends('template.template')
 @section('content')
-    <!-- Start Breadcrumbs -->
-    <div class="breadcrumbs">
+        <div class="breadcrumbs">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6 col-12">
@@ -19,9 +18,6 @@
             </div>
         </div>
     </div>
-    <!-- End Breadcrumbs -->
-
-    <!-- Start Product Grids -->
     <section class="product-grids section">
         <div class="container">
             <div class="row">
@@ -68,21 +64,13 @@
                             </div>
                             <div class="tab-pane fade" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
                                 @include('template.partials.ajax.product-list')
-
                             </div>
-
-
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    
-
-
     <!-- ========================= scroll-top ========================= -->
     <a href="#" class="scroll-top">
         <i class="lni lni-chevron-up"></i>

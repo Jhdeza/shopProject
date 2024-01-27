@@ -12,7 +12,7 @@ class Product extends Model
     use HasFactory;
     public $timestamps = false;
     protected $guarded = ['_token'];
-    const urlImageEmpty = 'path/to/empty/image.jpg';
+    const urlImageEmpty = 'template/assets/images/img/product.jpg';
     public function getRouteKeyName(): string
 {
     return 'slug';
