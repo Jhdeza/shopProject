@@ -36,7 +36,6 @@
                                 rel="noopener noreferrer">
                                 <i class="lni lni-phone"></i>
                             </a>
-
                             <h3>LLame Ahora:
                                 <span>{{ $commonInfo['contacts']->phone_contacts }}</span>
                             </h3>
@@ -90,7 +89,7 @@
                         <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                             <ul id="nav" class="navbar-nav ms-auto">
                                 <li class="nav-item  ">
-                                    <a href="{{ route('home') }}" class="{{ request()->is('home') ? 'active' : '' }}"
+                                    <a href="{{ route('home') }}" class="{{ request()->is('/') ? 'active' : '' }}"
                                         aria-label="Toggle navigation">Home</a>
                                 </li>
                                 <li class="nav-item">

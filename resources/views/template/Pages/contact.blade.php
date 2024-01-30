@@ -69,6 +69,13 @@
                                         <li>{{ $contact->address_contacts }}</li>
                                     </ul>
                                 </div>
+                                <div class="single-info">
+                                    <i class="lni lni-map"></i>
+                                    <h3>{{__('main.address')}}:</h3>
+                                    <ul>
+                                        <li>{{$contact->address_contacts}}</li>
+                                    </ul>
+                                </div>
                                 @endforeach
                             </div>
                         </div>

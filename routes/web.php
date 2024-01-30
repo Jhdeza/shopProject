@@ -33,7 +33,7 @@ Route::get('/admin', function () {
 })->name('admin');
 
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/about-us', [App\Http\Controllers\HomeController::class, 'about'])->name('about-us');
 Route::get('/productGrid/{slug?}/{sub_slug?}', [App\Http\Controllers\HomeController::class, 'productGrid'])->name('Product-grids');

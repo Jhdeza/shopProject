@@ -127,6 +127,7 @@ class HomeController extends Controller
                 return response()->json($arr);
 
 
+            
         } else {
 
             $query = Product::with("Ofert");
