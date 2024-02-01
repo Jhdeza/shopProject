@@ -212,11 +212,11 @@
                 type: 'GET',
                 dataType: "json",
                 success: function(response) {
-
-                    $('#nav-grid').html(response.grid);
+                    $('#new').empty().append(response.view)
+                    /*$('#nav-grid').html(response.grid);
                     $('#nav-list').html(response.list);
                     $('#pagination').html(response.links);
-                    $('#pagination-info').html(response.pagination_info);
+                    $('#pagination-info').html(response.pagination_info);*/
 
                 },
 
