@@ -7,8 +7,8 @@
     <title>Chapintec | Tu Auto Nuestro Compromiso</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('template/assets/images/icon.png')}}" />
-    
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('template/assets/images/icon.png') }}" />
+
     <!-- ========================= CSS here ========================= -->
     <link rel="stylesheet" href="{{ asset('template/assets/css/bootstrap.min.css') }} " />
     <link rel="stylesheet" href="{{ asset('template/assets/css/LineIcons.3.0.css') }} " />
@@ -22,9 +22,9 @@
 </head>
 
 <body>
-    
 
-    
+
+
     <div class="preloader">
         <div class="preloader-inner">
             <div class="preloader-icon">
@@ -33,15 +33,11 @@
             </div>
         </div>
     </div>
-    
-    @if (Route::current() && Route::current()->getName() == 'Product-grids' && !Route::current()->hasParameter('slug'))
-        
-        @include('template.partials.navbargrid')
 
+    @if (Route::current() && Route::current()->getName() == 'Product-grids' && !Route::current()->hasParameter('slug'))
+        @include('template.partials.navbargrid')
     @else
         @include('template.partials.navbar')
-
-        
     @endif
 
     @yield('content')
@@ -143,18 +139,19 @@
         $(document).ready(function() {
             $.input = $('#search');
             $.select = $('#category_id');
-            
 
-            $('#searchbtn').on('click',  function(e) {
+
+
+            $('#searchbtn').on('click', function(e) {
                 e.preventDefault();
                 orderProduct();
             });
-                      
+
             @if (request()->isMethod('post'))
                 $('#searchbtn').trigger('click');
             @endif
 
-            $(document).on('change', '#sorting',function() {
+            $(document).on('change', '#sorting', function() {
                 orderProduct();
             });
 
@@ -186,22 +183,30 @@
                     sort: sortValue,
                 },
                 dataType: 'json',
-                
-                    success: function(response) {
-                        $('#new').empty().append(response.view)
-                        
+
+
+                beforeSend: function() {
+                    $('#new').html(`
+        <div class="preloader">
+            <div class="preloader-inner">
+                <div class="preloader-icon">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>`);
+                },
+
+                success: function(response) {
+                    var selectedSort = response.selectedSort;
+                    $('#new').html(response.view)
+                    $('#sorting').val(selectedSort);
                     // $('#nav-grid').html(response.grid);
                     // $('#nav-list').html(response.list);
                     // $('#pagination-info').html(response.pagination_info);
                 },
             });
         }
-
-
-
-
-
-
         $(document).on('click', '.pagination a', function(e) {
 
             e.preventDefault();
@@ -212,11 +217,11 @@
                 type: 'GET',
                 dataType: "json",
                 success: function(response) {
-                    $('#new').empty().append(response.view)
-                    /*$('#nav-grid').html(response.grid);
-                    $('#nav-list').html(response.list);
+                    $('#new').html(response.view)
                     $('#pagination').html(response.links);
-                    $('#pagination-info').html(response.pagination_info);*/
+                    /*$('#nav-grid').html(response.grid);
+                       $('#nav-list').html(response.list);
+                       $('#pagination-info').html(response.pagination_info);*/
 
                 },
 

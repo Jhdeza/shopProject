@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\aboutUs;
 use App\Models\Category;
+use App\Models\Characteristic;
 use App\Models\Contact_information;
 use App\Models\Product;
 use App\Models\Staff;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
+use App\Models\Variation;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -108,6 +111,7 @@ class HomeController extends Controller
             if ($products->total() > 0 && isset($products->items()[0]) && $products->items()[0]->id) {
                 $arr = [
                     'view' => view('template.partials.ajax.sectiongrid', compact('products', 'quantity'))->render(),
+                    'selectedSort' => $sort,
                     //     'grid' => view('template.partials.ajax.product-grid', compact('products', 'quantity'))->render(),
                     //     'list' => view('template.partials.ajax.product-list', compact('products', 'quantity'))->render(),
                     // 'pagination_info' => $products->firstItem() . ' - ' . $products->lastItem() . ' de ' . $products->total() . ' Productos',
@@ -151,7 +155,7 @@ class HomeController extends Controller
                     $query->orderBy('id', 'asc');
             }
             $products = $query->paginate(2)->withQueryString();
-            // dd($products);
+
             $quantity = $products->count();
 
             if ($request->category_id) {
@@ -169,6 +173,7 @@ class HomeController extends Controller
 
                 $arr = [
                     'view' => view('template.partials.ajax.sectiongrid', compact('products', 'quantity'))->render(),
+                    'selectedSort' => $sort,
                     // 'grid' => view('template.partials.ajax.product-grid', compact('products', 'quantity'))->render(),
                     // 'list' => view('template.partials.ajax.product-list', compact('products', 'quantity'))->render(),
                     // 'pagination_info' => $products->firstItem() . ' - ' . $products->lastItem() . ' de ' . $products->total() . ' Productos',
@@ -205,6 +210,24 @@ class HomeController extends Controller
         $product->increment('views');
 
         $category = Category::with('subcategories')->where('parent_id', null)->get();
+
+        $variaciones = $product->variation;
+        // $caracteristicas = $variaciones->first()->caracteristicas;
+
+        $variations = DB::table("variations")
+        ->join("characteristic_variation", "variations.id", "=", "characteristic_variation.variation_id")
+        ->join("values", "characteristic_variation.value_id", "=", "values.id")
+        ->select(
+            'characteristic_variation.characteristic_id',
+            DB::raw('MAX(characteristic_variation.id) as cvid'),
+            DB::raw('MAX(variations.id) as max_id'),
+            DB::raw('MAX(variations.stock) as max_stock'),
+            DB::raw('MAX(values.name) as valuesname')
+        )
+        ->groupBy('characteristic_variation.characteristic_id')
+        ->get();
+
+
 
 
         return view('template.pages.product-details', compact('commonInfo', 'product', "category"));

@@ -37,35 +37,39 @@ class Variation extends Model
     {
         return $this->belongsToMany(Characteristic::class)->withPivot('value_id');
     }
+    public function values()
+    {
+        return $this->belongsToMany(Value::class)->withPivot('characteristics_id');
+    }
 
-    // public function getvnameAttribute()
-    // {
-    //     $parts =  explode('', $this->name);
-    //     if (count($parts) > 1)
-    //         return $parts[1];
-    //     return $this->name;
-    // }
+    public function getvnameAttribute()
+    {
+        $parts =  explode('', $this->name);
+        if (count($parts) > 1)
+            return $parts[1];
+        return $this->name;
+    }
 
-    // public function getHumanNameAttribute()
-    // {
-    //     return str_replace('', " ", $this->name);
-    // }
+    public function getHumanNameAttribute()
+    {
+        return str_replace('', " ", $this->name);
+    }
 
-    // public function siblings()
-    // {
-    //     return $this->product->variations();
-    // }
+    public function siblings()
+    {
+        return $this->product->variations();
+    }
 
-    // public function scopeFilter(Builder $query, $term): void
-    // {
-    //     $query
-    //         ->where('products.name', 'LIKE', '%' . $term . '%')
-    //         ->orWhere('sku', 'LIKE', '%' . $term . '%')
-    //         //->orWhere('sub_sku', 'LIKE', '%' . $term . '%')
-    //         ->select([
-    //             //DB::raw("products.name value"),
-    //             DB::raw("(CASE WHEN products.type = '" . ProductTypeEnum::SIMPLE() . "' THEN products.name ELSE  v.name END) as value"),
-    //             DB::raw("v.id as id")
-    //         ]);
-    // }
+    public function scopeFilter(Builder $query, $term): void
+    {
+        $query
+            ->where('products.name', 'LIKE', '%' . $term . '%')
+            ->orWhere('sku', 'LIKE', '%' . $term . '%')
+            //->orWhere('sub_sku', 'LIKE', '%' . $term . '%')
+            ->select([
+                //DB::raw("products.name value"),
+                DB::raw("(CASE WHEN products.type = SIMPLE THEN products.name ELSE  v.name END) as value"),
+                DB::raw("v.id as id")
+            ]);
+    }
 }

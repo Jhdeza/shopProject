@@ -1,4 +1,5 @@
 @extends('template.template')
+
 @section('content')
     <div class="breadcrumbs">
         <div class="container">

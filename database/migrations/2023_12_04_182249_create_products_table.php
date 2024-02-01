@@ -23,6 +23,7 @@ return new class extends Migration
             $table->boolean('act_carusel')->nullable();
             $table->boolean('is_new')->nullable();
             $table->integer('views');
+            $table->text('details')->nullable();
 
 
             $table->unsignedBigInteger('category_id')->nullable();
