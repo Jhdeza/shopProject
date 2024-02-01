@@ -14,15 +14,20 @@ class Product extends Model
     protected $guarded = ['_token'];
     const urlImageEmpty = 'template/assets/images/img/product.jpg';
     public function getRouteKeyName(): string
-{
-    return 'slug';
-}
-
-    public function category(){
+    {
+        return 'slug';
+    }
+    public function variation()
+    {
+        return $this->hasMany(Variation::class);
+    }
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
 
-    public function ofert(){
+    public function ofert()
+    {
         return $this->belongsTo(Ofert::class);
     }
 
@@ -31,28 +36,31 @@ class Product extends Model
         return $this->morphMany(Image::class, 'imageable');
     }
 
-    public function getGalery(){
+    public function getGalery()
+    {
         return $this->galery()->orderBy('is_main', 'desc')->get();
     }
 
-    public function getMainImage(){
+    public function getMainImage()
+    {
         return $this->galery()->where('is_main', true)->first();
     }
 
-    public function setMainImage($id){
+    public function setMainImage($id)
+    {
         $main = $this->getMainImage();
-        if($main && $id != $main->id){
+        if ($main && $id != $main->id) {
             $main->update(['is_main' => false]);
             $this->galery()->where('id', $id)->update(['is_main' => true]);
-        }
-        else{
+        } else {
             $this->galery()->where('id', $id)->update(['is_main' => true]);
         }
     }
 
-    public function getImageAttribute(){
+    public function getImageAttribute()
+    {
         $main = $this->getMainImage();
-        if($main)
+        if ($main)
             return $main->url;
         return self::urlImageEmpty;
     }
@@ -61,6 +69,4 @@ class Product extends Model
         'is_new' => 'boolean',
         'act_carusel' => 'boolean',
     ];
-
-
 }

@@ -145,18 +145,16 @@
             $.select = $('#category_id');
             
 
-            $('#searchbtn').on('click', function(e) {
+            $('#searchbtn').on('click',  function(e) {
                 e.preventDefault();
                 orderProduct();
             });
-            $('#search').on('input', function() {});
-
-           
+                      
             @if (request()->isMethod('post'))
                 $('#searchbtn').trigger('click');
             @endif
 
-            $('#sorting').on('change', function() {
+            $(document).on('change', '#sorting',function() {
                 orderProduct();
             });
 
@@ -190,10 +188,11 @@
                 dataType: 'json',
                 
                     success: function(response) {
-                    $('#nav-grid').html(response.grid);
-                    $('#nav-list').html(response.list);
-                    $('#pagination-info').html(response.pagination_info);
-                   
+                        $('#new').empty().append(response.view)
+                        
+                    // $('#nav-grid').html(response.grid);
+                    // $('#nav-list').html(response.list);
+                    // $('#pagination-info').html(response.pagination_info);
                 },
             });
         }

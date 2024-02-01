@@ -22,7 +22,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-   
+
 
     /**
      * Show the application dashboard.
@@ -54,11 +54,11 @@ class HomeController extends Controller
 
         $filter = $request->input('filter');
         $category = $request->input('category');
-        
 
 
 
-        if ($filter != null || $category != null || ($filter != null &&  $category != null)) {
+
+        if ($filter != null || $category != null /* || ($filter != null &&  $category != null) */) {
 
 
             $query = Product::query();
@@ -71,7 +71,7 @@ class HomeController extends Controller
                         ->where("name", 'like', '%' . $filter . '%');
                 });
             } else {
-                
+
                 if ($category) {
                     $query->where(function ($query) use ($category) {
                         $query->where('category_id', $category)
@@ -101,33 +101,27 @@ class HomeController extends Controller
 
                     $query->orderBy('id', 'asc');
             }
-            $products = $query->paginate(12)->withQueryString();
-           
-            // $quantity = $products->items();
-            // if(count($products->items()) == 0){
-            //     $arr=[
+            $products = $query->paginate(2)->withQueryString();
 
-            //         'grid' => view('template.partials.notfound')->render(),
-            //         'list' => view('template.partials.notfound')->render(),
-            //         'pagination_info' => $products->firstItem() . ' - ' . $products->lastItem() . ' de ' . $products->total() . ' Productos',
-            //     ];
-                // return view('template.partials.notfound');
-                
-            // }
-            // else{ 
-               
+            $quantity = $products->items();
+            //  dd($products);
+            if ($products->total() > 0 && isset($products->items()[0]) && $products->items()[0]->id) {
                 $arr = [
-                    'grid' => view('template.partials.ajax.product-grid', compact('products'))->render(),
-                    'list' => view('template.partials.ajax.product-list', compact('products'))->render(),
-                    'pagination_info' => $products->firstItem() . ' - ' . $products->lastItem() . ' de ' . $products->total() . ' Productos',
+                    'view' => view('template.partials.ajax.sectiongrid', compact('products', 'quantity'))->render(),
+                    //     'grid' => view('template.partials.ajax.product-grid', compact('products', 'quantity'))->render(),
+                    //     'list' => view('template.partials.ajax.product-list', compact('products', 'quantity'))->render(),
+                    // 'pagination_info' => $products->firstItem() . ' - ' . $products->lastItem() . ' de ' . $products->total() . ' Productos',
+
                 ];
-                
-            // }
-                
-                return response()->json($arr);
+            } else {
 
+                $arr = [
+                    "view" => view('template.partials.notfound')->render(),
 
-            
+                ];
+            }
+
+            return response()->json($arr);
         } else {
 
             $query = Product::with("Ofert");
@@ -156,10 +150,10 @@ class HomeController extends Controller
                 default:
                     $query->orderBy('id', 'asc');
             }
-            $products = $query->paginate(12)->withQueryString();
-            
+            $products = $query->paginate(2)->withQueryString();
+            // dd($products);
             $quantity = $products->count();
-            
+
             if ($request->category_id) {
                 $arr = explode("-", $request->category_id);
                 if (count($arr) > 1)
@@ -170,26 +164,28 @@ class HomeController extends Controller
                 $category = null;
 
             $search = $request->search;
-           
+
             if ($request->ajax()) {
+
                 $arr = [
-                    'grid' => view('template.partials.ajax.product-grid', compact('products'))->render(),
-                    'list' => view('template.partials.ajax.product-list', compact('products'))->render(),
-                    'pagination_info' => $products->firstItem() . ' - ' . $products->lastItem() . ' de ' . $products->total() . ' Productos',
+                    'view' => view('template.partials.ajax.sectiongrid', compact('products', 'quantity'))->render(),
+                    // 'grid' => view('template.partials.ajax.product-grid', compact('products', 'quantity'))->render(),
+                    // 'list' => view('template.partials.ajax.product-list', compact('products', 'quantity'))->render(),
+                    // 'pagination_info' => $products->firstItem() . ' - ' . $products->lastItem() . ' de ' . $products->total() . ' Productos',
+
                 ];
-                
+
                 return response()->json($arr);
-            }else{
-                
-                return view('template.pages.product-grids', compact('commonInfo',
-                                                                    'products', 
-                                                                    'category', 
-                                                                    'search',
-                                                                    'quantity'));
+            } else {
+
+                return view('template.pages.product-grids', compact(
+                    'commonInfo',
+                    'products',
+                    'category',
+                    'search',
+                    'quantity'
+                ));
             }
-
-
-
         }
     }
 

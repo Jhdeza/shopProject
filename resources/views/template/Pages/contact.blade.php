@@ -45,8 +45,7 @@
                                         </ul>
                                     </div>
                                     <div class="d-flex ">
-                                        <a
-                                            href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $commonInfo['contacts']->phone_contacts) }}">
+                                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $commonInfo['contacts']->phone_contacts) }}">
                                             <i class="lni lni-whatsapp"></i> </a>
                                         <ul style="margin-left: 10px; margin-top: 5px">
                                             <li>{{ $contact->phone_contacts }}</li>
@@ -67,13 +66,6 @@
                                     <h3>{{ __('main.address') }}:</h3>
                                     <ul>
                                         <li>{{ $contact->address_contacts }}</li>
-                                    </ul>
-                                </div>
-                                <div class="single-info">
-                                    <i class="lni lni-map"></i>
-                                    <h3>{{__('main.address')}}:</h3>
-                                    <ul>
-                                        <li>{{$contact->address_contacts}}</li>
                                     </ul>
                                 </div>
                                 @endforeach

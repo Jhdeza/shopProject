@@ -40,6 +40,9 @@
     $(document).ready(function(){
 
         $.list_tb = $('#staff-tb').DataTable({
+            language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/es-ES.json',
+                },
             processing: true,
             serverSide: true,
             scrollY: "75vh",

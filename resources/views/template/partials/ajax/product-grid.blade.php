@@ -1,3 +1,4 @@
+
 <div class="row">
    
     @foreach ($products as $product)

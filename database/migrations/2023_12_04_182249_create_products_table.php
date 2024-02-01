@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name', 30);
             $table->string('color', 100)->nullable();
             $table->string('form', 20)->nullable();
-            $table->string('description', 45);
+            $table->text('description');
             $table->float('price');
             $table->integer('quantity');
             $table->integer('quantity_alert');

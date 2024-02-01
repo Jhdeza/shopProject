@@ -2957,7 +2957,7 @@ ol {
 }
 
 .hero-area .hero-slider .single-slider .content {
-  padding: 20px 365px 20px 50px;
+  padding: 20px 365px 20px 100px;
   position: absolute;
   left: 0;
   top: 50%;
@@ -3285,7 +3285,7 @@ ol {
 .featured-categories .single-category img {
   position: absolute;
   right: 0;
-  top: 50%;
+  top: 55%;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   z-index: -1;
@@ -8193,3 +8193,8 @@ padding-top: 8px;
   width: 375px !important;
 }
 
+#new{
+  padding-top: 30px;
+  padding-bottom: 30px;
+  position: relative;
+}
