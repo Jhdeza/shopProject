@@ -100,6 +100,13 @@
             }
         });
     </script>
+
+    @isset($product)
+    <script>
+            var detailsurl = '{{ route('product-details', $product->id) }}'
+    </script>
+    @endisset
+
     <script>
         const finaleDate = new Date("February 15, 2023 00:00:00").getTime();
 
@@ -187,14 +194,14 @@
 
                 beforeSend: function() {
                     $('#new').html(`
-        <div class="preloader">
-            <div class="preloader-inner">
-                <div class="preloader-icon">
-                    <span></span>
-                    <span></span>
+            <div class="preloader">
+                <div class="preloader-inner">
+                    <div class="preloader-icon">
+                        <span></span>
+                        <span></span>
+                    </div>
                 </div>
-            </div>
-        </div>`);
+            </div>`);
                 },
 
                 success: function(response) {
@@ -205,6 +212,8 @@
                 },
             });
         }
+
+
         $(document).on('click', '.pagination a', function(e) {
 
             e.preventDefault();
@@ -235,27 +244,26 @@
         });
 
 
-        
-        var detailsurl = {{ route('product-details', $product->id) }}
+       
       
 
         $(document).ready(function() {
-            $('.stock-radio').on('change', function() {
-                var selectedCharacteristics = [];
 
-                $('.stock-radio:checked').each(function() {
-                    selectedCharacteristics.push($(this).val());
-                });
-                
+            $('#chars-form input[type=radio]').on('change', function() {
                
+                $('#chars-form').trigger('submit')
+
+            });
+
+            $('#chars-form').on('submit', function(e){
+              
+                e.preventDefault();
+                e.stopPropagation()              
 
                 $.ajax({
                     type: 'GET',
-                    url: detailsurl ;
-                    data: {
-                        selectedCharacteristics: selectedCharacteristics,
-
-                    },
+                    url: $(this).attr('action'),
+                    data: $(this).serialize(),
                     success: function(response) {
                         var quantity = $('#cantidad');
                         quantity.text(response.stock);

@@ -75,26 +75,28 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-12 col-md-12 col-12">
-                                    @foreach ($result as $res)
-                                        <label class="title-label" for="size">{{ $res['name'] }}</label>
-                                        <div class="d-flex flex-wrap">
-                                            @foreach ($res['values'] as $value)
-                                                <div class="form-group color-option align-items-center mr-4 mb-3 radio-option">
-                                                    <div class="single-radio radio-style-1">
-                                                        <input type="radio" id="radio-{{ $value['id'] }}" 
-                                                               name="radio-group-{{ $res['id'] }}" class="radio-input">
+                                <form id="chars-form" action={{ route('product-details-stock', $product->id) }} method="GET">
+                                    <div class="col-lg-12 col-md-12 col-12">
+                                        @foreach ($result as $res)
+                                            <label class="title-label" for="size">{{ $res['name'] }}</label>
+                                            <div class="d-flex flex-wrap">
+                                                @foreach ($res['values'] as $value)
+                                                    <div class="form-group color-option align-items-center mr-4 mb-3 radio-option">
+                                                        <div class="single-radio radio-style-1">
+                                                            <input type="radio" id="radio-{{ $value['id'] }}" value="{{ $value['id'] }}"
+                                                                name="values[]" class="radio-input">
 
-                                                        <label for="radio-{{ $value['id'] }}" class="radio-label">
-                                                            {{ $value['name'] }}
-                                                            
-                                                        </label>
+                                                            <label for="radio-{{ $value['id'] }}" class="radio-label">
+                                                                {{ $value['name'] }}
+                                                                
+                                                            </label>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    @endforeach
-                                </div>
+                                                @endforeach
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </form>
                             </div>
                             <div class="col-lg-2 col-md-4 col-12">                                                           
                                 <div class="form-group quantity">

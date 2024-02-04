@@ -284,6 +284,10 @@ class HomeController extends Controller
         }
     }
 
+    public function productStock(Request $request){
+        dd($request->all());
+    }
+
     public function Error()
     {
         $commonInfo = $this->commonInfo();
