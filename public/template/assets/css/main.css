@@ -5261,13 +5261,17 @@ blockquote span {
   padding-bottom: 20px;
   border-bottom: 1px solid #eee;
 }
+.item-details .product-info .title-label{
+  font-size: 20px !important;
+}
 
 .item-details .product-info .form-group {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .item-details .product-info .form-group.color-option .title-label {
   display: block !important;
+  
 }
 
 .item-details .product-info .form-group.color-option .single-checkbox {
@@ -5293,9 +5297,9 @@ blockquote span {
 
 .item-details .product-info .form-group.color-option .single-checkbox input[type="checkbox"] + label span {
   border-color: #e58d00;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
+  width: 80px;
+  height: 30px;
+  border-radius: 35%;
   cursor: pointer;
   position: relative;
   display: inline-block;
@@ -5305,11 +5309,11 @@ blockquote span {
 
 .item-details .product-info .form-group.color-option .single-checkbox input[type="checkbox"] + label span::before {
   position: absolute;
-  content: '';
-  top: 50%;
-  left: 50%;
-  width: 18px;
-  height: 18px;
+  
+  top: 30%;
+  left: 10%;
+  width: 80px;
+  height: 30px;
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
   -webkit-transform: scale(0);
@@ -5318,46 +5322,35 @@ blockquote span {
   line-height: 1.2;
   background-color: #e58d00;
   font-family: "Lineicons";
-  content: "\ea5b";
+  content: "";
   padding-left: 0px;
   padding-top: 3px;
-  border-radius: 50%;
+  border-radius: 35%;
   margin-top: -9px;
   margin-left: -9px;
   text-align: center;
 }
 
+.item-details .product-info .form-group.color-option .single-checkbox input[type="checkbox"] + label span::after {
+ display: block;
+  font-size: 14px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000000; 
+}
+
 .item-details .product-info .form-group.color-option .single-checkbox.checkbox-style-1 input[type="checkbox"] + label span {
-  border: 2px solid #081828;
+  border: 2px solid #4c5a68;
 }
 
 .item-details .product-info .form-group.color-option .single-checkbox.checkbox-style-1 input[type="checkbox"] + label span::before {
-  background-color: #081828;
+  border: 2px solid #4c5a68;
+  background-color: #d7d4d4;
+  color: #081828;
 }
 
-.item-details .product-info .form-group.color-option .single-checkbox.checkbox-style-2 input[type="checkbox"] + label span {
-  border: 2px solid #e58d00;
-}
-
-.item-details .product-info .form-group.color-option .single-checkbox.checkbox-style-2 input[type="checkbox"] + label span::before {
-  background-color: #e58d00;
-}
-
-.item-details .product-info .form-group.color-option .single-checkbox.checkbox-style-3 input[type="checkbox"] + label span {
-  border: 2px solid #ca0f05;
-}
-
-.item-details .product-info .form-group.color-option .single-checkbox.checkbox-style-3 input[type="checkbox"] + label span::before {
-  background-color: #ca0f05;
-}
-
-.item-details .product-info .form-group.color-option .single-checkbox.checkbox-style-4 input[type="checkbox"] + label span {
-  border: 2px solid #029c07;
-}
-
-.item-details .product-info .form-group.color-option .single-checkbox.checkbox-style-4 input[type="checkbox"] + label span::before {
-  background-color: #029c07;
-}
 
 .item-details .product-info .form-group.color-option .single-checkbox input[type="checkbox"]:checked + label span {
   border-color: transparent;
@@ -5366,7 +5359,7 @@ blockquote span {
 .item-details .product-info .form-group.color-option .single-checkbox input[type="checkbox"]:checked + label span::before {
   -webkit-transform: scale(1);
           transform: scale(1);
-  border-radius: 50%;
+  border-radius: 35%;
   color: #fff;
 }
 
@@ -8199,4 +8192,40 @@ padding-top: 8px;
   padding-top: 30px;
   padding-bottom: 30px;
   position: relative;
+}
+.radio-option {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.radio-style-1 {
+  position: relative;
+  cursor: pointer;
+}
+
+.radio-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px; /* ajusta el ancho según sea necesario */
+  height: 30px; /* ajusta la altura según sea necesario */
+  background-color: white; /* color de fondo del rectángulo */
+  border: 2px solid #aaaaaa; /* color del borde */
+  border-radius: 20px; /* esquinas ovaladas */
+  padding: 10px;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease;
+}
+
+.radio-input:checked + .radio-label {
+  background-color:#e58d00 ; /* color de fondo cuando está marcado */
+  color: #000; /* color del texto cuando está marcado */
+
+
 }

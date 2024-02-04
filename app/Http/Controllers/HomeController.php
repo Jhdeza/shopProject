@@ -13,6 +13,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Route;
 use App\Models\Variation;
 use Illuminate\Support\Facades\DB;
+use App\Models\Value;
+
 
 
 
@@ -201,7 +203,7 @@ class HomeController extends Controller
         return view('template.pages.contact', compact('commonInfo', 'contacts'));
     }
 
-    public function productDetails($id,)
+    public function productDetails(Request $request, $id)
     {
 
         $commonInfo = $this->commonInfo();
@@ -212,25 +214,74 @@ class HomeController extends Controller
         $category = Category::with('subcategories')->where('parent_id', null)->get();
 
         $variaciones = $product->variation;
-        // $caracteristicas = $variaciones->first()->caracteristicas;
+        $caracteristicas = $variaciones->first()->caracteristicas;
 
         $variations = DB::table("variations")
-        ->join("characteristic_variation", "variations.id", "=", "characteristic_variation.variation_id")
-        ->join("values", "characteristic_variation.value_id", "=", "values.id")
-        ->select(
-            'characteristic_variation.characteristic_id',
-            DB::raw('MAX(characteristic_variation.id) as cvid'),
-            DB::raw('MAX(variations.id) as max_id'),
-            DB::raw('MAX(variations.stock) as max_stock'),
-            DB::raw('MAX(values.name) as valuesname')
-        )
-        ->groupBy('characteristic_variation.characteristic_id')
-        ->get();
+            ->join("characteristic_variation", "variations.id", "=", "characteristic_variation.variation_id")
+            ->join("values", "characteristic_variation.value_id", "=", "values.id")
+            ->select(
+                'characteristic_variation.characteristic_id',
+                DB::raw('MAX(characteristic_variation.id) as cvid'),
+                DB::raw('MAX(variations.id) as max_id'),
+                DB::raw('MAX(variations.stock) as max_stock'),
+                DB::raw('MAX(values.name) as valuesname')
+            )
+            ->groupBy('characteristic_variation.characteristic_id')
+            ->get();
+
+        $firstVariation = $product->variation->first();
+
+        $result = $firstVariation->characteristics->map(function ($char) use ($product) {
+            $values = Value::join('characteristic_variation as cv', 'values.id', '=', 'cv.value_id')
+                ->join('variations as v', 'v.id', '=', 'cv.variation_id')
+                ->where('product_id', $product->id)
+                ->where('cv.characteristic_id', $char->id)
+                ->select('values.id', 'values.name')
+                ->get()
+                ->toArray();
+
+            return [
+                'id' => $char->id,
+                'name' => $char->name,
+                'values' => $values,
+            ];
+        });
+
+        $result = collect($result)->keyBy('id')->toArray();
+        // $product->variation()->with('characteristics')->get();
+
+        // dd($product);
 
 
+        $variaciones = $product->variation;
+        // Obtén las características seleccionadas desde la solicitud AJAX
+        $selectedCharacteristics = $request->input('selectedCharacteristics', []);
 
+        // Filtra las variaciones según las características seleccionadas
+        $filteredVariations = $variaciones->filter(function ($variation) use ($selectedCharacteristics) {
+            $characteristics = $variation->characteristics->pluck('id')->toArray();
+            return count(array_intersect($characteristics, $selectedCharacteristics)) === count($selectedCharacteristics);
+        });
 
-        return view('template.pages.product-details', compact('commonInfo', 'product', "category"));
+        // Obtén el stock de la variación filtrada o utiliza el stock de la primera variación como predeterminado
+        $stock = $filteredVariations->isNotEmpty() ? $filteredVariations->first()->stock : $variaciones->first()->stock;
+
+        // Devuelve el stock en la respuesta JSON
+
+        if ($request->ajax()) {
+            return response()->json(['stock' => $stock]);
+        } else {
+            return view('template.pages.product-details', compact(
+                'commonInfo',
+                'product',
+                "category",
+                "variations",
+                "variaciones",
+                "caracteristicas",
+                'result',
+                'stock'
+            ));
+        }
     }
 
     public function Error()
@@ -244,8 +295,6 @@ class HomeController extends Controller
             return view('template.pages.404', compact('commonInfo', 'cat'));
         }
     }
-
-
 
     private function commonInfo()
     {

@@ -73,41 +73,40 @@
                                     <span class="price">En Stock: {{ $product->quantity }}</span>
                                 @endif
                             </div>
-                            
+
                             <div class="row">
-                                <div class="col-lg-4 col-md-12 col-12">
-                                    <div class="form-group color-option">
-                                        <label class="title-label" for="size">Choose color</label>
-                                        <div class="single-checkbox checkbox-style-1">
-                                            <input type="checkbox" id="checkbox-1" checked>
-                                            <label for="checkbox-1"><span></span></label>
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    @foreach ($result as $res)
+                                        <label class="title-label" for="size">{{ $res['name'] }}</label>
+                                        <div class="d-flex flex-wrap">
+                                            @foreach ($res['values'] as $value)
+                                                <div class="form-group color-option align-items-center mr-4 mb-3 radio-option">
+                                                    <div class="single-radio radio-style-1">
+                                                        <input type="radio" id="radio-{{ $value['id'] }}" 
+                                                               name="radio-group-{{ $res['id'] }}" class="radio-input">
+
+                                                        <label for="radio-{{ $value['id'] }}" class="radio-label">
+                                                            {{ $value['name'] }}
+                                                            
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            @endforeach
                                         </div>
-                                       
-                                    </div>
+                                    @endforeach
                                 </div>
-                                
-                                {{-- <div class="col-lg-4 col-md-4 col-12">
-                                    <div class="form-group">
-                                        <label for="color">Battery capacity</label>
-                                        <select class="form-control" id="color">
-                                            <option>5100 mAh</option>
-                                            <option>6200 mAh</option>
-                                            <option>8000 mAh</option>
-                                        </select>
+                            </div>
+                            <div class="col-lg-2 col-md-4 col-12">                                                           
+                                <div class="form-group quantity">
+                                    <label class="title-label">Quantity:</label>
+                                    <div class="form-control">
+                                        @if(!$stock) 
+                                        <span id="cantidad">{{$product->stock}} </span>
+                                        @else
+                                        <span id="cantidad">{{$stock}} </span>
+                                        @endif
                                     </div>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-12">
-                                    <div class="form-group quantity">
-                                        <label for="color">Quantity</label>
-                                        <select class="form-control">
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                        </select>
-                                    </div>
-                                </div> --}}
+                                </div>                              
                             </div>
                         </div>
                     </div>
@@ -120,9 +119,9 @@
                             <div class="info-body custom-responsive-margin">
                                 <h4>@lang('main.details')</h4>
                                 <p>{!! $product->details !!}</p>
-                           </div>
+                            </div>
                         </div>
-                   </div>
+                    </div>
                 </div>
             </div>
         </div>
