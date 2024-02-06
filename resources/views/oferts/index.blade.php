@@ -24,7 +24,7 @@
                         <tr>
                             <th></th>
                             <th>@lang('main.name') </th>
-                            <th>@lang('main.discount_percent')</th>
+                            <th>@lang('main.discount')</th>
                             <th>@lang('main.date_begin')</th>
                             <th>@lang('main.date_end')</th>
                             <th>@lang('main.state')</th>
@@ -62,8 +62,8 @@
                         name: 'name'
                     },
                     {
-                        data: 'percent',
-                        name: 'percent'
+                        data: 'value',
+                        name: 'value'
                     },
                     {
                         data: 'date_ini',

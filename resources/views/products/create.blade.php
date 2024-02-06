@@ -40,7 +40,7 @@
 
                         <div class="form-group col-lg-4 col-md-12 col-12">
                             <label class="col-form-label">@lang('main.quantity')</label>
-                            <input type="text" name="quantity"  class="form-control validate-types" data-val-type="quantity" value="{{old('quantity', null)}}">
+                            <input type="text" name="quantity"  class="form-control validate-types"  data-val-type="quantity"  value="{{old('quantity', null)}}">
                         </div>
 
                         <div class="form-group col-lg-4 col-md-12 col-12">

@@ -102,9 +102,9 @@
     </script>
 
     @isset($product)
-    <script>
+        <script>
             var detailsurl = '{{ route('product-details', $product->id) }}'
-    </script>
+        </script>
     @endisset
 
     <script>
@@ -244,36 +244,45 @@
         });
 
 
-       
-      
+
+
 
         $(document).ready(function() {
+//
 
-            $('#chars-form input[type=radio]').on('change', function() {
-               
+            //$('#chars-form input[type=radio]').on('change', function() {
+            $('#chars-form .radio-label-act').on('click', function() {
+                if($(this).siblings('input[type=radio]').is(':checked')){
+                    $(this).siblings('input[type=radio]').prop('checked', false)
+                }
+                else{
+                    $(this).siblings('input[type=radio]').prop('checked', true)
+                }
                 $('#chars-form').trigger('submit')
-
             });
 
-            $('#chars-form').on('submit', function(e){
-              
+            $('#chars-form').on('submit', function(e) {
+
                 e.preventDefault();
-                e.stopPropagation()              
+                e.stopPropagation()
 
                 $.ajax({
                     type: 'GET',
                     url: $(this).attr('action'),
                     data: $(this).serialize(),
                     success: function(response) {
-                        var quantity = $('#cantidad');
-                        quantity.text(response.stock);
+                         $('#cantidad').text(response.stock);
+                         $('#title').text(response.title);
+                         if(response.soldOut){
+                            $('#title').addClass('d-none')
+                         }
+                         else
+                            $('#title').removeClass('d-none')
+                        
                     },
                 });
             });
         });
-
-
-        
     </script>
 
 

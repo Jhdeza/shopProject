@@ -17,9 +17,7 @@ class OfertController extends Controller
         $oferts = Ofert::all();
         if($request->ajax()){
             return DataTables::of($oferts)
-            ->editColumn('percent', function($row){
-                return $row->percent.'%';
-            })
+           
             ->editColumn('date_ini', function($row){
                 return $row->date_ini->format('d/m/Y');
             })
@@ -48,7 +46,7 @@ class OfertController extends Controller
                   </div>
                 </div>';
             })
-            ->rawColumns(['percent', 'buttons', 'date_ini', 'date_end', 'active'])
+            ->rawColumns([ 'buttons', 'date_ini', 'date_end', 'active'])
             ->make(true);
         }
         return view("oferts.index", compact("oferts"));

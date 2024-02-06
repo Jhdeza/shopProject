@@ -7,15 +7,23 @@
                 <div class="d-flex flex-row align-items-start">
                     <div class="product-image">
                         <img src="{{ request()->is('productGrid/*') ? '/' . $product->image  : $product->image }}" alt="Imagen Producto">
-                        @if ($product->is_new || ($product->ofert && $product->ofert->percent && $product->ofert->active))
+                        @if ($product->is_new || ($product->ofert && $product->ofert->value && $product->ofert->active))
                             <span class="new-tag">{{ $product->is_new == 1 ? 'New' : '' }}</span>
                             @endif
-                            @if ($product->ofert && $product->ofert->percent && $product->ofert->active)
-                                <span class="sale-tag"
-                                    @if ($product->is_new)  style="margin-left:45px" @endif>
-                                    -{{ $product->ofert->percent }}%
-                                </span>
-                            @endif
+                            @if ($product->ofert && $product->ofert->value && $product->ofert->active && $product->ofert->Type == 'PERCENT')
+                            <span class="sale-tag "
+                                @if ($product->is_new) style="margin-left:45px" @endif>
+                                - {{ $product->ofert->value }}%
+                            </span>
+                        
+                        @elseif ($product->ofert && $product->ofert->value && $product->ofert->active)
+                            <span class="sale-tag "
+                                @if ($product->is_new) style="margin-left:45px" @endif>
+
+                               - {{ number_format(($product->ofert->value/$product->price)*100, 0, '.', '') }}%
+                            </span>
+                        @endif
+                         
                     </div>
                 </div>
                 <div class="product-info">
@@ -24,16 +32,24 @@
                         <a href="{{ route('product-details', $product->id) }}">{{ $product->name }}</a>
                     </h4>
                     <div class="price">
-                        @if ($product->ofert)
-                            <span>${{ number_format($product->price - ($product->price * ($product->ofert->percent / 100)), 2, '.', '') }}</span>
-                            <span class="discount-price">${{ number_format($product->price, 2, '.', '') }}</span>
-                        @else
-                            <span class="price">${{ number_format($product->price, 2, '.', '') }}</span>
-                        @endif
+                        @if ($product->ofert && $product->ofert->active && $product->ofert->Type == 'PERCENT')
+                        <span>${{ number_format($product->price - $product->price * ($product->ofert->value / 100), 2, '.', '') }}</span>
+                        <span class="discount-price">${{ number_format($product->price, 2, '.', '') }}</span>
+                    @elseif($product->ofert && $product->ofert->value && $product->ofert->active)
+                    <span>${{ number_format($product->price - $product->ofert->value , 2, '.', '') }}</span>
+                        <span class="discount-price">${{ number_format($product->price, 2, '.', '') }}</span>
+                    @else
+                        <span>${{ number_format($product->price, 2, '.', '') }}</span>
+                    @endif
+
+                        
                     </div>
                     <div class="price">
-                        @if ($product->quantity <= $product->quantity_alert)
-                            <span class="price">En Stock: {{ $product->quantity }}</span>
+                        @if ($product->quantity === 0)
+                        <span class="price">@lang('main.soldout')</span>
+                        @elseif($product->quantity < $product->quantity_alert)
+                        <span class="price">En Stock: {{ $product->quantity }}</span>
+                            
                         @endif
                     </div>
                 </div>

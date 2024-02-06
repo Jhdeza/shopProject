@@ -39,7 +39,7 @@ Route::get('/about-us', [App\Http\Controllers\HomeController::class, 'about'])->
 Route::get('/productGrid/{slug?}/{sub_slug?}', [App\Http\Controllers\HomeController::class, 'productGrid'])->name('Product-grids');
 Route::get('/contact-us', [App\Http\Controllers\HomeController::class, 'contactUs'])->name('contact-us');
 Route::get('/productDetails/{id}', [App\Http\Controllers\HomeController::class, 'productDetails'])->name('product-details');
-Route::get('/get-stock/{id}', [App\Http\Controllers\HomeController::class, 'productStock'])->name('product-details-stock');
+Route::get('/get-stock/{product}', [App\Http\Controllers\HomeController::class, 'productStock'])->name('product-details-stock');
 Route::post('/productGrid/{slug?}/{sub_slug?}', [App\Http\Controllers\HomeController::class, 'productGrid'])->name('Product-grids');
 
 Route::fallback(function () {return app(HomeController::class)->Error();})->middleware(['web']);

@@ -16,8 +16,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-form-label">@lang('main.discount_percent')</label>
-                        <input type="text" name="percent" class="form-control validate-types" data-val-type="percent">
+                        <label class="col-form-label">@lang('main.discount')</label>
+                        <input type="text" name="value" class="form-control validate-types" data-val-type="value">
                     </div>
 
                     <div class="form-group mt-2">

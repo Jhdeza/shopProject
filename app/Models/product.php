@@ -13,10 +13,10 @@ class Product extends Model
     public $timestamps = false;
     protected $guarded = ['_token'];
     const urlImageEmpty = 'template/assets/images/img/product.jpg';
-    public function getRouteKeyName(): string
+    /* public function getRouteKeyName(): string
     {
         return 'slug';
-    }
+    } */
     public function variation()
     {
         return $this->hasMany(Variation::class);
@@ -24,6 +24,15 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function model()
+    {
+        return $this->belongsTo(Models::class);
+    }
+    public function branch()
+    {
+        return $this->belongsTo(Branch::class);
     }
 
     public function ofert()

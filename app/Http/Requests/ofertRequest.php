@@ -28,14 +28,14 @@ class OfertRequest extends FormRequest
                 'max:255',
                 Rule::unique('oferts', 'name')->ignore($ofertid),
             ],
-            "percent" => "required|numeric|max:99",
+            "value" => "required|numeric",
         ];
     }
     public function attributes(): array
     {
         return [
             'name'=>'nombre',
-            'percent'=>'porciento',
+            'value'=>'valor',
             
         ];
     }

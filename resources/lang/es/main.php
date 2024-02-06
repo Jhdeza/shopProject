@@ -18,7 +18,7 @@ return [
     "sure_delete_cat" => "Está seguro que desea eliminar la categoría?",
     "change" => "Cambiar",
     "empty_categories" => 'No existen categorías registradas',
-    "discount_percent" => "Porciento de descuento",
+    "discount" => "Descuento",
     "date_range" => "Rango de fechas",
     "ofert_list" => "Listado de Ofertas",
     "active" => "Activo",
@@ -135,6 +135,9 @@ return [
     
     'no_products_available'=>'No se encontraron Productos',
     'email'=>'Email',
+    'stock'=>'En Stock',
+    'stock1' =>'Stock',
+    'soldout'=>'Agotado'
 
 
 

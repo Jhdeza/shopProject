@@ -9,7 +9,8 @@
                         <div class="hero-slider">
 
                             @foreach ($commonInfo['products'] as $product)
-                                <div class="single-slider " style="background-image: url({{ asset($product->image) }}); background-size:contain; background-position:90%;" >
+                                <div class="single-slider "
+                                    style="background-image: url({{ asset($product->image) }}); background-size:contain; background-position:90%;">
                                     <div class="content">
                                         <h2><a href="{{ route('product-details', $product->id) }}">{{ $product->name }}</a>
                                         </h2>
@@ -17,16 +18,23 @@
                                         <h3>
                                             <span>@lang('main.price'):</span>
                                             <div class="price d-flex  align-items-baseline">
-                                                @if ($product->ofert)
-                                                    <h3>${{ number_format($product->price - $product->price * ($product->ofert->percent / 100), 2, '.', '') }}
+                                                @if ($product->ofert && $product->ofert->active && $product->ofert->Type == 'PERCENT')
+                                                    <h3>${{ number_format($product->price - $product->price * ($product->ofert->value / 100), 2, '.', '') }}
                                                     </h3>
                                                     <h4 class="text-decoration-line-through "
                                                         style="color: grey; margin-left: 15px">
                                                         ${{ number_format($product->price, 2, '.', '') }}</h4>
+                                                @elseif($product->ofert && $product->ofert->value && $product->ofert->active)
+                                                <h3>${{ number_format($product->price - $product->ofert->value, 2, '.', '') }}
+                                                </h3>
+                                                <h4 class="text-decoration-line-through "
+                                                    style="color: grey; margin-left: 15px">
+                                                    ${{ number_format($product->price, 2, '.', '') }}</h4>
                                                 @else
                                                     <h3 class="price">${{ number_format($product->price, 2, '.', '') }}
                                                     </h3>
                                                 @endif
+                                       
                                             </div>
                                         </h3>
                                     </div>
@@ -72,7 +80,7 @@
 
                             <div class="images">
                                 @if ($category->image)
-                                <img src="{{ asset($category->image->url) }}" alt="{{ $category->name }}">
+                                    <img src="{{ asset($category->image->url) }}" alt="{{ $category->name }}">
                                 @endif
                             </div>
                         </div>
@@ -102,13 +110,19 @@
                             <div class="product-image">
                                 <img src="{{ $prod->image }}" alt="{{ $prod->name }}">
 
-                                @if ($prod->is_new || ($prod->ofert && $prod->ofert->percent && $prod->ofert->active))
+                                @if ($prod->is_new || ($prod->ofert && $prod->ofert->value && $prod->ofert->active))
                                     <span class="new-tag">{{ $prod->is_new == 1 ? 'New' : '' }}</span>
                                 @endif
-                                @if ($prod->ofert && $prod->ofert->percent && $prod->ofert->active)
+                                @if ($prod->ofert && $prod->ofert->value && $prod->ofert->active && $prod->ofert->Type == 'PERCENT')
                                     <span class="sale-tag "
                                         @if ($prod->is_new) style="margin-left:45px" @endif>
-                                        -{{ $prod->ofert->percent }}%
+                                        - {{ $prod->ofert->value }}%
+                                    </span>
+                                @elseif ($prod->ofert && $prod->ofert->value && $prod->ofert->active)
+                                    <span class="sale-tag "
+                                        @if ($prod->is_new) style="margin-left:45px" @endif>
+
+                                        - {{ number_format(($prod->ofert->value / $prod->price) * 100, 0, '.', '') }}%
                                     </span>
                                 @endif
                             </div>
@@ -119,8 +133,11 @@
                                 </h4>
 
                                 <div class="price">
-                                    @if ($prod->ofert)
-                                        <span>${{ number_format($prod->price - $prod->price * ($prod->ofert->percent / 100), 2, '.', '') }}</span>
+                                    @if ($prod->ofert && $prod->ofert->active && $prod->ofert->Type == 'PERCENT')
+                                        <span>${{ number_format($prod->price - $prod->price * ($prod->ofert->value / 100), 2, '.', '') }}</span>
+                                        <span class="discount-price">${{ number_format($prod->price, 2, '.', '') }}</span>
+                                    @elseif($prod->ofert && $prod->ofert->value && $prod->ofert->active)
+                                        <span>${{ number_format($prod->price - $prod->ofert->value, 2, '.', '') }}</span>
                                         <span class="discount-price">${{ number_format($prod->price, 2, '.', '') }}</span>
                                     @else
                                         <span>${{ number_format($prod->price, 2, '.', '') }}</span>

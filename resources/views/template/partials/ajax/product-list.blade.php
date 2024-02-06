@@ -1,4 +1,3 @@
-
 <div class="row">
     <div class="col-lg-12 col-md-12 col-12">
         @foreach ($products as $product)
@@ -7,14 +6,22 @@
                     <div class="col-lg-4 col-md-4 col-8">
                         <div class="d-flex ">
                             <div class="product-image">
-                                <img src= "{{ request()->is('productGrid/*') ? '/' . $product->image  : $product->image }}" alt="Imagen Producto">
-                                @if ($product->is_new || ($product->ofert && $product->ofert->percent && $product->ofert->active))
+                                <img src= "{{ request()->is('productGrid/*') ? '/' . $product->image : $product->image }}"
+                                    alt="Imagen Producto">
+                                @if ($product->is_new || ($product->ofert && $product->ofert->value && $product->ofert->active))
                                     <span class="new-tag">{{ $product->is_new == 1 ? 'New' : '' }}</span>
                                 @endif
-                               @if($product->ofert && $product->ofert->percent && $product->ofert->active)
+                                @if ($product->ofert && $product->ofert->value && $product->ofert->active && $product->ofert->Type == 'PERCENT')
                                     <span class="sale-tag "
-                                        @if ($product->is_new)  style="margin-left:45px" @endif>-{{ $product->ofert->percent }}%</span>
-                               
+                                        @if ($product->is_new) style="margin-left:45px" @endif>
+                                        - {{ $product->ofert->value }}%
+                                    </span>
+                                @elseif ($product->ofert && $product->ofert->value && $product->ofert->active)
+                                    <span class="sale-tag "
+                                        @if ($product->is_new) style="margin-left:45px" @endif>
+
+                                        - {{ number_format(($product->ofert->value / $product->price) * 100, 0, '.', '') }}%
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -26,11 +33,16 @@
                                 <a href="{{ route('product-details', $product->id) }}">{{ $product->name }}</a>
                             </h4>
                             <div class="price">
-                                @if ($product->ofert)
-                                    <span>${{ number_format($product->price - $product->price * ($product->ofert->percent / 100), 2, '.', '')}}</span>
-                                    <span class="discount-price">${{number_format($product->price, 2, '.', '') }}</span>
+                                @if ($product->ofert && $product->ofert->active && $product->ofert->Type == 'PERCENT')
+                                    <span>${{ number_format($product->price - $product->price * ($product->ofert->value / 100), 2, '.', '') }}</span>
+                                    <span
+                                        class="discount-price">${{ number_format($product->price, 2, '.', '') }}</span>
+                                @elseif($product->ofert && $product->ofert->value && $product->ofert->active)
+                                    <span>${{ number_format($product->price - $product->ofert->value, 2, '.', '') }}</span>
+                                    <span
+                                        class="discount-price">${{ number_format($product->price, 2, '.', '') }}</span>
                                 @else
-                                    <span class="price">${{number_format($product->price, 2, '.', '') }}</span>
+                                    <span>${{ number_format($product->price, 2, '.', '') }}</span>
                                 @endif
                             </div>
                             <div class="price">
@@ -42,14 +54,14 @@
                     </div>
                 </div>
             </div>
-            @endforeach
-        </div> 
+        @endforeach
+    </div>
 </div>
 
 <div class="row">
-    <div class="col-12"> 
-        <div class="pagination left" id="pagination" >
-            <ul  class="pagination-list">
+    <div class="col-12">
+        <div class="pagination left" id="pagination">
+            <ul class="pagination-list">
                 {{ $products->links() }}
             </ul>
         </div>

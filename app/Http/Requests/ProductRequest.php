@@ -24,14 +24,11 @@ class ProductRequest extends FormRequest
     {
        
         return [
-            "name" => ['required','max:255',
-                
-            ],
+            "name" => ['required','max:255'],
             "price" => [
                 'required',
                 'regex:/^\d+\.\d{2}$/',
-                'max:99999',
-            ],
+                'max:99999'],
             "quantity" => "required|integer",
             "quantity_alert"=> "required|integer",
             "description"=> "required",
