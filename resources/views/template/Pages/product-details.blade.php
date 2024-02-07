@@ -35,6 +35,7 @@
                                     @endforeach
                                 </div>
                                 <div class="images">
+
                                     @foreach ($product->galery as $image)
                                         @if (!$image->is_main)
                                             <img src="{{ asset($image->url) }}" class="img thumbnail" alt="imagen producto"
@@ -107,22 +108,19 @@
                             @endif
                             <div class="col-lg-2 col-md-4 col-12">
                                 <div class="form-group quantity">
-                                    
-                                    <label @class([
-                                        "title-label",
-                                        'd-none' => $product->quantity == 0
-                                    ]) id="title">@lang('main.stock1'):</label>
-                                    
+
+                                    <label @class(['title-label', 'd-none' => $product->quantity == 0]) id="title">@lang('main.stock1'):</label>
+
                                     <div class="form-control">
-                                     {{--    @if ($product->quantity > $product->quantity_alert)
+                                        {{--    @if ($product->quantity > $product->quantity_alert)
                                         
                                             <span id="cantidad">@lang('main.stock')</span>
                                         @elseif($product->quantity === 0)
                                             <span id="cantidad">Agotado</span>
                                         @elseif($product->quantity <= $product->quantity_alert)
                                          --}}
-                                            <span id="cantidad">{{ $stock }}</span>
-                                      {{--   @endif --}}
+                                        <span id="cantidad">{{ $stock }}</span>
+                                        {{--   @endif --}}
                                     </div>
                                 </div>
                             </div>
@@ -130,19 +128,20 @@
                     </div>
                 </div>
             </div>
-
-            <div class="product-details-info">
-                <div class="single-block">
-                    <div class="row">
-                        <div class="col-lg-12 col-12">
-                            <div class="info-body custom-responsive-margin">
-                                <h4>@lang('main.details')</h4>
-                                <p>{!! $product->details !!}</p>
+            @if ($product->details)
+                <div class="product-details-info">
+                    <div class="single-block">
+                        <div class="row">
+                            <div class="col-lg-12 col-12">
+                                <div class="info-body custom-responsive-margin">
+                                    <h4>@lang('main.details')</h4>
+                                    <p>{!! $product->details !!}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endif
         </div>
         </div>
         </div>

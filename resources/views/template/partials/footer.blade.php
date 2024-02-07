@@ -15,7 +15,8 @@
                                 <li><span> {{ __('main.Saturday') }}</span> {{ __('main.horaS') }}</li>
                             </ul>
                             <p class="mail">
-                                <a href="mailto:{{ $commonInfo['contacts']->email }}">{{ $commonInfo['contacts']->email }}</a>
+                                <a
+                                    href="mailto:{{ $commonInfo['contacts']->email }}">{{ $commonInfo['contacts']->email }}</a>
                             </p>
                         </div>
 
@@ -46,7 +47,7 @@
 
                     <div class="col-lg-6 col-12">
                         <div class="copyright">
-                            <p>Derechos de Autor 2024 | Todos los derechos reservados<a href="" rel="nofollow"
+                            <p>@lang('main.copyright')<a href="" rel="nofollow"
                                     target="_blank"></a></p>
                         </div>
                     </div>
@@ -59,12 +60,18 @@
                                 <li>
                                     <span>{{ __('main.follow_us_on') }}:</span>
                                 </li>
-                                <li><a href="{{ $commonInfo['contacts']->social_facebook }}"><i
-                                            class="lni lni-facebook-filled"></i></a></li>
-                                <li><a href="{{ $commonInfo['contacts']->social_twitter }}"><i
-                                            class="lni lni-twitter-original"></i></a></li>
-                                <li><a href="{{ $commonInfo['contacts']->social_instagram }}"><i
-                                            class="lni lni-instagram"></i></a></li>
+                                @if ($commonInfo['contacts']->social_facebook)
+                                    <li><a href="{{ $commonInfo['contacts']->social_facebook }}"><i
+                                                class="lni lni-facebook-filled"></i></a></li>
+                                @endif
+                                @if ($commonInfo['contacts']->social_twitter)
+                                    <li><a href="{{ $commonInfo['contacts']->social_twitter }}"><i
+                                                class="lni lni-twitter-original"></i></a></li>
+                                @endif
+                                @if ($commonInfo['contacts']->social_instagram)
+                                    <li><a href="{{ $commonInfo['contacts']->social_instagram }}"><i
+                                                class="lni lni-instagram"></i></a></li>
+                                @endif
 
                             </ul>
                         @endif

@@ -64,12 +64,20 @@
                         <div class="content">
                             <div class="info">
                                 <h3>{{$staff->name}}</h3>
-                                <h5>{{$staff->position}}</h5>                               
+                                <h5>{{$staff->position}}</h5> 
+                                @if ($staff->facebook || $staff->Twitter || $staff->Instagram )                              
                                 <ul class="social">
+                                    @if($staff->facebook)
                                     <li><a href={{ $staff->facebook }}><i class="lni lni-facebook-filled"></i></a></li>                                    
+                                    @endif
+                                    @if($staff->Twitter)
                                     <li><a href={{ $staff->Twitter }}><i class="lni lni-twitter-original"></i></a></li>
+                                    @endif
+                                    @if($staff->Instagram)
                                     <li><a href={{ $staff->Instagram }}><i class="lni lni-instagram-original"></i></a></li>
-                                </ul>                              
+                                    @endif
+                                </ul>
+                                @endif                              
                             </div>
                         </div>
                     </div>                
@@ -91,12 +99,12 @@
     <script type="text/javascript">
 
         //========= glightbox
-        GLightbox({
-            'href': 'https://www.youtube.com/watch?v=r44RKWyfcFw&fbclid=IwAR21beSJORalzmzokxDRcGfkZA1AtRTE__l5N4r09HcGS5Y6vOluyouM9EM',
-            'type': 'video',
-            'source': 'youtube', //vimeo, youtube or local
-            'width': 900,
-            'autoplayVideos': true,
-        });
+        // GLightbox({
+        //     'href': 'https://www.youtube.com/watch?v=r44RKWyfcFw&fbclid=IwAR21beSJORalzmzokxDRcGfkZA1AtRTE__l5N4r09HcGS5Y6vOluyouM9EM',
+        //     'type': 'video',
+        //     'source': 'youtube', //vimeo, youtube or local
+        //     'width': 900,
+        //     'autoplayVideos': true,
+        // });
     </script>
 @endsection

@@ -89,7 +89,8 @@
                         <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                             <ul id="nav" class="navbar-nav ms-auto">
                                 <li class="nav-item  ">
-                                    <a href="{{ route('home') }}" class="{{ request()->is('/') ? 'active' : '' }}"
+                                    <a href="{{ route('home') }}"
+                                        class="{{ request()->is('/') || request()->is('home') ? 'active' : '' }}"
                                         aria-label="Toggle navigation">Home</a>
                                 </li>
                                 <li class="nav-item">
@@ -122,21 +123,24 @@
                     <div class="nav-social">
                         <h5 class="title">{{ __('main.follow_us_on') }}:</h5>
                         <ul>
-
-                            <li>
-                                <a href={{ $commonInfo['contacts']->social_facebook }}><i
-                                        class="lni lni-facebook-filled"></i></a>
-                            </li>
-
-                            <li>
-                                <a href={{ $commonInfo['contacts']->social_twitter }}><i
-                                        class="lni lni-twitter-original"></i></a>
-                            </li>
-                            <li>
-                                <a href={{ $commonInfo['contacts']->social_instagram }}><i
-                                        class="lni lni-instagram-original"></i></a>
-                            </li>
-
+                            @if ($commonInfo['contacts']->social_facebook)
+                                <li>
+                                    <a href={{ $commonInfo['contacts']->social_facebook }}><i
+                                            class="lni lni-facebook-filled"></i></a>
+                                </li>
+                            @endif
+                            @if ($commonInfo['contacts']->social_twitter)
+                                <li>
+                                    <a href={{ $commonInfo['contacts']->social_twitter }}><i
+                                            class="lni lni-twitter-original"></i></a>
+                                </li>
+                            @endif
+                            @if ($commonInfo['contacts']->social_instagram)
+                                <li>
+                                    <a href={{ $commonInfo['contacts']->social_instagram }}><i
+                                            class="lni lni-instagram-original"></i></a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 @endif

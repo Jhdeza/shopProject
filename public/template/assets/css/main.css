@@ -1201,7 +1201,7 @@ ol {
   box-shadow: 0 1rem 3rem rgba(35, 38, 45, 0.15) !important;
   -webkit-transform: translate3d(0, -5px, 0);
   transform: translate3d(0, -5px, 0);
-  background-color: #282108;
+  background-color: #ac761e;
 }
 
 /* Overlay */
@@ -3248,6 +3248,7 @@ ol {
 }
 
 .featured-categories .single-category {
+  height: 280px;
   padding: 40px;
   margin-top: 30px;
   border: 2px solid #f0f0f0;
@@ -8226,6 +8227,8 @@ padding-top: 8px;
 .radio-input:checked + .radio-label {
   background-color:#e58d00 ; /* color de fondo cuando está marcado */
   color: #000; /* color del texto cuando está marcado */
-
-
+}
+.btn-outline-warning{
+border-color: #e58d00;
+color:#212529;
 }

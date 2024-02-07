@@ -103,7 +103,7 @@
 
     @isset($product)
         <script>
-            var detailsurl = '{{ route('product-details', $product->id) }}'
+            var detailsurl = '{{ route('product-details', $product->id) }}';
         </script>
     @endisset
 
@@ -147,8 +147,6 @@
             $.input = $('#search');
             $.select = $('#category_id');
 
-
-
             $('#searchbtn').on('click', function(e) {
                 e.preventDefault();
                 orderProduct();
@@ -161,9 +159,6 @@
             $(document).on('change', '#sorting', function() {
                 orderProduct();
             });
-
-
-
         });
 
         function orderProduct() {
@@ -248,14 +243,13 @@
 
 
         $(document).ready(function() {
-//
+            //
 
             //$('#chars-form input[type=radio]').on('change', function() {
             $('#chars-form .radio-label-act').on('click', function() {
-                if($(this).siblings('input[type=radio]').is(':checked')){
+                if ($(this).siblings('input[type=radio]').is(':checked')) {
                     $(this).siblings('input[type=radio]').prop('checked', false)
-                }
-                else{
+                } else {
                     $(this).siblings('input[type=radio]').prop('checked', true)
                 }
                 $('#chars-form').trigger('submit')
@@ -271,17 +265,31 @@
                     url: $(this).attr('action'),
                     data: $(this).serialize(),
                     success: function(response) {
-                         $('#cantidad').text(response.stock);
-                         $('#title').text(response.title);
-                         if(response.soldOut){
+                        $('#cantidad').text(response.stock);
+                        $('#title').text(response.title);
+                        if (response.soldOut) {
                             $('#title').addClass('d-none')
-                         }
-                         else
+                        } else
                             $('#title').removeClass('d-none')
-                        
+
                     },
                 });
             });
+        });
+
+        document.getElementById('show-hidden-categories').addEventListener('click', function() {
+            var hiddenCategories = document.getElementById('hidden-categories');
+            if (hiddenCategories.style.display === 'none') {
+                hiddenCategories.style.display = 'flex';
+
+                $(this).find('i').removeClass('lni-chevron-right').addClass('lni-chevron-up')
+                $(this).find('span').text('Ocultar categorías')
+            } else {
+                hiddenCategories.style.display = 'none';
+
+                $(this).find('i').removeClass('lni-chevron-up').addClass('lni-chevron-right')
+                $(this).find('span').text('Ver mas categorías')
+            }
         });
     </script>
 

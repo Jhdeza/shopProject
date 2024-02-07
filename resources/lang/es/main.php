@@ -137,7 +137,8 @@ return [
     'email'=>'Email',
     'stock'=>'En Stock',
     'stock1' =>'Stock',
-    'soldout'=>'Agotado'
+    'soldout'=>'Agotado',
+    'copyright'=>'Derechos de Autor 2024 | Todos los derechos reservados',
 
 
 

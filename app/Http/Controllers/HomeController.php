@@ -39,7 +39,11 @@ class HomeController extends Controller
     {
         $commonInfo = $this->commonInfo();
         $cat = Category::get();
-        return view('template.pages.home', compact('commonInfo', 'cat'));
+        $catVistas = Category::where('parent_id', null )->orderByDesc('views')
+        
+        ->get();
+       
+        return view('template.pages.home', compact('commonInfo', 'cat',"catVistas"));
     }
     public function about()
     {
@@ -66,7 +70,7 @@ class HomeController extends Controller
 
         if ($filter != null || $category != null /* || ($filter != null &&  $category != null) */) {
 
-
+            
             $query = Product::query();
             if ($category && $filter) {
                 $query->where(function ($query) use ($category, $filter) {
@@ -110,7 +114,7 @@ class HomeController extends Controller
             $products = $query->paginate(2)->withQueryString();
 
             $quantity = $products->items();
-            //  dd($products);
+
             if ($products->total() > 0 && isset($products->items()[0]) && $products->items()[0]->id) {
                 $arr = [
                     'view' => view('template.partials.ajax.sectiongrid', compact('products', 'quantity'))->render(),
@@ -141,6 +145,7 @@ class HomeController extends Controller
                 $query->where('category_id', $category->id);
             }
 
+           
             switch ($sort) {
                 case 'Low - High Price':
                     $query->orderBy('price');
@@ -157,21 +162,32 @@ class HomeController extends Controller
                 default:
                     $query->orderBy('id', 'asc');
             }
+            
             $products = $query->paginate(2)->withQueryString();
-
+            
             $quantity = $products->count();
-
+            
+            if($category){
+    
+                if ($category->parent ){
+                    $category->parent->increment("views");
+                }
+                $category->increment('views');
+            }
+            
             if ($request->category_id) {
                 $arr = explode("-", $request->category_id);
                 if (count($arr) > 1)
-                    $id = $arr[0];
-                else $id = $arr[0];
-                $category = Category::find($id);
-            } else
-                $category = null;
-
-            $search = $request->search;
-
+                $id = $arr[0];
+            else $id = $arr[0];
+            $category = Category::find($id);
+        } else
+        $category = null;
+        
+        
+        $search = $request->search;
+        
+                
             if ($request->ajax()) {
 
                 $arr = [
@@ -180,12 +196,15 @@ class HomeController extends Controller
                     // 'grid' => view('template.partials.ajax.product-grid', compact('products', 'quantity'))->render(),
                     // 'list' => view('template.partials.ajax.product-list', compact('products', 'quantity'))->render(),
                     // 'pagination_info' => $products->firstItem() . ' - ' . $products->lastItem() . ' de ' . $products->total() . ' Productos',
-
+                    
                 ];
-
+                
                 return response()->json($arr);
             } else {
-
+                
+                
+                
+                
                 return view('template.pages.product-grids', compact(
                     'commonInfo',
                     'products',
@@ -319,7 +338,6 @@ class HomeController extends Controller
         if ($stock > $product->quantity_alert) {
             $title = trans('main.stock1');
             $stock = trans('main.stock');
-         
         } else if ($stock === 0) {
             $soldOut = true;
             $stock = trans('main.soldout');

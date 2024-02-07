@@ -89,8 +89,8 @@ return [
             'path' => 'template/assets/images/icon.png',
             'alt' => 'Auth Logo',
             'class' => '',
-            'width' => 50,
-            'height' => 50,
+            'width' => 80,
+            'height' => 80,
         ],
     ],
 
@@ -167,12 +167,12 @@ return [
     |
     */
 
-    'classes_auth_card' => 'card-outline card-primary',
+    'classes_auth_card' => 'card-outline card-orange',
     'classes_auth_header' => '',
     'classes_auth_body' => '',
-    'classes_auth_footer' => '',
+    'classes_auth_footer' => 'd-none',
     'classes_auth_icon' => '',
-    'classes_auth_btn' => 'btn-flat btn-primary',
+    'classes_auth_btn' => 'btn bg-orange rounded-4 ',
 
     /*
     |--------------------------------------------------------------------------
@@ -309,11 +309,11 @@ return [
         
         [
             'text'        => 'Pagina Principal',
-            'url'         => '/',
+            'url'         => '/admin',
             'icon'        => 'fa fa-globe',
            
         ],
-        ['header' => 'account_settings'],
+       
         [
             'text' => 'Usuarios',
             'url' => 'admin/my-user',
