@@ -1,6 +1,6 @@
 @extends('layouts.middle')
 
-
+@section('content')
     <div class="container">
         <div class="row mt-5 ">
             <div class="col-6">

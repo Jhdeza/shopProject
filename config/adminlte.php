@@ -63,9 +63,9 @@ return [
     |
     */
 
-    'logo' => '<h4>Chapintec</h4>',
+    'logo' => '<h4 class="my-0" >Chapintec</h4>',
     'logo_img' => 'template/assets/images/icon.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo_img_class' => 'brand-image ',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'Chapintec Logo',
@@ -167,9 +167,9 @@ return [
     |
     */
 
-    'classes_auth_card' => 'card-outline card-orange',
+    'classes_auth_card' => 'bg-gradient-dark card-outline card-orange',
     'classes_auth_header' => '',
-    'classes_auth_body' => '',
+    'classes_auth_body' => 'bg-gradient-dark',
     'classes_auth_footer' => 'd-none',
     'classes_auth_icon' => '',
     'classes_auth_btn' => 'btn bg-orange rounded-4 ',
@@ -291,21 +291,21 @@ return [
 
     'menu' => [
         // Navbar items:
-        [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
-            'topnav_right' => true,
-        ],
+        // [
+        //     'type'         => 'navbar-search',
+        //     'text'         => 'search',
+        //     'topnav_right' => true,
+        // ],
         [
             'type'         => 'fullscreen-widget',
             'topnav_right' => true,
         ],
 
         // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
+        // [
+        //     'type' => 'sidebar-menu-search',
+        //     'text' => 'search',
+        // ],
         
         [
             'text'        => 'Pagina Principal',
