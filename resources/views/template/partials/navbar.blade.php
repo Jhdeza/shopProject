@@ -4,10 +4,12 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 col-md-3 col-7">
                     <a class="navbar-brand" href="{{ route('home') }}">
+                        @if($commonInfo['contacts']->image)
                         <img src={{ request()->is('productGrid/*') || request()->is('productDetails/*')
                             ? '/' . $commonInfo['contacts']->image->url
                             : $commonInfo['contacts']->image->url }}
                             alt="Logo">
+                            @endif
                     </a>
                 </div>
                 <div class="col-lg-5 col-md-7 col-xs-3">

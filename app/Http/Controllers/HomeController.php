@@ -111,7 +111,8 @@ class HomeController extends Controller
 
                     $query->orderBy('id', 'asc');
             }
-            $products = $query->paginate(2)->withQueryString();
+            
+            $products = $query->paginate(12)->withQueryString();
 
             $quantity = $products->items();
 
@@ -163,7 +164,7 @@ class HomeController extends Controller
                     $query->orderBy('id', 'asc');
             }
             
-            $products = $query->paginate(2)->withQueryString();
+            $products = $query->paginate(12)->withQueryString();
             
             $quantity = $products->count();
             
