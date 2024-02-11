@@ -4,8 +4,10 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 col-md-3 col-7">
                     <!-- Start Header Logo -->
+                    @if($commonInfo['contacts']->image)
                     <a class="navbar-brand" href="{{ route('home') }}">
                         <img src={{ $commonInfo['contacts']->image->url }} alt="Logo">
+                        @endif
                     </a>
                 </div>
                 <div class="col-lg-5 col-md-7 col-xs-3">

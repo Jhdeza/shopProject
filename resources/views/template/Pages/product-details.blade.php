@@ -106,7 +106,7 @@
                                     </form>
                                 </div>
                             @endif
-                            <div class="col-lg-2 col-md-4 col-12">
+                            <div class="col-lg-3 col-md-3 col-3">
                                 <div class="form-group quantity">
 
                                     <label @class(['title-label', 'd-none' => $product->quantity == 0]) id="title">@lang('main.stock1'):</label>

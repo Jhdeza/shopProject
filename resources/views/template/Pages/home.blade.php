@@ -88,7 +88,7 @@
                     </div>
                 @endforeach
 
-                <div class="row px-0"  id="hidden-categories" style="display: none; flex-wrap: wrap;">
+                <div class="row px-0" id="hidden-categories" style="display: none; flex-wrap: wrap;">
                     @foreach ($hidden as $category)
                         <div class="col-lg-4 col-md-6 col-12">
                             <div class="single-category">
@@ -117,7 +117,7 @@
                 <div class="row  justify-content-center">
                     <div class="d-grid gap-2 d-md-flex justify-content-md-center text-center mt-3 ">
                         <button id="show-hidden-categories" class="btn btn-outline-warning"> <span>Ver mas categorías
-                            </span>   <i class="lni lni-chevron-right"></i></button>
+                            </span> <i class="lni lni-chevron-right"></i></button>
                     </div>
                 </div>
             </div>
