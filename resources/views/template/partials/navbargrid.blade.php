@@ -124,6 +124,7 @@
             </div>
             <div class="col-lg-5 col-md-6 col-12">
                 @if ($commonInfo['contacts'] != null)
+                
                     @if (
                         $commonInfo['contacts']->social_facebook ||
                             $commonInfo['contacts']->social_twitter ||
