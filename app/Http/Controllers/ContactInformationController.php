@@ -28,7 +28,7 @@ class ContactInformationController extends Controller
     {
 
         
-        $contacts_information = Contact_information::find($id);
+        $contacts_information = Contact_information::findOrFail($id);
         $contacts_information->fill($request->all());
         $contacts_information->save();
         $image = $request->file('file');
