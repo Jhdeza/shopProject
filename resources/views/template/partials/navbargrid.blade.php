@@ -4,7 +4,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 col-md-3 col-7">
                     <!-- Start Header Logo -->
-                    @if($commonInfo['contacts']->image)
+                    @if($commonInfo['contacts']->image = !null)
                     <a class="navbar-brand" href="{{ route('home') }}">
                         
                         <img src={{ $commonInfo['contacts']->image->url }} alt="Logo">
