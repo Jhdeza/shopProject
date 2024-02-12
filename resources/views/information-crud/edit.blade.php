@@ -15,12 +15,8 @@
                     </div>
                     <form enctype="multipart/form-data" class="form" method="post"
                         action="
-                        @if ($contacts_information->id != null)
-                       {{ route('information.update', $contacts_information->id) }}
-@else
-{{ route('information.store') }}
-                       
-                       ">
+                        @if ($contacts_information->id != null) {{ route('information.update', $contacts_information->id) }}
+                        @else {{ route('information.store') }} @endif ">
                         @csrf
                         @method('PUT')
 
