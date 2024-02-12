@@ -6,6 +6,7 @@
                     <!-- Start Header Logo -->
                     @if($commonInfo['contacts']->image)
                     <a class="navbar-brand" href="{{ route('home') }}">
+                        @if($commonInfo['contacts']->image)
                         <img src={{ $commonInfo['contacts']->image->url }} alt="Logo">
                         @endif
                     </a>
