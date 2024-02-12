@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-
+@if($contacts_information->id)
     <div class="container">
         <div class="row mt-5 ">
             <div class="col-lg-6 col-12">
@@ -120,6 +120,7 @@
             </div>
         </div>
     </div>
+    @endif
 @endsection
 @push('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
