@@ -4,11 +4,11 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 col-md-3 col-7">
                     <!-- Start Header Logo -->
-                    @if($commonInfo['contacts']!=null)
-                    <a class="navbar-brand" href="{{ route('home') }}">
-                        
-                        <img src={{ $commonInfo['contacts']->image->url }} alt="Logo">
-                        @endif
+                    @if ($commonInfo['contacts'] != null)
+                        <a class="navbar-brand" href="{{ route('home') }}">
+
+                            <img src={{ $commonInfo['contacts']->image->url }} alt="Logo">
+                    @endif
                     </a>
                 </div>
                 <div class="col-lg-5 col-md-7 col-xs-3">
@@ -35,12 +35,16 @@
                 <div class="col-lg-4 col-md-2 col-5">
                     <div class="middle-right-area">
                         <div class="nav-hotline">
-                            <a href="tel:{{ $commonInfo['contacts']->phone_contacts }}" target="_blank"
-                                rel="noopener noreferrer">
-                                <i class="lni lni-phone"></i>
+                            @if ($commonInfo['contacts'] != null)
+                                <a href="tel:{{ $commonInfo['contacts']->phone_contacts }}" target="_blank"
+                                    rel="noopener noreferrer">
+                                    <i class="lni lni-phone"></i>
+                            @endif
                             </a>
                             <h3>LLame Ahora:
-                                <span>{{ $commonInfo['contacts']->phone_contacts }}</span>
+                                @if ($commonInfo['contacts'] != null)
+                                    <span>{{ $commonInfo['contacts']->phone_contacts }}</span>
+                                @endif
                             </h3>
                         </div>
                     </div>
@@ -119,35 +123,36 @@
                 </div>
             </div>
             <div class="col-lg-5 col-md-6 col-12">
-                @if (
-                    $commonInfo['contacts']->social_facebook ||
-                        $commonInfo['contacts']->social_twitter ||
-                        $commonInfo['contacts']->social_instagram)
-                    <div class="nav-social">
-                        <h5 class="title">{{ __('main.follow_us_on') }}:</h5>
-                        <ul>
-                            @if ($commonInfo['contacts']->social_facebook)
-                                <li>
-                                    <a href={{ $commonInfo['contacts']->social_facebook }}><i
-                                            class="lni lni-facebook-filled"></i></a>
-                                </li>
-                            @endif
-                            @if ($commonInfo['contacts']->social_twitter)
-                                <li>
-                                    <a href={{ $commonInfo['contacts']->social_twitter }}><i
-                                            class="lni lni-twitter-original"></i></a>
-                                </li>
-                            @endif
-                            @if ($commonInfo['contacts']->social_instagram)
-                                <li>
-                                    <a href={{ $commonInfo['contacts']->social_instagram }}><i
-                                            class="lni lni-instagram-original"></i></a>
-                                </li>
-                            @endif
-                        </ul>
-                    </div>
+                @if ($commonInfo['contacts'] != null)
+                    @if (
+                        $commonInfo['contacts']->social_facebook ||
+                            $commonInfo['contacts']->social_twitter ||
+                            $commonInfo['contacts']->social_instagram)
+                        <div class="nav-social">
+                            <h5 class="title">{{ __('main.follow_us_on') }}:</h5>
+                            <ul>
+                                @if ($commonInfo['contacts']->social_facebook)
+                                    <li>
+                                        <a href={{ $commonInfo['contacts']->social_facebook }}><i
+                                                class="lni lni-facebook-filled"></i></a>
+                                    </li>
+                                @endif
+                                @if ($commonInfo['contacts']->social_twitter)
+                                    <li>
+                                        <a href={{ $commonInfo['contacts']->social_twitter }}><i
+                                                class="lni lni-twitter-original"></i></a>
+                                    </li>
+                                @endif
+                                @if ($commonInfo['contacts']->social_instagram)
+                                    <li>
+                                        <a href={{ $commonInfo['contacts']->social_instagram }}><i
+                                                class="lni lni-instagram-original"></i></a>
+                                    </li>
+                                @endif
+                            </ul>
+                        </div>
+                    @endif
                 @endif
-
             </div>
         </div>
     </div>

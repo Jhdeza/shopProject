@@ -37,12 +37,16 @@
                 <div class="col-lg-4 col-md-2 col-5">
                     <div class="middle-right-area">
                         <div class="nav-hotline">
+                            @if($commonInfo['contacts']!=null)
                             <a href="tel:{{ $commonInfo['contacts']->phone_contacts }}" target="_blank"
                                 rel="noopener noreferrer">
                                 <i class="lni lni-phone"></i>
+                                @endif
                             </a>
                             <h3>LLame Ahora:
+                                @if($commonInfo['contacts']!=null)
                                 <span>{{ $commonInfo['contacts']->phone_contacts }}</span>
+                                @endif
                             </h3>
                         </div>
                     </div>
@@ -119,6 +123,7 @@
                 </div>
             </div>
             <div class="col-lg-5 col-md-6 col-12">
+                @if($commonInfo['contacts']!=null)
                 @if (   $commonInfo['contacts']->social_facebook ||
                         $commonInfo['contacts']->social_twitter ||
                         $commonInfo['contacts']->social_instagram)
@@ -146,6 +151,7 @@
 
                         </ul>
                     </div>
+                @endif
                 @endif
             </div>
         </div>
