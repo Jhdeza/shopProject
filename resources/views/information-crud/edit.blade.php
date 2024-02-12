@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-@if($contacts_information->id)
+
     <div class="container">
         <div class="row mt-5 ">
             <div class="col-lg-6 col-12">
@@ -13,7 +13,13 @@
                     <div class= "card-header">
                         <h3>@lang('main.contact_information')</h3>
                     </div>
-                    <form  enctype="multipart/form-data" class="form" method="post" action="{{ route('information.update', $contacts_information->id) }}">
+                    <form  enctype="multipart/form-data" class="form" method="post" action="
+                        @if($contacts_information->id!=null)
+                       {{ route('information.update', $contacts_information->id) }}
+                       @else
+                       {{route('information.store')}}
+                       
+                       ">
                         @csrf
                         @method('PUT')
 
@@ -120,7 +126,7 @@
             </div>
         </div>
     </div>
-    @endif
+    
 @endsection
 @push('js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
