@@ -41,13 +41,13 @@
                             <a href="tel:{{ $commonInfo['contacts']->phone_contacts }}" target="_blank"
                                 rel="noopener noreferrer">
                                 <i class="lni lni-phone"></i>
-                                @endif
                             </a>
+                            @endif
+                            @if($commonInfo['contacts']!=null)
                             <h3>LLame Ahora:
-                                @if($commonInfo['contacts']!=null)
                                 <span>{{ $commonInfo['contacts']->phone_contacts }}</span>
-                                @endif
                             </h3>
+                            @endif
                         </div>
                     </div>
                 </div>

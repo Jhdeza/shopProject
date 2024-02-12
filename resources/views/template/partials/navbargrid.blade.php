@@ -4,11 +4,11 @@
             <div class="row align-items-center">
                 <div class="col-lg-3 col-md-3 col-7">
                     <!-- Start Header Logo -->
-                    @if ($commonInfo['contacts'] != null)
-                        <a class="navbar-brand" href="{{ route('home') }}">
-
-                            <img src={{ $commonInfo['contacts']->image->url }} alt="Logo">
-                    @endif
+                    @if($commonInfo['contacts']!=null)
+                    <a class="navbar-brand" href="{{ route('home') }}">
+                        
+                        <img src={{ $commonInfo['contacts']->image->url }} alt="Logo">
+                        @endif
                     </a>
                 </div>
                 <div class="col-lg-5 col-md-7 col-xs-3">
@@ -35,16 +35,12 @@
                 <div class="col-lg-4 col-md-2 col-5">
                     <div class="middle-right-area">
                         <div class="nav-hotline">
-                            @if ($commonInfo['contacts'] != null)
-                                <a href="tel:{{ $commonInfo['contacts']->phone_contacts }}" target="_blank"
-                                    rel="noopener noreferrer">
-                                    <i class="lni lni-phone"></i>
-                            @endif
+                            <a href="tel:{{ $commonInfo['contacts']->phone_contacts }}" target="_blank"
+                                rel="noopener noreferrer">
+                                <i class="lni lni-phone"></i>
                             </a>
                             <h3>LLame Ahora:
-                                @if ($commonInfo['contacts'] != null)
-                                    <span>{{ $commonInfo['contacts']->phone_contacts }}</span>
-                                @endif
+                                <span>{{ $commonInfo['contacts']->phone_contacts }}</span>
                             </h3>
                         </div>
                     </div>
@@ -154,6 +150,7 @@
                         </div>
                     @endif
                 @endif
+
             </div>
         </div>
     </div>
