@@ -8,16 +8,20 @@
                         <div class="single-footer f-contact">
                             <h3>{{ __('main.touch_with_us') }}:</h3>
                             <p class="phone">{{ __('main.phone') }}:
+                                @if($commonInfo['contacts']!=null)
                             <p> {{ $commonInfo['contacts']->phone_contacts }}</p>
                             </p>
+                            @endif
                             <ul>
                                 <li><span> {{ __('main.MondayFriday') }}</span>{{ __('main.horaLV') }}</li>
                                 <li><span> {{ __('main.Saturday') }}</span> {{ __('main.horaS') }}</li>
                             </ul>
+                            @if($commonInfo['contacts']!=null)
                             <p class="mail">
                                 <a
                                     href="mailto:{{ $commonInfo['contacts']->email }}">{{ $commonInfo['contacts']->email }}</a>
                             </p>
+                            @endif
                         </div>
 
                     </div>
@@ -52,6 +56,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-12">
+                        @if($commonInfo['contacts']!=null)
                         @if (
                             $commonInfo['contacts']->social_facebook ||
                                 $commonInfo['contacts']->social_twitter ||
@@ -74,6 +79,7 @@
                                 @endif
 
                             </ul>
+                        @endif
                         @endif
                     </div>
                 </div>
