@@ -25,7 +25,7 @@
                             <label class=" col-form-label">Contacto:</label>
                             <div class="form-group row">
 
-                                <input class="form-control " name="name_contact" type="text" placeholder="Name"
+                                <input class="form-control " name="name_contact" type="text" placeholder="Nombre"
                                     value="{{$contacts_information?$contacts_information->name_contact:"" }}"
                                    >
 
@@ -100,9 +100,7 @@
                             <label class=" col-form-label">Descripción:</label>
                             <div class="form-group message row">
 
-                                <textarea class="form-control" rows="5" name="description" 
-                                placeholder="About Us">{{$contacts_information?$contacts_information->description:""}}
-                              </textarea>
+                                <textarea class="form-control" rows="5" name="description" placeholder="">{{$contacts_information?$contacts_information->description:""}}</textarea>
                                 @error('description')
                                     <span style="display: block" class="error invalid-feedback ">
                                         {{ $message }}

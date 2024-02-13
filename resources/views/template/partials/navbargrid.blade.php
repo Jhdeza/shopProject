@@ -35,13 +35,17 @@
                 <div class="col-lg-4 col-md-2 col-5">
                     <div class="middle-right-area">
                         <div class="nav-hotline">
+                            @if($commonInfo['contacts']!=null)
                             <a href="tel:{{ $commonInfo['contacts']->phone_contacts }}" target="_blank"
                                 rel="noopener noreferrer">
                                 <i class="lni lni-phone"></i>
                             </a>
+                            @endif
+                            @if($commonInfo['contacts']!=null)
                             <h3>LLame Ahora:
                                 <span>{{ $commonInfo['contacts']->phone_contacts }}</span>
                             </h3>
+                            @endif
                         </div>
                     </div>
                 </div>
