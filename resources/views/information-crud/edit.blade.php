@@ -13,19 +13,28 @@
                     <div class= "card-header">
                         <h3>@lang('main.contact_information')</h3>
                     </div>
+
                     <form enctype="multipart/form-data" class="form" method="post"
                         action="
-                        @if ($contacts_information->id != null) {{ route('information.update', $contacts_information->id) }}
-                        @else {{ route('information.store') }} @endif ">
+                        @if ($contacts_information != null) 
+                        {{ route('information.update', $contacts_information->id) }}
+                        @else 
+                        {{ route('information.store') }} 
+                        @endif 
+                        ">
                         @csrf
+                        @if ($contacts_information != null)
                         @method('PUT')
+                        @endif
 
                         <div class="card-body">
                             <label class=" col-form-label">Contacto:</label>
                             <div class="form-group row">
 
                                 <input class="form-control " name="name_contact" type="text" placeholder="Name"
-                                    value="{{ $contacts_information->name_contact }}">
+                                    @if ($contacts_information != null) value="{{ $contacts_information->name_contact }}"
+                                    @else  value="" @endif>
+
                                 @error('name_contact')
                                     <span style="display: block" class="error invalid-feedback ">
                                         {{ $message }}
@@ -39,7 +48,10 @@
 
 
                                 <input class="form-control" name="address_contacts" type="text"
-                                    placeholder="Your Address" value="{{ $contacts_information->address_contacts }}">
+                                    placeholder="Your Address"
+                                    @if ($contacts_information != null) value="{{ $contacts_information->address_contacts }}"
+                                    @else  value="" @endif>
+
                                 @error('address_contacts')
                                     <span style="display: block" class="error invalid-feedback ">
                                         {{ $message }}
@@ -54,7 +66,8 @@
 
 
                                 <input class="form-control" name="email" type="email" placeholder="Your Email"
-                                    value="{{ $contacts_information->email }}">
+                                    @if ($contacts_information != null) value="{{ $contacts_information->email }}"
+                                @else  value="" @endif>
                                 @error('email')
                                     <span style="display: block" class="error invalid-feedback ">
                                         {{ $message }}
@@ -66,7 +79,8 @@
                             <div class="form-group row">
 
                                 <input class="form-control" name="phone_contacts" type="text" placeholder="Your Phone"
-                                    value="{{ $contacts_information->phone_contacts }}">
+                                    @if ($contacts_information != null) value="{{ $contacts_information->phone_contacts }}"
+                                @else  value="" @endif>
                                 @error('phone_contacts')
                                     <span style="display: block" class="error invalid-feedback ">
                                         {{ $message }}
@@ -77,22 +91,33 @@
                             <div>
                                 <div class="form-group row">
                                     <input class="form-control" name="social_facebook" type="text"
-                                        placeholder="Facebook Link" value="{{ $contacts_information->social_facebook }}">
+                                        placeholder="Facebook Link"
+                                        @if ($contacts_information != null) value="{{ $contacts_information->social_facebook }}"
+                                        @else  value="" @endif>
                                 </div>
                                 <div class="form-group row">
                                     <input class="form-control" name="social_instagram" type="text"
-                                        placeholder="Instagram Link" value="{{ $contacts_information->social_instagram }}">
+                                        placeholder="Instagram Link"
+                                        @if ($contacts_information != null) value="{{ $contacts_information->social_instagram }}"
+                                        @else  value="" @endif>
                                 </div>
                                 <div class="form-group row">
                                     <input class="form-control" name="social_twitter" type="text"
-                                        placeholder="Twitter Link" value="{{ $contacts_information->social_twitter }}">
+                                        placeholder="Twitter Link"
+                                        @if ($contacts_information != null) value="{{ $contacts_information->social_twitter }}"
+                                         @else  value="" @endif>
                                 </div>
                             </div>
 
                             <label class=" col-form-label">Descripción:</label>
                             <div class="form-group message row">
 
-                                <textarea class="form-control" rows="5" name="description" placeholder="About Us">{{ $contacts_information->description }}</textarea>
+                                <textarea class="form-control" rows="5" name="description" placeholder="About Us">
+                                 @if ($contacts_information != null){{ $contacts_information->description }}
+                                 @else 
+                                 {{ '' }} 
+                                 @endif
+                                </textarea>
                                 @error('description')
                                     <span style="display: block" class="error invalid-feedback ">
                                         {{ $message }}
@@ -101,15 +126,21 @@
                             </div>
                             <div class="form-group row">
                                 <div class="form-group">
-                                    <x-image :params="[
-                                        'type' => 'simple',
-                                        'model' => $contacts_information,
-                                        'method' => 'imageUrl',
-                                    ]" />
+                                    @php
+                                        $imageParams = [
+                                            'type' => 'simple',
+                                            'method' => 'imageUrl',
+                                            'model' => $contacts_information??App\Models\Contact_information::class
+                                        ];
+                                        // if($contacts_information != null) {
+                                        //     $imageParams['model'] = $contacts_information;
+                                        // } else {
+                                        //     $imageParams['model'] = App\Models\Contact_information::class;
+                                        // }
+                                    @endphp
+                                    <x-image :params="$imageParams" />
                                 </div>
-
                             </div>
-
 
                             <div class="form-group button row">
 
