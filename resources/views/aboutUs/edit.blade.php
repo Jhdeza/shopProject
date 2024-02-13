@@ -12,13 +12,8 @@
                     <div class= "card-header">
                         <h3>@lang('main.about_us')</h3>
                     </div>
-                    <form class="form" method="post" action="
-                    @if($about!=null)
-                    {{ route('about-us.update', $about->id) }}
-                    @else
-                    {{ route('about-us.store')}}
-                    @endif
-                    ">
+                    <form class="form" method="post" 
+                    action="{{$about?route('about-us.update', $about->id):route('about-us.store')}}">
                         @csrf
                         @if($about!=null)
                         @method('PUT')
@@ -28,37 +23,23 @@
                             <label class=" col-form-label ">Titulo:</label>
                             <div class="form-group row">
 
-                                <input class="form-control col-xs-12 " name="titulo" type="text" placeholder="Titulo"
-                                @if($about!=null) value="{{ $about->titulo }}"
-                                @else
-                                value=""
-                                @endif
-                                >
+                                <input class="form-control col-xs-12 " name="titulo" type="text" 
+                                placeholder="Titulo" value="{{$about?$about->titulo:"" }}">
 
                             </div>
 
                             <label class=" col-form-label">Extrato:</label>
                             <div class="form-group message row">
 
-                                <textarea class="form-control col-xs-12" rows="5" name="extracto" placeholder="Descripcion empresa">
-                                    @if($about!=null)
-                                    {{ $about->extracto }}
-                                    @else
-                                    {{""}}
-                                    @endif
-                                </textarea>
+                                <textarea class="form-control col-xs-12" rows="5" name="extracto" 
+                                placeholder="Descripcion empresa">{{$about?$about->extracto:""}}</textarea>
 
                             </div>
                             <label class=" col-form-label">Extrato Equipo:</label>
                             <div class="form-group message row">
 
-                                <textarea class="form-control col-xs-12" rows="5" name="extracto_team" placeholder="Descripcion Equipo">
-                                    @if($about!=null)
-                                    {{ $about->extracto_team }}
-                                    @else
-                                    {{""}}
-                                    @endif
-                                </textarea>
+                                <textarea class="form-control col-xs-12" rows="5" name="extracto_team" 
+                                placeholder="Descripcion Equipo">{{$about?$about->extracto_team:""}}</textarea>
 
                             </div>
 

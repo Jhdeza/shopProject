@@ -15,13 +15,7 @@
                     </div>
 
                     <form enctype="multipart/form-data" class="form" method="post"
-                        action="
-                        @if ($contacts_information != null) 
-                        {{ route('information.update', $contacts_information->id) }}
-                        @else 
-                        {{ route('information.store') }} 
-                        @endif 
-                        ">
+                    action="{{$contacts_information?route('information.update', $contacts_information->id):route('information.store')}}">
                         @csrf
                         @if ($contacts_information != null)
                         @method('PUT')
@@ -32,8 +26,8 @@
                             <div class="form-group row">
 
                                 <input class="form-control " name="name_contact" type="text" placeholder="Name"
-                                    @if ($contacts_information != null) value="{{ $contacts_information->name_contact }}"
-                                    @else  value="" @endif>
+                                    value="{{$contacts_information?$contacts_information->name_contact:"" }}"
+                                   >
 
                                 @error('name_contact')
                                     <span style="display: block" class="error invalid-feedback ">
@@ -48,9 +42,8 @@
 
 
                                 <input class="form-control" name="address_contacts" type="text"
-                                    placeholder="Your Address"
-                                    @if ($contacts_information != null) value="{{ $contacts_information->address_contacts }}"
-                                    @else  value="" @endif>
+                                    placeholder="Dirección"
+                                     value="{{$contacts_information? $contacts_information->address_contacts:"" }}">
 
                                 @error('address_contacts')
                                     <span style="display: block" class="error invalid-feedback ">
@@ -65,9 +58,8 @@
                             <div class="form-group row">
 
 
-                                <input class="form-control" name="email" type="email" placeholder="Your Email"
-                                    @if ($contacts_information != null) value="{{ $contacts_information->email }}"
-                                @else  value="" @endif>
+                                <input class="form-control" name="email" type="email" placeholder="Email"
+                                    value="{{$contacts_information?$contacts_information->email:"" }}">
                                 @error('email')
                                     <span style="display: block" class="error invalid-feedback ">
                                         {{ $message }}
@@ -78,9 +70,8 @@
                             <label class="c col-form-label">Telefono:</label>
                             <div class="form-group row">
 
-                                <input class="form-control" name="phone_contacts" type="text" placeholder="Your Phone"
-                                    @if ($contacts_information != null) value="{{ $contacts_information->phone_contacts }}"
-                                @else  value="" @endif>
+                                <input class="form-control" name="phone_contacts" type="text" placeholder="Telefono"
+                                 value="{{ $contacts_information?$contacts_information->phone_contacts:"" }}">
                                 @error('phone_contacts')
                                     <span style="display: block" class="error invalid-feedback ">
                                         {{ $message }}
@@ -92,32 +83,26 @@
                                 <div class="form-group row">
                                     <input class="form-control" name="social_facebook" type="text"
                                         placeholder="Facebook Link"
-                                        @if ($contacts_information != null) value="{{ $contacts_information->social_facebook }}"
-                                        @else  value="" @endif>
+                                        value="{{ $contacts_information?$contacts_information->social_facebook:"" }}">
                                 </div>
                                 <div class="form-group row">
                                     <input class="form-control" name="social_instagram" type="text"
                                         placeholder="Instagram Link"
-                                        @if ($contacts_information != null) value="{{ $contacts_information->social_instagram }}"
-                                        @else  value="" @endif>
+                                         value="{{$contacts_information?$contacts_information->social_instagram:"" }}">
                                 </div>
                                 <div class="form-group row">
                                     <input class="form-control" name="social_twitter" type="text"
                                         placeholder="Twitter Link"
-                                        @if ($contacts_information != null) value="{{ $contacts_information->social_twitter }}"
-                                         @else  value="" @endif>
+                                        value="{{$contacts_information? $contacts_information->social_twitter:"" }}" >
                                 </div>
                             </div>
 
                             <label class=" col-form-label">Descripción:</label>
                             <div class="form-group message row">
 
-                                <textarea class="form-control" rows="5" name="description" placeholder="About Us">
-                                 @if ($contacts_information != null){{ $contacts_information->description }}
-                                 @else 
-                                 {{ '' }} 
-                                 @endif
-                                </textarea>
+                                <textarea class="form-control" rows="5" name="description" 
+                                placeholder="About Us">{{$contacts_information?$contacts_information->description:""}}
+                              </textarea>
                                 @error('description')
                                     <span style="display: block" class="error invalid-feedback ">
                                         {{ $message }}
@@ -132,11 +117,7 @@
                                             'method' => 'imageUrl',
                                             'model' => $contacts_information??App\Models\Contact_information::class
                                         ];
-                                        // if($contacts_information != null) {
-                                        //     $imageParams['model'] = $contacts_information;
-                                        // } else {
-                                        //     $imageParams['model'] = App\Models\Contact_information::class;
-                                        // }
+                                       
                                     @endphp
                                     <x-image :params="$imageParams" />
                                 </div>
