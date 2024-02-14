@@ -72,10 +72,10 @@
 
                             <p class="info-text">{{ $product->description }}</p>
                             <h4 class="title">Marca:
-                                <span class="info-text">{{ $product->branch ? $product->branch->name : '' }}</span>
+                                <span class="info-text">{{ $product->brand ? $product->brand->name : '' }}</span>
                             </h4>
                             <h4 class="title">Modelo:
-                                <span class="info-text"> {{ $product->models ? $product->models->name : '' }} </span>
+                                <span class="info-text"> {{ $product->model ? $product->model->name : '' }} </span>
                             </h4>
 
 

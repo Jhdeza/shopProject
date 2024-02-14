@@ -28,11 +28,11 @@ class Product extends Model
 
     public function model()
     {
-        return $this->belongsTo(Models::class);
+        return $this->belongsTo(Brandmodel::class);
     }
-    public function branch()
+    public function brand()
     {
-        return $this->belongsTo(Branch::class);
+        return $this->belongsTo(Brand::class);
     }
 
     public function ofert()
