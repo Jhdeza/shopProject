@@ -12,36 +12,49 @@
                     <div class= "card-header">
                         <h3>@lang('main.about_us')</h3>
                     </div>
-                    <form class="form" method="post" 
-                    action="{{$about?route('about-us.update', $about->id):route('about-us.store')}}">
+                    <form class="form" enctype="multipart/form-data" method="post"
+                        action="{{ $about ? route('about-us.update', $about->id) : route('about-us.store') }}">
                         @csrf
-                        @if($about!=null)
-                        @method('PUT')
+                        @if ($about != null)
+                            @method('PUT')
                         @endif
 
                         <div class="card-body">
                             <label class=" col-form-label ">Titulo:</label>
                             <div class="form-group row">
 
-                                <input class="form-control col-xs-12 " name="titulo" type="text" 
-                                placeholder="Titulo" value="{{$about?$about->titulo:"" }}">
+                                <input class="form-control col-xs-12 " name="titulo" type="text" placeholder="Titulo"
+                                    value="{{ $about ? $about->titulo : '' }}">
 
                             </div>
 
                             <label class=" col-form-label">Extrato:</label>
                             <div class="form-group message row">
 
-                                <textarea class="form-control col-xs-12" rows="5" name="extracto" 
-                                placeholder="Descripcion empresa">{{$about?$about->extracto:""}}</textarea>
+                                <textarea class="form-control col-xs-12" rows="5" name="extracto" placeholder="Descripcion empresa">{{ $about ? $about->extracto : '' }}</textarea>
 
                             </div>
                             <label class=" col-form-label">Extrato Equipo:</label>
                             <div class="form-group message row">
 
-                                <textarea class="form-control col-xs-12" rows="5" name="extracto_team" 
-                                placeholder="Descripcion Equipo">{{$about?$about->extracto_team:""}}</textarea>
+                                <textarea class="form-control col-xs-12" rows="5" name="extracto_team" placeholder="Descripcion Equipo">{{ $about ? $about->extracto_team : '' }}</textarea>
 
                             </div>
+                            <div class="form-group row">
+                                <div class="form-group">
+                                    @php
+                                        $imageParams = [
+                                            'type' => 'simple',
+                                            'method' => 'imageUrl',
+                                            'model' => $about ?? App\Models\AboutUs::class,
+                                        ];
+
+                                    @endphp
+                                    <x-image :params="$imageParams" />
+                                </div>
+                            </div>
+
+
 
 
                             <div class="form-group button row">
@@ -75,5 +88,9 @@
                 }
             });
         })
+
+        $(document).ready(function() {
+            $('.file-upload').upload();
+        });
     </script>
 @endsection

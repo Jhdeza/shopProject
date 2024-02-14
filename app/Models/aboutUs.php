@@ -9,8 +9,13 @@ class aboutUs extends Model
 {
     use HasFactory;
     
+    protected $guarded = [
+        "id"
+    ];
+    
     public $timestamps = false;
     const urlImageEmpty = 'path/to/empty/image.jpg';
+    protected $table = "about_us";
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
@@ -26,11 +31,6 @@ class aboutUs extends Model
         return self::urlImageEmpty;
     }
 
-    protected $guarded = [
-        "id"
-    ];
-    protected $table = "about_us";
-    
 
 
 }

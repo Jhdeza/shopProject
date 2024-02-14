@@ -21,15 +21,69 @@ class AboutUsController extends Controller
         $about = new aboutUs();
         $about->fill($request->all());
         $about->save();
+
+        $image = $request->file('file');
+        $deleteImg = false;
+   
+        if($image){
+           
+                if($request->input('flag-file')){
+                    $fileName = /* $staff->name . '_' . */ time() . '.' . $image->getClientOriginalExtension();  
+                    $path = $image->storeAs('public/about', $fileName); 
+                    
+                    if($about->image){                    
+                        $about->image->update([
+                            'url' => str_replace('public/', 'storage/' ,$path)
+                        ]);
+                    }
+                    else{
+                        $about->image()->create([
+                            'url' => str_replace('public/', 'storage/' ,$path)
+                        ]);
+                    }          
+                } 
+            } 
+            else if($request->input('flag-file')) $deleteImg = true;   
+            
+            if($deleteImg && $about->image){
+                $about->image->delete();
+            }  
         return redirect()->route("about-us.index");
 
     }
     
-    public function update(Request $request, $id)
+    public function update(AboutUsRequest $request, $id)
     {
         $about = aboutUs::find($id);
         $about->fill($request->all());
         $about->save();
+        $image = $request->file('file');
+        $deleteImg = false;
+        
+        if($image){
+           
+                if($request->input('flag-file')){
+                    $fileName = /* $staff->name . '_' . */ time() . '.' . $image->getClientOriginalExtension();  
+                    $path = $image->storeAs('public/about', $fileName); 
+                    
+                    if($about->image){                    
+                        $about->image->update([
+                            'url' => str_replace('public/', 'storage/' ,$path)
+                        ]);
+                    }
+                    else{
+                        $about->image()->create([
+                            'url' => str_replace('public/', 'storage/' ,$path)
+                        ]);
+                    }          
+                } 
+            } 
+            else if($request->input('flag-file')) $deleteImg = true;   
+            
+            if($deleteImg && $about->image){
+                $about->image->delete();
+            }  
+
         return redirect()->route("about-us.index");
     }
 

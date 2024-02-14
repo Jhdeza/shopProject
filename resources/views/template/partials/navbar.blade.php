@@ -7,8 +7,7 @@
                     <a class="navbar-brand" href="{{ route('home') }}">
                         
                         <img src={{ request()->is('productGrid/*') || request()->is('productDetails/*')
-                            ? '/' . $commonInfo['contacts']->image->url
-                            : $commonInfo['contacts']->image->url }}
+                            ? '/' . $commonInfo['contacts']->image->url : $commonInfo['contacts']->image->url }}
                             alt="Logo">
                             @endif
                     </a>

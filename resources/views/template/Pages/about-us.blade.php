@@ -23,8 +23,15 @@
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-12 col-12">
                     <div class="content-left">
-                        <img src="{{asset('template/assets/images/img/proyecto.jpg')}}" alt="foto_front_chapintec">
-                    </div>
+                        
+                        @foreach ($abouts as $about)
+                        <img
+                        @if($about->image!=null)
+                        src={{$about->image->url}} 
+                         @endif
+                         alt="foto_front_chapintec">
+                         @endforeach
+                        </div>
                 </div>
                 <div class="col-lg-6 col-md-12 col-12">
                     <div class="content-right">
