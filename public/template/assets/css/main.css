@@ -5262,6 +5262,12 @@ blockquote span {
   padding-bottom: 20px;
   border-bottom: 1px solid #eee;
 }
+.item-details .product-info .info-textbrand {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+ 
+}
+
 .item-details .product-info .title-label{
   font-size: 20px !important;
 }

@@ -72,10 +72,10 @@
 
                             <p class="info-text">{{ $product->description }}</p>
                             <h4 class="title">Marca:
-                                <span class="info-text">{{ $product->brand ? $product->brand->name : '' }}</span>
+                                <span class="info-text-brand">{{ $product->brand ? $product->brand->name : '' }}</span>
                             </h4>
                             <h4 class="title">Modelo:
-                                <span class="info-text"> {{ $product->model ? $product->model->name : '' }} </span>
+                                <span class="info-text-brand"> {{ $product->model ? $product->model->name : '' }} </span>
                             </h4>
 
 
@@ -93,7 +93,7 @@
                                                             <div class="single-radio radio-style-1">
                                                                 <input type="radio" id="radio-{{ $value['id'] }}"
                                                                     value="{{ $res['id'] . '-' . $value['id'] }}"
-                                                                    name="values[]" class="radio-input">
+                                                                    name="values[{{$loop->index}}][]" class="radio-input">
                                                                 <label {{-- for="radio-{{ $value['id'] }}" --}}
                                                                     class="radio-label radio-label-act">
                                                                     {{ $value['name'] }} </label>

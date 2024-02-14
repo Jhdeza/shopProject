@@ -261,7 +261,7 @@ class HomeController extends Controller
                     ->join('variations as v', 'v.id', '=', 'cv.variation_id')
                     ->where('product_id', $product->id)
                     ->where('cv.characteristic_id', $char->id)
-                    ->select('values.id', 'values.name')
+                    ->select('values.id', 'values.name','variations.price')
                     ->get()
                     ->toArray();
 
