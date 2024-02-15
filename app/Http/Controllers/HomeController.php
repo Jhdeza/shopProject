@@ -314,13 +314,11 @@ class HomeController extends Controller
 
     public function productStock(Request $request, Product $product)
     {
-        //dd($request->all());
         $values = $request->values;
         $query = $product->variation()->join('characteristic_variation as vc', 'vc.variation_id', '=', 'variations.id');
         $stock = 0;
         $title = trans('main.stock1');
         $soldOut = false;
-        //dd(count($values));
 
         if ($values) {
             $query = DB::table('variations as v')
