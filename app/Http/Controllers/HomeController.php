@@ -320,20 +320,74 @@ class HomeController extends Controller
         $stock = 0;
         $title = trans('main.stock1');
         $soldOut = false;
+        //dd(count($values));
 
         if ($values) {
-            foreach ($values as $value) {
-                $parts = explode('-', $value);
-                $query->where('characteristic_id', $parts[0])
-                    ->where('value_id', $parts[1]);
-            }
-            $resultstock = $query->select(DB::raw('SUM(variations.stock) as stock'))->first();
+            $query = DB::table('variations as v')
+            ->join('characteristic_variation as cv', 'v.id', '=', 'cv.variation_id')
+            ->select('v.id', 'v.price', DB::raw('MAX(v.stock) as stock'), DB::raw('COUNT(*) as total'))
+            ->where('v.product_id', $product->id);
+       
+            $query->where(function($query) use($values){
+                foreach ($values as $value) {
+                    list($characteristic_id, $value_id) = explode('-', $value[0]);
+                    $query->orWhere(function($query1) use($characteristic_id, $value_id){
+                        $query1->where('cv.characteristic_id', $characteristic_id)
+                            ->where('cv.value_id', $value_id);
+                    });
+                }
+            });
+            
+            $query->groupBy('v.id')
+            ->having('total', count($values));
 
-            if ($resultstock && $resultstock->stock != 0)
-                $stock = $resultstock->stock;
+           $result = $query
+            ->get();
+         
+         $resultSend = new \stdClass();
+         $resultSend->stock = 0;
+         $resultSend->min_price = 999999;
+         foreach($result as $row){
+            $resultSend->stock += $row->stock;
+            if($resultSend->min_price > $row->price)
+                $resultSend->min_price = $row->price;
+         }
+        
+         
+        dd($resultSend);
+            if ($resultstock && $resultstock->total_stock != 0)
+                $stock = $resultstock->total_stock;
         } else
             $stock = $product->quantity;
 
+
+
+
+
+      /*  
+        $totalStock = DB::table(function ($query) {
+        $query->select('v.stock')
+        ->from('variations as v')
+        ->join('characteristic_variation as cv', 'v.id', '=', 'cv.variation_id')
+        ->where('v.product_id', '=', $product->id);
+        if ($values) {
+            foreach ($values as $value) {
+                $parts = explode('-', $value);
+                $query->where('cv.characteristic_id', '=', $parts[0])
+                ->where('cv.value_id', '=', $parts[1]);
+            }
+        }
+}, 'intersected_stocks')
+->selectRaw('SUM(stock) as total_stock')
+->join(DB::raw('(SELECT v.stock
+                FROM variations v 
+                INNER JOIN characteristic_variation cv ON v.id = cv.variation_id 
+                WHERE cv.characteristic_id = 12 AND cv.value_id = 28 AND v.product_id = 17) as intersected_stocks_2'), function ($join) {
+    $join->on('intersected_stocks.stock', '=', 'intersected_stocks_2.stock');
+})
+->first();
+
+            */
 
 
 
