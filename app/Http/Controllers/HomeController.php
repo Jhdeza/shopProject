@@ -275,21 +275,7 @@ class HomeController extends Controller
 
             $result = collect($result)->keyBy('id')->toArray();
 
-
-            // $product->variation()->with('characteristics')->get();
-
-            // dd($product);
-
-
-            /*  return view('template.pages.product-details', compact(
-                'commonInfo',
-                'product',
-                "category",
-                // "variations",
-                "variaciones",
-                // "caracteristicas",
-                'result',
-            )); */
+        
         }
         $stock = $product->quantity;
 
@@ -299,6 +285,13 @@ class HomeController extends Controller
             $soldOut = true;
             $stock = trans('main.soldout');
         }
+        else if($stock < $product->quantity_alert){
+            $stock = $product->quantity;
+
+        }
+
+
+
 
         return view('template.pages.product-details', compact(
             'commonInfo',
@@ -317,6 +310,7 @@ class HomeController extends Controller
         $values = $request->values;
         $query = $product->variation()->join('characteristic_variation as vc', 'vc.variation_id', '=', 'variations.id');
         $stock = 0;
+        $price = 0;
         $title = trans('main.stock1');
         $soldOut = false;
 
@@ -351,53 +345,24 @@ class HomeController extends Controller
                 $resultSend->min_price = $row->price;
          }
         
-         
-        dd($resultSend);
-            if ($resultstock && $resultstock->total_stock != 0)
-                $stock = $resultstock->total_stock;
-        } else
-            $stock = $product->quantity;
-
-
-
-
-
-      /*  
-        $totalStock = DB::table(function ($query) {
-        $query->select('v.stock')
-        ->from('variations as v')
-        ->join('characteristic_variation as cv', 'v.id', '=', 'cv.variation_id')
-        ->where('v.product_id', '=', $product->id);
-        if ($values) {
-            foreach ($values as $value) {
-                $parts = explode('-', $value);
-                $query->where('cv.characteristic_id', '=', $parts[0])
-                ->where('cv.value_id', '=', $parts[1]);
-            }
         }
-}, 'intersected_stocks')
-->selectRaw('SUM(stock) as total_stock')
-->join(DB::raw('(SELECT v.stock
-                FROM variations v 
-                INNER JOIN characteristic_variation cv ON v.id = cv.variation_id 
-                WHERE cv.characteristic_id = 12 AND cv.value_id = 28 AND v.product_id = 17) as intersected_stocks_2'), function ($join) {
-    $join->on('intersected_stocks.stock', '=', 'intersected_stocks_2.stock');
-})
-->first();
+        if ($resultSend && $resultSend->stock != 0){
+            $stock = $resultSend->stock;
+            $price ='$'. number_format($resultSend->min_price, 2, '.', '');
+        }else
+        $price = '0.00 $';
+      
 
-            */
-
-
-
-        if ($stock > $product->quantity_alert) {
-            $title = trans('main.stock1');
-            $stock = trans('main.stock');
-        } else if ($stock === 0) {
+        if ($stock == 0) {
             $soldOut = true;
             $stock = trans('main.soldout');
-        }
-
-        return response()->json(['stock' => $stock, 'title' => $title, 'soldOut' => $soldOut]);
+        }        
+        else if ($stock > $product->quantity_alert) {
+            $title = trans('main.stock1');
+            $stock = trans('main.stock');
+      }
+   
+        return response()->json(['stock' => $stock, 'price'=>$price, 'title' => $title, 'soldOut' => $soldOut]);
     }
 
     public function Error()

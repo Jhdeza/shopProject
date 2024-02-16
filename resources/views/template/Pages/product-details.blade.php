@@ -66,17 +66,21 @@
                                         <span>${{ number_format($product->price, 2, '.', '') }}</span>
                                     </h3>
                                 @else
-                                    <h3 class="price">${{ number_format($product->price, 2, '.', '') }}</h3>
+                                    <h3 class="price" id="price-min" >${{ number_format($product->price, 2, '.', '') }}</h3>
                                 @endif
                             </div>
 
                             <p class="info-text">{{ $product->description }}</p>
-                            <h4 class="title">Marca:
-                                <span class="info-text-brand">{{ $product->brand ? $product->brand->name : '' }}</span>
-                            </h4>
-                            <h4 class="title">Modelo:
-                                <span class="info-text-brand"> {{ $product->model ? $product->model->name : '' }} </span>
-                            </h4>
+                            @if($product->brand)
+                                <h4 class="title">Marca:
+                                    <span class="info-text-brand">{{ $product->brand ? $product->brand->name : '' }}</span>
+                                </h4>
+                            @endif
+                            @if($product->model)
+                                <h4 class="title">Modelo:
+                                    <span class="info-text-brand"> {{ $product->model ? $product->model->name : '' }} </span>
+                                </h4>
+                        @endif
 
 
                             @if ($product->type == 'VARIABLE')
@@ -85,6 +89,7 @@
                                         method="GET">
                                         <div class="col-lg-12 col-md-12 col-12">
                                             @foreach ($result as $res)
+                                            
                                                 <label class="title-label" for="size">{{ $res['name'] }}</label>
                                                 <div class="d-flex flex-wrap">
                                                     @foreach ($res['values'] as $value)
@@ -112,15 +117,13 @@
                                     <label @class(['title-label', 'd-none' => $product->quantity == 0]) id="title">@lang('main.stock1'):</label>
 
                                     <div class="form-control">
-                                        {{--    @if ($product->quantity > $product->quantity_alert)
-                                        
-                                            <span id="cantidad">@lang('main.stock')</span>
+                                           @if ($product->quantity > $product->quantity_alert)
+                                         <span id="cantidad">@lang('main.stock')</span>
                                         @elseif($product->quantity === 0)
                                             <span id="cantidad">Agotado</span>
-                                        @elseif($product->quantity <= $product->quantity_alert)
-                                         --}}
-                                        <span id="cantidad">{{ $stock }}</span>
-                                        {{--   @endif --}}
+                                        @elseif($product->quantity < $product->quantity_alert)
+                                        <span id="cantidad">{{$product->quantity}}</span>
+                                       @endif
                                     </div>
                                 </div>
                             </div>

@@ -265,8 +265,9 @@
                     url: $(this).attr('action'),
                     data: $(this).serialize(),
                     success: function(response) {
-                        $('#cantidad').text(response.stock);
+                        $('#cantidad').html(response.stock);
                         $('#title').text(response.title);
+                        $('#price-min').text(response.price);
                         if (response.soldOut) {
                             $('#title').addClass('d-none')
                         } else
