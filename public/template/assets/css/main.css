@@ -8220,7 +8220,7 @@ padding-top: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80px; /* ajusta el ancho según sea necesario */
+  min-width: 80px; /* ajusta el ancho según sea necesario */
   height: 30px; /* ajusta la altura según sea necesario */
   background-color: white; /* color de fondo del rectángulo */
   border: 2px solid #aaaaaa; /* color del borde */

@@ -100,7 +100,7 @@
                                                                     value="{{ $res['id'] . '-' . $value['id'] }}"
                                                                     name="values[{{$loop->parent->index}}][]" class="radio-input">
                                                                 <label {{-- for="radio-{{ $value['id'] }}" --}}
-                                                                    class="radio-label radio-label-act w-auto" >
+                                                                    class="radio-label radio-label-act" >
                                                                     {{ $value['name'] }} </label>
                                                             </div>
                                                         </div>
