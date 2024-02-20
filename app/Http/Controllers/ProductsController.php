@@ -99,7 +99,7 @@ class ProductsController extends Controller
      */
     public function store(ProductRequest $request)
     {
-        
+       
         try {
             DB::beginTransaction();
             $productData = $request->all();
@@ -123,7 +123,7 @@ class ProductsController extends Controller
                     $path = $image->storeAs('public/products', $fileName);
                     $files[] =[
                         'url' => str_replace('public/', 'storage/' ,$path),
-                        'is_main' => $request->input('pre_hidden_galery') == $image->getClientOriginalName()?true:false
+                        'is_main' => str_replace('%20',' ',$request->input('pre_hidden_galery')) == $image->getClientOriginalName()?true:false
                     ];
                 }
                 $product->galery()->createMany($files);
@@ -215,7 +215,7 @@ class ProductsController extends Controller
                     $path = $image->storeAs('public/products', $fileName);
                     $files[] =[
                         'url' => str_replace('public/', 'storage/' ,$path),
-                        'is_main' => $request->input('pre_hidden_galery') == $image->getClientOriginalName()?true:false
+                        'is_main' => str_replace('%20',' ',$request->input('pre_hidden_galery')) == $image->getClientOriginalName()?true:false
                     ];
                 }
                 $product->galery()->createMany($files);
