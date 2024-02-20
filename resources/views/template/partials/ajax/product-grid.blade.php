@@ -2,6 +2,8 @@
 <div class="row">
    
     @foreach ($products as $product)
+    @if($product->prod_actv != null)
+    
     <div id="productGrid" class="col-lg-3 col-md-6 col-6">
             <div class="single-product">
                 <div class="d-flex flex-row align-items-start">
@@ -55,6 +57,7 @@
                 </div>
             </div>  
         </div>
+        @endif
         @endforeach 
         
         

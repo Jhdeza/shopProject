@@ -1,6 +1,7 @@
 <div class="row">
     <div class="col-lg-12 col-md-12 col-12">
         @foreach ($products as $product)
+        @if($product->prod_actv)
             <div class="single-product">
                 <div class="row align-items-start">
                     <div class="col-lg-4 col-md-4 col-8">
@@ -54,6 +55,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         @endforeach
     </div>
 </div>

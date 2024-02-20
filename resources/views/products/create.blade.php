@@ -2,7 +2,7 @@
     <div class="modal-content">
         <form class="form form-generic" enctype="multipart/form-data" method="POST" action="{{ route('product.store') }}">
             @csrf
-            <div class="modal-header">
+               <div class="modal-header">
                 <h4 class="modal-title">@lang('main.insert_Product')</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>

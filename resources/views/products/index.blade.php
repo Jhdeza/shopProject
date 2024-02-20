@@ -11,9 +11,9 @@
                 <div class="card-title">
                     <h5>@lang('main.product_list')</h5>
                 </div>
-                <button class="btn btn-success btn-sm float-right btn-modal" data-toggle="modal" data-target="#modal-generic" data-url="{{ route('product.create') }}">
+                {{-- <button class="btn btn-success btn-sm float-right btn-modal" data-toggle="modal" data-target="#modal-generic" data-url="{{ route('product.create') }}">
                     <i class="fas fa-list-alt "> </i> @lang('main.create')
-                </button>
+                </button> --}}
             </div>
             <div class="card-body">
                 <table id="products-tb" class="table table-striped table-list" style="width: 100%">
@@ -29,6 +29,7 @@
                             <th>@lang('main.ofert_id')</th>
                             <th>@lang('main.onsigth')</th>
                             <th>@lang('main.onnew')</th>
+                            <th>@lang('main.prod_actv')</th>
                         </tr>
                     </thead>
                 </table>
@@ -70,6 +71,7 @@
                 { data: 'ofert', name: 'ofert' },
                 { data: 'act_carusel', name: 'act_carusel' },
                 { data: 'is_new', name: 'is_new' },
+                { data: 'prod_actv', name: 'prod_actv' },
 
             ],
             initComplete: function () {

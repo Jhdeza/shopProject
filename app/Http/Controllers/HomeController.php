@@ -112,8 +112,8 @@ class HomeController extends Controller
                     $query->orderBy('id', 'asc');
             }
             
-            $products = $query->paginate(12)->withQueryString();
-
+            $products = $query->where('prod_actv',1)->paginate(12)->withQueryString();
+           
             $quantity = $products->items();
 
             if ($products->total() > 0 && isset($products->items()[0]) && $products->items()[0]->id) {
@@ -164,7 +164,7 @@ class HomeController extends Controller
                     $query->orderBy('id', 'asc');
             }
             
-            $products = $query->paginate(12)->withQueryString();
+            $products = $query->where('prod_actv',1)->paginate(12)->withQueryString();
             
             $quantity = $products->count();
             

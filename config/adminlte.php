@@ -321,16 +321,16 @@ return [
         ],
         
 
-        [
-            'text' => 'Categorias',
-            'url' => 'admin/category',
-            'icon' => 'fa fa-list'
-        ],
-        [
-            'text' => 'Ofertas',
-            'url' => 'admin/ofert',
-            'icon' => 'fa fa-bolt'
-        ],
+        // [
+        //     'text' => 'Categorias',
+        //     'url' => 'admin/category',
+        //     'icon' => 'fa fa-list'
+        // ],
+        // [
+        //     'text' => 'Ofertas',
+        //     'url' => 'admin/ofert',
+        //     'icon' => 'fa fa-bolt'
+        // ],
         [
             'text' => 'Productos',
             'url' => 'admin/product',

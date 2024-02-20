@@ -23,7 +23,8 @@ class ProductsController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::with(["category","ofert"])->get();
+        
+        // $products = Product::with(["category","ofert"])->get();
         $products = Product::join('categories as c', 'c.id' , '=' , 'products.category_id')
                         ->leftJoin('categories as sub', 'sub.id', "=", 'products.sub_category_id')
                         ->leftJoin('oferts as o', 'o.id', "=", 'products.ofert_id')
@@ -38,6 +39,7 @@ class ProductsController extends Controller
                             'c.name as category',
                             'sub.name as sub_category',
                             'o.name as ofert',
+                            'products.prod_actv',
                         )->get();
         if($request->ajax()){
             return Datatables::of($products)
@@ -54,17 +56,21 @@ class ProductsController extends Controller
                     <div class="dropdown-menu">
                         <button class="dropdown-item btn-modal" data-toggle="modal" data-target="#modal-generic" data-url="'. route('product.edit', $row->id) .'">
                         <i class="fas fa-pencil-alt mr-1"></i><span class="">'. __('main.edit') .'</span></button>
-                        <button type="button" class="dropdown-item delete" data-url="'. route('product.destroy', $row->id) .'">
-                        <i class="fas fa-trash-alt mr-1"></i><span class="">'. __('main.delete') .'</span></button>
+                       
                     </div>
                   </div>
                 </div>';
             })
+            // <button type="button" class="dropdown-item delete" data-url="'. route('product.destroy', $row->id) .'">
+            // <i class="fas fa-trash-alt mr-1"></i><span class="">'. __('main.delete') .'</span></button>
             ->editColumn('is_new', function($row){
                 return $row->is_new?__('main.yes'):__('main.no');
             })
             ->editColumn('act_carusel', function($row){
                 return $row->act_carusel?__('main.yes'):__('main.no');
+            })
+            ->editColumn('prod_actv', function($row){
+                return $row->prod_actv?__('main.yes'):__('main.no');
             })
             ->editColumn('category', function($row){
                 if($row->sub_category){
@@ -182,6 +188,7 @@ class ProductsController extends Controller
             $product->fill($request->all());
             $product->act_carusel = $request->input('act_carusel') == "on" ?  true : false ;
             $product->is_new = $request->input('is_new') == "on" ?  true : false ;
+            $product->prod_actv = $request->input('prod_actv') == "on" ?  true : false ;
             $product->save();
             $files = [];
 
