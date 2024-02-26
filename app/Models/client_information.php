@@ -11,6 +11,7 @@ class client_information extends Model
     protected $guarded = [
         "id"
 
+        
     ];
    public $timestamps = false;  
     protected $table = "client_contact_informations";

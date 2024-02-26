@@ -9,6 +9,7 @@ use App\Models\Image;
 
 class Product extends Model
 {
+    
     use HasFactory;
     public $timestamps = false;
     protected $guarded = ['_token'];

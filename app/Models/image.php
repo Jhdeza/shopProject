@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Storage;
 class Image extends Model
 {
     use HasFactory;
-
+ 
+    
     protected $fillable = ['url', 'is_main'];
     public $timestamps = false;
 

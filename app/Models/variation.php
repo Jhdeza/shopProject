@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class Variation extends Model
 {
+    
     use HasFactory;
 
     // use Scopes;
