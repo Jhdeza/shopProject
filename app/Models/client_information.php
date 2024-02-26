@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class client_information extends Model
-{
-    use HasFactory;
+{    use HasFactory;
     protected $guarded = [
         "id"
 

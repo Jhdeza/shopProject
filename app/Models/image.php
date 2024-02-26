@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Support\Facades\Storage;
 
 class Image extends Model
-{
-    use HasFactory;
+{    use HasFactory;
  
     
     protected $fillable = ['url', 'is_main'];

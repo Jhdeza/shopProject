@@ -13,8 +13,7 @@ use Illuminate\Support\Facades\DB;
 
 class Variation extends Model
 {
-    
-    use HasFactory;
+        use HasFactory;
 
     // use Scopes;
     protected $guarded = ['_token'];
