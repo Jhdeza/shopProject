@@ -243,7 +243,7 @@ class HomeController extends Controller
                     ->where('product_id', $product->id)
                     ->where('cv.characteristic_id', $char->id)
                     ->select(DB::raw('MAX(values.id) AS id'), DB::raw('MAX(values.name) AS name'), DB::raw('MAX(v.price) as price'))
-                    ->groupBy(['values.id','v.price'])
+                    ->groupBy('values.id')
                     ->get()
                     ->toArray();
 
