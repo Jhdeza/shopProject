@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\aboutUs;
+use App\Models\AboutUs;
 use App\Models\Category;
 use App\Models\Characteristic;
 use App\Models\Contact_information;
@@ -48,7 +48,7 @@ class HomeController extends Controller
     public function about()
     {
         $commonInfo = $this->commonInfo();
-        $abouts = aboutUs::get();
+        $abouts = AboutUs::get();
         $staffs = Staff::get();
         return view('template.pages.about-us', compact('commonInfo', 'abouts', "staffs"));
     }
@@ -202,10 +202,7 @@ class HomeController extends Controller
                 
                 return response()->json($arr);
             } else {
-                
-                
-                
-                
+                     
                 return view('template.pages.product-grids', compact(
                     'commonInfo',
                     'products',
@@ -235,23 +232,7 @@ class HomeController extends Controller
         $category = Category::with('subcategories')->where('parent_id', null)->get();
 
         $variaciones = $product->variation;
-
-        // $caracteristicas = $variaciones->first()->caracteristicas;
-
-
-        // $variations = DB::table("variations")
-        //     ->join("characteristic_variation", "variations.id", "=", "characteristic_variation.variation_id")
-        //     ->join("values", "characteristic_variation.value_id", "=", "values.id")
-        //     ->select(
-        //         'characteristic_variation.characteristic_id',
-        //         DB::raw('MAX(characteristic_variation.id) as cvid'),
-        //         DB::raw('MAX(variations.id) as max_id'),
-        //         DB::raw('MAX(variations.stock) as max_stock'),
-        //         DB::raw('MAX(values.name) as valuesname')
-        //     )
-        //     ->groupBy('characteristic_variation.characteristic_id')
-        //     ->get();
-
+        
         $firstVariation = $product->variation->first();
         $result = null;
         $soldOut = false;
@@ -262,7 +243,7 @@ class HomeController extends Controller
                     ->where('product_id', $product->id)
                     ->where('cv.characteristic_id', $char->id)
                     ->select(DB::raw('MAX(values.id) AS id'), DB::raw('MAX(values.name) AS name'), DB::raw('MAX(v.price) as price'))
-                    ->groupBy('values.id')
+                    ->groupBy(['values.id','v.price'])
                     ->get()
                     ->toArray();
 

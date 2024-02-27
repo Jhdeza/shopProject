@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 
 use App\Observers\ImageObserver;
+
 use App\Models\Image;
 
 class AppServiceProvider extends ServiceProvider
@@ -26,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         Paginator::useBootstrap();
         Paginator::useBootstrapFive();
-    Paginator::useBootstrapFour();
+        Paginator::useBootstrapFour();
         Image::observe(ImageObserver::class);
     }
 }
