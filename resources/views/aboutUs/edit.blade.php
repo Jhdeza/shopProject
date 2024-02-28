@@ -26,6 +26,12 @@
                                 <input class="form-control col-xs-12 " name="titulo" type="text" placeholder="Titulo"
                                     value="{{ $about ? $about->titulo : '' }}">
 
+                                    @error('titulo')
+                                    <span style="display: block" class="error invalid-feedback ">
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+
                             </div>
 
                             <label class=" col-form-label">Extrato:</label>
@@ -33,12 +39,22 @@
 
                                 <textarea class="form-control col-xs-12" rows="5" name="extracto" placeholder="Descripcion empresa">{{ $about ? $about->extracto : '' }}</textarea>
 
+                                @error('extracto')
+                                <span style="display: block" class="error invalid-feedback ">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+
                             </div>
                             <label class=" col-form-label">Extrato Equipo:</label>
                             <div class="form-group message row">
 
                                 <textarea class="form-control col-xs-12" rows="5" name="extracto_team" placeholder="Descripcion Equipo">{{ $about ? $about->extracto_team : '' }}</textarea>
-
+                                @error('extracto_team')
+                                <span style="display: block" class="error invalid-feedback ">
+                                    {{ $message }}
+                                </span>
+                            @enderror
                             </div>
                             <div class="form-group row">
                                 <div class="form-group">

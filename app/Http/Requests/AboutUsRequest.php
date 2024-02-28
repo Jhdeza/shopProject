@@ -22,7 +22,24 @@ class AboutUsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "titulo" =>'required|string|max:255',
+            'extracto' =>"required",
+            'extracto_team'=> 'required'
         ];
     }
+    public function attributes(): array
+    {
+        return [
+            'extracto_team'=>'extracto de equipo',
+            
+            
+        ];
+    }
+
+
+
 }
+
+
+
+

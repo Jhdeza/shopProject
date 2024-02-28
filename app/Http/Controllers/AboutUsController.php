@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AboutUsRequest;
-use App\Models\aboutUs;
+use App\Models\AboutUs;
 use Illuminate\Http\Request;
 
 class AboutUsController extends Controller
@@ -14,7 +14,7 @@ class AboutUsController extends Controller
     public function index()
     {
        
-        $about = aboutUs::First();
+        $about = AboutUs::First();
         return view("aboutUs.edit", compact("about"));
     }
     public function store(AboutUsRequest $request){
