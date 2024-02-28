@@ -117,11 +117,11 @@
                                     <label @class(['title-label', 'd-none' => $product->quantity == 0]) id="title">@lang('main.stock1'):</label>
 
                                     <div class="form-control">
-                                           @if ($product->quantity > $product->quantity_alert)
+                                           @if ($product->quantity >= $product->quantity_alert)
                                          <span id="cantidad">@lang('main.stock')</span>
                                         @elseif($product->quantity === 0)
                                             <span id="cantidad">Agotado</span>
-                                        @elseif($product->quantity <= $product->quantity_alert)
+                                        @elseif($product->quantity < $product->quantity_alert)
                                         <span id="cantidad">{{$product->quantity}}</span>
                                        @endif
                                     </div>
