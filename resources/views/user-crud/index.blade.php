@@ -9,11 +9,11 @@
         <div class="row mt-5">
             <div class="card">
                 <div class="card-header">
-                    <h3>Listado de Usuarios</h3>
+                    <h3>{{__('main.User_List')}}</h3>
                 </div>
                 <div class="card-body">
                     <table class="table table-responsive">
-                        <a class= "btn btn-primary mb-1" href="{{ route('my-user.create') }}">Create</a>
+                        <a class= "btn btn-primary mb-1" href="{{ route('my-user.create') }}">{{__('main.Create')}}</a>
                         <tr>
                             <th>#</th>
                             <th>Name</th>
@@ -26,7 +26,7 @@
                                 <td> {{ $user->name }}</td>
                                 <td> {{ $user->email }}</td>
                                 <td><a class="btn btn-primary" href="{{ route('my-user.edit', $user->id) }}"><i
-                                            class= "fa fa-edit"></i> Edit </a></td>
+                                            class= "fa fa-edit"></i> {{__('main.Edit')}} </a></td>
                                 <td>
                                     <form class="form-delete"
                                         action="{{ route('my-user.destroy', $user->id) }}" method="POST">
@@ -34,7 +34,7 @@
                                         @method('DELETE')
                                         <button class="btn btn-danger " data-user="{{ $user->name }}" type="button"><i
                                                 class= "fa fa-trash"></i>
-                                            Delete</button>
+                                                {{__('main.Delete')}}</button>
                                     </form>
                                 </td>
                             </tr>

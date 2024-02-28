@@ -142,8 +142,18 @@ return [
     'soldout'=>'Agotado',
     'copyright'=>'Derechos de Autor 2024 | Todos los derechos reservados',
 
+    'User_List'=>'Listado de Usuarios',
+    'Create'=>'Crear',
+    'Edit'=>'Editar',
+    'Delete'=>'Eliminar',
 
-
-
+    'AddUser'=>'Agregar Usuario',
+    'Email'=>'Email',
+    'Name'=>'Nombre',
+    'Password'=>'Password',
+    
+    'Edituser'=>'Editar Usuario',
+    'changeuser'=>'Cambiar',
+   
 
 ];

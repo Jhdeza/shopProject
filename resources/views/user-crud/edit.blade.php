@@ -6,7 +6,7 @@
             <div class="col-6">
                 <div class="card card-dark ">
                     <div class= "card-header">
-                        <h3>Editar Usuario</h3>
+                        <h3>{{__('main.Edituser')}}</h3>
                     </div>
 
                     <form method="POST" class="form-horizontal" action="{{ route('my-user.update', $user->id) }}">
@@ -15,7 +15,7 @@
                         
                         <div class="card-body">
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Email:</label>
+                                <label class="col-sm-3 col-form-label">{{__('main.Email')}}:</label>
                                 <div class="col-sm-9">
                                     <input class="form-control " type="text" value="{{ $user->email }}" name="email"
                                         placeholder="Email...">
@@ -27,7 +27,7 @@
                                     @enderror
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Name</label>
+                                <label class="col-sm-3 col-form-label">{{__('main.Name')}}:</label>
                                 <div class="col-sm-9">
                                     <input class="form-control" type="text" value="{{ $user->name }}" name="name"
                                         placeholder="Nombre...">
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-info" type="submit">Cambiar</button>
+                            <button class="btn btn-info" type="submit">{{__('main.changeuser')}}</button>
                         </div>
                     </form>
                 </div>
