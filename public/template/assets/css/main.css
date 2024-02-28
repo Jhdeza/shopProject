@@ -3319,7 +3319,7 @@ ol {
 .single-product .product-image {
   overflow: hidden;
   position: relative;
-  padding: 5px;
+  padding: 15px;
 }
 
 .single-product .product-image .sale-tag {
@@ -8242,4 +8242,10 @@ color:#212529;
 .product-grids-head{
   margin: auto;
   
+}
+@media (max-width: 767px) {
+  .hero-area .hero-slider .single-slider .content {
+    padding-right: 30px;
+    padding-left: 40px;
+  }
 }
