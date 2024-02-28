@@ -116,7 +116,7 @@
 
                                     <label @class(['title-label', 'd-none' => $product->quantity == 0]) id="title">@lang('main.stock1'):</label>
 
-                                    <div class="form-control">
+                                    {{-- <div class="form-control">
                                            @if ($product->quantity > $product->quantity_alert)
                                          <span id="cantidad">@lang('main.stock')</span>
                                         @elseif($product->quantity === 0)
@@ -124,7 +124,7 @@
                                         @elseif($product->quantity <= $product->quantity_alert)
                                         <span id="cantidad">{{$product->quantity}}</span>
                                        @endif
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
