@@ -298,7 +298,7 @@ class HomeController extends Controller
         if ($values) {
             $query = DB::table('variations as v')
             ->join('characteristic_variation as cv', 'v.id', '=', 'cv.variation_id')
-            ->select('v.id', 'v.price', DB::raw('MAX(v.stock) as stock'), DB::raw('COUNT(*) as total'))
+            ->select(DB::raw('MAX(v.id) as id'), DB::raw('MAX(v.price) as price'), DB::raw('MAX(v.stock) as stock'), DB::raw('COUNT(*) as total'))
             ->where('v.product_id', $product->id);
        
             $query->where(function($query) use($values){
