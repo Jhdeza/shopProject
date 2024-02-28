@@ -256,10 +256,11 @@ class HomeController extends Controller
 
             $result = collect($result)->keyBy('id')->toArray();
 
+            dd($result);
         
         }
         $stock = $product->quantity;
-
+        
         if ($stock > $product->quantity_alert)
             $stock = trans('main.stock');
         else if ($stock === 0) {
@@ -270,7 +271,6 @@ class HomeController extends Controller
             $stock = $product->quantity;
 
         }
-
 
 
 
