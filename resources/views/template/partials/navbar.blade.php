@@ -2,7 +2,7 @@
     <div class="header-middle">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-3 col-md-3 col-7">
+                <div class="col-lg-3 col-md-3 col-7 mb-2 mb-md-0">
                     @if($commonInfo['contacts']!=null)
                     <a class="navbar-brand" href="{{ route('home') }}">
                         

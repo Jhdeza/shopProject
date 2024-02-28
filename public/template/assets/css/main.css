@@ -3319,6 +3319,7 @@ ol {
 .single-product .product-image {
   overflow: hidden;
   position: relative;
+  padding: 5px;
 }
 
 .single-product .product-image .sale-tag {
