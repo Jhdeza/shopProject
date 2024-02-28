@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\image;
+use App\Models\Image;
 use App\Models\Product;
 
 class Ofert extends Model
@@ -18,7 +18,7 @@ class Ofert extends Model
 
     public function image()
     {
-        return $this->morphOne(image::class, 'imageable');
+        return $this->morphOne(Image::class, 'imageable');
     }
 
     protected $casts = [
