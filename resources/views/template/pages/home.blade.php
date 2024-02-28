@@ -9,7 +9,7 @@
                             @foreach ($commonInfo['products'] as $product)
                                 <div class="single-slider "
                                     style="background-image: url({{ asset($product->image) }}); background-size:contain; background-position:90%;">
-                                    <div class="content">
+                                    <div class="content ml-2 ml-md-0">
                                         <h2><a href="{{ route('product-details', $product->id) }}">{{ $product->name }}</a>
                                         </h2>
                                         <p>{{ $product->description }}</p>
