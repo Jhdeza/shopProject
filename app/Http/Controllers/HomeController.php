@@ -256,7 +256,7 @@ class HomeController extends Controller
 
             $result = collect($result)->keyBy('id')->toArray();
 
-            dd($result);
+           
         
         }
         $stock = $product->quantity;
@@ -315,8 +315,9 @@ class HomeController extends Controller
             ->having('total', count($values));
 
            $result = $query
+          
             ->get();
-         
+            dd($result);
          $resultSend = new \stdClass();
          $resultSend->stock = 0;
          $resultSend->min_price = 999999;
