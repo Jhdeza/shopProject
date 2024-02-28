@@ -246,7 +246,7 @@ class HomeController extends Controller
                     ->groupBy('values.id')
                     ->get()
                     ->toArray();
-
+                    dd($values);
                 return [
                     'id' => $char->id,
                     'name' => $char->name,
@@ -310,7 +310,7 @@ class HomeController extends Controller
                     });
                 }
             });
-            dd($query);
+            
             $query->groupBy('v.id')
             ->having('total', count($values));
 
