@@ -240,10 +240,10 @@ class HomeController extends Controller
             $result = $firstVariation->characteristics->map(function ($char) use ($product) {
                 $values = Value::join('characteristic_variation as cv', 'values.id', '=', 'cv.value_id')
                     ->join('variations as v', 'v.id', '=', 'cv.variation_id')
-                    ->where('product_id', $product->id)
+                    ->where('v.product_id', $product->id) // Corregido para evitar ambigüedades
                     ->where('cv.characteristic_id', $char->id)
                     ->select(DB::raw('MAX(values.id) AS id'), DB::raw('MAX(values.name) AS name'), DB::raw('MAX(v.price) as price'))
-                    ->groupBy('values.id')
+                    ->groupBy('cv.value_id') // Corregido para agrupar por el ID del valor
                     ->get()
                     ->toArray();
                     
