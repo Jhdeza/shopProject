@@ -310,14 +310,14 @@ class HomeController extends Controller
                     });
                 }
             });
-            
+            dd($query);
             $query->groupBy('v.id')
             ->having('total', count($values));
 
            $result = $query
           
             ->get();
-            dd($result);
+            
          $resultSend = new \stdClass();
          $resultSend->stock = 0;
          $resultSend->min_price = 999999;
