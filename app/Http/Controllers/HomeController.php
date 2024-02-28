@@ -242,11 +242,11 @@ class HomeController extends Controller
                     ->join('variations as v', 'v.id', '=', 'cv.variation_id')
                     ->where('product_id', $product->id)
                     ->where('cv.characteristic_id', $char->id)
-                    ->select(DB::raw('MAX(values.id) AS id'), DB::raw('MAX(values.name) AS name'), DB::raw('MAX(v.price) as price'))
+                    ->select(DB::raw('MAX(values.id) AS id'), DB::raw('MAX(values.name) AS name'))
                     ->groupBy('values.id')
                     ->get()
                     ->toArray();
-                    
+                   
                 return [
                     'id' => $char->id,
                     'name' => $char->name,
