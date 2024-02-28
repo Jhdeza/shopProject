@@ -9,6 +9,7 @@ use App\Models\Product;
 
 class Ofert extends Model
 {
+    
     use HasFactory;
     public $timestamps = false;
     protected $guarded = ['_token'];
