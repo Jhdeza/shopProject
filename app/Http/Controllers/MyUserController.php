@@ -55,6 +55,7 @@ class MyUserController extends Controller
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->password = $request->password;
         $user->save();
         return redirect()->route('my-user.index');
     }

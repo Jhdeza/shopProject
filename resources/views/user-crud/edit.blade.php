@@ -39,6 +39,19 @@
                                     @enderror
                             </div>
                         </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label pr-0">{{__('main.Password')}}:</label>
+                                <div class="col-sm-9">
+                                    <input type="password" class="form-control" name="password" placeholder="Password">
+                                    @error('password')
+                                        <span style="display: block" class="error invalid-feedback ">
+                                            {{$message}}
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
                         <div class="card-footer">
                             <button class="btn btn-info" type="submit">{{__('main.changeuser')}}</button>
                         </div>
