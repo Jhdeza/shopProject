@@ -154,6 +154,7 @@ return [
     
     'Edituser'=>'Editar Usuario',
     'changeuser'=>'Cambiar',
+    'weekhours'=>'Horario Laboral',
    
 
 ];

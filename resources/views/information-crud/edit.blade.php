@@ -15,10 +15,10 @@
                     </div>
 
                     <form enctype="multipart/form-data" class="form" method="post"
-                    action="{{$contacts_information?route('information.update', $contacts_information->id):route('information.store')}}">
+                        action="{{ $contacts_information ? route('information.update', $contacts_information->id) : route('information.store') }}">
                         @csrf
                         @if ($contacts_information != null)
-                        @method('PUT')
+                            @method('PUT')
                         @endif
 
                         <div class="card-body">
@@ -26,8 +26,7 @@
                             <div class="form-group row">
 
                                 <input class="form-control " name="name_contact" type="text" placeholder="Nombre"
-                                    value="{{$contacts_information?$contacts_information->name_contact:"" }}"
-                                   >
+                                    value="{{ $contacts_information ? $contacts_information->name_contact : '' }}">
 
                                 @error('name_contact')
                                     <span style="display: block" class="error invalid-feedback ">
@@ -41,9 +40,8 @@
                             <div class="form-group row">
 
 
-                                <input class="form-control" name="address_contacts" type="text"
-                                    placeholder="Dirección"
-                                     value="{{$contacts_information? $contacts_information->address_contacts:"" }}">
+                                <input class="form-control" name="address_contacts" type="text" placeholder="Dirección"
+                                    value="{{ $contacts_information ? $contacts_information->address_contacts : '' }}">
 
                                 @error('address_contacts')
                                     <span style="display: block" class="error invalid-feedback ">
@@ -59,7 +57,7 @@
 
 
                                 <input class="form-control" name="email" type="email" placeholder="Email"
-                                    value="{{$contacts_information?$contacts_information->email:"" }}">
+                                    value="{{ $contacts_information ? $contacts_information->email : '' }}">
                                 @error('email')
                                     <span style="display: block" class="error invalid-feedback ">
                                         {{ $message }}
@@ -71,7 +69,7 @@
                             <div class="form-group row">
 
                                 <input class="form-control" name="phone_contacts" type="text" placeholder="Telefono"
-                                 value="{{ $contacts_information?$contacts_information->phone_contacts:"" }}">
+                                    value="{{ $contacts_information ? $contacts_information->phone_contacts : '' }}">
                                 @error('phone_contacts')
                                     <span style="display: block" class="error invalid-feedback ">
                                         {{ $message }}
@@ -83,34 +81,40 @@
                                 <div class="form-group row">
                                     <input class="form-control" name="social_facebook" type="text"
                                         placeholder="Facebook Link"
-                                        value="{{ $contacts_information?$contacts_information->social_facebook:"" }}">
+                                        value="{{ $contacts_information ? $contacts_information->social_facebook : '' }}">
                                 </div>
                                 <div class="form-group row">
                                     <input class="form-control" name="social_instagram" type="text"
                                         placeholder="Instagram Link"
-                                         value="{{$contacts_information?$contacts_information->social_instagram:"" }}">
+                                        value="{{ $contacts_information ? $contacts_information->social_instagram : '' }}">
                                 </div>
                                 <div class="form-group row">
                                     <input class="form-control" name="social_twitter" type="text"
                                         placeholder="Twitter Link"
-                                        value="{{$contacts_information? $contacts_information->social_twitter:"" }}" >
+                                        value="{{ $contacts_information ? $contacts_information->social_twitter : '' }}">
                                 </div>
                             </div>
-                            <label class=" col-form-label">Horario:</label>
+                            <label class=" col-form-label">{{ __('main.weekhours') }}:</label>
                             <div>
                                 <div class="form-group row">
                                     <input class="form-control" name="week_hours" type="text"
-                                        placeholder="Formato 9.00am-8.00pm"
-                                        value="{{ $contacts_information? $contacts_information->week_hours:"" }}">
+                                        placeholder="Formato -> 9.00am-8.00pm"
+                                        value="{{ $contacts_information ? $contacts_information->week_hours : '' }}">
+
+                                    @error('week_hours')
+                                        <span style="display: block" class="error invalid-feedback ">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
                                 </div>
-                                                                
+
                             </div>
-                            
+
 
                             <label class=" col-form-label">Descripción:</label>
                             <div class="form-group message row">
 
-                                <textarea class="form-control" rows="5" name="description" placeholder="">{{$contacts_information?$contacts_information->description:""}}</textarea>
+                                <textarea class="form-control" rows="5" name="description" placeholder="">{{ $contacts_information ? $contacts_information->description : '' }}</textarea>
                                 @error('description')
                                     <span style="display: block" class="error invalid-feedback ">
                                         {{ $message }}
@@ -123,9 +127,9 @@
                                         $imageParams = [
                                             'type' => 'simple',
                                             'method' => 'imageUrl',
-                                            'model' => $contacts_information??App\Models\Contact_information::class
+                                            'model' => $contacts_information ?? App\Models\Contact_information::class,
                                         ];
-                                       
+
                                     @endphp
                                     <x-image :params="$imageParams" />
                                 </div>

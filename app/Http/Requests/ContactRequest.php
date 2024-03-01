@@ -28,6 +28,7 @@ class ContactRequest extends FormRequest
             'email'=>'required|email',
             'phone_contacts'=>['required','regex:/^(\+[0-9]{0,3}|\+[0-9]{1,3}\s)?([0-9]{8,9})$/'],
             'description'=>'required|string',
+            'week_hours'=>'required|string',
 
         ];
     }
@@ -39,6 +40,7 @@ class ContactRequest extends FormRequest
             'email' => 'email',
             'phone_contacts' => 'telefono',
             'description' => 'descripción',
+            'week_hours' => 'Horario',
         ];
     }
 
