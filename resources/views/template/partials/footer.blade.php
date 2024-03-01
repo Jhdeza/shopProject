@@ -13,8 +13,8 @@
                             </p>
                             @endif
                             <ul>
-                                <li><span> {{ __('main.MondayFriday') }}</span>{{ __('main.horaLV') }}</li>
-                                <li><span> {{ __('main.Saturday') }}</span> {{ __('main.horaS') }}</li>
+                                <li><span> {{ __('main.MondayFriday') }}</span>{{ $commonInfo['contacts']->week_hours }}</li>
+                                
                             </ul>
                             @if($commonInfo['contacts']!=null)
                             <p class="mail">
@@ -31,8 +31,9 @@
                         <div class="single-footer f-link">
                             <h3>{{ __('main.information') }}:</h3>
                             <ul>
-                                <li><a href="{{ route('about-us') }}">{{ __('main.aboutus') }}</a></li>
+                                <li><a href="{{ route('Product-grids') }}">{{ __('main.productgrid') }}</a></li>
                                 <li><a href="{{ route('contact-us') }}">{{ __('main.contactus') }}</a></li>
+                                <li><a href="{{ route('about-us') }}">{{ __('main.aboutus') }}</a></li>
 
                             </ul>
                         </div>

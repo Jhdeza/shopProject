@@ -96,6 +96,16 @@
                                         value="{{$contacts_information? $contacts_information->social_twitter:"" }}" >
                                 </div>
                             </div>
+                            <label class=" col-form-label">Horario:</label>
+                            <div>
+                                <div class="form-group row">
+                                    <input class="form-control" name="week_hours" type="text"
+                                        placeholder="Formato 9.00am-8.00pm"
+                                        value="{{ $contacts_information? $contacts_information->week_hours:"" }}">
+                                </div>
+                                                                
+                            </div>
+                            
 
                             <label class=" col-form-label">Descripción:</label>
                             <div class="form-group message row">
