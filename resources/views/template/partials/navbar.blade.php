@@ -5,8 +5,7 @@
                 <div class="col-lg-3 col-md-3 col-7 mb-2 mb-md-0">
                     @if($commonInfo['contacts']!=null)
                     <a class="navbar-brand" href="{{ route('home') }}">
-                        
-                        <img src={{ request()->is('productGrid/*') || request()->is('productDetails/*')
+                          <img src={{ request()->is('productGrid/*') || request()->is('productDetails/*')
                             ? '/' . $commonInfo['contacts']->image->url : $commonInfo['contacts']->image->url }}
                             alt="Logo">
                             @endif
