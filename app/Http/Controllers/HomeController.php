@@ -39,11 +39,13 @@ class HomeController extends Controller
     {
         $commonInfo = $this->commonInfo();
         $cat = Category::get();
-        $catVistas = Category::where('parent_id', null )->orderByDesc('views')
+        $catVistas = Category::where('parent_id', null )->orderByDesc('views')->get();
+
+        $categorias = Category::withCount('subcategories')->get();
+        $categoriaMaxSubcategorias = $categorias->sortByDesc('subcategorias_count')->first();
         
-        ->get();
        
-        return view('template.pages.home', compact('commonInfo', 'cat',"catVistas"));
+        return view('template.pages.home', compact('commonInfo', 'cat',"catVistas",'categorias','categoriaMaxSubcategorias'));
     }
     public function about()
     {
@@ -361,12 +363,15 @@ class HomeController extends Controller
 
     private function commonInfo()
     {
+       
         return [
 
             'contacts' => Contact_information::First(),
             'products' => Product::where('act_carusel', true)->get(),
             'productosMasVistos' => Product::orderByDesc('views')->take(8)->get(),
-            'categories' =>  Category::with('subcategories')->where('parent_id', null)->get()
+            'categories' =>  Category::with('subcategories')->where('parent_id', null)->get(),
+            
+            
         ];
     }
 }
