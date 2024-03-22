@@ -69,7 +69,7 @@
                     <div class="col-lg-4 col-md-6 col-12">
                         <div class="single-category"
                             @foreach ($categorias as $categoria)
-                        style="height: {{ $categoria->id == $categoriaMaxSubcategorias->id ? $categoria->subcategories->count() * 33 : 'auto' }}px;" @endforeach>
+                        style="height: {{ $categoria->id == $categoriaMaxSubcategorias->id ? $categoria->subcategories->count() * 32 : 'auto' }}px;" @endforeach>
                             <h3 class="heading"><a href="{{ route('Product-grids', ['slug' => $category->slug]) }}">
                                     {{ $category->name }}</a></h3>
                             <ul>
@@ -98,7 +98,7 @@
                         <div class="col-lg-4 col-md-6 col-12">
                             <div class="single-category"
                                 @foreach ($categorias as $categoria)
-                                  style="height: {{ $categoria->id == $categoriaMaxSubcategorias->id ? $categoria->subcategories->count() * 33 : 'auto' }}px;" 
+                                  style="height: {{ $categoria->id == $categoriaMaxSubcategorias->id ? $categoria->subcategories->count() * 32 : 'auto' }}px;" 
                                   @endforeach
                                   >
                                 <h3 class="heading"><a href="{{ route('Product-grids', ['slug' => $category->slug]) }}">
