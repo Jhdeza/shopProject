@@ -3301,7 +3301,7 @@ ol {
 }
 @media (max-width: 768px) {
   .single-category {
-      height:auto  !important; 
+     min-height: 250px !important; 
   }
 }
 
