@@ -3248,7 +3248,7 @@ ol {
 }
 
 .featured-categories .single-category {
-  height: 280px;
+  
   padding: 20px;
   margin-top: 30px;
   border: 2px solid #f0f0f0;
@@ -3299,6 +3299,12 @@ ol {
     width: 50%;
   }
 }
+@media (max-width: 768px) {
+  .single-category {
+      height:auto  !important; 
+  }
+}
+
 
 /*======================================
     Product CSS
